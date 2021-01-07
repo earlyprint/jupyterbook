@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://schemata.earlyprint.org/schemata/tei_earlyprint.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="A51877">
+ <teiHeader>
+  <fileDesc>
+   <titleStmt>
+    <title>A map or groundplott of the citty of London with the suburbes thereof so farr as the Lord Mayors iurisdication doeth extend by which is exactly demonstrated the present condition of it since the last sad accident of fire. The blanke space signifyng [sic] the burnt part &amp; where the houses be those places yet standing. A⁰ 1666.</title>
+   </titleStmt>
+   <editionStmt>
+    <edition>This text is an enriched version of the TCP digital transcription A51877 of text R224100 in the <ref target="http;//estc.bl.uk">English Short Title Catalog</ref> (Wing M560). Textual changes  and metadata enrichments aim at making the                             text more  computationally tractable, easier to read, and suitable for network-based collaborative                              curation by amateur and professional end users from many walks of life.  The text has been tokenized and linguistically annotated with <ref target="http://morphadorner.northwestern.edu/morphadorner/">MorphAdorner</ref>. The annotation includes standard spellings that support the display of a text in                             a standardized format that preserves archaic forms ('loveth', 'seekest').                              Textual changes aim at restoring the text the author or stationer meant to publish.</edition>
+    <respStmt>
+     <resp>This text has not been fully proofread</resp>
+     <name/>
+    </respStmt>
+   </editionStmt>
+   <extent>Approx. 4 KB of XML-encoded text transcribed from 1 1-bit group-IV TIFF page image.</extent>
+   <publicationStmt>
+    <publisher>EarlyPrint Project</publisher>
+    <pubPlace>Evanston,IL, Notre Dame, IN, St. Louis, MO</pubPlace>
+    <date>2018</date>
+    <idno type="DLPS">A51877</idno>
+    <idno type="STC">Wing M560</idno>
+    <idno type="STC">ESTC R224100</idno>
+    <idno type="EEBO-CITATION">99834609</idno>
+    <idno type="PROQUEST">99834609</idno>
+    <idno type="VID">39111</idno>
+    <availability>
+     <p>
+            This keyboarded and encoded edition of the work described above is co-owned by the institutions providing financial support to the Early English Books Online Text Creation Partnership. This Phase I text is available for reuse, according to the terms of
+            <ref target="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0 1.0 Universal</ref>
+            . The text can be copied, modified, distributed and performed, even for commercial purposes, all without asking permission.
+          </p>
+    </availability>
+   </publicationStmt>
+   <seriesStmt>
+    <title>Early English books online.</title>
+   </seriesStmt>
+   <notesStmt>
+    <note>(EEBO-TCP ; phase 1, no. A51877)</note>
+    <note>Transcribed from: (Early English Books Online ; image set 39111)</note>
+    <note>Images scanned from microfilm: (Early English books, 1641-1700 ; 1815:06)</note>
+   </notesStmt>
+   <sourceDesc>
+    <biblFull>
+     <titleStmt>
+      <title>A map or groundplott of the citty of London with the suburbes thereof so farr as the Lord Mayors iurisdication doeth extend by which is exactly demonstrated the present condition of it since the last sad accident of fire. The blanke space signifyng [sic] the burnt part &amp; where the houses be those places yet standing. A⁰ 1666.</title>
+     </titleStmt>
+     <extent>1 sheet ([1] p.) : map</extent>
+     <publicationStmt>
+      <publisher>Sould by Nathanael Brooke, in Gresham Colledge in the second yard as you go into the Exchange from Bishopsgate Street,</publisher>
+      <pubPlace>[London] :</pubPlace>
+      <date>[1666]</date>
+     </publicationStmt>
+     <notesStmt>
+      <note>Wholly engraved.</note>
+      <note>Reproduction of the original at the Trinity College Library, Cambridge.</note>
+     </notesStmt>
+    </biblFull>
+   </sourceDesc>
+  </fileDesc>
+  <profileDesc>
+   <langUsage>
+    <language ident="eng">eng</language>
+   </langUsage>
+   <textClass>
+    <keywords scheme="http://authorities.loc.gov/">
+     <term>London (England) -- Early works to 1800.</term>
+    </keywords>
+   </textClass>
+  </profileDesc>
+  <xenoData>
+   <ep:epHeader xmlns:ep="http://earlyprint.org/ns/1.0">
+    <ep:corpus>eebo</ep:corpus>
+    <ep:title>A map or groundplott of the citty of London, with the suburbes thereof so farr as the Lord Mayors iurisdication doeth extend by which is exactly demon</ep:title>
+    <ep:author>[no entry]</ep:author>
+    <ep:publicationYear>1666</ep:publicationYear>
+    <ep:creationYear/>
+    <ep:curator>
+     <ep:name/>
+    </ep:curator>
+    <ep:pageCount>1</ep:pageCount>
+    <ep:wordCount>243</ep:wordCount>
+    <ep:defectiveTokenCount>7</ep:defectiveTokenCount>
+    <ep:untranscribedForeignCount>0</ep:untranscribedForeignCount>
+    <ep:untranscribedMathCount>0</ep:untranscribedMathCount>
+    <ep:untranscribedMusicCount>0</ep:untranscribedMusicCount>
+    <ep:missingChunkCount>0</ep:missingChunkCount>
+    <ep:missingPagesCount>0</ep:missingPagesCount>
+    <ep:defectRate>288.07</ep:defectRate>
+    <ep:finalGrade>F</ep:finalGrade>
+    <ep:defectRangePerGrade> The  rate of 288.07 defects per 10,000 words puts this text in the F category of texts with  100 or more defects per 10,000 words.</ep:defectRangePerGrade>
+   </ep:epHeader>
+  </xenoData>
+  <revisionDesc>
+   <change><date>2007-12</date><label>TCP</label>
+        Assigned for keying and markup
+      </change>
+   <change><date>2008-01</date><label>SPi Global</label>
+        Keyed and coded from ProQuest page images
+      </change>
+   <change><date>2008-03</date><label>Mona Logarbo</label>
+        Sampled and proofread
+      </change>
+   <change><date>2008-03</date><label>Mona Logarbo</label>
+        Text and markup reviewed and edited
+      </change>
+   <change><date>2008-09</date><label>pfs</label>
+        Batch review (QC) and XML conversion
+      </change>
+  </revisionDesc>
+ </teiHeader>
+ <text xml:id="A51877-t">
+  <body xml:id="A51877-e0">
+   <div type="map" xml:id="A51877-e10">
+    <pb facs="tcp:39111:1" xml:id="A51877-001-a"/>
+    <p xml:id="A51877-e20">
+     <figure xml:id="A51877-e30">
+      <figDesc xml:id="A51877-e40">map of London</figDesc>
+      <head xml:id="A51877-e50">
+       <w lemma="a" pos="d" xml:id="A51877-001-a-0010">A</w>
+       <w lemma="map" pos="n1" xml:id="A51877-001-a-0020">MAP</w>
+       <w lemma="or" pos="cc" xml:id="A51877-001-a-0030">or</w>
+       <w lemma="GROUNDPLOTT" pos="n1-nn" xml:id="A51877-001-a-0040">GROUNDPLOTT</w>
+       <w lemma="of" pos="acp" xml:id="A51877-001-a-0050">OF</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0060">THE</w>
+       <w lemma="city" pos="n1" reg="CITY" xml:id="A51877-001-a-0070">CITTY</w>
+       <w lemma="of" pos="acp" xml:id="A51877-001-a-0080">OF</w>
+       <w lemma="LONDON" pos="n1-nn" xml:id="A51877-001-a-0090">LONDON</w>
+       <w lemma="with" pos="acp" xml:id="A51877-001-a-0100">WITH</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0110">THE</w>
+       <w lemma="suburb" pos="n2" reg="SUBURBS" xml:id="A51877-001-a-0120">SVBVRBES</w>
+       <w lemma="thereof" pos="av" xml:id="A51877-001-a-0130">THEREOF</w>
+       <w lemma="so" pos="av" xml:id="A51877-001-a-0140">so</w>
+       <w lemma="far" pos="av_j" reg="far" xml:id="A51877-001-a-0150">farr</w>
+       <w lemma="as" pos="acp" xml:id="A51877-001-a-0160">as</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0170">the</w>
+       <w lemma="lord" pos="n1" xml:id="A51877-001-a-0180">Lord</w>
+       <w lemma="mayor" pos="n1g" reg="Mayor's" xml:id="A51877-001-a-0190">Mayors</w>
+       <w lemma="jurisdiction" pos="n1" reg="jurisdiction" xml:id="A51877-001-a-0200">Iurisdiction</w>
+       <w lemma="do" pos="vvz" reg="doth" xml:id="A51877-001-a-0210">doeth</w>
+       <w lemma="extend" pos="vvi" xml:id="A51877-001-a-0220">extend</w>
+       <w lemma="by" pos="acp" xml:id="A51877-001-a-0230">by</w>
+       <w lemma="which" pos="crq" xml:id="A51877-001-a-0240">which</w>
+       <w lemma="be" pos="vvz" xml:id="A51877-001-a-0250">is</w>
+       <w lemma="exact" pos="av_j" xml:id="A51877-001-a-0260">exactly</w>
+       <w lemma="demonstrate" pos="vvn" xml:id="A51877-001-a-0270">demonstrated</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0280">the</w>
+       <w lemma="present" pos="j" xml:id="A51877-001-a-0290">present</w>
+       <w lemma="condition" pos="n1" xml:id="A51877-001-a-0300">condition</w>
+       <w lemma="of" pos="acp" xml:id="A51877-001-a-0310">of</w>
+       <w lemma="it" pos="pn" xml:id="A51877-001-a-0320">it</w>
+       <w lemma="since" pos="acp" xml:id="A51877-001-a-0330">since</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0340">the</w>
+       <w lemma="last" pos="ord" xml:id="A51877-001-a-0350">last</w>
+       <w lemma="sad" pos="j" xml:id="A51877-001-a-0360">sad</w>
+       <w lemma="accident" pos="n1" xml:id="A51877-001-a-0370">accident</w>
+       <w lemma="of" pos="acp" xml:id="A51877-001-a-0380">of</w>
+       <w lemma="fire" pos="n1" xml:id="A51877-001-a-0390">fire</w>
+       <pc xml:id="A51877-001-a-0400">,</pc>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0410">the</w>
+       <w lemma="blank" pos="j" reg="blank" xml:id="A51877-001-a-0420">blanke</w>
+       <w lemma="space" pos="n1" xml:id="A51877-001-a-0430">space</w>
+       <w lemma="signifijng" pos="vvg" xml:id="A51877-001-a-0440">signifijng</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0450">the</w>
+       <w lemma="burn" pos="j_vn" reg="" xml:id="A51877-001-a-0460">burnt</w>
+       <w lemma="part" pos="n1" xml:id="A51877-001-a-0470">part</w>
+       <pc xml:id="A51877-001-a-0480">,</pc>
+       <w lemma="&amp;" pos="cc" xml:id="A51877-001-a-0490">&amp;</w>
+       <w lemma="where" pos="crq" xml:id="A51877-001-a-0500">where</w>
+       <w lemma="the" pos="d" xml:id="A51877-001-a-0510">the</w>
+       <w lemma="house" pos="n2" xml:id="A51877-001-a-0520">houses</w>
+       <w lemma="be" pos="vvb" xml:id="A51877-001-a-0530">be</w>
+       <w lemma="those" pos="d" xml:id="A51877-001-a-0540">those</w>
+       <w lemma="place" pos="n2" xml:id="A51877-001-a-0550">places</w>
+       <w lemma="yet" pos="av" xml:id="A51877-001-a-0560">yet</w>
+       <w lemma="stand" pos="vvg" xml:id="A51877-001-a-0570">standing</w>
+       <pc unit="sentence" xml:id="A51877-001-a-0580">.</pc>
+       <date xml:id="A51877-e60">
+        <hi xml:id="A51877-e70">
+         <w lemma="a" pos="sy" xml:id="A51877-001-a-0590">A</w>
+         <hi rendition="#sup" xml:id="A51877-e80">
+          <w lemma="o" pos="sy" reg="oh" xml:id="A51877-001-a-0600">o</w>
+         </hi>
+        </hi>
+        <w lemma="1666." pos="crd" xml:id="A51877-001-a-0610">1666.</w>
+        <pc unit="sentence" xml:id="A51877-001-a-0620"/>
+       </date>
+      </head>
+      <p xml:id="A51877-e90">
+       <list xml:id="A51877-e100">
+        <head xml:id="A51877-e110">
+         <w lemma="annotation" pos="n2" xml:id="A51877-001-a-0630">Annotations</w>
+         <w lemma="of" pos="acp" xml:id="A51877-001-a-0640">of</w>
+         <w lemma="remarkable" pos="j" xml:id="A51877-001-a-0650">remarkable</w>
+         <w lemma="place" pos="n2" xml:id="A51877-001-a-0660">places</w>
+        </head>
+        <item xml:id="A51877-e120">
+         <label xml:id="A51877-e130">
+          <w lemma="a" pos="d" xml:id="A51877-001-a-0670">A</w>
+         </label>
+         <w lemma="Ludgate" pos="n1-nn" xml:id="A51877-001-a-0680">Ludgate</w>
+        </item>
+        <item xml:id="A51877-e140">
+         <label xml:id="A51877-e150">
+          <w lemma="b" pos="sy" xml:id="A51877-001-a-0690">B</w>
+         </label>
+         <w lemma="Newgate" pos="n1-nn" xml:id="A51877-001-a-0700">Newgate</w>
+        </item>
+        <item xml:id="A51877-e160">
+         <label xml:id="A51877-e170">
+          <w lemma="c" pos="sy" xml:id="A51877-001-a-0710">C</w>
+         </label>
+         <w lemma="Aldersgate" pos="n1-nn" xml:id="A51877-001-a-0720">Aldersgate</w>
+        </item>
+        <item xml:id="A51877-e180">
+         <label xml:id="A51877-e190">
+          <w lemma="d" pos="sy" xml:id="A51877-001-a-0730">D</w>
+         </label>
+         <w lemma="Cripple" pos="n1-nn" xml:id="A51877-001-a-0740">Cripple</w>
+         <w lemma="gate" pos="n1" xml:id="A51877-001-a-0750">gate</w>
+         <pc xml:id="A51877-001-a-0760">,</pc>
+        </item>
+        <item xml:id="A51877-e200">
+         <label xml:id="A51877-e210">
+          <w lemma="e" pos="sy" xml:id="A51877-001-a-0770">E</w>
+         </label>
+         <w lemma="Moor" pos="n1-nn" reg="Moor" xml:id="A51877-001-a-0780">Moore</w>
+         <w lemma="gate" pos="n1" xml:id="A51877-001-a-0790">gate</w>
+         <pc xml:id="A51877-001-a-0800">,</pc>
+        </item>
+        <item xml:id="A51877-e220">
+         <label xml:id="A51877-e230">
+          <w lemma="f" pos="sy" xml:id="A51877-001-a-0810">F</w>
+         </label>
+         <w lemma="bishop" pos="n1g" reg="Bishop's" xml:id="A51877-001-a-0820">Bishops</w>
+         <w lemma="gate" pos="n1" xml:id="A51877-001-a-0830">gate</w>
+         <pc xml:id="A51877-001-a-0840">,</pc>
+        </item>
+        <item xml:id="A51877-e240">
+         <label xml:id="A51877-e250">
+          <w lemma="g" pos="zz" xml:id="A51877-001-a-0850">G</w>
+         </label>
+         <w lemma="Aldgate" pos="n1-nn" xml:id="A51877-001-a-0860">Aldgate</w>
+        </item>
+        <item xml:id="A51877-e260">
+         <label xml:id="A51877-e270">
+          <w lemma="H" pos="n1-nn" xml:id="A51877-001-a-0870">H</w>
+         </label>
+         <w lemma="Essex" pos="n1-nn" xml:id="A51877-001-a-0880">Essex</w>
+         <w lemma="house" pos="n1" xml:id="A51877-001-a-0890">House</w>
+        </item>
+        <item xml:id="A51877-e280">
+         <label xml:id="A51877-e290">
+          <w lemma="i" pos="pns" xml:id="A51877-001-a-0900">I</w>
+         </label>
+         <w lemma="the" pos="d" xml:id="A51877-001-a-0910">The</w>
+         <w lemma="temple" pos="n1" xml:id="A51877-001-a-0920">Temple</w>
+        </item>
+        <item xml:id="A51877-e300">
+         <label xml:id="A51877-e310">
+          <w lemma="k" pos="ab" xml:id="A51877-001-a-0930">K</w>
+         </label>
+         <w lemma="Dorset" pos="n1-nn" xml:id="A51877-001-a-0940">Dorset</w>
+         <w lemma="house" pos="n1" xml:id="A51877-001-a-0950">House</w>
+        </item>
+        <item xml:id="A51877-e320">
+         <label xml:id="A51877-e330">
+          <w lemma="l" pos="sy" xml:id="A51877-001-a-0960">L</w>
+         </label>
+         <w lemma="Bridewell" pos="n1-nn" xml:id="A51877-001-a-0970">Bridewell</w>
+        </item>
+        <item xml:id="A51877-e340">
+         <label xml:id="A51877-e350">
+          <w lemma="m" pos="ab" xml:id="A51877-001-a-0980">M</w>
+         </label>
+         <w lemma="Baynard" pos="n1g-nn" reg="Baynard's" xml:id="A51877-001-a-0990">Baynards</w>
+         <w lemma="castle" pos="n1" xml:id="A51877-001-a-1000">Castle</w>
+        </item>
+        <item xml:id="A51877-e360">
+         <label xml:id="A51877-e370">
+          <w lemma="n" pos="sy" xml:id="A51877-001-a-1010">N</w>
+         </label>
+         <w lemma="Christ" pos="n1-nn" xml:id="A51877-001-a-1020">Christ</w>
+         <w lemma="church" pos="n1" xml:id="A51877-001-a-1030">Church</w>
+         <w lemma="cloister" pos="n2" reg="Cloisters" xml:id="A51877-001-a-1040">Cloysters</w>
+        </item>
+        <item xml:id="A51877-e380">
+         <label xml:id="A51877-e390">
+          <w lemma="o" pos="sy" xml:id="A51877-001-a-1050">O</w>
+         </label>
+         <w lemma="s." pos="ab" xml:id="A51877-001-a-1060">S.</w>
+         <w lemma="Bartho" pos="n1-nn" xml:id="A51877-001-a-1070">Bartho</w>
+         <pc xml:id="A51877-001-a-1080">:</pc>
+         <w lemma="hospital" pos="n1" reg="Hospital" xml:id="A51877-001-a-1090">Hospitall</w>
+        </item>
+        <item xml:id="A51877-e400">
+         <label xml:id="A51877-e410">
+          <w lemma="p" pos="sy" xml:id="A51877-001-a-1100">P</w>
+         </label>
+         <w lemma="charterhouse" pos="n1-nn" xml:id="A51877-001-a-1110">Charterhouse</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1120">.</pc>
+        </item>
+        <item xml:id="A51877-e420">
+         <label xml:id="A51877-e430">
+          <w lemma="q" pos="sy" xml:id="A51877-001-a-1130">Q</w>
+         </label>
+         <w lemma="Guildhall" pos="n1-nn" xml:id="A51877-001-a-1140">Guildhall</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1150">.</pc>
+        </item>
+        <item xml:id="A51877-e440">
+         <label xml:id="A51877-e450">
+          <w lemma="r" pos="sy" xml:id="A51877-001-a-1160">R</w>
+         </label>
+         <w lemma="the" pos="d" xml:id="A51877-001-a-1170">The</w>
+         <w lemma="stokes" pos="n1-nn" xml:id="A51877-001-a-1180">Stokes</w>
+        </item>
+        <item xml:id="A51877-e460">
+         <label xml:id="A51877-e470">
+          <w lemma="s" pos="sy" xml:id="A51877-001-a-1190">S</w>
+         </label>
+         <w lemma="royal" pos="j" reg="royal" xml:id="A51877-001-a-1200">Royall</w>
+         <w lemma="exchange" pos="n1" xml:id="A51877-001-a-1210">Exchange</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1220">.</pc>
+        </item>
+        <item xml:id="A51877-e480">
+         <label xml:id="A51877-e490">
+          <w lemma="t" pos="sy" xml:id="A51877-001-a-1230">T</w>
+         </label>
+         <w lemma="Gresham" pos="n1-nn" xml:id="A51877-001-a-1240">Gresham</w>
+         <w lemma="college" pos="n1" reg="College" xml:id="A51877-001-a-1250">Colledge</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1260">.</pc>
+        </item>
+        <item xml:id="A51877-e500">
+         <label xml:id="A51877-e510">
+          <w lemma="v" pos="sy" xml:id="A51877-001-a-1270">V</w>
+         </label>
+         <w lemma="L●adenhall" pos="n1-nn" xml:id="A51877-001-a-1280">L●adenhall</w>
+         <pc xml:id="A51877-001-a-1290">,</pc>
+        </item>
+        <item xml:id="A51877-e520">
+         <label xml:id="A51877-e530">
+          <w lemma="w" pos="ab" xml:id="A51877-001-a-1300">W</w>
+         </label>
+         <w lemma="duke" pos="n1g" reg="Duke's" xml:id="A51877-001-a-1310">Dukes</w>
+         <w lemma="palace" pos="n1" xml:id="A51877-001-a-1320">Palace</w>
+         <pc xml:id="A51877-001-a-1330">,</pc>
+        </item>
+        <item xml:id="A51877-e540">
+         <label xml:id="A51877-e550">
+          <w lemma="x" pos="crd" xml:id="A51877-001-a-1340">X</w>
+         </label>
+         <w lemma="custom" pos="n1" xml:id="A51877-001-a-1350">Custom</w>
+         <w lemma="house" pos="n1" xml:id="A51877-001-a-1360">house</w>
+        </item>
+        <item xml:id="A51877-e560">
+         <label xml:id="A51877-e570">
+          <w lemma="y" pos="sy" xml:id="A51877-001-a-1370">Y</w>
+         </label>
+         <w lemma="bedlam" pos="n1" reg="Bedlam" xml:id="A51877-001-a-1380">Bedlame</w>
+         <pc xml:id="A51877-001-a-1390">,</pc>
+        </item>
+        <item xml:id="A51877-e580">
+         <label xml:id="A51877-e590">
+          <w lemma="z" pos="sy" xml:id="A51877-001-a-1400">Z</w>
+         </label>
+         <w lemma="Zion" pos="n1-nn" reg="Zion" xml:id="A51877-001-a-1410">Sion</w>
+         <w lemma="college" pos="n1" reg="College" xml:id="A51877-001-a-1420">Colledge</w>
+        </item>
+       </list>
+      </p>
+      <p xml:id="A51877-e600">
+       <list xml:id="A51877-e610">
+        <item xml:id="A51877-e620">
+         <label xml:id="A51877-e630">
+          <w lemma="a" pos="d" xml:id="A51877-001-a-1430">a</w>
+         </label>
+         <w lemma="temple" pos="n1" xml:id="A51877-001-a-1440">Temple</w>
+         <w lemma="Stair●●" pos="n1-nn" xml:id="A51877-001-a-1450">Stair●●</w>
+        </item>
+        <item xml:id="A51877-e640">
+         <label xml:id="A51877-e650">
+          <w lemma="b" pos="sy" xml:id="A51877-001-a-1460">b</w>
+         </label>
+         <w lemma="White" pos="n1-nn" xml:id="A51877-001-a-1470">White</w>
+         <w lemma="friar" pos="n1g" reg="Friar's" xml:id="A51877-001-a-1480">Friars</w>
+         <w lemma="stair" pos="n2" reg="Stairs" xml:id="A51877-001-a-1490">Staires</w>
+         <pc xml:id="A51877-001-a-1500">,</pc>
+        </item>
+        <item xml:id="A51877-e660">
+         <label xml:id="A51877-e670">
+          <w lemma="c" pos="sy" xml:id="A51877-001-a-1510">c</w>
+         </label>
+         <w lemma="black" pos="j" xml:id="A51877-001-a-1520">Black</w>
+         <w lemma="friar" pos="n2" xml:id="A51877-001-a-1530">Friars</w>
+         <w lemma="stair" pos="n2" reg="Stairs" xml:id="A51877-001-a-1540">Staires</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1550">.</pc>
+        </item>
+        <item xml:id="A51877-e680">
+         <label xml:id="A51877-e690">
+          <w lemma="d" pos="sy" xml:id="A51877-001-a-1560">d</w>
+         </label>
+         <w lemma="puddle" pos="n1" xml:id="A51877-001-a-1570">Puddle</w>
+         <w lemma="dock" pos="n1" xml:id="A51877-001-a-1580">dock</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1590">.</pc>
+        </item>
+        <item xml:id="A51877-e700">
+         <label xml:id="A51877-e710">
+          <w lemma="e" pos="sy" xml:id="A51877-001-a-1600">e</w>
+         </label>
+         <w lemma="Paul" pos="n1g-nn" reg="Paul's" xml:id="A51877-001-a-1610">Pauls</w>
+         <w lemma="wharfe" pos="n1-nn" xml:id="A51877-001-a-1620">Wharfe</w>
+        </item>
+        <item xml:id="A51877-e720">
+         <label xml:id="A51877-e730">
+          <w lemma="f" pos="sy" xml:id="A51877-001-a-1630">f</w>
+         </label>
+         <w lemma="break" pos="j_vn" xml:id="A51877-001-a-1640">Broken</w>
+         <w lemma="wharfe" pos="n1-nn" xml:id="A51877-001-a-1650">Wharfe</w>
+         <pc xml:id="A51877-001-a-1660">,</pc>
+        </item>
+        <item xml:id="A51877-e740">
+         <label xml:id="A51877-e750">
+          <w lemma="g" pos="sy" xml:id="A51877-001-a-1670">g</w>
+         </label>
+         <w lemma="queen" pos="n1" reg="Queen" xml:id="A51877-001-a-1680">Queene</w>
+         <w lemma="hythe" pos="n1-nn" xml:id="A51877-001-a-1690">Hythe</w>
+         <pc unit="sentence" xml:id="A51877-001-a-1700">.</pc>
+        </item>
+        <item xml:id="A51877-e760">
+         <label xml:id="A51877-e770">
+          <w lemma="h" pos="sy" xml:id="A51877-001-a-1710">h</w>
+         </label>
+         <w lemma="3" pos="crd" xml:id="A51877-001-a-1720">3</w>
+         <w lemma="crane" pos="n2" xml:id="A51877-001-a-1730">Cranes</w>
+         <pc xml:id="A51877-001-a-1740">,</pc>
+        </item>
+        <item xml:id="A51877-e780">
+         <label xml:id="A51877-e790">
+          <w lemma="i" pos="ord" xml:id="A51877-001-a-1750">i</w>
+         </label>
+         <w lemma="stiliard" pos="n1" xml:id="A51877-001-a-1760">Stiliard</w>
+         <pc xml:id="A51877-001-a-1770">,</pc>
+        </item>
+        <item xml:id="A51877-e800">
+         <label xml:id="A51877-e810">
+          <w lemma="k" pos="sy" xml:id="A51877-001-a-1780">k</w>
+         </label>
+         <w lemma="Colharbour" pos="n1-nn" xml:id="A51877-001-a-1790">Colharbour</w>
+         <pc xml:id="A51877-001-a-1800">,</pc>
+        </item>
+        <item xml:id="A51877-e820">
+         <label xml:id="A51877-e830">
+          <w lemma="l" pos="sy" xml:id="A51877-001-a-1810">l</w>
+         </label>
+         <w lemma="old" pos="j" xml:id="A51877-001-a-1820">Old</w>
+         <w lemma="swan" pos="n1" xml:id="A51877-001-a-1830">Swan</w>
+        </item>
+        <item xml:id="A51877-e840">
+         <label xml:id="A51877-e850">
+          <w lemma="m" pos="crd" xml:id="A51877-001-a-1840">m</w>
+         </label>
+         <w lemma="Belin" pos="n1g-nn" reg="Belin's" xml:id="A51877-001-a-1850">Belins</w>
+         <w lemma="gate" pos="n1" xml:id="A51877-001-a-1860">gate</w>
+        </item>
+        <item xml:id="A51877-e860">
+         <label xml:id="A51877-e870">
+          <w lemma="n" pos="sy" xml:id="A51877-001-a-1870">n</w>
+         </label>
+         <w lemma="tower" pos="n1" xml:id="A51877-001-a-1880">Tower</w>
+         <w lemma="wharf" pos="n1" reg="wharf" xml:id="A51877-001-a-1890">wharfe</w>
+        </item>
+        <item xml:id="A51877-e880">
+         <label xml:id="A51877-e890">
+          <w lemma="o" pos="uh" xml:id="A51877-001-a-1900">o</w>
+         </label>
+         <w lemma="artillery" pos="n1" reg="Artillery" xml:id="A51877-001-a-1910">Artilery</w>
+         <w lemma="yard" pos="n1-nn" xml:id="A51877-001-a-1920">Yard</w>
+        </item>
+       </list>
+      </p>
+      <p xml:id="A51877-e900">
+       <list xml:id="A51877-e910">
+        <head xml:id="A51877-e920">
+         <w lemma="the" pos="d" xml:id="A51877-001-a-1930">The</w>
+         <w lemma="name" pos="n2" xml:id="A51877-001-a-1940">Names</w>
+         <w lemma="of" pos="acp" xml:id="A51877-001-a-1950">of</w>
+         <w lemma="all" pos="d" xml:id="A51877-001-a-1960">all</w>
+         <w lemma="the" pos="d" xml:id="A51877-001-a-1970">the</w>
+         <w lemma="church" pos="n2" xml:id="A51877-001-a-1980">Churches</w>
+         <w lemma="within" pos="acp" xml:id="A51877-001-a-1990">within</w>
+         <w lemma="the" pos="d" xml:id="A51877-001-a-2000">the</w>
+         <w lemma="〈…〉" pos="zz" xml:id="A51877-001-a-2010">〈…〉</w>
+         <w lemma="without" pos="acp" xml:id="A51877-001-a-2020">without</w>
+         <w lemma="〈…〉" pos="zz" xml:id="A51877-001-a-2030">〈…〉</w>
+        </head>
+        <item xml:id="A51877-e930">
+         <label xml:id="A51877-e940">
+          <w lemma="1." pos="crd" xml:id="A51877-001-a-2040">1.</w>
+          <pc unit="sentence" xml:id="A51877-001-a-2050"/>
+         </label>
+         <w lemma="cathedral" pos="n1" reg="Cathedral" xml:id="A51877-001-a-2060">Cathedrall</w>
+         <w lemma="of" pos="acp" xml:id="A51877-001-a-2070">of</w>
+         <w lemma="s" pos="sy" xml:id="A51877-001-a-2080">S</w>
+         <w lemma="Paul" pos="n1-nn" xml:id="A51877-001-a-2090">Paul</w>
+        </item>
+        <item xml:id="A51877-e950">
+         <label xml:id="A51877-e960">
+          <w lemma="2" pos="crd" xml:id="A51877-001-a-2100">2</w>
+         </label>
+         <w lemma="Christ" pos="n1-nn" xml:id="A51877-001-a-2110">Christ</w>
+         <w lemma="church" pos="n1" xml:id="A51877-001-a-2120">Church</w>
+        </item>
+        <item xml:id="A51877-e970">
+         <label xml:id="A51877-e980">
+          <w lemma="3" pos="crd" xml:id="A51877-001-a-2130">3</w>
+         </label>
+         <w lemma="〈…〉" pos="zz" xml:id="A51877-001-a-2140">〈…〉</w>
+        </item>
+       </list>
+      </p>
+     </figure>
+    </p>
+    <byline xml:id="A51877-e990">
+     <w lemma="wi" pos="ab" reg="Widow" xml:id="A51877-001-a-2150">Wi</w>
+     <w lemma="hollar" pos="n1-nn" xml:id="A51877-001-a-2160">Hollar</w>
+     <w lemma="〈…〉" pos="zz" xml:id="A51877-001-a-2170">〈…〉</w>
+    </byline>
+   </div>
+  </body>
+  <back xml:id="A51877-e1000">
+   <div cert="high" type="license" xml:id="A51877-e1010" xml:lang="lat">
+    <p xml:id="A51877-e1020">
+     <w lemma="cum" pos="f-la" xml:id="A51877-001-a-2180">Cum</w>
+     <w lemma="privilegio" pos="f-la" xml:id="A51877-001-a-2190">Privilegio</w>
+     <w lemma="regis" pos="f-la" xml:id="A51877-001-a-2200">Regis</w>
+    </p>
+   </div>
+   <div type="colophon" xml:id="A51877-e1030">
+    <p xml:id="A51877-e1040">
+     <w lemma="sould" pos="ab" reg="Sold" xml:id="A51877-001-a-2210">Sould</w>
+     <w lemma="by" pos="acp" xml:id="A51877-001-a-2220">by</w>
+     <w lemma="Nathanael" pos="n1-nn" xml:id="A51877-001-a-2230">Nathanael</w>
+     <w lemma="b" pos="sy" xml:id="A51877-001-a-2240">B</w>
+     <w lemma="〈◊〉" pos="zz" xml:id="A51877-001-a-2250">〈◊〉</w>
+     <pc xml:id="A51877-001-a-2260">,</pc>
+     <w lemma="in" pos="acp" xml:id="A51877-001-a-2270">in</w>
+     <w lemma="Gresham" pos="n1-nn" xml:id="A51877-001-a-2280">Gresham</w>
+     <w lemma="college" pos="n1" reg="College" xml:id="A51877-001-a-2290">Colledge</w>
+     <w lemma="in" pos="acp" xml:id="A51877-001-a-2300">in</w>
+     <w lemma="the" pos="d" xml:id="A51877-001-a-2310">the</w>
+     <w lemma="second" pos="ord" xml:id="A51877-001-a-2320">second</w>
+     <w lemma="yard" pos="n1" xml:id="A51877-001-a-2330">Yard</w>
+     <w lemma="as" pos="acp" xml:id="A51877-001-a-2340">as</w>
+     <w lemma="you" pos="pn" xml:id="A51877-001-a-2350">you</w>
+     <w lemma="go" pos="vvb" xml:id="A51877-001-a-2360">go</w>
+     <w lemma="into" pos="acp" xml:id="A51877-001-a-2370">into</w>
+     <w lemma="the" pos="d" xml:id="A51877-001-a-2380">the</w>
+     <w lemma="exchange" pos="n1" xml:id="A51877-001-a-2390">Exchange</w>
+     <w lemma="from" pos="acp" xml:id="A51877-001-a-2400">from</w>
+     <w lemma="Bishopsgate" pos="n1-nn" xml:id="A51877-001-a-2410">Bishopsgate</w>
+     <w lemma="street" pos="n1" xml:id="A51877-001-a-2420">Street</w>
+     <pc xml:id="A51877-001-a-2430">,</pc>
+    </p>
+   </div>
+  </back>
+ </text>
+</TEI>

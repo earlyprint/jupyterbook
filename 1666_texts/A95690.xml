@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://schemata.earlyprint.org/schemata/tei_earlyprint.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="A95690">
+ <teiHeader>
+  <fileDesc>
+   <titleStmt>
+    <title>A Table of the severall scantlings &amp; sorts of tymber that shall bee vsed in ye future buildings of all edifices within the citty of London and liberties thereof agreed upon by the lord maior, aldermen, &amp; com̃ons of the said citty in com̃on councell assembled as a rule for those that are to build, and a direction for those that are minded to furnish tymber for that service.</title>
+    <author>Corporation of London (England)</author>
+   </titleStmt>
+   <editionStmt>
+    <edition>This text is an enriched version of the TCP digital transcription A95690 of text R42587 in the <ref target="http;//estc.bl.uk">English Short Title Catalog</ref> (Wing T84). Textual changes  and metadata enrichments aim at making the                             text more  computationally tractable, easier to read, and suitable for network-based collaborative                              curation by amateur and professional end users from many walks of life.  The text has been tokenized and linguistically annotated with <ref target="http://morphadorner.northwestern.edu/morphadorner/">MorphAdorner</ref>. The annotation includes standard spellings that support the display of a text in                             a standardized format that preserves archaic forms ('loveth', 'seekest').                              Textual changes aim at restoring the text the author or stationer meant to publish.</edition>
+    <respStmt>
+     <resp>This text has not been fully proofread</resp>
+     <name/>
+    </respStmt>
+   </editionStmt>
+   <extent>Approx. 4 KB of XML-encoded text transcribed from 1 1-bit group-IV TIFF page image.</extent>
+   <publicationStmt>
+    <publisher>EarlyPrint Project</publisher>
+    <pubPlace>Evanston,IL, Notre Dame, IN, St. Louis, MO</pubPlace>
+    <date>2018</date>
+    <idno type="DLPS">A95690</idno>
+    <idno type="STC">Wing T84</idno>
+    <idno type="STC">ESTC R42587</idno>
+    <idno type="EEBO-CITATION">36282391</idno>
+    <idno type="OCLC">ocm 36282391</idno>
+    <idno type="VID">150312</idno>
+    <availability>
+     <p>
+            This keyboarded and encoded edition of the work described above is co-owned by the institutions providing financial support to the Early English Books Online Text Creation Partnership. This Phase I text is available for reuse, according to the terms of
+            <ref target="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0 1.0 Universal</ref>
+            . The text can be copied, modified, distributed and performed, even for commercial purposes, all without asking permission.
+          </p>
+    </availability>
+   </publicationStmt>
+   <seriesStmt>
+    <title>Early English books online.</title>
+   </seriesStmt>
+   <notesStmt>
+    <note>(EEBO-TCP ; phase 1, no. A95690)</note>
+    <note>Transcribed from: (Early English Books Online ; image set 150312)</note>
+    <note>Images scanned from microfilm: (Early English books, 1641-1700 ; 2241:8)</note>
+   </notesStmt>
+   <sourceDesc>
+    <biblFull>
+     <titleStmt>
+      <title>A Table of the severall scantlings &amp; sorts of tymber that shall bee vsed in ye future buildings of all edifices within the citty of London and liberties thereof agreed upon by the lord maior, aldermen, &amp; com̃ons of the said citty in com̃on councell assembled as a rule for those that are to build, and a direction for those that are minded to furnish tymber for that service.</title>
+      <author>Corporation of London (England)</author>
+     </titleStmt>
+     <extent>1 sheet ([1] p.).</extent>
+     <publicationStmt>
+      <publisher>Sold by Nathanael Brooke ...,</publisher>
+      <pubPlace>[London] :</pubPlace>
+      <date>[1666]</date>
+     </publicationStmt>
+     <notesStmt>
+      <note>"26 Novembr. 1666. Ordered by the said Lord Maior Aldermen and Com̃ons that this Table bee forthwith Printed &amp; made Publique. Avery."</note>
+      <note>Reproduction of original in the Society of Antiquaries (London, England).</note>
+     </notesStmt>
+    </biblFull>
+   </sourceDesc>
+  </fileDesc>
+  <profileDesc>
+   <langUsage>
+    <language ident="eng">eng</language>
+   </langUsage>
+   <textClass>
+    <keywords scheme="http://authorities.loc.gov/">
+     <term>Lumber -- Law and legislation -- England -- London.</term>
+     <term>Lumber -- Tables -- Early works to 1800.</term>
+     <term>Broadsides -- London (England) -- 17th century.</term>
+    </keywords>
+   </textClass>
+  </profileDesc>
+  <xenoData>
+   <ep:epHeader xmlns:ep="http://earlyprint.org/ns/1.0">
+    <ep:corpus>eebo</ep:corpus>
+    <ep:title>A Table of the severall scantlings &amp; sorts of tymber that shall bee vsed in ye future buildings of all edifices within the citty of London and liberti</ep:title>
+    <ep:author>Corporation of London</ep:author>
+    <ep:publicationYear>1666</ep:publicationYear>
+    <ep:creationYear/>
+    <ep:curator>
+     <ep:name/>
+    </ep:curator>
+    <ep:pageCount>1</ep:pageCount>
+    <ep:wordCount>577</ep:wordCount>
+    <ep:defectiveTokenCount>0</ep:defectiveTokenCount>
+    <ep:untranscribedForeignCount>0</ep:untranscribedForeignCount>
+    <ep:untranscribedMathCount>0</ep:untranscribedMathCount>
+    <ep:untranscribedMusicCount>0</ep:untranscribedMusicCount>
+    <ep:missingChunkCount>0</ep:missingChunkCount>
+    <ep:missingPagesCount>0</ep:missingPagesCount>
+    <ep:defectRate>0</ep:defectRate>
+    <ep:finalGrade>A</ep:finalGrade>
+    <ep:defectRangePerGrade>This text  has no known defects that were recorded as gap elements at the time of transcription. </ep:defectRangePerGrade>
+   </ep:epHeader>
+  </xenoData>
+  <revisionDesc>
+   <change><date>2007-06</date><label>TCP</label>
+        Assigned for keying and markup
+      </change>
+   <change><date>2007-06</date><label>Aptara</label>
+        Keyed and coded from ProQuest page images
+      </change>
+   <change><date>2007-08</date><label>Jonathan Blaney</label>
+        Sampled and proofread
+      </change>
+   <change><date>2007-08</date><label>Jonathan Blaney</label>
+        Text and markup reviewed and edited
+      </change>
+   <change><date>2008-02</date><label>pfs</label>
+        Batch review (QC) and XML conversion
+      </change>
+  </revisionDesc>
+ </teiHeader>
+ <text xml:id="A95690-t">
+  <body xml:id="A95690-e0">
+   <div type="text" xml:id="A95690-e10">
+    <pb facs="tcp:150312:1" rendition="simple:additions" xml:id="A95690-001-a"/>
+    <head xml:id="A95690-e20">
+     <w lemma="a" pos="d" xml:id="A95690-001-a-0010">A</w>
+     <w lemma="table" pos="n1" xml:id="A95690-001-a-0020">Table</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-0030">of</w>
+     <w lemma="the" pos="d" xml:id="A95690-001-a-0040">the</w>
+     <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-0050">severall</w>
+     <w lemma="Scantlings" pos="n1-nn" xml:id="A95690-001-a-0060">Scantlings</w>
+     <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-0070">&amp;</w>
+     <w lemma="sort" pos="n2" xml:id="A95690-001-a-0080">Sorts</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-0090">of</w>
+     <w lemma="timber" pos="n1" reg="Timber" xml:id="A95690-001-a-0100">Tymber</w>
+     <w lemma="that" pos="cs" xml:id="A95690-001-a-0110">that</w>
+     <w lemma="shall" pos="vmb" xml:id="A95690-001-a-0120">shall</w>
+     <w lemma="be" pos="vvi" reg="be" xml:id="A95690-001-a-0130">bee</w>
+     <w lemma="use" pos="vvn" reg="used" xml:id="A95690-001-a-0140">vsed</w>
+     <w lemma="in" pos="acp" xml:id="A95690-001-a-0150">in</w>
+     <w lemma="the" pos="d" rendition="#sup-ye" xml:id="A95690-001-a-0160">the</w>
+     <w lemma="future" pos="j" xml:id="A95690-001-a-0180">future</w>
+     <w lemma="building" pos="n1" xml:id="A95690-001-a-0190">Building</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-0200">of</w>
+     <w lemma="all" pos="d" xml:id="A95690-001-a-0210">all</w>
+     <w lemma="edifice" pos="n2" xml:id="A95690-001-a-0220">Edifices</w>
+     <w lemma="within" pos="acp" xml:id="A95690-001-a-0230">within</w>
+     <w lemma="the" pos="d" xml:id="A95690-001-a-0240">the</w>
+     <w lemma="city" pos="n1" reg="City" xml:id="A95690-001-a-0250">Citty</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-0260">of</w>
+     <w lemma="London" pos="n1-nn" xml:id="A95690-001-a-0270">London</w>
+     <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-0280">&amp;</w>
+     <w lemma="liberties" pos="n1-nn" xml:id="A95690-001-a-0290">Liberties</w>
+     <w lemma="thereof" pos="av" xml:id="A95690-001-a-0300">thereof</w>
+     <w lemma="agree" pos="vvn" xml:id="A95690-001-a-0310">Agreed</w>
+     <w lemma="upon" pos="acp" reg="upon" xml:id="A95690-001-a-0320">vpon</w>
+     <w lemma="by" pos="acp" xml:id="A95690-001-a-0330">by</w>
+     <w lemma="the" pos="d" xml:id="A95690-001-a-0340">the</w>
+     <w lemma="lord" pos="n1" xml:id="A95690-001-a-0350">Lord</w>
+     <w lemma="Maior" pos="n1-nn" xml:id="A95690-001-a-0360">Maior</w>
+     <w lemma="alderman" pos="n2" xml:id="A95690-001-a-0370">Aldermen</w>
+     <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-0380">&amp;</w>
+     <w lemma="commons" pos="n2" reg="Commons" xml:id="A95690-001-a-0390">Com̄ons</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-0400">of</w>
+     <w lemma="the" pos="d" xml:id="A95690-001-a-0410">the</w>
+     <w lemma="say" pos="j_vn" xml:id="A95690-001-a-0420">said</w>
+     <w lemma="city" pos="n1" reg="City" xml:id="A95690-001-a-0430">Citty</w>
+     <w lemma="in" pos="acp" xml:id="A95690-001-a-0440">in</w>
+     <w lemma="common" pos="j" reg="Common" xml:id="A95690-001-a-0450">Com̄on</w>
+     <w lemma="council" pos="n1" reg="Council" xml:id="A95690-001-a-0460">Councell</w>
+     <w lemma="assemble" pos="vvn" xml:id="A95690-001-a-0470">assembled</w>
+     <w lemma="as" pos="acp" xml:id="A95690-001-a-0480">as</w>
+     <w lemma="a" pos="d" xml:id="A95690-001-a-0490">a</w>
+     <w lemma="rule" pos="n1" xml:id="A95690-001-a-0500">Rule</w>
+     <w lemma="for" pos="acp" xml:id="A95690-001-a-0510">for</w>
+     <w lemma="those" pos="d" xml:id="A95690-001-a-0520">those</w>
+     <w lemma="that" pos="cs" xml:id="A95690-001-a-0530">that</w>
+     <w lemma="be" pos="vvb" xml:id="A95690-001-a-0540">are</w>
+     <w lemma="to" pos="to" xml:id="A95690-001-a-0550">to</w>
+     <w lemma="build" pos="vvb" xml:id="A95690-001-a-0560">Build</w>
+     <pc xml:id="A95690-001-a-0570">,</pc>
+     <w lemma="and" pos="cc" xml:id="A95690-001-a-0580">And</w>
+     <w lemma="a" pos="d" xml:id="A95690-001-a-0590">a</w>
+     <w lemma="direction" pos="n1" xml:id="A95690-001-a-0600">Direction</w>
+     <w lemma="for" pos="acp" xml:id="A95690-001-a-0610">for</w>
+     <w lemma="those" pos="d" xml:id="A95690-001-a-0620">those</w>
+     <w lemma="that" pos="cs" xml:id="A95690-001-a-0630">that</w>
+     <w lemma="be" pos="vvb" xml:id="A95690-001-a-0640">are</w>
+     <w lemma="mind" pos="vvn" xml:id="A95690-001-a-0650">minded</w>
+     <w lemma="to" pos="to" xml:id="A95690-001-a-0660">to</w>
+     <w lemma="furnish" pos="vvi" xml:id="A95690-001-a-0670">furnish</w>
+     <w lemma="timber" pos="n1" reg="Timber" xml:id="A95690-001-a-0680">Tymber</w>
+     <w lemma="for" pos="acp" xml:id="A95690-001-a-0690">for</w>
+     <w lemma="that" pos="d" xml:id="A95690-001-a-0700">that</w>
+     <w lemma="service" pos="n1" xml:id="A95690-001-a-0710">Service</w>
+     <pc unit="sentence" xml:id="A95690-001-a-0720">.</pc>
+    </head>
+    <list xml:id="A95690-e40">
+     <item xml:id="A95690-e50">
+      <w lemma="summer" pos="n2" reg="Summers" xml:id="A95690-001-a-0730">Sum̄ers</w>
+      <w lemma="or" pos="cc" xml:id="A95690-001-a-0740">or</w>
+      <w lemma="gyrder" pos="n2" xml:id="A95690-001-a-0750">Gyrders</w>
+      <w lemma="may" pos="vmb" xml:id="A95690-001-a-0760">may</w>
+      <w lemma="be" pos="vvi" reg="be" xml:id="A95690-001-a-0770">bee</w>
+      <w lemma="cut" pos="n1" reg="cut" xml:id="A95690-001-a-0780">cutt</w>
+      <w lemma="to" pos="acp" xml:id="A95690-001-a-0790">to</w>
+      <w lemma="any" pos="d" xml:id="A95690-001-a-0800">any</w>
+      <w lemma="of" pos="acp" xml:id="A95690-001-a-0810">of</w>
+      <w lemma="these" pos="d" xml:id="A95690-001-a-0820">these</w>
+      <w lemma="five" pos="crd" xml:id="A95690-001-a-0830">five</w>
+      <w lemma="sort" pos="n2" xml:id="A95690-001-a-0840">Sorts</w>
+      <w lemma="of" pos="acp" xml:id="A95690-001-a-0850">of</w>
+      <w lemma="square" pos="j" xml:id="A95690-001-a-0860">Square</w>
+      <list xml:id="A95690-e60">
+       <item xml:id="A95690-e70">
+        <w lemma="11" pos="crd" xml:id="A95690-001-a-0870">11</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-0880">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-0890">and</w>
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-0900">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-0910">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-0920">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-0930">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-0940">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-0950">from</w>
+        <w lemma="14" pos="crd" xml:id="A95690-001-a-0960">14</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-0970">foot</w>
+        <w lemma="exclusive" pos="j" xml:id="A95690-001-a-0980">exclusive</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-0990">to</w>
+        <w lemma="16" pos="crd" xml:id="A95690-001-a-1000">16</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1010">foot</w>
+        <w lemma="inclusive" pos="j" reg="inclusive" xml:id="A95690-001-a-1020">inclusiue</w>
+       </item>
+       <item xml:id="A95690-e80">
+        <w lemma="13" pos="crd" xml:id="A95690-001-a-1030">13</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1040">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1050">and</w>
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-1060">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1070">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1080">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-1090">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-1100">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-1110">from</w>
+        <w lemma="16" pos="crd" xml:id="A95690-001-a-1120">16</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1130">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-1140">excl</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-1150">to</w>
+        <w lemma="20" pos="crd" xml:id="A95690-001-a-1160">20</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1170">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-1180">incl</w>
+        <pc xml:id="A95690-001-a-1190">:</pc>
+       </item>
+       <item xml:id="A95690-e90">
+        <w lemma="14" pos="crd" xml:id="A95690-001-a-1200">14</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1210">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1220">and</w>
+        <w lemma="10" pos="crd" xml:id="A95690-001-a-1230">10</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1240">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1250">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-1260">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-1270">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-1280">from</w>
+        <w lemma="20" pos="crd" xml:id="A95690-001-a-1290">20</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1300">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-1310">excl</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-1320">to</w>
+        <w lemma="23" pos="crd" xml:id="A95690-001-a-1330">23</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1340">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-1350">incl</w>
+        <pc xml:id="A95690-001-a-1360">:</pc>
+       </item>
+       <item xml:id="A95690-e100">
+        <w lemma="16" pos="crd" xml:id="A95690-001-a-1370">16</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1380">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1390">and</w>
+        <w lemma="12" pos="crd" xml:id="A95690-001-a-1400">12</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1410">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1420">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-1430">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-1440">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-1450">from</w>
+        <w lemma="23" pos="crd" xml:id="A95690-001-a-1460">23</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1470">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-1480">excl</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-1490">to</w>
+        <w lemma="26" pos="crd" xml:id="A95690-001-a-1500">26</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1510">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-1520">incl</w>
+        <pc xml:id="A95690-001-a-1530">:</pc>
+       </item>
+       <item xml:id="A95690-e110">
+        <w lemma="17" pos="crd" xml:id="A95690-001-a-1540">17</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1550">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1560">and</w>
+        <w lemma="14" pos="crd" xml:id="A95690-001-a-1570">14</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1580">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1590">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-1600">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-1610">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-1620">from</w>
+        <w lemma="26" pos="crd" xml:id="A95690-001-a-1630">26</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1640">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-1650">excl</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-1660">to</w>
+        <w lemma="28" pos="crd" xml:id="A95690-001-a-1670">28</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1680">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-1690">incl</w>
+        <pc xml:id="A95690-001-a-1700">:</pc>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e120">
+      <w lemma="Gyst" pos="n1-nn" xml:id="A95690-001-a-1710">Gyst</w>
+      <w lemma="or" pos="cc" xml:id="A95690-001-a-1720">or</w>
+      <w lemma="joyst" pos="n2" reg="joysts" xml:id="A95690-001-a-1730">Ioysts</w>
+      <w lemma="at" pos="acp" xml:id="A95690-001-a-1740">at</w>
+      <w lemma="full" pos="j" xml:id="A95690-001-a-1750">full</w>
+      <w lemma="length" pos="n2" xml:id="A95690-001-a-1760">Lengths</w>
+      <w lemma="to" pos="to" xml:id="A95690-001-a-1770">to</w>
+      <w lemma="bear" pos="vvi" reg="bear" xml:id="A95690-001-a-1780">beare</w>
+      <w lemma="in" pos="acp" xml:id="A95690-001-a-1790">in</w>
+      <w lemma="the" pos="d" rendition="#sup-ye" xml:id="A95690-001-a-1800">the</w>
+      <w lemma="Wall" pos="n1-nn" xml:id="A95690-001-a-1820">Wall</w>
+      <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-1830">&amp;</w>
+      <w lemma="frame" pos="n1" xml:id="A95690-001-a-1840">Frame</w>
+      <w lemma="may" pos="vmb" xml:id="A95690-001-a-1850">may</w>
+      <w lemma="be" pos="vvi" xml:id="A95690-001-a-1860">be</w>
+      <w lemma="cut" pos="vvn" xml:id="A95690-001-a-1870">cut</w>
+      <w lemma="to" pos="acp" xml:id="A95690-001-a-1880">to</w>
+      <w lemma="square" pos="j" xml:id="A95690-001-a-1890">Square</w>
+      <list xml:id="A95690-e140">
+       <item xml:id="A95690-e150">
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-1900">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1910">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1920">and</w>
+        <w lemma="3" pos="crd" xml:id="A95690-001-a-1930">3</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-1940">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-1950">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-1960">in</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-1970">lengths</w>
+        <w lemma="11½" pos="n1" xml:id="A95690-001-a-1980">11½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-1990">foot</w>
+       </item>
+       <item xml:id="A95690-e160">
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2000">7</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2010">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2020">and</w>
+        <w lemma="3" pos="crd" xml:id="A95690-001-a-2030">3</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2040">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2050">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-2060">in</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2070">lengths</w>
+       </item>
+       <item xml:id="A95690-e170">
+        <w lemma="6" pos="crd" xml:id="A95690-001-a-2080">6</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2090">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2100">and</w>
+        <w lemma="3" pos="crd" xml:id="A95690-001-a-2110">3</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2120">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2130">and</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-2140">in</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2150">lengths</w>
+        <w lemma="10½" pos="n1" xml:id="A95690-001-a-2160">10½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2170">foot</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e180">
+      <w lemma="bind" pos="vvg" xml:id="A95690-001-a-2180">Binding</w>
+      <w lemma="gyst" pos="n2" xml:id="A95690-001-a-2190">Gysts</w>
+      <w lemma="or" pos="cc" xml:id="A95690-001-a-2200">or</w>
+      <w lemma="joyst" pos="n2" reg="joysts" xml:id="A95690-001-a-2210">Ioysts</w>
+      <w lemma="and" pos="cc" xml:id="A95690-001-a-2220">and</w>
+      <w lemma="trime" pos="j_vg" xml:id="A95690-001-a-2230">Triming</w>
+      <w lemma="gyst" pos="n2" xml:id="A95690-001-a-2240">Gysts</w>
+      <w lemma="square" pos="j" xml:id="A95690-001-a-2250">Square</w>
+      <list xml:id="A95690-e190">
+       <item xml:id="A95690-e200">
+        <w lemma="6" pos="crd" xml:id="A95690-001-a-2260">6</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2270">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2280">and</w>
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-2290">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2300">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2310">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-2320">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-2330">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2340">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-2350">from</w>
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2360">7</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2370">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-2380">to</w>
+        <w lemma="11½" pos="n1" xml:id="A95690-001-a-2390">11½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2400">foot</w>
+       </item>
+       <item xml:id="A95690-e210">
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2410">7</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2420">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2430">and</w>
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-2440">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2450">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2460">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-2470">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-2480">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2490">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-2500">from</w>
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2510">7</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2520">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-2530">to</w>
+        <w lemma="11½" pos="n1" xml:id="A95690-001-a-2540">11½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2550">foot</w>
+       </item>
+       <item xml:id="A95690-e220">
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-2560">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2570">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2580">and</w>
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-2590">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2600">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2610">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-2620">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-2630">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2640">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-2650">from</w>
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2660">7</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2670">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-2680">to</w>
+        <w lemma="11½" pos="n1" xml:id="A95690-001-a-2690">11½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2700">foot</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e230">
+      <w lemma="Wall" pos="n1-nn" xml:id="A95690-001-a-2710">Wall</w>
+      <w lemma="plate" pos="n2" xml:id="A95690-001-a-2720">plates</w>
+      <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2730">&amp;</w>
+      <w lemma="beam" pos="n2" reg="Beams" xml:id="A95690-001-a-2740">Beames</w>
+      <w lemma="square" pos="j" xml:id="A95690-001-a-2750">Square</w>
+      <list xml:id="A95690-e240">
+       <item xml:id="A95690-e250">
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-2760">7</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2770">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2780">and</w>
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-2790">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2800">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2810">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-2820">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-2830">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2840">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-2850">from</w>
+        <w lemma="15" pos="crd" xml:id="A95690-001-a-2860">15</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2870">foot</w>
+       </item>
+       <item xml:id="A95690-e260">
+        <w lemma="10" pos="crd" xml:id="A95690-001-a-2880">10</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2890">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-2900">and</w>
+        <w lemma="6" pos="crd" xml:id="A95690-001-a-2910">6</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-2920">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-2930">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-2940">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-2950">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-2960">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-2970">from</w>
+        <w lemma="15" pos="crd" xml:id="A95690-001-a-2980">15</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-2990">foot</w>
+       </item>
+       <item xml:id="A95690-e270">
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-3000">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3010">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-3020">and</w>
+        <w lemma="6" pos="crd" xml:id="A95690-001-a-3030">6</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3040">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-3050">&amp;</w>
+        <w lemma="of" pos="acp" xml:id="A95690-001-a-3060">of</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-3070">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-3080">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-3090">from</w>
+        <w lemma="15" pos="crd" xml:id="A95690-001-a-3100">15</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-3110">foot</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e280">
+      <w lemma="purlyne" pos="vvz" xml:id="A95690-001-a-3120">Purlynes</w>
+      <w lemma="all" pos="d" xml:id="A95690-001-a-3130">all</w>
+      <w lemma="of" pos="acp" xml:id="A95690-001-a-3140">of</w>
+      <w lemma="oak" pos="n1" xml:id="A95690-001-a-3150">Oak</w>
+      <w lemma="Square" pos="n1-nn" xml:id="A95690-001-a-3160">Square</w>
+      <list xml:id="A95690-e290">
+       <item xml:id="A95690-e300">
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-3170">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3180">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-3190">and</w>
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-3200">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3210">inch</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-3220">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-3230">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-3240">from</w>
+        <w lemma="15½" pos="n1" xml:id="A95690-001-a-3250">15½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-3260">foot</w>
+        <w lemma="exclusive" pos="j" xml:id="A95690-001-a-3270">exclusive</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3280">to</w>
+        <w lemma="18½" pos="n1" xml:id="A95690-001-a-3290">18½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-3300">foot</w>
+        <w lemma="inclusive" pos="j" xml:id="A95690-001-a-3310">inclusive</w>
+       </item>
+       <item xml:id="A95690-e310">
+        <w lemma="12" pos="crd" xml:id="A95690-001-a-3320">12</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3330">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-3340">and</w>
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-3350">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3360">inch</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-3370">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-3380">length</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-3390">from</w>
+        <w lemma="18½" pos="n1" xml:id="A95690-001-a-3400">18½</w>
+        <w lemma="foot" pos="vvb" xml:id="A95690-001-a-3410">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-3420">excl</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3430">to</w>
+        <w lemma="21½" pos="n1" xml:id="A95690-001-a-3440">21½</w>
+        <w lemma="foot" pos="vvb" xml:id="A95690-001-a-3450">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-3460">incl</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e320">
+      <w lemma="principal" pos="j" reg="Principal" xml:id="A95690-001-a-3470">Principall</w>
+      <w lemma="rafter" pos="n2" xml:id="A95690-001-a-3480">Rafters</w>
+      <w lemma="oak" pos="n1" xml:id="A95690-001-a-3490">Oak</w>
+      <w lemma="one" pos="crd" xml:id="A95690-001-a-3500">one</w>
+      <w lemma="side" pos="n1" xml:id="A95690-001-a-3510">side</w>
+      <w lemma="cut" pos="vvi" reg="cut" xml:id="A95690-001-a-3520">cutt</w>
+      <w lemma="taper" pos="n1" xml:id="A95690-001-a-3530">Taper</w>
+      <w lemma="from" pos="acp" xml:id="A95690-001-a-3540">from</w>
+      <list xml:id="A95690-e330">
+       <item xml:id="A95690-e340">
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-3550">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3560">inch</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3570">to</w>
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-3580">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3590">inch</w>
+        <w lemma="the" pos="d" xml:id="A95690-001-a-3600">the</w>
+        <w lemma="other" pos="d" xml:id="A95690-001-a-3610">other</w>
+        <w lemma="side" pos="n1" xml:id="A95690-001-a-3620">side</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-3630">in</w>
+        <w lemma="thickness" pos="n1" reg="Thickness" xml:id="A95690-001-a-3640">Thicknes</w>
+        <w lemma="6" pos="crd" xml:id="A95690-001-a-3650">6</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3660">inch</w>
+        <w lemma="their" pos="po" xml:id="A95690-001-a-3670">Their</w>
+        <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-3680">severall</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-3690">Lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-3700">from</w>
+        <w lemma="12½" pos="n1" xml:id="A95690-001-a-3710">12½</w>
+        <w lemma="foot" pos="vvb" xml:id="A95690-001-a-3720">foot</w>
+        <w lemma="excl" pos="n2-nn" reg="excls" xml:id="A95690-001-a-3730">excl</w>
+        <pc xml:id="A95690-001-a-3740">:</pc>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3750">to</w>
+        <w lemma="14½" pos="n1" xml:id="A95690-001-a-3760">14½</w>
+        <w lemma="foot" pos="vvb" xml:id="A95690-001-a-3770">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-3780">incl</w>
+       </item>
+       <item xml:id="A95690-e350">
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-3790">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3800">inch</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3810">to</w>
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-3820">7</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3830">inch</w>
+        <w lemma="the" pos="d" xml:id="A95690-001-a-3840">the</w>
+        <w lemma="other" pos="d" xml:id="A95690-001-a-3850">other</w>
+        <w lemma="side" pos="n1" xml:id="A95690-001-a-3860">side</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-3870">in</w>
+        <w lemma="thickness" pos="n1" reg="Thickness" xml:id="A95690-001-a-3880">Thicknes</w>
+        <w lemma="7" pos="crd" xml:id="A95690-001-a-3890">7</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-3900">inch</w>
+        <w lemma="their" pos="po" xml:id="A95690-001-a-3910">Their</w>
+        <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-3920">severall</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-3930">Lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-3940">from</w>
+        <w lemma="14½" pos="n1" xml:id="A95690-001-a-3950">14½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-3960">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-3970">to</w>
+        <w lemma="18½" pos="n1" xml:id="A95690-001-a-3980">18½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-3990">foot</w>
+       </item>
+       <item xml:id="A95690-e360">
+        <w lemma="10" pos="crd" xml:id="A95690-001-a-4000">10</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4010">inch</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4020">to</w>
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-4030">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4040">inch</w>
+        <w lemma="the" pos="d" xml:id="A95690-001-a-4050">the</w>
+        <w lemma="other" pos="d" xml:id="A95690-001-a-4060">other</w>
+        <w lemma="side" pos="n1" xml:id="A95690-001-a-4070">side</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-4080">in</w>
+        <w lemma="thickness" pos="n1" reg="Thickness" xml:id="A95690-001-a-4090">Thicknes</w>
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-4100">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4110">inch</w>
+        <w lemma="their" pos="po" xml:id="A95690-001-a-4120">Their</w>
+        <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-4130">severall</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-4140">Lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-4150">from</w>
+        <w lemma="18½" pos="n1" xml:id="A95690-001-a-4160">18½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4170">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4180">to</w>
+        <w lemma="21½" pos="n1" xml:id="A95690-001-a-4190">21½</w>
+        <w lemma="foot" pos="vvb" xml:id="A95690-001-a-4200">foot</w>
+        <w lemma="incl" pos="n2-nn" reg="incls" xml:id="A95690-001-a-4210">incl</w>
+       </item>
+       <item xml:id="A95690-e370">
+        <w lemma="12" pos="crd" xml:id="A95690-001-a-4220">12</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4230">inch</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4240">to</w>
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-4250">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4260">inch</w>
+        <w lemma="the" pos="d" xml:id="A95690-001-a-4270">the</w>
+        <w lemma="other" pos="d" xml:id="A95690-001-a-4280">other</w>
+        <w lemma="side" pos="n1" xml:id="A95690-001-a-4290">side</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-4300">in</w>
+        <w lemma="thickness" pos="n1" reg="Thickness" xml:id="A95690-001-a-4310">Thicknes</w>
+        <w lemma="8" pos="crd" xml:id="A95690-001-a-4320">8</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4330">inch</w>
+        <w lemma="their" pos="po" xml:id="A95690-001-a-4340">Their</w>
+        <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-4350">severall</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-4360">Lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-4370">from</w>
+        <w lemma="21½" pos="n1" xml:id="A95690-001-a-4380">21½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4390">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4400">to</w>
+        <w lemma="24½" pos="n1" xml:id="A95690-001-a-4410">24½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4420">foot</w>
+       </item>
+       <item xml:id="A95690-e380">
+        <w lemma="13" pos="crd" xml:id="A95690-001-a-4430">13</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4440">inch</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4450">to</w>
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-4460">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4470">inch</w>
+        <w lemma="the" pos="d" xml:id="A95690-001-a-4480">the</w>
+        <w lemma="other" pos="d" xml:id="A95690-001-a-4490">other</w>
+        <w lemma="side" pos="n1" xml:id="A95690-001-a-4500">side</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-4510">in</w>
+        <w lemma="thickness" pos="n1" reg="Thickness" xml:id="A95690-001-a-4520">Thicknes</w>
+        <w lemma="9" pos="crd" xml:id="A95690-001-a-4530">9</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4540">inch</w>
+        <w lemma="their" pos="po" xml:id="A95690-001-a-4550">Their</w>
+        <w lemma="several" pos="j" reg="several" xml:id="A95690-001-a-4560">severall</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-4570">Lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-4580">from</w>
+        <w lemma="24½" pos="n1" xml:id="A95690-001-a-4590">24½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4600">foot</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4610">to</w>
+        <w lemma="26½" pos="n1" xml:id="A95690-001-a-4620">26½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4630">foot</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e390">
+      <w lemma="single" pos="j" xml:id="A95690-001-a-4640">Single</w>
+      <w lemma="rafter" pos="n2" xml:id="A95690-001-a-4650">Rafters</w>
+      <w lemma="square" pos="j" xml:id="A95690-001-a-4660">Square</w>
+      <list xml:id="A95690-e400">
+       <item xml:id="A95690-e410">
+        <w lemma="4" pos="crd" xml:id="A95690-001-a-4670">4</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4680">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-4690">&amp;</w>
+        <w lemma="3½" pos="n1" xml:id="A95690-001-a-4700">3½</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4710">inch</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-4720">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-4730">length</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4740">to</w>
+        <w lemma="6½" pos="n1" xml:id="A95690-001-a-4750">6½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4760">foot</w>
+       </item>
+       <item xml:id="A95690-e420">
+        <w lemma="5" pos="crd" xml:id="A95690-001-a-4770">5</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4780">inch</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-4790">&amp;</w>
+        <w lemma="4" pos="crd" xml:id="A95690-001-a-4800">4</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-4810">inch</w>
+        <w lemma="in" pos="acp" xml:id="A95690-001-a-4820">in</w>
+        <w lemma="length" pos="n1" xml:id="A95690-001-a-4830">length</w>
+        <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-4840">&amp;</w>
+        <w lemma="thence" pos="av" xml:id="A95690-001-a-4850">thence</w>
+        <w lemma="to" pos="acp" xml:id="A95690-001-a-4860">to</w>
+        <w lemma="9½" pos="n1" xml:id="A95690-001-a-4870">9½</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-4880">foot</w>
+       </item>
+      </list>
+     </item>
+     <item xml:id="A95690-e430">
+      <w lemma="principal" pos="j" reg="Principal" xml:id="A95690-001-a-4890">Principall</w>
+      <w lemma="discharge" pos="vvz" xml:id="A95690-001-a-4900">Discharges</w>
+      <w lemma="upon" pos="acp" reg="upon" xml:id="A95690-001-a-4910">vpon</w>
+      <w lemma="peer" pos="n2" reg="Peers" xml:id="A95690-001-a-4920">Peeres</w>
+      <w lemma="in" pos="acp" xml:id="A95690-001-a-4930">in</w>
+      <w lemma="the" pos="d" xml:id="A95690-001-a-4940">the</w>
+      <w lemma="first" pos="ord" xml:id="A95690-001-a-4950">first</w>
+      <w lemma="story" pos="n1" xml:id="A95690-001-a-4960">Story</w>
+      <w lemma="in" pos="acp" xml:id="A95690-001-a-4970">in</w>
+      <w lemma="front" pos="n1" xml:id="A95690-001-a-4980">front</w>
+      <w lemma="of" pos="acp" xml:id="A95690-001-a-4990">of</w>
+      <w lemma="oak" pos="n1" xml:id="A95690-001-a-5000">Oak</w>
+      <w lemma="Square" pos="n1-nn" xml:id="A95690-001-a-5010">Square</w>
+      <list xml:id="A95690-e440">
+       <item xml:id="A95690-e450">
+        <w lemma="13" pos="crd" xml:id="A95690-001-a-5020">13</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-5030">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-5040">and</w>
+        <w lemma="12" pos="crd" xml:id="A95690-001-a-5050">12</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-5060">inch</w>
+        <w lemma="at" pos="acp" xml:id="A95690-001-a-5070">at</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-5080">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-5090">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-5100">from</w>
+        <w lemma="10" pos="crd" xml:id="A95690-001-a-5110">10</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-5120">foot</w>
+        <w lemma="upward" pos="av_j" reg="upwards" xml:id="A95690-001-a-5130">vpwards</w>
+       </item>
+       <item xml:id="A95690-e460">
+        <w lemma="15" pos="crd" xml:id="A95690-001-a-5140">15</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-5150">inch</w>
+        <w lemma="and" pos="cc" xml:id="A95690-001-a-5160">and</w>
+        <w lemma="13" pos="crd" xml:id="A95690-001-a-5170">13</w>
+        <w lemma="inch" pos="n1" xml:id="A95690-001-a-5180">inch</w>
+        <w lemma="at" pos="acp" xml:id="A95690-001-a-5190">at</w>
+        <w lemma="any" pos="d" xml:id="A95690-001-a-5200">any</w>
+        <w lemma="length" pos="n2" xml:id="A95690-001-a-5210">lengths</w>
+        <w lemma="from" pos="acp" xml:id="A95690-001-a-5220">from</w>
+        <w lemma="10" pos="crd" xml:id="A95690-001-a-5230">10</w>
+        <w lemma="foot" pos="n1" xml:id="A95690-001-a-5240">foot</w>
+        <w lemma="upward" pos="av_j" reg="upwards" xml:id="A95690-001-a-5250">vpwards</w>
+       </item>
+      </list>
+     </item>
+    </list>
+    <p xml:id="A95690-e470">
+     <w lemma="the" pos="d" xml:id="A95690-001-a-5260">The</w>
+     <w lemma="scale" pos="n1" xml:id="A95690-001-a-5270">Scale</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-5280">of</w>
+     <w lemma="a" pos="d" xml:id="A95690-001-a-5290">an</w>
+     <w lemma="english" pos="j-nn" xml:id="A95690-001-a-5300">English</w>
+     <w lemma="foot" pos="n1" xml:id="A95690-001-a-5310">Foot</w>
+     <w lemma="contain" pos="vvg" xml:id="A95690-001-a-5320">containing</w>
+     <w lemma="12" pos="crd" xml:id="A95690-001-a-5330">12</w>
+     <w lemma="inch" pos="n2" xml:id="A95690-001-a-5340">Inches</w>
+     <pc xml:id="A95690-001-a-5350">.</pc>
+     <w lemma="for" pos="acp" xml:id="A95690-001-a-5360">for</w>
+     <w lemma="direction" pos="n1" xml:id="A95690-001-a-5370">Direction</w>
+     <w lemma="of" pos="acp" xml:id="A95690-001-a-5380">of</w>
+     <w lemma="foreign" pos="j" reg="foreign" xml:id="A95690-001-a-5390">forrayne</w>
+     <w lemma="nation" pos="n2" xml:id="A95690-001-a-5400">Nations</w>
+    </p>
+   </div>
+  </body>
+  <back xml:id="A95690-e480">
+   <div type="license" xml:id="A95690-e490">
+    <opener xml:id="A95690-e500">
+     <dateline xml:id="A95690-e510">
+      <date xml:id="A95690-e520">
+       <w lemma="26" pos="crd" xml:id="A95690-001-a-5410">26</w>
+       <w lemma="Novembr" pos="n1-nn" xml:id="A95690-001-a-5420">Novembr</w>
+       <pc unit="sentence" xml:id="A95690-001-a-5430">.</pc>
+       <w lemma="1666." pos="crd" xml:id="A95690-001-a-5440">1666.</w>
+       <pc unit="sentence" xml:id="A95690-001-a-5450"/>
+      </date>
+     </dateline>
+    </opener>
+    <p xml:id="A95690-e530">
+     <w lemma="order" pos="vvn" xml:id="A95690-001-a-5460">Ordered</w>
+     <w lemma="by" pos="acp" xml:id="A95690-001-a-5470">by</w>
+     <w lemma="the" pos="d" xml:id="A95690-001-a-5480">the</w>
+     <w lemma="say" pos="j_vn" xml:id="A95690-001-a-5490">said</w>
+     <w lemma="lord" pos="n1" xml:id="A95690-001-a-5500">Lord</w>
+     <w lemma="Maior" pos="n1-nn" xml:id="A95690-001-a-5510">Maior</w>
+     <w lemma="alderman" pos="n2" xml:id="A95690-001-a-5520">Aldermen</w>
+     <w lemma="and" pos="cc" xml:id="A95690-001-a-5530">and</w>
+     <w lemma="commons" pos="n2" reg="Commons" xml:id="A95690-001-a-5540">Com̄ons</w>
+     <w lemma="that" pos="cs" xml:id="A95690-001-a-5550">that</w>
+     <w lemma="this" pos="d" xml:id="A95690-001-a-5560">this</w>
+     <w lemma="table" pos="n1" xml:id="A95690-001-a-5570">Table</w>
+     <w lemma="be" pos="vvi" reg="be" xml:id="A95690-001-a-5580">bee</w>
+     <w lemma="forthwith" pos="av" xml:id="A95690-001-a-5590">forthwith</w>
+     <w lemma="print" pos="vvn" xml:id="A95690-001-a-5600">Printed</w>
+     <w lemma="&amp;" pos="cc" xml:id="A95690-001-a-5610">&amp;</w>
+     <w lemma="make" pos="vvn" xml:id="A95690-001-a-5620">made</w>
+     <w lemma="public" pos="j" reg="Public" xml:id="A95690-001-a-5630">Publique</w>
+     <pc unit="sentence" xml:id="A95690-001-a-5640">.</pc>
+    </p>
+    <closer xml:id="A95690-e540">
+     <signed xml:id="A95690-e550">
+      <w lemma="avery" pos="n1-nn" xml:id="A95690-001-a-5650">Avery</w>
+      <pc unit="sentence" xml:id="A95690-001-a-5660">.</pc>
+     </signed>
+    </closer>
+   </div>
+   <div type="colophon" xml:id="A95690-e560">
+    <p xml:id="A95690-e570">
+     <w lemma="sell" pos="vvn" xml:id="A95690-001-a-5670">Sold</w>
+     <w lemma="by" pos="acp" xml:id="A95690-001-a-5680">by</w>
+     <w lemma="Nathanael" pos="n1-nn" xml:id="A95690-001-a-5690">Nathanael</w>
+     <w lemma="Brooke" pos="n1-nn" xml:id="A95690-001-a-5700">Brooke</w>
+     <w lemma="stationer" pos="n1" xml:id="A95690-001-a-5710">Stationer</w>
+     <w lemma="in" pos="acp" xml:id="A95690-001-a-5720">in</w>
+     <w lemma="Gresham" pos="n1-nn" xml:id="A95690-001-a-5730">Gresham</w>
+     <w lemma="college" pos="n1" reg="College" xml:id="A95690-001-a-5740">Colledge</w>
+     <w lemma="next" pos="ord" xml:id="A95690-001-a-5750">next</w>
+     <w lemma="bishop" pos="n2" xml:id="A95690-001-a-5760">Bishops</w>
+     <w lemma="gate" pos="n1" xml:id="A95690-001-a-5770">gate</w>
+     <w lemma="street" pos="n1" xml:id="A95690-001-a-5780">street</w>
+     <pc unit="sentence" xml:id="A95690-001-a-5790">.</pc>
+    </p>
+   </div>
+  </back>
+ </text>
+</TEI>
