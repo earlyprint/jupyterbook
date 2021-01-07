@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Parsing EarlyPrint XML Texts in Python &#8212; EarlyPrint + Python</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Exploring Vocabulary in EarlyPrint using Tf-Idf" href="tf_idf.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/eplogo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">EarlyPrint + Python</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Parsing
+   <em>
+    EarlyPrint
+   </em>
+   XML Texts in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tf_idf.html">
+   2. Exploring Vocabulary in
+   <em>
+    EarlyPrint
+   </em>
+   using Tf-Idf
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/ep_xml.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fep_xml.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ep_xml.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   1.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tools">
+   1.2. Tools
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-1-import-libraries">
+   1.3. Step 1: Import Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-2-read-a-text-and-create-an-etree-object">
+   1.4. Step 2: Read a Text and Create an “etree” object
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-3-individual-words">
+   1.5. Step 3: Individual Words
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-4-lines-stanzas-and-sentences">
+   1.6. Step 4: Lines, Stanzas, and Sentences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-divisions">
+   1.7. Other Divisions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exporting-and-sharing">
+   1.8. Exporting and Sharing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   1.9. Conclusion
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="parsing-earlyprint-xml-texts-in-python">
+<h1><span class="section-number">1. </span>Parsing <em>EarlyPrint</em> XML Texts in Python<a class="headerlink" href="#parsing-earlyprint-xml-texts-in-python" title="Permalink to this headline">¶</a></h1>
+<p>by <a class="reference external" href="https://jrladd.com">John R. Ladd</a></p>
+<p><a class="reference external" href="https://earlyprint.org/assets/jupyter/ep_xml.ipynb">Download this notebook!</a></p>
+<div class="section" id="introduction">
+<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, you’ll learn how to take advantage of the XML markup in <em>EarlyPrint</em> texts to subdivide and <strong>parse</strong> a single text or group of texts (that is, to use the formal encoding provided by XML to select textual features in which you’re especially interested).</p>
+<p><em>EarlyPrint</em> uses <a class="reference external" href="https://tei-c.org/release/doc/tei-p5-exemplars/html/tei_simplePrint.doc.html">TEI simplePrint</a>, an encoding standard derived from the <a class="reference external" href="https://tei-c.org/">Text Encoding Initiative</a> guidelines and designed specifically for early modern and modern printed books. The standard includes many ways of marking up the structure of books, and we’ll take advantage of a text’s various TEI tags and attributes to transform it a number of useful ways.</p>
+<p>For more on XML (which stands for eXtensible Markup Language), its long history, and the ways it has been used with early modern texts, consult <a class="reference external" href="https://earlyprint.org/intros/intro-to-eebo-tcp.html">our introductory post on EEBO-TCP</a> which includes a helpful glossary and set of links at the bottom.</p>
+</div>
+<div class="section" id="tools">
+<h2><span class="section-number">1.2. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<p>Like the other tutorials in this series, this post presumes some basic knowledge of Python. However, you need not write any code yourself. You can simply <a class="reference external" href="https://earlyprint.org/assets/jupyter/ep_xml.ipynb">download this notebook</a> and modify it to run on your own <em>EarlyPrint</em> texts.</p>
+<p>For this notebook to work, you will need to have Python3 installed as well as the following libraries:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyter.org/install">Jupyter Notebook</a> (for running and reading the notebook)</p></li>
+<li><p><a class="reference external" href="https://lxml.de/">lxml</a> (for parsing the XML)</p></li>
+<li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a> (for aggregating information and exporting as a CSV)</p></li>
+</ul>
+<p>As an example text, I’ve chosen the original 1667 publication of <em>Paradise Lost</em> (ID A50919) which you can <a class="reference external" href="https://earlyprint.org/download/">find and download here</a>.</p>
+<p>Now let’s get started!</p>
+</div>
+<div class="section" id="step-1-import-libraries">
+<h2><span class="section-number">1.3. </span>Step 1: Import Libraries<a class="headerlink" href="#step-1-import-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Once you’ve installed the necessary libraries, you need to <strong>import</strong> them into the current script. Often you don’t need to import the whole library, just specific commands <strong>from</strong> that library. Your imports should look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span> <span class="c1"># This is the only part of lxml we need</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># You won&#39;t need pandas until the very end of this tutorial</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span> <span class="c1"># A built-in tool for counting items</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-2-read-a-text-and-create-an-etree-object">
+<h2><span class="section-number">1.4. </span>Step 2: Read a Text and Create an “etree” object<a class="headerlink" href="#step-2-read-a-text-and-create-an-etree-object" title="Permalink to this headline">¶</a></h2>
+<p>In order for lxml to understand the entire tree structure of your XML text, you’ll need to load all of the text in a special <code class="docutils literal notranslate"><span class="pre">etree</span></code> object (abbreviated from Element Tree). When a computer reads an XML text, it’s called “parsing,” and so you’ll be using lxml’s <code class="docutils literal notranslate"><span class="pre">parse()</span></code> function. Once you do, you can query the object for specific XML tags.</p>
+<p><em><strong>For the examples in this notebook to run as expected, you’ll need to place the file you want to explore in the same directory as the notebook.</strong></em>  You could place it elsewhere, but this would require an adjustment in the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First create a parser object. It will work faster if you tell it not to collect IDs.</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">collect_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Parse your XML file into a &quot;tree&quot; object</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;A50919.xml&#39;</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+
+<span class="c1"># Get the XML from the tree object</span>
+<span class="n">paradiselost</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-3-individual-words">
+<h2><span class="section-number">1.5. </span>Step 3: Individual Words<a class="headerlink" href="#step-3-individual-words" title="Permalink to this headline">¶</a></h2>
+<p>There are many ways to parse XML documents. The most common and robust is a query language called <a class="reference external" href="https://www.w3schools.com/xml/xpath_intro.asp">XPath</a>, which allows you to create various <em>expressions</em> to select parts of an XML document.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lxml</span></code> uses a simplified version of XPath called <a class="reference external" href="https://effbot.org/zone/element-xpath.htm">ElementPath</a>, which we recommend for beginners. Most of the expressions you see from here forward use <code class="docutils literal notranslate"><span class="pre">lxml</span></code>’s default ElementPath expressions. Keep in mind that if you want to construct very complex queries of a document, you may want to switch to XPath at some point down the road.</p>
+<p>The easiest thing to do with an <em>EarlyPrint</em> document is to tokenize it into a list of words. <em>EarlyPrint</em> texts wrap every word in a <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tag, and it keeps all the punctuation separate in <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> tags. To get all the words in <em>Paradise Lost</em>, you simply use ElementPath to ask for the contents of all the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags.</p>
+<p>An ElementPath query usually begins with <code class="docutils literal notranslate"><span class="pre">.//</span></code>: the dot refers to your current location in the XML tree, and the two slashes indicate that you’d like to search anywhere below that in the tree. Often, as with <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags, you want to start at the highest level of the document, the <em>root</em> of the element tree, and search anywhere within the document.</p>
+<p>You also need to account for a <a class="reference external" href="https://en.wikipedia.org/wiki/XML_namespace">namespace</a>, usually enclosed within brackets in an ElementPath query. Every <em>EarlyPrint</em> document has a namespace, and it will almost always be the default TEI namespace: <a class="reference external" href="https://tei-c.org/ns/1.0/">https://tei-c.org/ns/1.0/</a>. You could write your ElementPath query as <code class="docutils literal notranslate"><span class="pre">&quot;.//{https://tei-c.org/ns/1.0/}w&quot;</span></code>, but that could get tedious to type each time. To make your code more readable and easier to type, you can create a dictionary (usually named <code class="docutils literal notranslate"><span class="pre">nsmap</span></code>) that refers to all the namespaces you want to use in your document. Then you can refer to <code class="docutils literal notranslate"><span class="pre">nsmap</span></code> within any lxml method, as you’ll see below.</p>
+<p>Finally, after the namespace you can include the notation for the tag you want. In this case, you simply want all <code class="docutils literal notranslate"><span class="pre">w</span></code> tags. Your code will look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create your nsmap for the &#39;tei&#39; namespace</span>
+<span class="c1"># You only need to do this once in your script,</span>
+<span class="c1"># but you&#39;ll refer back to this variable throughout</span>
+<span class="c1"># the rest of this notebook.</span>
+<span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
+
+
+<span class="c1"># Use the findall() method to get a list of all possible matches</span>
+<span class="c1"># A similar method, find(), will only return the first match</span>
+<span class="n">all_word_tags</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span>
+
+<span class="c1"># Once you have all the tags, you can get the text inside them with the .text attribute</span>
+
+<span class="n">all_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">all_word_tags</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_words</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span> <span class="c1"># This will print the first 100 words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Paradise&#39;, &#39;lost&#39;, &#39;A&#39;, &#39;POEM&#39;, &#39;Written&#39;, &#39;in&#39;, &#39;TEN&#39;, &#39;BOOKS&#39;, &#39;By&#39;, &#39;JOHN&#39;, &#39;MILTON&#39;, &#39;Licensed&#39;, &#39;and&#39;, &#39;Entred&#39;, &#39;according&#39;, &#39;to&#39;, &#39;Order&#39;, &#39;LONDON&#39;, &#39;Printed&#39;, &#39;and&#39;, &#39;are&#39;, &#39;to&#39;, &#39;be&#39;, &#39;sold&#39;, &#39;by&#39;, &#39;Peter&#39;, &#39;Parker&#39;, &#39;under&#39;, &#39;Creed&#39;, &#39;Church&#39;, &#39;neer&#39;, &#39;Aldgate&#39;, &#39;And&#39;, &#39;by&#39;, &#39;Robert&#39;, &#39;Boulter&#39;, &#39;at&#39;, &#39;the&#39;, &#39;Turks&#39;, &#39;Head&#39;, &#39;in&#39;, &#39;Bishopsgate-street&#39;, &#39;And&#39;, &#39;Matthias&#39;, &#39;Walker&#39;, &#39;under&#39;, &#39;St.&#39;, &#39;Dunstons&#39;, &#39;Church&#39;, &#39;in&#39;, &#39;Fleet-street&#39;, &#39;1667.&#39;, &#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;I.&#39;, &#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;, &#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;tast&#39;, &#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;, &#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;, &#39;Restore&#39;, &#39;us&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;, &#39;Sing&#39;, &quot;Heav&#39;nly&quot;, &#39;Muse&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Voila! A list of the first 100 words in <em>Paradise Lost</em>! (<code class="docutils literal notranslate"><span class="pre">all_words</span></code> includes <em>all</em> the words, and you can display all of them simply by removing <code class="docutils literal notranslate"><span class="pre">[:100]</span></code> from the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function.)</p>
+<p>But <em>EarlyPrint</em> documents contain much more information than just the words themselves. For each <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tag, <em>EarlyPrint</em> includes XML attributes for part of speech, lemma (dictionary headword), and sometimes a regularized spelling.</p>
+<p>Once we have the tags for each word, you can access attributes in two ways. You can treat an attribute as if it were a dictionary key, and type <code class="docutils literal notranslate"><span class="pre">tag_name.attrib['attribute_name']</span></code>. Or you can use the <code class="docutils literal notranslate"><span class="pre">get()</span></code> method: <code class="docutils literal notranslate"><span class="pre">tag_name.get('attribute_name')</span></code>.</p>
+<p>If you wanted only regularized spellings, you could obtain them by capturing the <code class="docutils literal notranslate"><span class="pre">'reg'</span></code> attribute with either of these methods. But because not every tag includes a <code class="docutils literal notranslate"><span class="pre">'reg'</span></code> attribute, we want to be sure to get the original word, i.e. <code class="docutils literal notranslate"><span class="pre">w.text</span></code>, when there is no regularized spelling available. To do this, <code class="docutils literal notranslate"><span class="pre">get()</span></code> is preferred because it allows you to pass a second argument as a default value. When you run <code class="docutils literal notranslate"><span class="pre">tag_name.get('attribute_name',</span> <span class="pre">tag_name.text)</span></code>, if there is no <code class="docutils literal notranslate"><span class="pre">'attribute_name'</span></code>, the function will simply return the text content of the element.</p>
+<p>This allows you to write a simple script to get all regularized spellings:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_regularized</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reg&#39;</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">all_word_tags</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_regularized</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Paradise&#39;, &#39;lost&#39;, &#39;A&#39;, &#39;POEM&#39;, &#39;Written&#39;, &#39;in&#39;, &#39;TEN&#39;, &#39;BOOKS&#39;, &#39;By&#39;, &#39;JOHN&#39;, &#39;MILTON&#39;, &#39;Licenced&#39;, &#39;and&#39;, &#39;entered&#39;, &#39;according&#39;, &#39;to&#39;, &#39;Order&#39;, &#39;LONDON&#39;, &#39;Printed&#39;, &#39;and&#39;, &#39;are&#39;, &#39;to&#39;, &#39;be&#39;, &#39;sold&#39;, &#39;by&#39;, &#39;Peter&#39;, &#39;Parker&#39;, &#39;under&#39;, &#39;Creed&#39;, &#39;Church&#39;, &#39;near&#39;, &#39;Aldgate&#39;, &#39;And&#39;, &#39;by&#39;, &#39;Robert&#39;, &#39;Boulter&#39;, &#39;at&#39;, &#39;the&#39;, &#39;Turks&#39;, &#39;Head&#39;, &#39;in&#39;, &#39;Bishopsgate-street&#39;, &#39;And&#39;, &#39;Mathias&#39;, &#39;Walker&#39;, &#39;under&#39;, &#39;St.&#39;, &quot;Dunston&#39;s&quot;, &#39;Church&#39;, &#39;in&#39;, &#39;Fleetstreet&#39;, &#39;1667.&#39;, &#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;I.&#39;, &#39;OF&#39;, &quot;man&#39;s&quot;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;, &#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;taste&#39;, &#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;, &#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;, &#39;Restore&#39;, &#39;us&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;, &#39;Sing&#39;, &#39;heavenly&#39;, &#39;Muse&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you have the same list, but words like “Heav’nly” have been regularized to “heavenly.” This is very useful if you’re looking for accurate word counts. (Full disclosure: our regularization routine, from <a class="reference external" href="http://morphadorner.northwestern.edu/morphadorner/">MorphAdorner</a>, was solid but not infallible: very infrequently the regularizations — and, thence, the lemmatizations – are mistaken, so treat them with slight caution.)</p>
+<p>Let’s take a step back to better understand how this works by concentrating on that word, “Heav’nly.” From the list above you can tell it’s the 96th word in the list, which means you can access its tag at index 95:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heavenly_tag</span> <span class="o">=</span> <span class="n">all_word_tags</span><span class="p">[</span><span class="mi">95</span><span class="p">]</span>
+
+<span class="c1"># You can print out the entire tag using the .tostring() method:</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">heavenly_tag</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;&lt;w xmlns=&quot;http://www.tei-c.org/ns/1.0&quot; lemma=&quot;heavenly&quot; pos=&quot;j&quot; reg=&quot;heavenly&quot; xml:id=&quot;A50919-002-b-0530&quot;&gt;Heav\&#39;nly&lt;/w&gt;\n      &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The printout above shows the full <code class="docutils literal notranslate"><span class="pre">w</span></code> element for the word “Heav’nly,” with all its attributes. You can see the namespace in <code class="docutils literal notranslate"><span class="pre">xmlns</span></code>, and the id number in <code class="docutils literal notranslate"><span class="pre">xml:id</span></code>. But the main attributes a researcher will care about are <code class="docutils literal notranslate"><span class="pre">lemma</span></code>, <code class="docutils literal notranslate"><span class="pre">pos</span></code>, and <code class="docutils literal notranslate"><span class="pre">reg</span></code>, which contain the relevant linguistic markup.</p>
+<p>As you saw above, you can get an element’s text content by accessing <code class="docutils literal notranslate"><span class="pre">element.text</span></code> and the content of an attribute by accessing <code class="docutils literal notranslate"><span class="pre">element.attrib[&quot;attribute&quot;]</span></code> or <code class="docutils literal notranslate"><span class="pre">element.get(&quot;attribute&quot;)</span></code>. You can use this syntax get all the relevant information for “Heav’nly”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">heavenly_tag</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">heavenly_tag</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;reg&quot;</span><span class="p">],</span> <span class="n">heavenly_tag</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;lemma&quot;</span><span class="p">],</span> <span class="n">heavenly_tag</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;pos&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heav&#39;nly heavenly heavenly j
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the above you can see that the original spelling of the word is “Heav’nly,” its regularized spelling is “heavenly,” its lemma is also “heavenly,” and its part of speech is “j” for adjective.</p>
+<p>You can now extrapolate from this to get all the linguistic information for the first ten words of <em>Paradise Lost</em>. But this time you can use <code class="docutils literal notranslate"><span class="pre">.get()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">.attrib</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Every w element will have a lemma and pos attribute</span>
+<span class="c1"># But not every one will have a reg attribute!</span>
+<span class="c1"># Don&#39;t forget to add a default value for &quot;reg&quot; to avoid</span>
+<span class="c1"># any errors.</span>
+
+<span class="n">all_word_info</span> <span class="o">=</span> <span class="p">[(</span><span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reg&quot;</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">),</span> <span class="n">w</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lemma&quot;</span><span class="p">),</span> <span class="n">w</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">all_word_tags</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_word_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Paradise&#39;, &#39;Paradise&#39;, &#39;paradise&#39;, &#39;n1&#39;), (&#39;lost&#39;, &#39;lost&#39;, &#39;lose&#39;, &#39;vvn&#39;), (&#39;A&#39;, &#39;A&#39;, &#39;a&#39;, &#39;d&#39;), (&#39;POEM&#39;, &#39;POEM&#39;, &#39;poem&#39;, &#39;n1&#39;), (&#39;Written&#39;, &#39;Written&#39;, &#39;write&#39;, &#39;j-vn&#39;), (&#39;in&#39;, &#39;in&#39;, &#39;in&#39;, &#39;acp&#39;), (&#39;TEN&#39;, &#39;TEN&#39;, &#39;ten&#39;, &#39;crd&#39;), (&#39;BOOKS&#39;, &#39;BOOKS&#39;, &#39;book&#39;, &#39;n2&#39;), (&#39;By&#39;, &#39;By&#39;, &#39;by&#39;, &#39;acp&#39;), (&#39;JOHN&#39;, &#39;JOHN&#39;, &#39;JOHN&#39;, &#39;nn1&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that you’ve done a little more investigation into the structure of <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> elements, you can use them to get only a specific type of word. For example, you could use the <em>EarlyPrint</em> part of speech tagging to get all the nouns in <em>Paradise Lost</em>:</p>
+<p>[n.b. <em>EarlyPrint</em> uses the <a class="reference external" href="https://earlyprint.org/intros/intro-to-nupos.html">NUPOS</a> tagset, which uses helpfully fine-grained part-of-speech tags. To find all the nouns, you can simply look for all tags that begin with the letter “n.”]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_nouns</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">all_word_tags</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_nouns</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Paradise&#39;, &#39;POEM&#39;, &#39;BOOKS&#39;, &#39;JOHN&#39;, &#39;MILTON&#39;, &#39;Order&#39;, &#39;LONDON&#39;, &#39;Peter&#39;, &#39;Parker&#39;, &#39;Creed&#39;, &#39;Church&#39;, &#39;Aldgate&#39;, &#39;Robert&#39;, &#39;Boulter&#39;, &#39;Turks&#39;, &#39;Head&#39;, &#39;Bishopsgate-street&#39;, &#39;Matthias&#39;, &#39;Walker&#39;, &#39;Dunstons&#39;, &#39;Church&#39;, &#39;Fleet-street&#39;, &#39;PARADISE&#39;, &#39;BOOK&#39;, &#39;Mans&#39;, &#39;Disobedience&#39;, &#39;Fruit&#39;, &#39;Tree&#39;, &#39;tast&#39;, &#39;Death&#39;, &#39;World&#39;, &#39;woe&#39;, &#39;loss&#39;, &#39;Eden&#39;, &#39;Man&#39;, &#39;Seat&#39;, &#39;Muse&#39;, &#39;top&#39;, &#39;Oreb&#39;, &#39;Sinai&#39;, &#39;Shepherd&#39;, &#39;Seed&#39;, &#39;Beginning&#39;, &quot;Heav&#39;ns&quot;, &#39;Earth&#39;, &#39;Rose&#39;, &#39;Chaos&#39;, &#39;Sion&#39;, &#39;Hill&#39;, &quot;Siloa&#39;s&quot;, &#39;Brook&#39;, &#39;Oracle&#39;, &#39;God&#39;, &#39;aid&#39;, &#39;Song&#39;, &#39;flight&#39;, &#39;Mount&#39;, &#39;Things&#39;, &#39;Pros●…&#39;, &#39;Rhime&#39;, &#39;Spirit&#39;, &#39;Temples&#39;, &#39;●…eart&#39;, &#39;wings&#39;, &#39;Dove&#39;, &#39;Abyss&#39;, &#39;highth&#39;, &#39;Argument&#39;, &#39;Providence&#39;, &#39;wayes&#39;, &#39;God&#39;, &#39;men&#39;, &quot;Heav&#39;n&quot;, &#39;view&#39;, &#39;Tract&#39;, &#39;Hell&#39;, &#39;cause&#39;, &#39;Parents&#39;, &#39;State&#39;, &#39;Creator&#39;, &#39;Will&#39;, &#39;restraint&#39;, &#39;Lords&#39;, &#39;World&#39;, &#39;fowl&#39;, &#39;revolt&#39;, &#39;Envy&#39;, &#39;Revenge&#39;, &#39;Mother&#39;, &#39;Mankinde&#39;, &#39;time&#39;, &#39;Pride&#39;, &quot;Heav&#39;n&quot;, &#39;Host&#39;, &#39;Rebel&#39;, &#39;Angels&#39;, &#39;aid&#39;, &#39;Glory&#39;, &#39;Peers&#39;, &#39;aim&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the first 100 words in this list skip over all the other parts of speech to give only the nouns. You could combine this with the regularized word capture above to get only regularized nouns, or only lemmatized verbs, etc.</p>
+<p>You can also aggregate all nouns by their frequency with Python’s built-in Counter (which you imported above) and output a list of the top 10 most frequent nouns (but keep in mind that the spellings are <em>not</em> regularized):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Counter</span><span class="p">(</span><span class="n">all_nouns</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&quot;Heav&#39;n&quot;, 316),
+ (&#39;God&#39;, 238),
+ (&#39;Earth&#39;, 191),
+ (&#39;Man&#39;, 119),
+ (&#39;Hell&#39;, 104),
+ (&#39;things&#39;, 98),
+ (&#39;Eve&#39;, 97),
+ (&#39;Adam&#39;, 93),
+ (&#39;Death&#39;, 87),
+ (&#39;Son&#39;, 85)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-4-lines-stanzas-and-sentences">
+<h2><span class="section-number">1.6. </span>Step 4: Lines, Stanzas, and Sentences<a class="headerlink" href="#step-4-lines-stanzas-and-sentences" title="Permalink to this headline">¶</a></h2>
+<p>But what if you want chunks larger than a single word? What if you wanted to examine <em>Paradise Lost</em> by its lines or sentences?</p>
+<p>If you’re examining verse, lines and stanzas are particularly easy. Lines are marked with <code class="docutils literal notranslate"><span class="pre">&lt;l&gt;</span></code> tags and stanzas are marked with <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> tags (for line group). But be careful with <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> tags: not every group of lines constitutes a stanza! In the case of <em>Paradise Lost</em>, <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> elements refer to Milton’s long verse paragraphs.</p>
+<p>Begin by breaking <em>Paradise Lost</em> into lines, using <code class="docutils literal notranslate"><span class="pre">&lt;l&gt;</span></code> tags instead of the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code>’s (as well as the same namespace we used above):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_line_tags</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:l&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span>
+
+<span class="c1"># Now that we have the lines, we can find each word in each line</span>
+
+<span class="n">words_by_line</span> <span class="o">=</span> <span class="p">[[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">all_line_tags</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words_by_line</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span> <span class="c1"># Print only the first 20 lines</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;], [&#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;tast&#39;], [&#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;], [&#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;], [&#39;Restore&#39;, &#39;us&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;], [&#39;Sing&#39;, &quot;Heav&#39;nly&quot;, &#39;Muse&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;, &#39;secret&#39;, &#39;top&#39;], [&#39;Of&#39;, &#39;Oreb&#39;, &#39;or&#39;, &#39;of&#39;, &#39;Sinai&#39;, &#39;didst&#39;, &#39;inspire&#39;], [&#39;That&#39;, &#39;Shepherd&#39;, &#39;who&#39;, &#39;first&#39;, &#39;taught&#39;, &#39;the&#39;, &#39;chosen&#39;, &#39;Seed&#39;], [&#39;In&#39;, &#39;the&#39;, &#39;Beginning&#39;, &#39;how&#39;, &#39;the&#39;, &quot;Heav&#39;ns&quot;, &#39;and&#39;, &#39;Earth&#39;], [&#39;Rose&#39;, &#39;out&#39;, &#39;of&#39;, &#39;Chaos&#39;, &#39;Or&#39;, &#39;if&#39;, &#39;Sion&#39;, &#39;Hill&#39;], [&#39;Delight&#39;, &#39;thee&#39;, &#39;more&#39;, &#39;and&#39;, &quot;Siloa&#39;s&quot;, &#39;Brook&#39;, &#39;that&#39;, &quot;flow&#39;d&quot;], [&#39;Fast&#39;, &#39;by&#39;, &#39;the&#39;, &#39;Oracle&#39;, &#39;of&#39;, &#39;God&#39;, &#39;I&#39;, &#39;thence&#39;], [&#39;Invoke&#39;, &#39;thy&#39;, &#39;aid&#39;, &#39;to&#39;, &#39;my&#39;, &#39;adventrous&#39;, &#39;Song&#39;], [&#39;That&#39;, &#39;with&#39;, &#39;no&#39;, &#39;middle&#39;, &#39;flight&#39;, &#39;intends&#39;, &#39;to&#39;, &#39;soar&#39;], [&#39;Above&#39;, &quot;th&#39;&quot;, &#39;Aonian&#39;, &#39;Mount&#39;, &#39;while&#39;, &#39;it&#39;, &#39;pursues&#39;], [&#39;Things&#39;, &#39;〈◊〉&#39;, &#39;yet&#39;, &#39;in&#39;, &#39;Pros●…&#39;, &#39;〈◊〉&#39;, &#39;Rhime&#39;], [&#39;And&#39;, &#39;chiefly&#39;, &#39;Thou&#39;, &#39;O&#39;, &#39;Spirit&#39;, &#39;that&#39;, &#39;dost&#39;, &#39;prefer&#39;], [&#39;Before&#39;, &#39;all&#39;, &#39;Temples&#39;, &quot;th&#39;&quot;, &#39;up●…ght&#39;, &#39;●…eart&#39;, &#39;and&#39;, &#39;pure&#39;], [&#39;Instruct&#39;, &#39;me&#39;, &#39;for&#39;, &#39;Thou&#39;, &quot;know&#39;st&quot;, &#39;Thou&#39;, &#39;from&#39;, &#39;the&#39;, &#39;first&#39;], [&#39;Wast&#39;, &#39;present&#39;, &#39;and&#39;, &#39;with&#39;, &#39;mighty&#39;, &#39;wings&#39;, &#39;outspread&#39;]]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above yields a <em>list of lists</em>, where each line is represented as a list of words. This could be very useful for certain kinds of line-level analysis. But if you wanted to look at the lines as <em>strings</em> instead, you could join them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">all_line_tags</span><span class="p">[:</span><span class="mi">20</span><span class="p">]:</span> <span class="c1">#Only the first 20 lines</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OF Mans First Disobedience and the Fruit
+Of that Forbidden Tree whose mortal tast
+Brought Death into the World and all our woe
+With loss of Eden till one greater Man
+Restore us and regain the blissful Seat
+Sing Heav&#39;nly Muse that on the secret top
+Of Oreb or of Sinai didst inspire
+That Shepherd who first taught the chosen Seed
+In the Beginning how the Heav&#39;ns and Earth
+Rose out of Chaos Or if Sion Hill
+Delight thee more and Siloa&#39;s Brook that flow&#39;d
+Fast by the Oracle of God I thence
+Invoke thy aid to my adventrous Song
+That with no middle flight intends to soar
+Above th&#39; Aonian Mount while it pursues
+Things 〈◊〉 yet in Pros●… 〈◊〉 Rhime
+And chiefly Thou O Spirit that dost prefer
+Before all Temples th&#39; up●…ght ●…eart and pure
+Instruct me for Thou know&#39;st Thou from the first
+Wast present and with mighty wings outspread
+</pre></div>
+</div>
+</div>
+</div>
+<p>Those strange symbols you see are <strong>gaps</strong>, places where the TCP transcribers couldn’t confirm the correct character or word. The <a class="reference external" href="https://texts.earlyprint.org/exist/apps/shc/home.html"><em>EarlyPrint</em> Library site</a> is set up to enable public-spirited scholars to repair these defects on behalf of the research community: visit anytime if you’d like to correct gaps like these!</p>
+<p>You’ll also notice that, with the exception of apostrophes, there is no punctuation in the above passage. That’s because you only asked for <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags, and the punctuation is all in <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> tags. An easy way to remedy this is to ask lxml to return all <em>child</em> elements of the line, those tags—like those for words <em>or</em> punctuation—that are directly below it in the element tree. Since lxml treats an element as a list, this is as simple as omitting the second <code class="docutils literal notranslate"><span class="pre">findall()</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">all_line_tags</span><span class="p">[:</span><span class="mi">20</span><span class="p">]:</span> <span class="c1">#Only the first 20 lines</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">child</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]))</span> <span class="c1"># Without findall(), lxml returns every child of l</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OF Mans First Disobedience , and the Fruit
+Of that Forbidden Tree , whose mortal tast
+Brought Death into the World , and all our woe ,
+With loss of Eden , till one greater Man
+Restore us , and regain the blissful Seat ,
+Sing Heav&#39;nly Muse , that on the secret top
+Of Oreb , or of Sinai , didst inspire
+That Shepherd , who first taught the chosen Seed ,
+In the Beginning how the Heav&#39;ns and Earth
+Rose out of Chaos : Or if Sion Hill
+Delight thee more , and Siloa&#39;s Brook that flow&#39;d
+Fast by the Oracle of God ; I thence
+Invoke thy aid to my adventrous Song ,
+That with no middle flight intends to soar
+Above th&#39; Aonian Mount , while it pursues
+Things 〈◊〉 yet in Pros●… 〈◊〉 Rhime .
+And chiefly Thou O Spirit , that dost prefer
+Before all Temples th&#39; up●…ght ●…eart and pure ,
+Instruct me , for Thou know&#39;st ; Thou from the first
+Wast present , and with mighty wings outspread
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now all the punctuation is back! Our simple <code class="docutils literal notranslate"><span class="pre">join()</span></code> method is putting in unnecessary spaces, but you can always fix that with some custom logic. You’d need to write a rule that only adds a space after a word if the next element is <em>not</em> a punctuation mark.</p>
+<p>By extending what you’ve done above, you can also capture text by line group or stanza. For example, you can find all the words in the first line group—that is, the first verse paragraph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since you’re seeking only the first line group, we can use find() instead of findall()</span>
+<span class="n">first_line_group</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:lg&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span>
+
+<span class="n">lg_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">first_line_group</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lg_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;, &#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;tast&#39;, &#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;, &#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;, &#39;Restore&#39;, &#39;us&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;, &#39;Sing&#39;, &quot;Heav&#39;nly&quot;, &#39;Muse&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;, &#39;secret&#39;, &#39;top&#39;, &#39;Of&#39;, &#39;Oreb&#39;, &#39;or&#39;, &#39;of&#39;, &#39;Sinai&#39;, &#39;didst&#39;, &#39;inspire&#39;, &#39;That&#39;, &#39;Shepherd&#39;, &#39;who&#39;, &#39;first&#39;, &#39;taught&#39;, &#39;the&#39;, &#39;chosen&#39;, &#39;Seed&#39;, &#39;In&#39;, &#39;the&#39;, &#39;Beginning&#39;, &#39;how&#39;, &#39;the&#39;, &quot;Heav&#39;ns&quot;, &#39;and&#39;, &#39;Earth&#39;, &#39;Rose&#39;, &#39;out&#39;, &#39;of&#39;, &#39;Chaos&#39;, &#39;Or&#39;, &#39;if&#39;, &#39;Sion&#39;, &#39;Hill&#39;, &#39;Delight&#39;, &#39;thee&#39;, &#39;more&#39;, &#39;and&#39;, &quot;Siloa&#39;s&quot;, &#39;Brook&#39;, &#39;that&#39;, &quot;flow&#39;d&quot;, &#39;Fast&#39;, &#39;by&#39;, &#39;the&#39;, &#39;Oracle&#39;, &#39;of&#39;, &#39;God&#39;, &#39;I&#39;, &#39;thence&#39;, &#39;Invoke&#39;, &#39;thy&#39;, &#39;aid&#39;, &#39;to&#39;, &#39;my&#39;, &#39;adventrous&#39;, &#39;Song&#39;, &#39;That&#39;, &#39;with&#39;, &#39;no&#39;, &#39;middle&#39;, &#39;flight&#39;, &#39;intends&#39;, &#39;to&#39;, &#39;soar&#39;, &#39;Above&#39;, &quot;th&#39;&quot;, &#39;Aonian&#39;, &#39;Mount&#39;, &#39;while&#39;, &#39;it&#39;, &#39;pursues&#39;, &#39;Things&#39;, &#39;〈◊〉&#39;, &#39;yet&#39;, &#39;in&#39;, &#39;Pros●…&#39;, &#39;〈◊〉&#39;, &#39;Rhime&#39;, &#39;And&#39;, &#39;chiefly&#39;, &#39;Thou&#39;, &#39;O&#39;, &#39;Spirit&#39;, &#39;that&#39;, &#39;dost&#39;, &#39;prefer&#39;, &#39;Before&#39;, &#39;all&#39;, &#39;Temples&#39;, &quot;th&#39;&quot;, &#39;up●…ght&#39;, &#39;●…eart&#39;, &#39;and&#39;, &#39;pure&#39;, &#39;Instruct&#39;, &#39;me&#39;, &#39;for&#39;, &#39;Thou&#39;, &quot;know&#39;st&quot;, &#39;Thou&#39;, &#39;from&#39;, &#39;the&#39;, &#39;first&#39;, &#39;Wast&#39;, &#39;present&#39;, &#39;and&#39;, &#39;with&#39;, &#39;mighty&#39;, &#39;wings&#39;, &#39;outspread&#39;, &#39;Dove&#39;, &#39;like&#39;, &#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;the&#39;, &#39;〈◊〉&#39;, &#39;Abyss&#39;, &#39;And&#39;, &quot;mad&#39;st&quot;, &#39;it&#39;, &#39;pregnant&#39;, &#39;What&#39;, &#39;in&#39;, &#39;me&#39;, &#39;is&#39;, &#39;dark&#39;, &#39;Illumine&#39;, &#39;what&#39;, &#39;is&#39;, &#39;low&#39;, &#39;〈◊〉&#39;, &#39;and&#39;, &#39;support&#39;, &#39;That&#39;, &#39;to&#39;, &#39;the&#39;, &#39;highth&#39;, &#39;of&#39;, &#39;this&#39;, &#39;great&#39;, &#39;Argument&#39;, &#39;I&#39;, &#39;may&#39;, &#39;assert&#39;, &quot;th&#39;&quot;, &#39;Eternal&#39;, &#39;Providence&#39;, &#39;And&#39;, &#39;justifie&#39;, &#39;the&#39;, &#39;wayes&#39;, &#39;of&#39;, &#39;God&#39;, &#39;to&#39;, &#39;men&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>But how do you find sentences instead of lines or stanzas? Because sentences typically end with punctuation, <em>EarlyPrint</em> texts mark sentence boundaries as <em>attributes</em> on <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> (i.e., punctuation) tags. To find the end of all sentences, you must look for <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> elements that have an attribute “unit” whose value is “sentence.” In the XML, that might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">pc</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;sentence&quot;</span><span class="o">&gt;.&lt;/</span><span class="n">pc</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To get sentences, you must find these markers and all the words in between them. And to do that, you first need to find a list of all <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags and all <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> tags in order.</p>
+<p>This is where you’ll run into the limitations of ElementPath, which doesn’t easily allow you to search for two types of tags at once. Luckily, you can use <a class="reference external" href="https://www.w3schools.com/xml/xpath_intro.asp">XPath</a> to search for both at the same time. The syntax for XPath is very similar to the ElementPath queries above. You should omit the <code class="docutils literal notranslate"><span class="pre">.</span></code> before <code class="docutils literal notranslate"><span class="pre">//</span></code>, and you can use the pipe <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol to combine two queries. You can use the same <code class="docutils literal notranslate"><span class="pre">nsmap</span></code> dictionary you used above to account for the <code class="docutils literal notranslate"><span class="pre">tei</span></code> namespace.</p>
+<p>Once you’ve run the XPath query, you can loop through every tag and and put its contents into a list for each sentence. And when you reach the tag with the <code class="docutils literal notranslate"><span class="pre">unit='sentence'</span></code> attribute, you’ll know to start over with a fresh list. Here’s the example code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># An XPath query to find all &lt;w&gt; and &lt;pc&gt; tags, with</span>
+<span class="c1"># special handling of the XML namespace.</span>
+<span class="n">w_and_pc</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;//tei:w|//tei:pc&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span>
+
+<span class="n">all_sentences</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># A master list to hold all sentences</span>
+<span class="n">new_sentence</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># An empty list for the first sentence</span>
+
+<span class="c1"># Loop through every tag (for the sample, I&#39;ve done just the first 500 tags)</span>
+<span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">w_and_pc</span><span class="p">[:</span><span class="mi">500</span><span class="p">]:</span>
+    <span class="c1"># Test to see if a tag has a &quot;unit&quot; attribute and</span>
+    <span class="c1"># if the value of that attribute is &quot;sentence.&quot;</span>
+    <span class="c1"># This will be the end of your sentence.</span>
+    <span class="k">if</span> <span class="s1">&#39;unit&#39;</span> <span class="ow">in</span> <span class="n">tag</span><span class="o">.</span><span class="n">attrib</span> <span class="ow">and</span> <span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;sentence&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># Sometimes these tags are empty, but other times they contain a period</span>
+            <span class="c1"># If there is a punctuation mark, add it to the sentence list</span>
+            <span class="n">new_sentence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="c1"># Add the whole sentence to the master list</span>
+        <span class="n">all_sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_sentence</span><span class="p">)</span>
+        <span class="c1"># Start over with a fresh list for a new sentence</span>
+        <span class="n">new_sentence</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># If the tag is not at the end of a sentence, we can simply add its contents to the list</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_sentence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">all_sentences</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;Paradise&#39;, &#39;lost&#39;, &#39;.&#39;], [&#39;A&#39;, &#39;POEM&#39;, &#39;Written&#39;, &#39;in&#39;, &#39;TEN&#39;, &#39;BOOKS&#39;, &#39;By&#39;, &#39;JOHN&#39;, &#39;MILTON&#39;, &#39;.&#39;], [&#39;Licensed&#39;, &#39;and&#39;, &#39;Entred&#39;, &#39;according&#39;, &#39;to&#39;, &#39;Order&#39;, &#39;.&#39;], [&#39;LONDON&#39;, &#39;Printed&#39;, &#39;,&#39;, &#39;and&#39;, &#39;are&#39;, &#39;to&#39;, &#39;be&#39;, &#39;sold&#39;, &#39;by&#39;, &#39;Peter&#39;, &#39;Parker&#39;, &#39;under&#39;, &#39;Creed&#39;, &#39;Church&#39;, &#39;neer&#39;, &#39;Aldgate&#39;, &#39;;&#39;, &#39;And&#39;, &#39;by&#39;, &#39;Robert&#39;, &#39;Boulter&#39;, &#39;at&#39;, &#39;the&#39;, &#39;Turks&#39;, &#39;Head&#39;, &#39;in&#39;, &#39;Bishopsgate-street&#39;, &#39;;&#39;, &#39;And&#39;, &#39;Matthias&#39;, &#39;Walker&#39;, &#39;,&#39;, &#39;under&#39;, &#39;St.&#39;, &#39;Dunstons&#39;, &#39;Church&#39;, &#39;in&#39;, &#39;Fleet-street&#39;, &#39;,&#39;, &#39;1667.&#39;], [&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;.&#39;], [&#39;BOOK&#39;, &#39;I.&#39;], [&#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;,&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;, &#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;,&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;tast&#39;, &#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;,&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;, &#39;,&#39;, &#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;,&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;, &#39;Restore&#39;, &#39;us&#39;, &#39;,&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;, &#39;,&#39;, &#39;Sing&#39;, &quot;Heav&#39;nly&quot;, &#39;Muse&#39;, &#39;,&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;, &#39;secret&#39;, &#39;top&#39;, &#39;Of&#39;, &#39;Oreb&#39;, &#39;,&#39;, &#39;or&#39;, &#39;of&#39;, &#39;Sinai&#39;, &#39;,&#39;, &#39;didst&#39;, &#39;inspire&#39;, &#39;That&#39;, &#39;Shepherd&#39;, &#39;,&#39;, &#39;who&#39;, &#39;first&#39;, &#39;taught&#39;, &#39;the&#39;, &#39;chosen&#39;, &#39;Seed&#39;, &#39;,&#39;, &#39;In&#39;, &#39;the&#39;, &#39;Beginning&#39;, &#39;how&#39;, &#39;the&#39;, &quot;Heav&#39;ns&quot;, &#39;and&#39;, &#39;Earth&#39;, &#39;Rose&#39;, &#39;out&#39;, &#39;of&#39;, &#39;Chaos&#39;, &#39;:&#39;, &#39;Or&#39;, &#39;if&#39;, &#39;Sion&#39;, &#39;Hill&#39;, &#39;Delight&#39;, &#39;thee&#39;, &#39;more&#39;, &#39;,&#39;, &#39;and&#39;, &quot;Siloa&#39;s&quot;, &#39;Brook&#39;, &#39;that&#39;, &quot;flow&#39;d&quot;, &#39;Fast&#39;, &#39;by&#39;, &#39;the&#39;, &#39;Oracle&#39;, &#39;of&#39;, &#39;God&#39;, &#39;;&#39;, &#39;I&#39;, &#39;thence&#39;, &#39;Invoke&#39;, &#39;thy&#39;, &#39;aid&#39;, &#39;to&#39;, &#39;my&#39;, &#39;adventrous&#39;, &#39;Song&#39;, &#39;,&#39;, &#39;That&#39;, &#39;with&#39;, &#39;no&#39;, &#39;middle&#39;, &#39;flight&#39;, &#39;intends&#39;, &#39;to&#39;, &#39;soar&#39;, &#39;Above&#39;, &quot;th&#39;&quot;, &#39;Aonian&#39;, &#39;Mount&#39;, &#39;,&#39;, &#39;while&#39;, &#39;it&#39;, &#39;pursues&#39;, &#39;Things&#39;, &#39;〈◊〉&#39;, &#39;yet&#39;, &#39;in&#39;, &#39;Pros●…&#39;, &#39;〈◊〉&#39;, &#39;Rhime&#39;, &#39;.&#39;], [&#39;And&#39;, &#39;chiefly&#39;, &#39;Thou&#39;, &#39;O&#39;, &#39;Spirit&#39;, &#39;,&#39;, &#39;that&#39;, &#39;dost&#39;, &#39;prefer&#39;, &#39;Before&#39;, &#39;all&#39;, &#39;Temples&#39;, &quot;th&#39;&quot;, &#39;up●…ght&#39;, &#39;●…eart&#39;, &#39;and&#39;, &#39;pure&#39;, &#39;,&#39;, &#39;Instruct&#39;, &#39;me&#39;, &#39;,&#39;, &#39;for&#39;, &#39;Thou&#39;, &quot;know&#39;st&quot;, &#39;;&#39;, &#39;Thou&#39;, &#39;from&#39;, &#39;the&#39;, &#39;first&#39;, &#39;Wast&#39;, &#39;present&#39;, &#39;,&#39;, &#39;and&#39;, &#39;with&#39;, &#39;mighty&#39;, &#39;wings&#39;, &#39;outspread&#39;, &#39;Dove&#39;, &#39;like&#39;, &#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;the&#39;, &#39;〈◊〉&#39;, &#39;Abyss&#39;, &#39;And&#39;, &quot;mad&#39;st&quot;, &#39;it&#39;, &#39;pregnant&#39;, &#39;:&#39;, &#39;What&#39;, &#39;in&#39;, &#39;me&#39;, &#39;is&#39;, &#39;dark&#39;, &#39;Illumine&#39;, &#39;,&#39;, &#39;what&#39;, &#39;is&#39;, &#39;low&#39;, &#39;〈◊〉&#39;, &#39;and&#39;, &#39;support&#39;, &#39;;&#39;, &#39;That&#39;, &#39;to&#39;, &#39;the&#39;, &#39;highth&#39;, &#39;of&#39;, &#39;this&#39;, &#39;great&#39;, &#39;Argument&#39;, &#39;I&#39;, &#39;may&#39;, &#39;assert&#39;, &quot;th&#39;&quot;, &#39;Eternal&#39;, &#39;Providence&#39;, &#39;,&#39;, &#39;And&#39;, &#39;justifie&#39;, &#39;the&#39;, &#39;wayes&#39;, &#39;of&#39;, &#39;God&#39;, &#39;to&#39;, &#39;men&#39;, &#39;.&#39;], [&#39;Say&#39;, &#39;first&#39;, &#39;,&#39;, &#39;for&#39;, &quot;Heav&#39;n&quot;, &#39;〈◊〉&#39;, &#39;nothing&#39;, &#39;from&#39;, &#39;thy&#39;, &#39;view&#39;, &#39;Nor&#39;, &#39;the&#39;, &#39;deep&#39;, &#39;Tract&#39;, &#39;of&#39;, &#39;Hell&#39;, &#39;,&#39;, &#39;say&#39;, &#39;first&#39;, &#39;what&#39;, &#39;cause&#39;, &quot;Mov&#39;d&quot;, &#39;our&#39;, &#39;Grand&#39;, &#39;Parents&#39;, &#39;in&#39;, &#39;that&#39;, &#39;happy&#39;, &#39;State&#39;, &#39;,&#39;, &quot;Favour&#39;d&quot;, &#39;of&#39;, &#39;〈◊〉&#39;, &#39;so&#39;, &#39;highly&#39;, &#39;▪&#39;, &#39;to&#39;, &#39;fall&#39;, &#39;off&#39;, &#39;From&#39;, &#39;their&#39;, &#39;Creator&#39;, &#39;,&#39;, &#39;and&#39;, &#39;transgress&#39;, &#39;his&#39;, &#39;Will&#39;, &#39;For&#39;, &#39;one&#39;, &#39;restraint&#39;, &#39;,&#39;, &#39;Lords&#39;, &#39;of&#39;, &#39;the&#39;, &#39;World&#39;, &#39;besides&#39;, &#39;?&#39;], [&#39;Who&#39;, &#39;first&#39;, &quot;seduc&#39;d&quot;, &#39;them&#39;, &#39;to&#39;, &#39;that&#39;, &#39;fowl&#39;, &#39;revolt&#39;, &#39;?&#39;], [&#39;Stird&#39;, &#39;up&#39;, &#39;with&#39;, &#39;Envy&#39;, &#39;and&#39;, &#39;Revenge&#39;, &#39;,&#39;, &quot;deceiv&#39;d&quot;, &#39;The&#39;, &#39;Mother&#39;, &#39;of&#39;, &#39;Mankinde&#39;, &#39;,&#39;, &#39;what&#39;, &#39;time&#39;, &#39;his&#39;, &#39;Pride&#39;, &#39;Had&#39;, &#39;cast&#39;, &#39;him&#39;, &#39;out&#39;, &#39;from&#39;, &quot;Heav&#39;n&quot;, &#39;,&#39;, &#39;with&#39;, &#39;all&#39;, &#39;his&#39;, &#39;Host&#39;, &#39;Of&#39;, &#39;Rebel&#39;, &#39;Angels&#39;, &#39;,&#39;, &#39;by&#39;, &#39;whose&#39;, &#39;aid&#39;, &#39;aspiring&#39;, &#39;To&#39;, &#39;set&#39;, &#39;himself&#39;, &#39;in&#39;, &#39;Glory&#39;, &#39;above&#39;, &#39;his&#39;, &#39;Peers&#39;, &#39;,&#39;, &#39;He&#39;, &#39;trusted&#39;, &#39;to&#39;, &#39;have&#39;, &quot;equal&#39;d&quot;, &#39;the&#39;, &#39;most&#39;, &#39;High&#39;, &#39;,&#39;, &#39;If&#39;, &#39;he&#39;, &quot;oppos&#39;d&quot;, &#39;;&#39;, &#39;and&#39;, &#39;with&#39;, &#39;ambitious&#39;, &#39;aim&#39;, &#39;Against&#39;, &#39;the&#39;, &#39;Throne&#39;, &#39;and&#39;, &#39;Monarchy&#39;, &#39;of&#39;, &#39;God&#39;, &quot;Rais&#39;d&quot;, &#39;impious&#39;, &#39;War&#39;, &#39;in&#39;, &quot;Heav&#39;n&quot;, &#39;and&#39;, &#39;Battel&#39;, &#39;proud&#39;, &#39;With&#39;, &#39;vain&#39;, &#39;attempt&#39;, &#39;.&#39;], [&#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;〈◊〉&#39;, &#39;Power&#39;, &#39;Hurld&#39;, &#39;headlong&#39;, &#39;〈◊〉&#39;, &#39;●…om&#39;, &quot;th&#39;&quot;, &#39;〈◊〉&#39;, &#39;Skie&#39;, &#39;With&#39;, &#39;〈◊〉&#39;, &#39;ruine&#39;, &#39;and&#39;, &#39;combustion&#39;, &#39;down&#39;, &#39;One&#39;, &#39;next&#39;, &#39;himself&#39;, &#39;in&#39;, &#39;power&#39;, &#39;,&#39;, &#39;and&#39;, &#39;next&#39;, &#39;in&#39;, &#39;crime&#39;, &#39;,&#39;, &#39;Long&#39;, &#39;after&#39;, &#39;known&#39;, &#39;in&#39;, &#39;Palestine&#39;, &#39;,&#39;, &#39;and&#39;, &quot;nam&#39;d&quot;, &#39;Eëëlzebub&#39;, &#39;.&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There you have it! A bit more complex than the other examples, but just as successful. You’ll notice the first few “sentences” are actually from the book’s front matter, but then it gets going with the first few sentences in the poem. <em>EarlyPrint</em> texts will attempt to segment all text into sentences, even when there aren’t complete sentences to be had, such as on title pages.</p>
+</div>
+<div class="section" id="other-divisions">
+<h2><span class="section-number">1.7. </span>Other Divisions<a class="headerlink" href="#other-divisions" title="Permalink to this headline">¶</a></h2>
+<p>You’ve now divided up the poem using various linguistic categories: words, parts of speech, lines, sentences. But what about other divisions in books? Most books have title pages, some have dedications and prefaces, and others have many subsections or contain multiple texts.</p>
+<p><em>EarlyPrint</em> texts use <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> tags to account for these kinds of divisions. <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> tags usually have a <code class="docutils literal notranslate"><span class="pre">type</span></code> that tells you what kind of division you’re working with. Some divisions, as you’re about to see, are numbered with an <code class="docutils literal notranslate"><span class="pre">n</span></code> attribute. You can easily find all the divisions in a text and list their attributes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_divs</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:div&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="c1"># Find all the divs</span>
+
+<span class="k">for</span> <span class="n">div</span> <span class="ow">in</span> <span class="n">all_divs</span><span class="p">:</span> <span class="c1"># Loop through each div</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">div</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span> <span class="c1"># Print out a dictionary of its attributes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;type&#39;: &#39;title_page&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e10&#39;}
+{&#39;n&#39;: &#39;1&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e180&#39;}
+{&#39;n&#39;: &#39;2&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e9800&#39;}
+{&#39;n&#39;: &#39;3&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e21860&#39;}
+{&#39;n&#39;: &#39;4&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e30150&#39;}
+{&#39;n&#39;: &#39;5&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e41860&#39;}
+{&#39;n&#39;: &#39;6&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e51990&#39;}
+{&#39;n&#39;: &#39;7&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e61960&#39;}
+{&#39;n&#39;: &#39;8&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e75720&#39;}
+{&#39;n&#39;: &#39;9&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e89380&#39;}
+{&#39;n&#39;: &#39;10&#39;, &#39;type&#39;: &#39;book&#39;, &#39;{http://www.w3.org/XML/1998/namespace}id&#39;: &#39;A50919-e102240&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the above we can see that <em>Paradise Lost</em> has 11 div elements. All of those elements have a <code class="docutils literal notranslate"><span class="pre">type</span></code> attribute and an <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute (with a special namespace). You can ignore the <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute for now.</p>
+<p>One of those <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> elements is the title page. You can get all the words on the title page by zeroing in on that specific <code class="docutils literal notranslate"><span class="pre">type</span></code> using ElementPath syntax for attributes. That notation uses brackets and the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol before the attribute name and encloses its values in single quotes, like this: <code class="docutils literal notranslate"><span class="pre">[&#64;type='title_page']</span></code>. You can add this to an ElementPath query to find the title page:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">title_page</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:div[@type=&#39;title_page&#39;]&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span>
+
+<span class="n">words_on_title_page</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">title_page</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words_on_title_page</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Paradise&#39;, &#39;lost&#39;, &#39;A&#39;, &#39;POEM&#39;, &#39;Written&#39;, &#39;in&#39;, &#39;TEN&#39;, &#39;BOOKS&#39;, &#39;By&#39;, &#39;JOHN&#39;, &#39;MILTON&#39;, &#39;Licensed&#39;, &#39;and&#39;, &#39;Entred&#39;, &#39;according&#39;, &#39;to&#39;, &#39;Order&#39;, &#39;LONDON&#39;, &#39;Printed&#39;, &#39;and&#39;, &#39;are&#39;, &#39;to&#39;, &#39;be&#39;, &#39;sold&#39;, &#39;by&#39;, &#39;Peter&#39;, &#39;Parker&#39;, &#39;under&#39;, &#39;Creed&#39;, &#39;Church&#39;, &#39;neer&#39;, &#39;Aldgate&#39;, &#39;And&#39;, &#39;by&#39;, &#39;Robert&#39;, &#39;Boulter&#39;, &#39;at&#39;, &#39;the&#39;, &#39;Turks&#39;, &#39;Head&#39;, &#39;in&#39;, &#39;Bishopsgate-street&#39;, &#39;And&#39;, &#39;Matthias&#39;, &#39;Walker&#39;, &#39;under&#39;, &#39;St.&#39;, &#39;Dunstons&#39;, &#39;Church&#39;, &#39;in&#39;, &#39;Fleet-street&#39;, &#39;1667.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use this same logic for any kind of <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code>!</p>
+<p>There are 10 more <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> tags in this text, all with the type “book.” That’s because this first publication of <em>Paradise Lost</em> was divided into ten books, and the XML retains that structure. (The second publication of <em>Paradise Lost</em> was divided into 12 books, but that’s a story for a different XML document.) You can easily find a specific book by searching for multiple attributes in one query:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">book2</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:div[@type=&#39;book&#39;][@n=&#39;2&#39;]&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="c1">#Find only Book 2</span>
+
+<span class="n">words_in_book2</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">book2</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span> <span class="c1"># Get all the words in Book 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words_in_book2</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span> <span class="c1"># Print just the first 100 words</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;II.&#39;, &#39;HIgh&#39;, &#39;on&#39;, &#39;a&#39;, &#39;Throne&#39;, &#39;of&#39;, &#39;Royal&#39;, &#39;State&#39;, &#39;which&#39;, &#39;far&#39;, &#39;Outshon&#39;, &#39;the&#39;, &#39;wealth&#39;, &#39;of&#39;, &#39;Or●…&#39;, &#39;and&#39;, &#39;of&#39;, &#39;Ind&#39;, &#39;Or&#39;, &#39;where&#39;, &#39;the&#39;, &#39;gorgeous&#39;, &#39;East&#39;, &#39;with&#39;, &#39;richest&#39;, &#39;hand&#39;, &#39;Showrs&#39;, &#39;on&#39;, &#39;her&#39;, &#39;Kings&#39;, &#39;Barbaric&#39;, &#39;Pearl&#39;, &#39;&amp;&#39;, &#39;Gold&#39;, &#39;Satan&#39;, &#39;exalted&#39;, &#39;sat&#39;, &#39;by&#39;, &#39;merit&#39;, &quot;rais&#39;d&quot;, &#39;To&#39;, &#39;that&#39;, &#39;bad&#39;, &#39;eminence&#39;, &#39;and&#39;, &#39;from&#39;, &#39;despair&#39;, &#39;Thus&#39;, &#39;high&#39;, &#39;uplifted&#39;, &#39;beyond&#39;, &#39;hope&#39;, &#39;aspires&#39;, &#39;Beyond&#39;, &#39;thus&#39;, &#39;high&#39;, &#39;insatiate&#39;, &#39;to&#39;, &#39;pursue&#39;, &#39;Vain&#39;, &#39;Warr&#39;, &#39;with&#39;, &quot;Heav&#39;n&quot;, &#39;and&#39;, &#39;by&#39;, &#39;success&#39;, &#39;untaught&#39;, &#39;His&#39;, &#39;proud&#39;, &#39;imaginations&#39;, &#39;thus&#39;, &#39;displaid&#39;, &#39;Powers&#39;, &#39;and&#39;, &#39;Dominions&#39;, &#39;Deities&#39;, &#39;of&#39;, &quot;Heav&#39;n&quot;, &#39;For&#39;, &#39;since&#39;, &#39;no&#39;, &#39;deep&#39;, &#39;within&#39;, &#39;her&#39;, &#39;gulf&#39;, &#39;can&#39;, &#39;hold&#39;, &#39;Immortal&#39;, &#39;vigor&#39;, &#39;though&#39;, &#39;opprest&#39;, &#39;and&#39;, &quot;fall&#39;n&quot;, &#39;I&#39;, &#39;give&#39;, &#39;not&#39;, &quot;Heav&#39;n&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or you can create a list of all books and categorize words by the book they appear in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_books</span> <span class="o">=</span> <span class="n">paradiselost</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:div[@type=&#39;book&#39;]&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="c1"># Find all of the books</span>
+
+<span class="c1"># In each book, get all of the words as a list</span>
+<span class="n">words_by_book</span> <span class="o">=</span> <span class="p">[[</span><span class="n">w</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span> <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">all_books</span><span class="p">]</span>
+
+<span class="c1"># Print the first 10 words in each book</span>
+<span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">words_by_book</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">book</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;I.&#39;, &#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;II.&#39;, &#39;HIgh&#39;, &#39;on&#39;, &#39;a&#39;, &#39;Throne&#39;, &#39;of&#39;, &#39;Royal&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;III.&#39;, &#39;HAil&#39;, &#39;holy&#39;, &#39;light&#39;, &#39;ofspring&#39;, &#39;of&#39;, &quot;Heav&#39;n&quot;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;IV.&#39;, &#39;O&#39;, &#39;For&#39;, &#39;that&#39;, &#39;warning&#39;, &#39;voice&#39;, &#39;which&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;V&#39;, &#39;NOw&#39;, &#39;Morn&#39;, &#39;her&#39;, &#39;rosie&#39;, &#39;steps&#39;, &#39;in&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;VI.&#39;, &#39;ALL&#39;, &#39;night&#39;, &#39;the&#39;, &#39;dreadless&#39;, &#39;Angel&#39;, &quot;unpursu&#39;d&quot;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;VII&#39;, &#39;DEscend&#39;, &#39;from&#39;, &quot;Heav&#39;n&quot;, &#39;Urania&#39;, &#39;by&#39;, &#39;that&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;VIII&#39;, &#39;NO&#39;, &#39;more&#39;, &#39;of&#39;, &#39;talk&#39;, &#39;where&#39;, &#39;God&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;IX&#39;, &#39;MEanwhile&#39;, &#39;the&#39;, &#39;hainous&#39;, &#39;and&#39;, &#39;despightfull&#39;, &#39;act&#39;]
+[&#39;PARADISE&#39;, &#39;LOST&#39;, &#39;BOOK&#39;, &#39;X.&#39;, &#39;THus&#39;, &#39;they&#39;, &#39;in&#39;, &#39;lowliest&#39;, &#39;plight&#39;, &#39;repentant&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exporting-and-sharing">
+<h2><span class="section-number">1.8. </span>Exporting and Sharing<a class="headerlink" href="#exporting-and-sharing" title="Permalink to this headline">¶</a></h2>
+<p>Now that you know a little bit about how to parse <em>EarlyPrint</em> XML files, it’s likely you’ll want to export some of this information out of a Python environment into a format that can easily be shared. One simple way of exporting information is as a CSV, or comma-separated value file. CSVs can easily be read by most spreadsheet applications, like Excel or Google Sheets, and are therefore useful for sharing information easily. There are many ways to work with CSV files in Python, but the <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> data science library provides one of the simplest interfaces. You already imported pandas at the beginning of this tutorial and named it <code class="docutils literal notranslate"><span class="pre">pd</span></code> for short.</p>
+<p>In this next bit of code, you’ll combine what you’ve learned from the previous examples to get a CSV file of the counts for every noun in each book of <em>Paradise Lost</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Begin by getting all regularized nouns in every book as a list</span>
+<span class="n">nouns_by_book</span> <span class="o">=</span> <span class="p">[[</span><span class="n">w</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reg&quot;</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">book</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:w&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">all_books</span><span class="p">]</span>
+
+<span class="c1"># Count each book&#39;s wordlist</span>
+<span class="n">noun_counts_by_book</span> <span class="o">=</span> <span class="p">[</span><span class="n">Counter</span><span class="p">(</span><span class="n">noun_list</span><span class="p">)</span> <span class="k">for</span> <span class="n">noun_list</span> <span class="ow">in</span> <span class="n">nouns_by_book</span><span class="p">]</span>
+
+<span class="c1"># Create a list of Book names to use as labels</span>
+<span class="n">book_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Book </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)]</span>
+
+<span class="c1"># Create a Pandas DataFrame</span>
+<span class="c1"># Set the index to the list of book_names</span>
+<span class="c1"># Fill any empty &quot;cells&quot; with 0 (if a word appears in some books but not others)</span>
+<span class="n">noun_counts_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">noun_counts_by_book</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">book_names</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># &quot;Transpose&quot; your DataFrame so that words are rows and books are columns</span>
+<span class="n">noun_counts_df</span> <span class="o">=</span> <span class="n">noun_counts_df</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Export your DataFrame to a CSV file.</span>
+<span class="n">noun_counts_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;pl_noun_counts_by_book.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above will save a CSV file to the same directory where this notebook resides. You can now take that CSV and use it any way you choose. You might start by loading it into Excel or Google Sheets and sorting it by column to see the most frequent nouns in each book.</p>
+</div>
+<div class="section" id="conclusion">
+<h2><span class="section-number">1.9. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>You’ve now run through some of the basic ways to subdivide <em>EarlyPrint</em> XML documents. If you have worked through the tutorial on <a class="reference external" href="https://earlyprint.org/notebooks/tf_idf.html">TF-IDF</a>, you will have noted that <em>Observations on Experimental Philosophy</em> and <em>The Blazing World</em> were contained in the same physical book, and therefore were both part of the same XML file. Now you have some tools and approaches with which to subdivide and analyze the two texts separately.</p>
+<p>And there are many more ways to subdivide texts according to the principles you’ve just learned. In the book divisions above, the word lists include headings that say, for example “PARADISE LOST BOOK I.” Those words are from headers and aren’t part of the main text of the poem. They’re contained in <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> tags, which you’re now better equipped to find and avoid, if you so choose.</p>
+<p>If you want to try some of these investigative routines on a different text—say, Aphra Behn’s <em>Oroonoko</em> or Thomas Hobbes’s <em>Leviathan</em>—you can find them by searching <a class="reference external" href="https://earlyprint.org/download/">the <em>EarlyPrint</em> download page</a>.</p>
+<p>XML documents can be complex, but we hope the TEI simplePrint markup in <em>EarlyPrint</em> will make it easier for you to find and analyze exactly the parts of the texts that interest you.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Welcome to your Jupyter Book</a>
+    <a class='right-next' id="next-link" href="tf_idf.html" title="next page"><span class="section-number">2. </span>Exploring Vocabulary in <em>EarlyPrint</em> using Tf-Idf</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By John R. Ladd<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
