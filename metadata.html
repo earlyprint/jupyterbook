@@ -115,31 +115,6 @@
    3. Working with Metadata, Creating Text Networks
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#all-of-the-metadata">
-   4. All of the Metadata
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#trimming-and-cleaning-data-fields">
-   5. Trimming and “Cleaning” Data Fields
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#building-a-network">
-   6. Building a Network
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#visualizing-the-network">
-   7. Visualizing the Network
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#next-steps">
-   8. Next Steps
-  </a>
- </li>
 </ul>
 
 </nav> <!-- To handle the deprecated key -->
@@ -243,46 +218,39 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3. Working with Metadata, Creating Text Networks
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#downloading-metadata">
+   3.1. Downloading Metadata
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downloading-metadata">
-     3.1. Downloading Metadata
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-single-metadata-file">
-     3.2. A Single Metadata File
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-single-metadata-file">
+   3.2. A Single Metadata File
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#all-of-the-metadata">
-   4. All of the Metadata
+   3.3. All of the Metadata
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#trimming-and-cleaning-data-fields">
-   5. Trimming and “Cleaning” Data Fields
+   3.4. Trimming and “Cleaning” Data Fields
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-a-network">
-   6. Building a Network
+   3.5. Building a Network
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualizing-the-network">
-   7. Visualizing the Network
+   3.6. Visualizing the Network
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
-   8. Next Steps
+   3.7. Next Steps
   </a>
  </li>
 </ul>
@@ -414,9 +382,8 @@ Printer: A. Maxwell
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="all-of-the-metadata">
-<h1><span class="section-number">4. </span>All of the Metadata<a class="headerlink" href="#all-of-the-metadata" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">3.3. </span>All of the Metadata<a class="headerlink" href="#all-of-the-metadata" title="Permalink to this headline">¶</a></h2>
 <p>The above method works fine if you need data on just one text, but what about analyzing the data for <em>all</em> of the texts at once? To do this, you’ll need to <a class="reference external" href="https://github.com/earlyprint/epmetadata">download all of the metadata files from Github</a>. But once you do, the code is not all that different from working with a single file.</p>
 <p>In the following code block, we’ll get the title, author, and date for every single text in the <em>EarlyPrint</em> corpus. We’ll aggregate the information and store it in a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrame for later use and analysis. For more on <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, see their <a class="reference external" href="https://pandas.pydata.org/">documentation</a>.</p>
 <p><em>n.b. Some of the dates  in our corpus are ranges rather than exact years, which are handled by <code class="docutils literal notranslate"><span class="pre">notBefore</span></code> and <code class="docutils literal notranslate"><span class="pre">notAfter</span></code> attributes of the <code class="docutils literal notranslate"><span class="pre">&lt;date&gt;</span></code> element. I’m skipping over those in this example, but you may want to retain them in your analysis. Find out more in <a class="reference external" href="https://earlyprint.org/posts/cleaning-metadata.html">my metadata blog post</a>.</em></p>
@@ -461,10 +428,105 @@ Printer: A. Maxwell
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>author</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A74460</th>
+      <td>An act for further doubling the sum of one hun...</td>
+      <td>England and Wales. Parliament.</td>
+      <td>1652</td>
+    </tr>
+    <tr>
+      <th>B19165</th>
+      <td>By the King, His Majesties proclamation to all...</td>
+      <td>England and Wales. Sovereign (1625-1649 : Char...</td>
+      <td>1642</td>
+    </tr>
+    <tr>
+      <th>A94369</th>
+      <td>The time-troubler crept in at the window, dist...</td>
+      <td>R., attributed name.</td>
+      <td>1642</td>
+    </tr>
+    <tr>
+      <th>A59569</th>
+      <td>A sermon preach'd before the Queen at White-Ha...</td>
+      <td>Sharp, John, 1645-1714.</td>
+      <td>1692</td>
+    </tr>
+    <tr>
+      <th>A90636</th>
+      <td>The high-way to peace: or, a direction set for...</td>
+      <td>Peyton, Edward, Sir, 1588?-1657.</td>
+      <td>1647</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A57605</th>
+      <td>Select observations of the incomparable Sir Wa...</td>
+      <td>Raleigh, Walter, Sir, 1552?-1618.</td>
+      <td>1696</td>
+    </tr>
+    <tr>
+      <th>A67173</th>
+      <td>The mourners memorial in two sermons on the de...</td>
+      <td>Wright, Timothy.</td>
+      <td>1692</td>
+    </tr>
+    <tr>
+      <th>A66317</th>
+      <td>By the King and Queen, a proclamation for the ...</td>
+      <td>England and Wales. Sovereign (1689-1694 : Will...</td>
+      <td>1689</td>
+    </tr>
+    <tr>
+      <th>A16261</th>
+      <td>Here begynneth y[e] hystory of Tytus &amp; Gesyppu...</td>
+      <td>Boccaccio, Giovanni, 1313-1375.</td>
+      <td>1525</td>
+    </tr>
+    <tr>
+      <th>A87714</th>
+      <td>A briefe remonstrance of the reasons and groun...</td>
+      <td>Kiffin, William, 1616-1701.</td>
+      <td>1645</td>
+    </tr>
+  </tbody>
+</table>
+<p>60331 rows × 3 columns</p>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="trimming-and-cleaning-data-fields">
-<h1><span class="section-number">5. </span>Trimming and “Cleaning” Data Fields<a class="headerlink" href="#trimming-and-cleaning-data-fields" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">3.4. </span>Trimming and “Cleaning” Data Fields<a class="headerlink" href="#trimming-and-cleaning-data-fields" title="Permalink to this headline">¶</a></h2>
 <p>Though we’ve done a lot of work to make the <em>EarlyPrint</em> data more usable, some fields may still need to be adjusted, trimmed, or edited before they can be analyzed. The Author field, for example, includes birth and death dates for most authors, which a researcher may want to leave out.</p>
 <p>There’s no one-size-fits-all approach to doing this sort of adjustment. And though this step is often referred to as “data cleaning,” the task of deciding when and how to “clean” and aggregate data is <a class="reference external" href="http://curatingmenus.org/articles/against-cleaning/">important intellectual work</a> with serious research implications. How you “clean” data fields will depend on your research question.</p>
 <p>Below, I focus on a single data field that we’ll use in the next section: the names of printers. As I discuss in the <a class="reference external" href="https://earlyprint.org/posts/cleaning-metadata.html">metadata post</a>, the <em>EarlyPrint</em> metadata takes imprint information a step further by algorithmically parsing out the names of printers, publishers, and booksellers (among others). This process is imperfect, and it leaves some unneccessary characters and unusual spellings in these data fields.</p>
@@ -500,7 +562,7 @@ Printer: A. Maxwell
 </div>
 </div>
 <div class="section" id="building-a-network">
-<h1><span class="section-number">6. </span>Building a Network<a class="headerlink" href="#building-a-network" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">3.5. </span>Building a Network<a class="headerlink" href="#building-a-network" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve created a function for cleaning up the printer names, we can use them for any purpose we like. In the rest of this tutorial, we’ll use printer names to create a network visualization of printers and the books they printed. Such a visualization could be useful for determining how much collaboration among printers there is in the early modern period.</p>
 <p>Networks are made up of <strong>nodes</strong> or entities, and the <strong>edges</strong> or relationships that connect those entities to one another. If you’re new to networks, you might refer to <a class="reference external" href="https://programminghistorian.org/en/lessons/exploring-and-analyzing-network-data-with-python">this <em>Programming Historian</em> tutorial on working with networks in Python</a>. We’ll use a similar Python approach here.</p>
 <p>Our goal is to create a <strong>bipartite</strong> network, one with two different types of nodes: printers and the books they printed. To quickly create a network, we can build an <strong>edgelist</strong> from our metadata, which is simply a list of which entities are related or linked.</p>
@@ -599,7 +661,7 @@ Average degree:   1.9508
 </div>
 </div>
 <div class="section" id="visualizing-the-network">
-<h1><span class="section-number">7. </span>Visualizing the Network<a class="headerlink" href="#visualizing-the-network" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">3.6. </span>Visualizing the Network<a class="headerlink" href="#visualizing-the-network" title="Permalink to this headline">¶</a></h2>
 <p>We could write a few lines of code to display our full network, but with 30,000+ nodes our visualization is likely to come out a wieldy, muddled mess. It will be more productive to create a smaller subset of the network to visualize, making things easier to read and interpret. Let’s look at the network just for the year 1660.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -669,13 +731,14 @@ Average degree:   1.8679
 <p><em>n.b. I tested out the network for the whole decade of the 1660s, and there wasn’t much more collaboration among printers than there was in 1660 alone. But different network “slices” might reveal different results.</em></p>
 </div>
 <div class="section" id="next-steps">
-<h1><span class="section-number">8. </span>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">3.7. </span>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
 <p>We’ve looked at just a couple examples of how metadata might be processed and used in Python. The DataFrame and network visualization methods here give a rough outline of what might be done with metadata after it’s parsed from our XML, but there are a large number of computational possibilities for this data. Perhaps most importantly, you now know how to find and access this data in order to supplement your work with our texts, as demonstrated in the other tutorials.</p>
 <p>The exploratory methods outlined here are meant to be an intermediate step rather than an ending. Which is to say, creating a network visualization might prompt you to return to earlier stages of scholarly work and data analysis. Let’s look at an example by zooming in on a different component in our interactive visualization:</p>
 <p><img alt="" src="_images/component2.png" /></p>
 <p>In this component we find the printer Thomas Newcomb, whose often-abbreviated name we dealt with in our name reconciliation, data “cleaning” step. We can see here that his frequent collaborator is the printer Edward Husbands. But there’s an additional, different printer for just one text in this component: Edward “Husband” with no “s.” This is very likely the same person as Edward Husbands, with his name misspelled in one of the imprints.</p>
 <p>It may have been difficult to find this misspelling without our network visualization. We could have used a text analysis technique such as edit distance to find variants, but that could still involve scanning a large list of texts (even for just one year) that were printed by a single person. Our network draws together co-printings, and in doing so it reveals name variants that are likely to refer to the same person. If we hadn’t regularized “Tho. Newcomb” to “Thomas Newcomb,” we would have found that name in this component, too!</p>
 <p>Rather than being a culmination or stopping point for our analysis, the visualization can instead help us to rethink our data organization practices, to catch things we may have missed, and to suggest new ways of moving through the data. In future tutorials we’ll continue to use this metadata to complement our work with the texts, keeping in mind the lessons we’ve learned here.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
