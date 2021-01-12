@@ -45,8 +45,6 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -111,6 +109,36 @@
     EarlyPrint
    </em>
    using Tf-Idf
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html">
+   3. Working with Metadata, Creating Text Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html#all-of-the-metadata">
+   4. All of the Metadata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html#trimming-and-cleaning-data-fields">
+   5. Trimming and “Cleaning” Data Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html#building-a-network">
+   6. Building a Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html#visualizing-the-network">
+   7. Visualizing the Network
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html#next-steps">
+   8. Next Steps
   </a>
  </li>
 </ul>
@@ -487,9 +515,6 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;OF&#39;, &#39;Mans&#39;, &#39;First&#39;, &#39;Disobedience&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Fruit&#39;], [&#39;Of&#39;, &#39;that&#39;, &#39;Forbidden&#39;, &#39;Tree&#39;, &#39;whose&#39;, &#39;mortal&#39;, &#39;tast&#39;], [&#39;Brought&#39;, &#39;Death&#39;, &#39;into&#39;, &#39;the&#39;, &#39;World&#39;, &#39;and&#39;, &#39;all&#39;, &#39;our&#39;, &#39;woe&#39;], [&#39;With&#39;, &#39;loss&#39;, &#39;of&#39;, &#39;Eden&#39;, &#39;till&#39;, &#39;one&#39;, &#39;greater&#39;, &#39;Man&#39;], [&#39;Restore&#39;, &#39;us&#39;, &#39;and&#39;, &#39;regain&#39;, &#39;the&#39;, &#39;blissful&#39;, &#39;Seat&#39;], [&#39;Sing&#39;, &quot;Heav&#39;nly&quot;, &#39;Muse&#39;, &#39;that&#39;, &#39;on&#39;, &#39;the&#39;, &#39;secret&#39;, &#39;top&#39;], [&#39;Of&#39;, &#39;Oreb&#39;, &#39;or&#39;, &#39;of&#39;, &#39;Sinai&#39;, &#39;didst&#39;, &#39;inspire&#39;], [&#39;That&#39;, &#39;Shepherd&#39;, &#39;who&#39;, &#39;first&#39;, &#39;taught&#39;, &#39;the&#39;, &#39;chosen&#39;, &#39;Seed&#39;], [&#39;In&#39;, &#39;the&#39;, &#39;Beginning&#39;, &#39;how&#39;, &#39;the&#39;, &quot;Heav&#39;ns&quot;, &#39;and&#39;, &#39;Earth&#39;], [&#39;Rose&#39;, &#39;out&#39;, &#39;of&#39;, &#39;Chaos&#39;, &#39;Or&#39;, &#39;if&#39;, &#39;Sion&#39;, &#39;Hill&#39;], [&#39;Delight&#39;, &#39;thee&#39;, &#39;more&#39;, &#39;and&#39;, &quot;Siloa&#39;s&quot;, &#39;Brook&#39;, &#39;that&#39;, &quot;flow&#39;d&quot;], [&#39;Fast&#39;, &#39;by&#39;, &#39;the&#39;, &#39;Oracle&#39;, &#39;of&#39;, &#39;God&#39;, &#39;I&#39;, &#39;thence&#39;], [&#39;Invoke&#39;, &#39;thy&#39;, &#39;aid&#39;, &#39;to&#39;, &#39;my&#39;, &#39;adventrous&#39;, &#39;Song&#39;], [&#39;That&#39;, &#39;with&#39;, &#39;no&#39;, &#39;middle&#39;, &#39;flight&#39;, &#39;intends&#39;, &#39;to&#39;, &#39;soar&#39;], [&#39;Above&#39;, &quot;th&#39;&quot;, &#39;Aonian&#39;, &#39;Mount&#39;, &#39;while&#39;, &#39;it&#39;, &#39;pursues&#39;], [&#39;Things&#39;, &#39;〈◊〉&#39;, &#39;yet&#39;, &#39;in&#39;, &#39;Pros●…&#39;, &#39;〈◊〉&#39;, &#39;Rhime&#39;], [&#39;And&#39;, &#39;chiefly&#39;, &#39;Thou&#39;, &#39;O&#39;, &#39;Spirit&#39;, &#39;that&#39;, &#39;dost&#39;, &#39;prefer&#39;], [&#39;Before&#39;, &#39;all&#39;, &#39;Temples&#39;, &quot;th&#39;&quot;, &#39;up●…ght&#39;, &#39;●…eart&#39;, &#39;and&#39;, &#39;pure&#39;], [&#39;Instruct&#39;, &#39;me&#39;, &#39;for&#39;, &#39;Thou&#39;, &quot;know&#39;st&quot;, &#39;Thou&#39;, &#39;from&#39;, &#39;the&#39;, &#39;first&#39;], [&#39;Wast&#39;, &#39;present&#39;, &#39;and&#39;, &#39;with&#39;, &#39;mighty&#39;, &#39;wings&#39;, &#39;outspread&#39;]]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
