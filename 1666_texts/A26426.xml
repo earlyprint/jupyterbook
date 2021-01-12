@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://schemata.earlyprint.org/schemata/tei_earlyprint.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="A26426">
+ <teiHeader>
+  <fileDesc>
+   <titleStmt>
+    <title>Advertisement be [sic] Agnes Campbel relict of the deceast Master William Guthrie, minister of the Gospel, unto whose hands some printed papers called sermons, bearing the said Master William his name, may come.</title>
+    <author>Campbel, Agnes.</author>
+   </titleStmt>
+   <editionStmt>
+    <edition>This text is an enriched version of the TCP digital transcription A26426 of text R28928 in the <ref target="http;//estc.bl.uk">English Short Title Catalog</ref> (Wing A608). Textual changes  and metadata enrichments aim at making the                             text more  computationally tractable, easier to read, and suitable for network-based collaborative                              curation by amateur and professional end users from many walks of life.  The text has been tokenized and linguistically annotated with <ref target="http://morphadorner.northwestern.edu/morphadorner/">MorphAdorner</ref>. The annotation includes standard spellings that support the display of a text in                             a standardized format that preserves archaic forms ('loveth', 'seekest').                              Textual changes aim at restoring the text the author or stationer meant to publish.</edition>
+    <respStmt>
+     <resp>This text has not been fully proofread</resp>
+     <name/>
+    </respStmt>
+   </editionStmt>
+   <extent>Approx. 3 KB of XML-encoded text transcribed from 1 1-bit group-IV TIFF page image.</extent>
+   <publicationStmt>
+    <publisher>EarlyPrint Project</publisher>
+    <pubPlace>Evanston,IL, Notre Dame, IN, St. Louis, MO</pubPlace>
+    <date>2018</date>
+    <idno type="DLPS">A26426</idno>
+    <idno type="STC">Wing A608</idno>
+    <idno type="STC">ESTC R28928</idno>
+    <idno type="EEBO-CITATION">10776331</idno>
+    <idno type="OCLC">ocm 10776331</idno>
+    <idno type="VID">45841</idno>
+    <availability>
+     <p>
+            This keyboarded and encoded edition of the work described above is co-owned by the institutions providing financial support to the Early English Books Online Text Creation Partnership. This Phase I text is available for reuse, according to the terms of
+            <ref target="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0 1.0 Universal</ref>
+            . The text can be copied, modified, distributed and performed, even for commercial purposes, all without asking permission.
+          </p>
+    </availability>
+   </publicationStmt>
+   <seriesStmt>
+    <title>Early English books online.</title>
+   </seriesStmt>
+   <notesStmt>
+    <note>(EEBO-TCP ; phase 1, no. A26426)</note>
+    <note>Transcribed from: (Early English Books Online ; image set 45841)</note>
+    <note>Images scanned from microfilm: (Early English books, 1641-1700 ; 1413:3)</note>
+   </notesStmt>
+   <sourceDesc>
+    <biblFull>
+     <titleStmt>
+      <title>Advertisement be [sic] Agnes Campbel relict of the deceast Master William Guthrie, minister of the Gospel, unto whose hands some printed papers called sermons, bearing the said Master William his name, may come.</title>
+      <author>Campbel, Agnes.</author>
+     </titleStmt>
+     <extent>l broadside.</extent>
+     <publicationStmt>
+      <publisher>s.n.,</publisher>
+      <pubPlace>[Edinburgh? :</pubPlace>
+      <date>1666?]</date>
+     </publicationStmt>
+     <notesStmt>
+      <note>Imprint suggested by Wing.</note>
+      <note>Refutation of published sermons which were attributed to William Guthrie.</note>
+      <note>Reproduction of original in the Edinburgh University Library.</note>
+     </notesStmt>
+    </biblFull>
+   </sourceDesc>
+  </fileDesc>
+  <profileDesc>
+   <langUsage>
+    <language ident="eng">eng</language>
+   </langUsage>
+   <textClass>
+    <keywords scheme="http://authorities.loc.gov/">
+     <term>Guthrie, William, 1620-1665.</term>
+     <term>Presbyterian Church -- Sermons.</term>
+     <term>Sermons, English -- 17th century.</term>
+    </keywords>
+   </textClass>
+  </profileDesc>
+  <xenoData>
+   <ep:epHeader xmlns:ep="http://earlyprint.org/ns/1.0">
+    <ep:corpus>eebo</ep:corpus>
+    <ep:title>Advertisement be [sic] Agnes Campbel relict of the deceast Master William Guthrie, minister of the Gospel, unto whose hands some printed papers called</ep:title>
+    <ep:author>Campbel, Agnes</ep:author>
+    <ep:publicationYear>1666</ep:publicationYear>
+    <ep:creationYear/>
+    <ep:curator>
+     <ep:name/>
+    </ep:curator>
+    <ep:pageCount>1</ep:pageCount>
+    <ep:wordCount>582</ep:wordCount>
+    <ep:defectiveTokenCount>0</ep:defectiveTokenCount>
+    <ep:untranscribedForeignCount>0</ep:untranscribedForeignCount>
+    <ep:untranscribedMathCount>0</ep:untranscribedMathCount>
+    <ep:untranscribedMusicCount>0</ep:untranscribedMusicCount>
+    <ep:missingChunkCount>0</ep:missingChunkCount>
+    <ep:missingPagesCount>0</ep:missingPagesCount>
+    <ep:defectRate>0</ep:defectRate>
+    <ep:finalGrade>A</ep:finalGrade>
+    <ep:defectRangePerGrade>This text  has no known defects that were recorded as gap elements at the time of transcription. </ep:defectRangePerGrade>
+   </ep:epHeader>
+  </xenoData>
+  <revisionDesc>
+   <change><date>2006-06</date><label>TCP</label>
+        Assigned for keying and markup
+      </change>
+   <change><date>2006-06</date><label>Aptara</label>
+        Keyed and coded from ProQuest page images
+      </change>
+   <change><date>2006-07</date><label>Derek Lee</label>
+        Sampled and proofread
+      </change>
+   <change><date>2006-07</date><label>Derek Lee</label>
+        Text and markup reviewed and edited
+      </change>
+   <change><date>2006-09</date><label>pfs</label>
+        Batch review (QC) and XML conversion
+      </change>
+  </revisionDesc>
+ </teiHeader>
+ <text xml:id="A26426-t">
+  <body xml:id="A26426-e0">
+   <div type="letter" xml:id="A26426-e10">
+    <pb facs="tcp:45841:1" xml:id="A26426-001-a"/>
+    <head xml:id="A26426-e20">
+     <w lemma="advertisement" pos="n1" xml:id="A26426-001-a-0010">ADVERTISEMENT</w>
+     <w lemma="be" pos="vvb" xml:id="A26426-001-a-0020">Be</w>
+     <w lemma="Agnes" pos="n1-nn" xml:id="A26426-001-a-0030">AGNES</w>
+     <w lemma="CAMPBEL" pos="n1-nn" xml:id="A26426-001-a-0040">CAMPBEL</w>
+     <pc xml:id="A26426-001-a-0050">,</pc>
+     <w lemma="relict" pos="n1" xml:id="A26426-001-a-0060">Relict</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-0070">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0080">the</w>
+     <w lemma="decease" pos="j_vn" reg="Deceased" xml:id="A26426-001-a-0090">Deceast</w>
+     <w lemma="master" pos="n1" xml:id="A26426-001-a-0100">Master</w>
+     <w lemma="WILLIAM" pos="n1-nn" xml:id="A26426-001-a-0110">WILLIAM</w>
+     <w lemma="guthrie" pos="n1-nn" reg="GUTHRIE" xml:id="A26426-001-a-0120">GVTHRIE</w>
+     <pc xml:id="A26426-001-a-0130">,</pc>
+     <w lemma="minister" pos="n1" xml:id="A26426-001-a-0140">Minister</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-0150">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0160">the</w>
+     <w lemma="gospel" pos="n1" xml:id="A26426-001-a-0170">Gospel</w>
+     <pc xml:id="A26426-001-a-0180">,</pc>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-0190">to</w>
+     <w lemma="such" pos="d" xml:id="A26426-001-a-0200">such</w>
+     <pc xml:id="A26426-001-a-0210">,</pc>
+     <w lemma="unto" pos="acp" reg="Unto" xml:id="A26426-001-a-0220">Vnto</w>
+     <w lemma="who" pos="crq-rg" xml:id="A26426-001-a-0230">whose</w>
+     <w lemma="hand" pos="n2" xml:id="A26426-001-a-0240">hands</w>
+     <w lemma="some" pos="d" xml:id="A26426-001-a-0250">some</w>
+     <w lemma="print" pos="j_vn" xml:id="A26426-001-a-0260">printed</w>
+     <w lemma="paper" pos="n2" xml:id="A26426-001-a-0270">Papers</w>
+     <pc xml:id="A26426-001-a-0280">,</pc>
+     <w lemma="call" pos="vvn" xml:id="A26426-001-a-0290">called</w>
+     <w lemma="sermon" pos="n2" xml:id="A26426-001-a-0300">SERMONS</w>
+     <w lemma="bear" pos="vvg" xml:id="A26426-001-a-0310">bearing</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0320">the</w>
+     <w lemma="say" pos="j_vn" xml:id="A26426-001-a-0330">said</w>
+     <w lemma="master" pos="n1" xml:id="A26426-001-a-0340">Master</w>
+     <w lemma="willam" pos="n1-nn" xml:id="A26426-001-a-0350">Willam</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-0360">his</w>
+     <w lemma="name" pos="n1" xml:id="A26426-001-a-0370">name</w>
+     <pc xml:id="A26426-001-a-0380">,</pc>
+     <w lemma="may" pos="vmb" xml:id="A26426-001-a-0390">may</w>
+     <w lemma="come" pos="vvi" xml:id="A26426-001-a-0400">come</w>
+     <pc unit="sentence" xml:id="A26426-001-a-0410">.</pc>
+    </head>
+    <opener xml:id="A26426-e30">
+     <salute xml:id="A26426-e40">
+      <w lemma="Christian" pos="n1-nn_j" xml:id="A26426-001-a-0420">CHRISTIAN</w>
+      <w lemma="reader" pos="n1" xml:id="A26426-001-a-0430">READER</w>
+      <pc unit="sentence" xml:id="A26426-001-a-0440">.</pc>
+     </salute>
+    </opener>
+    <p xml:id="A26426-e50">
+     <w lemma="be" pos="vvg" rendition="#decorinit" xml:id="A26426-001-a-0450">BEing</w>
+     <w lemma="much" pos="d" xml:id="A26426-001-a-0460">much</w>
+     <w lemma="afflict" pos="j_vn" xml:id="A26426-001-a-0470">afflicted</w>
+     <w lemma="with" pos="acp" xml:id="A26426-001-a-0480">with</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0490">the</w>
+     <w lemma="sight" pos="n1" xml:id="A26426-001-a-0500">sight</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-0510">of</w>
+     <w lemma="some" pos="d" xml:id="A26426-001-a-0520">some</w>
+     <w lemma="print" pos="j_vn" xml:id="A26426-001-a-0530">Printed</w>
+     <w lemma="paper" pos="n2" xml:id="A26426-001-a-0540">Papers</w>
+     <pc xml:id="A26426-001-a-0550">,</pc>
+     <w lemma="or" pos="cc" xml:id="A26426-001-a-0560">or</w>
+     <hi xml:id="A26426-e60">
+      <w lemma="sermon" pos="n2" xml:id="A26426-001-a-0570">Sermons</w>
+      <pc xml:id="A26426-001-a-0580">,</pc>
+     </hi>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-0590">to</w>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-0600">which</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0610">the</w>
+     <w lemma="name" pos="n1" xml:id="A26426-001-a-0620">name</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-0630">of</w>
+     <w lemma="my" pos="po" xml:id="A26426-001-a-0640">my</w>
+     <w lemma="worthy" pos="j" xml:id="A26426-001-a-0650">Worthy</w>
+     <w lemma="husband" pos="n1" xml:id="A26426-001-a-0660">Husband</w>
+     <pc join="right" xml:id="A26426-001-a-0670">(</pc>
+     <w lemma="now" pos="av" xml:id="A26426-001-a-0680">now</w>
+     <w lemma="with" pos="acp" xml:id="A26426-001-a-0690">with</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0700">the</w>
+     <w lemma="lord" pos="n1" xml:id="A26426-001-a-0710">Lord</w>
+     <pc xml:id="A26426-001-a-0720">)</pc>
+     <w lemma="be" pos="vvz" xml:id="A26426-001-a-0730">is</w>
+     <w lemma="prefix" pos="vvn" xml:id="A26426-001-a-0740">prefixed</w>
+     <pc xml:id="A26426-001-a-0750">,</pc>
+     <w lemma="by" pos="acp" xml:id="A26426-001-a-0760">by</w>
+     <w lemma="these" pos="d" xml:id="A26426-001-a-0770">these</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-0780">that</w>
+     <w lemma="have" pos="vvb" xml:id="A26426-001-a-0790">have</w>
+     <w lemma="publish" pos="vvn" xml:id="A26426-001-a-0800">published</w>
+     <w lemma="they" pos="pno" xml:id="A26426-001-a-0810">them</w>
+     <pc xml:id="A26426-001-a-0820">,</pc>
+     <w lemma="because" pos="acp" xml:id="A26426-001-a-0830">because</w>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-0840">I</w>
+     <w lemma="find" pos="vvd" xml:id="A26426-001-a-0850">found</w>
+     <w lemma="many" pos="d" xml:id="A26426-001-a-0860">many</w>
+     <w lemma="thing" pos="n2" xml:id="A26426-001-a-0870">things</w>
+     <w lemma="therein" pos="av" xml:id="A26426-001-a-0880">therein</w>
+     <w lemma="injurious" pos="j" xml:id="A26426-001-a-0890">injurious</w>
+     <pc xml:id="A26426-001-a-0900">,</pc>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-0910">not</w>
+     <w lemma="only" pos="av_j" reg="only" xml:id="A26426-001-a-0920">onlie</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-0930">to</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-0940">his</w>
+     <w lemma="memory" pos="n1" reg="memory" xml:id="A26426-001-a-0950">memorie</w>
+     <pc xml:id="A26426-001-a-0960">,</pc>
+     <w lemma="but" pos="acp" xml:id="A26426-001-a-0970">but</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-0980">to</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-0990">the</w>
+     <w lemma="truth" pos="n1" xml:id="A26426-001-a-1000">Truth</w>
+     <pc xml:id="A26426-001-a-1010">:</pc>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-1020">I</w>
+     <w lemma="be" pos="vvd" xml:id="A26426-001-a-1030">was</w>
+     <w lemma="therefore" pos="av" xml:id="A26426-001-a-1040">therefore</w>
+     <w lemma="at" pos="acp" xml:id="A26426-001-a-1050">at</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1060">the</w>
+     <w lemma="pain" pos="n2" xml:id="A26426-001-a-1070">pains</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-1080">to</w>
+     <w lemma="cause" pos="n1" xml:id="A26426-001-a-1090">cause</w>
+     <w lemma="compare" pos="vvb" xml:id="A26426-001-a-1100">compare</w>
+     <w lemma="they" pos="pno" xml:id="A26426-001-a-1110">them</w>
+     <w lemma="with" pos="acp" xml:id="A26426-001-a-1120">with</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-1130">his</w>
+     <w lemma="note" pos="n2" xml:id="A26426-001-a-1140">Notes</w>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-1150">I</w>
+     <w lemma="have" pos="vvb" xml:id="A26426-001-a-1160">have</w>
+     <w lemma="beside" pos="acp" xml:id="A26426-001-a-1170">beside</w>
+     <w lemma="i" pos="pno" xml:id="A26426-001-a-1180">me</w>
+     <pc xml:id="A26426-001-a-1190">;</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1200">And</w>
+     <w lemma="likewise" pos="av" xml:id="A26426-001-a-1210">likewise</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-1220">to</w>
+     <w lemma="interrogate" pos="vvi" xml:id="A26426-001-a-1230">Interrogate</w>
+     <w lemma="some" pos="d" xml:id="A26426-001-a-1240">some</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-1250">of</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-1260">his</w>
+     <w lemma="most" pos="av-s_d" xml:id="A26426-001-a-1270">most</w>
+     <w lemma="judicious" pos="j" xml:id="A26426-001-a-1280">Judicious</w>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1290">and</w>
+     <w lemma="conscientious" pos="j" xml:id="A26426-001-a-1300">Conscientious</w>
+     <w lemma="ordinary" pos="j" reg="ordinary" xml:id="A26426-001-a-1310">ordinarie</w>
+     <w lemma="hearer" pos="n2" xml:id="A26426-001-a-1320">Hearers</w>
+     <pc xml:id="A26426-001-a-1330">,</pc>
+     <w lemma="yet" pos="av" xml:id="A26426-001-a-1340">yet</w>
+     <w lemma="live" pos="vvg" xml:id="A26426-001-a-1350">living</w>
+     <pc xml:id="A26426-001-a-1360">,</pc>
+     <w lemma="anent" pos="acp" xml:id="A26426-001-a-1370">anent</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1380">the</w>
+     <w lemma="same" pos="d" xml:id="A26426-001-a-1390">same</w>
+     <pc xml:id="A26426-001-a-1400">:</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1410">And</w>
+     <w lemma="after" pos="acp" xml:id="A26426-001-a-1420">after</w>
+     <w lemma="due" pos="j" xml:id="A26426-001-a-1430">due</w>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1440">and</w>
+     <w lemma="serious" pos="j" xml:id="A26426-001-a-1450">serious</w>
+     <w lemma="consideration" pos="n1" xml:id="A26426-001-a-1460">consideration</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-1470">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1480">the</w>
+     <w lemma="whole" pos="j" xml:id="A26426-001-a-1490">whole</w>
+     <pc xml:id="A26426-001-a-1500">,</pc>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-1510">I</w>
+     <w lemma="dare" pos="vvb" xml:id="A26426-001-a-1520">dare</w>
+     <w lemma="very" pos="av" reg="very" xml:id="A26426-001-a-1530">verie</w>
+     <w lemma="confident" pos="av_j" xml:id="A26426-001-a-1540">confidently</w>
+     <w lemma="declare" pos="vvi" xml:id="A26426-001-a-1550">declare</w>
+     <pc xml:id="A26426-001-a-1560">,</pc>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-1570">that</w>
+     <w lemma="they" pos="pns" xml:id="A26426-001-a-1580">they</w>
+     <w lemma="be" pos="vvb" xml:id="A26426-001-a-1590">are</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-1600">not</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1610">the</w>
+     <w lemma="genuine" pos="j" xml:id="A26426-001-a-1620">genuine</w>
+     <hi xml:id="A26426-e70">
+      <w lemma="work" pos="n2" xml:id="A26426-001-a-1630">Works</w>
+     </hi>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1640">and</w>
+     <hi xml:id="A26426-e80">
+      <w lemma="sermon" pos="n2" xml:id="A26426-001-a-1650">Sermons</w>
+     </hi>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-1660">of</w>
+     <w lemma="my" pos="po" xml:id="A26426-001-a-1670">my</w>
+     <w lemma="foresay" pos="j_vn" xml:id="A26426-001-a-1680">foresaid</w>
+     <w lemma="husband" pos="n1" xml:id="A26426-001-a-1690">Husband</w>
+     <pc xml:id="A26426-001-a-1700">;</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-1710">which</w>
+     <w lemma="may" pos="vmb" xml:id="A26426-001-a-1720">may</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-1730">be</w>
+     <w lemma="very" pos="av" xml:id="A26426-001-a-1740">very</w>
+     <w lemma="evident" pos="j" xml:id="A26426-001-a-1750">evident</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-1760">to</w>
+     <w lemma="all" pos="d" xml:id="A26426-001-a-1770">all</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-1780">that</w>
+     <w lemma="know" pos="vvd" xml:id="A26426-001-a-1790">knew</w>
+     <w lemma="he" pos="pno" xml:id="A26426-001-a-1800">him</w>
+     <pc xml:id="A26426-001-a-1810">,</pc>
+     <w lemma="consider" pos="vvg" xml:id="A26426-001-a-1820">considering</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1830">the</w>
+     <w lemma="perplex" pos="j_vn" xml:id="A26426-001-a-1840">perplexed</w>
+     <w lemma="stile" pos="n1" xml:id="A26426-001-a-1850">stile</w>
+     <pc xml:id="A26426-001-a-1860">,</pc>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-1870">the</w>
+     <w lemma="confusion" pos="n1" xml:id="A26426-001-a-1880">confusion</w>
+     <pc xml:id="A26426-001-a-1890">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1900">and</w>
+     <w lemma="want" pos="vvb" xml:id="A26426-001-a-1910">want</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-1920">of</w>
+     <w lemma="connexion" pos="n1" xml:id="A26426-001-a-1930">connexion</w>
+     <pc xml:id="A26426-001-a-1940">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-1950">and</w>
+     <w lemma="a" pos="d" xml:id="A26426-001-a-1960">a</w>
+     <w lemma="multitude" pos="n1" xml:id="A26426-001-a-1970">multitude</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-1980">of</w>
+     <w lemma="vain" pos="j" xml:id="A26426-001-a-1990">vain</w>
+     <w lemma="repetition" pos="n2" xml:id="A26426-001-a-2000">repetitions</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-2010">that</w>
+     <w lemma="be" pos="vvb" xml:id="A26426-001-a-2020">are</w>
+     <w lemma="ofttimes" pos="av" reg="ofttimes" xml:id="A26426-001-a-2030">oft-times</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-2040">to</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-2050">be</w>
+     <w lemma="find" pos="vvn" xml:id="A26426-001-a-2060">found</w>
+     <w lemma="therein" pos="av" xml:id="A26426-001-a-2070">therein</w>
+     <pc xml:id="A26426-001-a-2080">;</pc>
+     <w lemma="as" pos="acp" xml:id="A26426-001-a-2090">as</w>
+     <w lemma="also" pos="av" xml:id="A26426-001-a-2100">also</w>
+     <w lemma="want" pos="vvb" xml:id="A26426-001-a-2110">want</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-2120">of</w>
+     <w lemma="that" pos="d" xml:id="A26426-001-a-2130">that</w>
+     <w lemma="clear" pos="j" xml:id="A26426-001-a-2140">clear</w>
+     <w lemma="method" pos="n1" xml:id="A26426-001-a-2150">method</w>
+     <w lemma="familiar" pos="j" xml:id="A26426-001-a-2160">familiar</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-2170">to</w>
+     <w lemma="he" pos="pno" xml:id="A26426-001-a-2180">him</w>
+     <pc xml:id="A26426-001-a-2190">,</pc>
+     <w lemma="together" pos="av" xml:id="A26426-001-a-2200">together</w>
+     <w lemma="with" pos="acp" xml:id="A26426-001-a-2210">with</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2220">the</w>
+     <w lemma="un" pos="f-we" xml:id="A26426-001-a-2230">un</w>
+     <w lemma="soundness" pos="n1" xml:id="A26426-001-a-2240">soundness</w>
+     <w lemma="sometime" pos="av" xml:id="A26426-001-a-2250">sometimes</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-2260">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2270">the</w>
+     <w lemma="matter" pos="n1" xml:id="A26426-001-a-2280">matter</w>
+     <pc xml:id="A26426-001-a-2290">,</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-2300">which</w>
+     <w lemma="be" pos="vvd" xml:id="A26426-001-a-2310">was</w>
+     <w lemma="know" pos="vvn" xml:id="A26426-001-a-2320">known</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-2330">to</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-2340">be</w>
+     <w lemma="far" pos="av_j" reg="far" xml:id="A26426-001-a-2350">farr</w>
+     <w lemma="from" pos="acp" xml:id="A26426-001-a-2360">from</w>
+     <w lemma="he" pos="pno" xml:id="A26426-001-a-2370">him</w>
+     <pc xml:id="A26426-001-a-2380">,</pc>
+     <w lemma="be" pos="vvg" xml:id="A26426-001-a-2390">being</w>
+     <w lemma="well" pos="av" xml:id="A26426-001-a-2400">well</w>
+     <w lemma="instruct" pos="vvn" xml:id="A26426-001-a-2410">instructed</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-2420">in</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2430">the</w>
+     <w lemma="form" pos="n1" xml:id="A26426-001-a-2440">form</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-2450">of</w>
+     <w lemma="sound" pos="j" xml:id="A26426-001-a-2460">sound</w>
+     <w lemma="word" pos="n2" xml:id="A26426-001-a-2470">words</w>
+     <pc xml:id="A26426-001-a-2480">,</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-2490">which</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-2500">in</w>
+     <w lemma="all" pos="d" xml:id="A26426-001-a-2510">all</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-2520">his</w>
+     <w lemma="discourse" pos="n2" xml:id="A26426-001-a-2530">discourses</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-2540">to</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2550">the</w>
+     <w lemma="people" pos="n1" xml:id="A26426-001-a-2560">people</w>
+     <w lemma="he" pos="pns" xml:id="A26426-001-a-2570">he</w>
+     <w lemma="hold" pos="vvd" xml:id="A26426-001-a-2580">held</w>
+     <w lemma="fast" pos="av_j" xml:id="A26426-001-a-2590">fast</w>
+     <pc unit="sentence" xml:id="A26426-001-a-2600">.</pc>
+     <w lemma="moreover" pos="av" xml:id="A26426-001-a-2610">Moreover</w>
+     <w lemma="there" pos="av" xml:id="A26426-001-a-2620">there</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-2630">be</w>
+     <w lemma="many" pos="d" xml:id="A26426-001-a-2640">many</w>
+     <w lemma="thing" pos="n2" xml:id="A26426-001-a-2650">things</w>
+     <w lemma="therein" pos="av" xml:id="A26426-001-a-2660">therein</w>
+     <w lemma="clear" pos="j" xml:id="A26426-001-a-2670">clear</w>
+     <w lemma="nonsense" pos="n1" reg="nonsense" xml:id="A26426-001-a-2680">non-sense</w>
+     <pc xml:id="A26426-001-a-2690">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-2700">and</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-2710">not</w>
+     <w lemma="intelligible" pos="j" xml:id="A26426-001-a-2720">intelligible</w>
+     <w lemma="by" pos="acp" xml:id="A26426-001-a-2730">by</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2740">the</w>
+     <w lemma="reader" pos="n1" xml:id="A26426-001-a-2750">Reader</w>
+     <w lemma="a" pos="d" xml:id="A26426-001-a-2760">a</w>
+     <w lemma="fault" pos="n1" xml:id="A26426-001-a-2770">fault</w>
+     <w lemma="very" pos="av" xml:id="A26426-001-a-2780">very</w>
+     <w lemma="far" pos="av_j" reg="far" xml:id="A26426-001-a-2790">farr</w>
+     <w lemma="from" pos="acp" xml:id="A26426-001-a-2800">from</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-2810">his</w>
+     <w lemma="way" pos="n1" xml:id="A26426-001-a-2820">way</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-2830">in</w>
+     <w lemma="preach" pos="vvg" xml:id="A26426-001-a-2840">Preaching</w>
+     <pc unit="sentence" xml:id="A26426-001-a-2850">.</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-2860">And</w>
+     <w lemma="this" pos="d" xml:id="A26426-001-a-2870">this</w>
+     <w lemma="be" pos="vvz" xml:id="A26426-001-a-2880">is</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-2890">to</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-2900">be</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-2910">the</w>
+     <w lemma="less" pos="av-c_d" xml:id="A26426-001-a-2920">less</w>
+     <w lemma="wonder" pos="vvn" reg="wondered" xml:id="A26426-001-a-2930">wondred</w>
+     <pc xml:id="A26426-001-a-2940">,</pc>
+     <w lemma="at" pos="acp" xml:id="A26426-001-a-2950">at</w>
+     <w lemma="see" pos="vvg" xml:id="A26426-001-a-2960">seeing</w>
+     <pc xml:id="A26426-001-a-2970">,</pc>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-2980">that</w>
+     <w lemma="when" pos="crq" xml:id="A26426-001-a-2990">when</w>
+     <w lemma="he" pos="pns" xml:id="A26426-001-a-3000">he</w>
+     <w lemma="be" pos="vvd" xml:id="A26426-001-a-3010">was</w>
+     <w lemma="yet" pos="av" xml:id="A26426-001-a-3020">yet</w>
+     <w lemma="alive" pos="j" xml:id="A26426-001-a-3030">alive</w>
+     <pc xml:id="A26426-001-a-3040">,</pc>
+     <w lemma="some" pos="d" xml:id="A26426-001-a-3050">some</w>
+     <w lemma="make" pos="vvd" xml:id="A26426-001-a-3060">made</w>
+     <w lemma="bold" pos="j" xml:id="A26426-001-a-3070">bold</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-3080">to</w>
+     <w lemma="print" pos="vvi" xml:id="A26426-001-a-3090">Print</w>
+     <w lemma="some" pos="d" xml:id="A26426-001-a-3100">some</w>
+     <w lemma="sermon" pos="n2" xml:id="A26426-001-a-3110">Sermons</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3120">of</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-3130">his</w>
+     <w lemma="without" pos="acp" xml:id="A26426-001-a-3140">without</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-3150">his</w>
+     <w lemma="knowledge" pos="n1" xml:id="A26426-001-a-3160">knowledge</w>
+     <pc xml:id="A26426-001-a-3170">,</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-3180">which</w>
+     <w lemma="he" pos="pns" xml:id="A26426-001-a-3190">he</w>
+     <w lemma="will" pos="vmd" xml:id="A26426-001-a-3200">would</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-3210">not</w>
+     <w lemma="own" pos="vvi" xml:id="A26426-001-a-3220">own</w>
+     <pc xml:id="A26426-001-a-3230">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-3240">and</w>
+     <w lemma="therefore" pos="av" xml:id="A26426-001-a-3250">therefore</w>
+     <w lemma="be" pos="vvd" xml:id="A26426-001-a-3260">was</w>
+     <w lemma="necessitate" pos="vvi" xml:id="A26426-001-a-3270">necessitate</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-3280">to</w>
+     <w lemma="emit" pos="vvi" xml:id="A26426-001-a-3290">emit</w>
+     <w lemma="these" pos="d" xml:id="A26426-001-a-3300">these</w>
+     <hi xml:id="A26426-e90">
+      <w lemma="few" pos="d" xml:id="A26426-001-a-3310">few</w>
+      <w lemma="sermon" pos="n2" xml:id="A26426-001-a-3320">Sermons</w>
+     </hi>
+     <w lemma="himself" pos="px" xml:id="A26426-001-a-3330">himself</w>
+     <pc xml:id="A26426-001-a-3340">,</pc>
+     <w lemma="entitle" pos="vvn" reg="Entitled" xml:id="A26426-001-a-3350">Intituled</w>
+     <pc xml:id="A26426-001-a-3360">,</pc>
+     <hi xml:id="A26426-e100">
+      <w lemma="the" pos="d" xml:id="A26426-001-a-3370">The</w>
+      <w lemma="trial" pos="n1" reg="trial" xml:id="A26426-001-a-3380">tryall</w>
+      <w lemma="of" pos="acp" xml:id="A26426-001-a-3390">of</w>
+      <w lemma="a" pos="d" xml:id="A26426-001-a-3400">a</w>
+      <w lemma="save" pos="vvg" xml:id="A26426-001-a-3410">Saving</w>
+      <w lemma="interest" pos="n1" xml:id="A26426-001-a-3420">Interest</w>
+      <w lemma="in" pos="acp" xml:id="A26426-001-a-3430">in</w>
+      <w lemma="Christ" pos="n1-nn" xml:id="A26426-001-a-3440">Christ</w>
+      <pc xml:id="A26426-001-a-3450">,</pc>
+     </hi>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-3460">to</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-3470">the</w>
+     <w lemma="advantage" pos="n1" xml:id="A26426-001-a-3480">advantage</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3490">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-3500">the</w>
+     <w lemma="truth" pos="n1" xml:id="A26426-001-a-3510">truth</w>
+     <pc xml:id="A26426-001-a-3520">,</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-3530">which</w>
+     <w lemma="have" pos="vvd" xml:id="A26426-001-a-3540">had</w>
+     <w lemma="be" pos="vvn" xml:id="A26426-001-a-3550">been</w>
+     <w lemma="otherwise" pos="av" xml:id="A26426-001-a-3560">otherwise</w>
+     <w lemma="wrong" pos="vvn" xml:id="A26426-001-a-3570">wronged</w>
+     <pc unit="sentence" xml:id="A26426-001-a-3580">.</pc>
+    </p>
+    <p xml:id="A26426-e110">
+     <w lemma="it" pos="pn" xml:id="A26426-001-a-3590">IT</w>
+     <w lemma="be" pos="vvz" xml:id="A26426-001-a-3600">IS</w>
+     <w lemma="hope" pos="vvn" xml:id="A26426-001-a-3610">hoped</w>
+     <w lemma="therefore" pos="av" xml:id="A26426-001-a-3620">therefore</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-3630">that</w>
+     <w lemma="every" pos="d" xml:id="A26426-001-a-3640">every</w>
+     <w lemma="conscientious" pos="j" xml:id="A26426-001-a-3650">conscientious</w>
+     <w lemma="person" pos="n1" xml:id="A26426-001-a-3660">person</w>
+     <w lemma="will" pos="vmb" xml:id="A26426-001-a-3670">will</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-3680">be</w>
+     <w lemma="so" pos="av" xml:id="A26426-001-a-3690">so</w>
+     <w lemma="far" pos="av_j" reg="far" xml:id="A26426-001-a-3700">farr</w>
+     <w lemma="tender" pos="j" xml:id="A26426-001-a-3710">tender</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3720">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-3730">the</w>
+     <w lemma="truth" pos="n1" xml:id="A26426-001-a-3740">Truth</w>
+     <pc xml:id="A26426-001-a-3750">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-3760">and</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3770">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-3780">the</w>
+     <w lemma="fame" pos="n1" xml:id="A26426-001-a-3790">Fame</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3800">of</w>
+     <w lemma="such" pos="d" xml:id="A26426-001-a-3810">such</w>
+     <w lemma="a" pos="d" xml:id="A26426-001-a-3820">a</w>
+     <w lemma="faithful" pos="j" xml:id="A26426-001-a-3830">faithful</w>
+     <w lemma="minister" pos="n1" xml:id="A26426-001-a-3840">Minister</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-3850">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-3860">the</w>
+     <w lemma="gospel" pos="n1" xml:id="A26426-001-a-3870">Gospel</w>
+     <pc xml:id="A26426-001-a-3880">,</pc>
+     <w lemma="who" pos="crq" xml:id="A26426-001-a-3890">who</w>
+     <w lemma="be" pos="vvz" xml:id="A26426-001-a-3900">is</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-3910">not</w>
+     <w lemma="now" pos="av" xml:id="A26426-001-a-3920">now</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-3930">to</w>
+     <w lemma="speak" pos="vvi" xml:id="A26426-001-a-3940">speak</w>
+     <w lemma="for" pos="acp" xml:id="A26426-001-a-3950">for</w>
+     <w lemma="himself" pos="px" xml:id="A26426-001-a-3960">himself</w>
+     <pc xml:id="A26426-001-a-3970">,</pc>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-3980">that</w>
+     <w lemma="they" pos="pns" xml:id="A26426-001-a-3990">they</w>
+     <w lemma="will" pos="vmb" xml:id="A26426-001-a-4000">will</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-4010">not</w>
+     <w lemma="look" pos="vvi" xml:id="A26426-001-a-4020">look</w>
+     <w lemma="upon" pos="acp" xml:id="A26426-001-a-4030">upon</w>
+     <w lemma="these" pos="d" xml:id="A26426-001-a-4040">these</w>
+     <w lemma="print" pos="j_vn" xml:id="A26426-001-a-4050">Printed</w>
+     <hi xml:id="A26426-e120">
+      <w lemma="sermon" pos="n2" xml:id="A26426-001-a-4060">Sermons</w>
+     </hi>
+     <w lemma="as" pos="acp" xml:id="A26426-001-a-4070">as</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-4080">his</w>
+     <hi xml:id="A26426-e130">
+      <w lemma="work" pos="n2" reg="Works" xml:id="A26426-001-a-4090">Workes</w>
+      <pc xml:id="A26426-001-a-4100">,</pc>
+     </hi>
+     <w lemma="see" pos="vvg" reg="seeing" xml:id="A26426-001-a-4110">seing</w>
+     <w lemma="they" pos="pns" xml:id="A26426-001-a-4120">they</w>
+     <w lemma="have" pos="vvb" xml:id="A26426-001-a-4130">have</w>
+     <w lemma="be" pos="vvn" xml:id="A26426-001-a-4140">been</w>
+     <w lemma="put" pos="vvn" xml:id="A26426-001-a-4150">put</w>
+     <w lemma="forth" pos="av" xml:id="A26426-001-a-4160">forth</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-4170">to</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4180">the</w>
+     <w lemma="public" pos="j" reg="public" xml:id="A26426-001-a-4190">publict</w>
+     <w lemma="view" pos="n1" reg="view" xml:id="A26426-001-a-4200">viewe</w>
+     <pc xml:id="A26426-001-a-4210">,</pc>
+     <w lemma="without" pos="acp" xml:id="A26426-001-a-4220">without</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4230">the</w>
+     <w lemma="knowledge" pos="n1" xml:id="A26426-001-a-4240">knowledge</w>
+     <w lemma="or" pos="cc" xml:id="A26426-001-a-4250">or</w>
+     <w lemma="consent" pos="n1" xml:id="A26426-001-a-4260">consent</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4270">of</w>
+     <w lemma="any" pos="d" xml:id="A26426-001-a-4280">any</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4290">of</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-4300">his</w>
+     <w lemma="relation" pos="n2" xml:id="A26426-001-a-4310">Relations</w>
+     <w lemma="or" pos="cc" xml:id="A26426-001-a-4320">or</w>
+     <w lemma="brethren" pos="n2" xml:id="A26426-001-a-4330">Brethren</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4340">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4350">the</w>
+     <w lemma="ministry" pos="n1" xml:id="A26426-001-a-4360">Ministry</w>
+     <pc xml:id="A26426-001-a-4370">,</pc>
+     <w lemma="who" pos="crq" xml:id="A26426-001-a-4380">who</w>
+     <w lemma="be" pos="vvd" xml:id="A26426-001-a-4390">were</w>
+     <w lemma="particular" pos="av_j" xml:id="A26426-001-a-4400">particularly</w>
+     <w lemma="acquaint" pos="vvi" xml:id="A26426-001-a-4410">acquaint</w>
+     <w lemma="with" pos="acp" xml:id="A26426-001-a-4420">with</w>
+     <w lemma="he" pos="pno" xml:id="A26426-001-a-4430">him</w>
+     <pc xml:id="A26426-001-a-4440">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-4450">and</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-4460">his</w>
+     <w lemma="way" pos="n1" xml:id="A26426-001-a-4470">way</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4480">of</w>
+     <w lemma="doctrine" pos="n1" xml:id="A26426-001-a-4490">Doctrine</w>
+     <pc xml:id="A26426-001-a-4500">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-4510">and</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-4520">to</w>
+     <w lemma="who" pos="crq-ro" xml:id="A26426-001-a-4530">whom</w>
+     <pc xml:id="A26426-001-a-4540">,</pc>
+     <w lemma="if" pos="cs" xml:id="A26426-001-a-4550">if</w>
+     <w lemma="he" pos="pns" xml:id="A26426-001-a-4560">he</w>
+     <w lemma="have" pos="vvd" xml:id="A26426-001-a-4570">had</w>
+     <w lemma="mind" pos="vvn" xml:id="A26426-001-a-4580">minded</w>
+     <w lemma="any" pos="d" xml:id="A26426-001-a-4590">any</w>
+     <w lemma="thing" pos="n1" xml:id="A26426-001-a-4600">thing</w>
+     <w lemma="for" pos="acp" xml:id="A26426-001-a-4610">for</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4620">the</w>
+     <w lemma="press" pos="n1" xml:id="A26426-001-a-4630">Press</w>
+     <pc xml:id="A26426-001-a-4640">,</pc>
+     <w lemma="he" pos="pns" xml:id="A26426-001-a-4650">he</w>
+     <w lemma="will" pos="vmd" xml:id="A26426-001-a-4660">would</w>
+     <w lemma="have" pos="vvi" xml:id="A26426-001-a-4670">have</w>
+     <w lemma="leave" pos="vvn" xml:id="A26426-001-a-4680">left</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4690">the</w>
+     <w lemma="charge" pos="n1" xml:id="A26426-001-a-4700">charge</w>
+     <w lemma="or" pos="cc" xml:id="A26426-001-a-4710">or</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4720">the</w>
+     <w lemma="oversight" pos="n1" xml:id="A26426-001-a-4730">oversight</w>
+     <w lemma="thereof" pos="av" xml:id="A26426-001-a-4740">thereof</w>
+     <pc unit="sentence" xml:id="A26426-001-a-4750">.</pc>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4760">The</w>
+     <w lemma="world" pos="n1" xml:id="A26426-001-a-4770">World</w>
+     <w lemma="have" pos="vvz" xml:id="A26426-001-a-4780">hath</w>
+     <w lemma="already" pos="av" xml:id="A26426-001-a-4790">already</w>
+     <w lemma="have" pos="vvn" xml:id="A26426-001-a-4800">had</w>
+     <w lemma="a" pos="d" xml:id="A26426-001-a-4810">a</w>
+     <w lemma="taste" pos="n1" xml:id="A26426-001-a-4820">taste</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4830">of</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-4840">his</w>
+     <w lemma="gift" pos="n1" xml:id="A26426-001-a-4850">gift</w>
+     <pc xml:id="A26426-001-a-4860">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-4870">and</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-4880">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4890">the</w>
+     <w lemma="spirit" pos="n1" xml:id="A26426-001-a-4900">Spirit</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-4910">that</w>
+     <w lemma="appear" pos="vvd" xml:id="A26426-001-a-4920">appeared</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-4930">in</w>
+     <w lemma="he" pos="pno" xml:id="A26426-001-a-4940">him</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-4950">in</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-4960">the</w>
+     <w lemma="foresay" pos="j_vn" xml:id="A26426-001-a-4970">foresaid</w>
+     <w lemma="useful" pos="j" xml:id="A26426-001-a-4980">useful</w>
+     <w lemma="little" pos="j" reg="little" xml:id="A26426-001-a-4990">litle</w>
+     <w lemma="book" pos="n1" xml:id="A26426-001-a-5000">Book</w>
+     <w lemma="publish" pos="vvn" xml:id="A26426-001-a-5010">published</w>
+     <w lemma="by" pos="acp" xml:id="A26426-001-a-5020">by</w>
+     <w lemma="himself" pos="px" xml:id="A26426-001-a-5030">himself</w>
+     <pc xml:id="A26426-001-a-5040">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-5050">and</w>
+     <w lemma="bless" pos="vvn" xml:id="A26426-001-a-5060">blessed</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-5070">of</w>
+     <w lemma="God" pos="n1-nn" xml:id="A26426-001-a-5080">God</w>
+     <w lemma="to" pos="acp" xml:id="A26426-001-a-5090">to</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-5100">the</w>
+     <w lemma="edification" pos="n1" xml:id="A26426-001-a-5110">Edification</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-5120">of</w>
+     <w lemma="many" pos="d" xml:id="A26426-001-a-5130">many</w>
+     <pc xml:id="A26426-001-a-5140">,</pc>
+     <w lemma="which" pos="crq" xml:id="A26426-001-a-5150">which</w>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-5160">I</w>
+     <w lemma="hope" pos="vvb" xml:id="A26426-001-a-5170">hope</w>
+     <w lemma="will" pos="vmb" xml:id="A26426-001-a-5180">will</w>
+     <w lemma="easy" pos="av_j" xml:id="A26426-001-a-5190">easily</w>
+     <w lemma="move" pos="vvi" xml:id="A26426-001-a-5200">move</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-5210">the</w>
+     <w lemma="observe" pos="n1_vg" xml:id="A26426-001-a-5220">observing</w>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-5230">and</w>
+     <w lemma="judicious" pos="j" xml:id="A26426-001-a-5240">Judicious</w>
+     <w lemma="reader" pos="n1" xml:id="A26426-001-a-5250">Reader</w>
+     <w lemma="to" pos="to" xml:id="A26426-001-a-5260">to</w>
+     <w lemma="have" pos="vvi" xml:id="A26426-001-a-5270">have</w>
+     <w lemma="these" pos="d" xml:id="A26426-001-a-5280">these</w>
+     <w lemma="late" pos="av_j" xml:id="A26426-001-a-5290">lately</w>
+     <w lemma="print" pos="vvn" xml:id="A26426-001-a-5300">Printed</w>
+     <w lemma="under" pos="acp" xml:id="A26426-001-a-5310">under</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-5320">his</w>
+     <w lemma="name" pos="n1" xml:id="A26426-001-a-5330">name</w>
+     <w lemma="in" pos="acp" xml:id="A26426-001-a-5340">in</w>
+     <w lemma="suspicion" pos="n1" reg="suspicion" xml:id="A26426-001-a-5350">suspition</w>
+     <pc unit="sentence" xml:id="A26426-001-a-5360">.</pc>
+     <w lemma="i" pos="pns" xml:id="A26426-001-a-5370">I</w>
+     <w lemma="shall" pos="vmb" xml:id="A26426-001-a-5380">shall</w>
+     <w lemma="add" pos="vvi" xml:id="A26426-001-a-5390">add</w>
+     <w lemma="no" pos="av-x_d" xml:id="A26426-001-a-5400">no</w>
+     <w lemma="more" pos="av-c_d" xml:id="A26426-001-a-5410">more</w>
+     <pc xml:id="A26426-001-a-5420">,</pc>
+     <w lemma="but" pos="acp" xml:id="A26426-001-a-5430">but</w>
+     <w lemma="for" pos="acp" xml:id="A26426-001-a-5440">for</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-5450">the</w>
+     <w lemma="future" pos="j" xml:id="A26426-001-a-5460">future</w>
+     <w lemma="entreat" pos="vvi" reg="entreat" xml:id="A26426-001-a-5470">intreat</w>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-5480">that</w>
+     <w lemma="nothing" pos="pi-x" xml:id="A26426-001-a-5490">nothing</w>
+     <w lemma="bear" pos="vvg" xml:id="A26426-001-a-5500">bearing</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-5510">his</w>
+     <w lemma="name" pos="n1" xml:id="A26426-001-a-5520">name</w>
+     <w lemma="may" pos="vmb" xml:id="A26426-001-a-5530">may</w>
+     <w lemma="be" pos="vvi" xml:id="A26426-001-a-5540">be</w>
+     <w lemma="look" pos="vvn" xml:id="A26426-001-a-5550">looked</w>
+     <w lemma="upon" pos="acp" xml:id="A26426-001-a-5560">upon</w>
+     <w lemma="as" pos="acp" xml:id="A26426-001-a-5570">as</w>
+     <w lemma="he" pos="png" xml:id="A26426-001-a-5580">his</w>
+     <pc xml:id="A26426-001-a-5590">,</pc>
+     <w lemma="that" pos="cs" xml:id="A26426-001-a-5600">that</w>
+     <w lemma="be" pos="vvz" xml:id="A26426-001-a-5610">is</w>
+     <w lemma="not" pos="xx" xml:id="A26426-001-a-5620">not</w>
+     <w lemma="attest" pos="vvn" xml:id="A26426-001-a-5630">attested</w>
+     <w lemma="by" pos="acp" xml:id="A26426-001-a-5640">by</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-5650">his</w>
+     <w lemma="near" pos="j-s" xml:id="A26426-001-a-5660">nearest</w>
+     <w lemma="relation" pos="n2" xml:id="A26426-001-a-5670">Relations</w>
+     <pc xml:id="A26426-001-a-5680">,</pc>
+     <w lemma="and" pos="cc" xml:id="A26426-001-a-5690">and</w>
+     <w lemma="his" pos="po" xml:id="A26426-001-a-5700">his</w>
+     <w lemma="brethren" pos="n2" xml:id="A26426-001-a-5710">Brethren</w>
+     <w lemma="of" pos="acp" xml:id="A26426-001-a-5720">of</w>
+     <w lemma="the" pos="d" xml:id="A26426-001-a-5730">the</w>
+     <w lemma="ministry" pos="n1" reg="Ministry" xml:id="A26426-001-a-5740">Ministrie</w>
+     <pc unit="sentence" xml:id="A26426-001-a-5750">.</pc>
+    </p>
+    <closer xml:id="A26426-e140">
+     <signed xml:id="A26426-e150">
+      <w lemma="i" pos="pns" xml:id="A26426-001-a-5760">I</w>
+      <w lemma="be" pos="vvm" xml:id="A26426-001-a-5770">am</w>
+      <w lemma="thy" pos="po" xml:id="A26426-001-a-5780">Thy</w>
+      <w lemma="wellwisher" pos="j" reg="wellwisher" xml:id="A26426-001-a-5790">well-wisher</w>
+      <hi xml:id="A26426-e160">
+       <w lemma="a." pos="ab" xml:id="A26426-001-a-5800">A.</w>
+       <w lemma="c." pos="ab" xml:id="A26426-001-a-5810">C.</w>
+       <pc unit="sentence" xml:id="A26426-001-a-5820"/>
+      </hi>
+     </signed>
+    </closer>
+   </div>
+  </body>
+ </text>
+</TEI>

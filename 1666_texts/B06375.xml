@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://schemata.earlyprint.org/schemata/tei_earlyprint.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="B06375">
+ <teiHeader>
+  <fileDesc>
+   <titleStmt>
+    <title>Upon the death of the truly valiant and magnanimous Sr. Christoph. Minns wounded at sea.</title>
+   </titleStmt>
+   <editionStmt>
+    <edition>This text is an enriched version of the TCP digital transcription B06375 of text R185891 in the <ref target="http;//estc.bl.uk">English Short Title Catalog</ref> (Wing U109AA). Textual changes  and metadata enrichments aim at making the                             text more  computationally tractable, easier to read, and suitable for network-based collaborative                              curation by amateur and professional end users from many walks of life.  The text has been tokenized and linguistically annotated with <ref target="http://morphadorner.northwestern.edu/morphadorner/">MorphAdorner</ref>. The annotation includes standard spellings that support the display of a text in                             a standardized format that preserves archaic forms ('loveth', 'seekest').                              Textual changes aim at restoring the text the author or stationer meant to publish.</edition>
+    <respStmt>
+     <resp>This text has not been fully proofread</resp>
+     <name/>
+    </respStmt>
+   </editionStmt>
+   <extent>Approx. 3 KB of XML-encoded text transcribed from 1 1-bit group-IV TIFF page image.</extent>
+   <publicationStmt>
+    <publisher>EarlyPrint Project</publisher>
+    <pubPlace>Evanston,IL, Notre Dame, IN, St. Louis, MO</pubPlace>
+    <date>2018</date>
+    <idno type="DLPS">B06375</idno>
+    <idno type="STC">Wing U109AA</idno>
+    <idno type="STC">ESTC R185891</idno>
+    <idno type="EEBO-CITATION">52529345</idno>
+    <idno type="OCLC">ocm 52529345</idno>
+    <idno type="VID">179186</idno>
+    <availability>
+     <p>
+            This keyboarded and encoded edition of the work described above is co-owned by the institutions providing financial support to the Early English Books Online Text Creation Partnership. This Phase I text is available for reuse, according to the terms of
+            <ref target="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0 1.0 Universal</ref>
+            . The text can be copied, modified, distributed and performed, even for commercial purposes, all without asking permission.
+          </p>
+    </availability>
+   </publicationStmt>
+   <seriesStmt>
+    <title>Early English books online.</title>
+   </seriesStmt>
+   <notesStmt>
+    <note>(EEBO-TCP ; phase 1, no. B06375)</note>
+    <note>Transcribed from: (Early English Books Online ; image set 179186)</note>
+    <note>Images scanned from microfilm: (Early English Books, 1641-1700 ; 2779:21)</note>
+   </notesStmt>
+   <sourceDesc>
+    <biblFull>
+     <titleStmt>
+      <title>Upon the death of the truly valiant and magnanimous Sr. Christoph. Minns wounded at sea.</title>
+     </titleStmt>
+     <extent>1 sheet ([1] p.)</extent>
+     <publicationStmt>
+      <publisher>Printed for Joseph Godwin,</publisher>
+      <pubPlace>Oxford :</pubPlace>
+      <date>1666</date>
+     </publicationStmt>
+     <notesStmt>
+      <note>In verse.</note>
+      <note>Caption title.</note>
+      <note>Text within heavy black mourning border.</note>
+      <note>Ms. note on text: "Sprung from [illegible] War-wick."</note>
+      <note>Reproduction of the original in the Bodleian Library.</note>
+     </notesStmt>
+    </biblFull>
+   </sourceDesc>
+  </fileDesc>
+  <profileDesc>
+   <langUsage>
+    <language ident="eng">eng</language>
+   </langUsage>
+   <textClass>
+    <keywords scheme="http://authorities.loc.gov/">
+     <term>Myngs, Christopher, -- Sir, 1625-1666 -- Death and burial -- Poetry.</term>
+     <term>Anglo-Dutch War, 1664-1667 -- Poetry.</term>
+     <term>Elegiac poetry, English -- 17th century.</term>
+     <term>Broadsides -- England -- 17th century.</term>
+    </keywords>
+   </textClass>
+  </profileDesc>
+  <xenoData>
+   <ep:epHeader xmlns:ep="http://earlyprint.org/ns/1.0">
+    <ep:corpus>eebo</ep:corpus>
+    <ep:title>Upon the death of the truly valiant and magnanimous Sr Christoph: Minns wounded at sea.</ep:title>
+    <ep:author>[no entry]</ep:author>
+    <ep:publicationYear>1666</ep:publicationYear>
+    <ep:creationYear/>
+    <ep:curator>
+     <ep:name/>
+    </ep:curator>
+    <ep:pageCount>1</ep:pageCount>
+    <ep:wordCount>404</ep:wordCount>
+    <ep:defectiveTokenCount>1</ep:defectiveTokenCount>
+    <ep:untranscribedForeignCount>0</ep:untranscribedForeignCount>
+    <ep:untranscribedMathCount>0</ep:untranscribedMathCount>
+    <ep:untranscribedMusicCount>0</ep:untranscribedMusicCount>
+    <ep:missingChunkCount>0</ep:missingChunkCount>
+    <ep:missingPagesCount>0</ep:missingPagesCount>
+    <ep:defectRate>24.75</ep:defectRate>
+    <ep:finalGrade>C</ep:finalGrade>
+    <ep:defectRangePerGrade> The  rate of 24.75 defects per 10,000 words puts this text in the C category of texts with between 10 and 35 defects per 10,000 words.</ep:defectRangePerGrade>
+   </ep:epHeader>
+  </xenoData>
+  <revisionDesc>
+   <change><date>2008-02</date><label>TCP</label>
+        Assigned for keying and markup
+      </change>
+   <change><date>2008-06</date><label>SPi Global</label>
+        Keyed and coded from ProQuest page images
+      </change>
+   <change><date>2008-07</date><label>Mona Logarbo</label>
+        Sampled and proofread
+      </change>
+   <change><date>2008-07</date><label>Mona Logarbo</label>
+        Text and markup reviewed and edited
+      </change>
+   <change><date>2008-09</date><label>pfs</label>
+        Batch review (QC) and XML conversion
+      </change>
+  </revisionDesc>
+ </teiHeader>
+ <text xml:id="B06375-t">
+  <body xml:id="B06375-e0">
+   <div type="poem" xml:id="B06375-e10">
+    <pb facs="tcp:179186:1" rendition="simple:additions" xml:id="B06375-001-a"/>
+    <head xml:id="B06375-e20">
+     <w lemma="upon" pos="acp" xml:id="B06375-001-a-0010">Upon</w>
+     <w lemma="the" pos="d" xml:id="B06375-001-a-0020">the</w>
+     <w lemma="death" pos="n1" xml:id="B06375-001-a-0030">Death</w>
+     <w lemma="of" pos="acp" xml:id="B06375-001-a-0040">of</w>
+     <w lemma="the" pos="d" xml:id="B06375-001-a-0050">the</w>
+     <w lemma="true" pos="av_j" xml:id="B06375-001-a-0060">truly</w>
+     <w lemma="valiant" pos="j" xml:id="B06375-001-a-0070">Valiant</w>
+     <w lemma="and" pos="cc" xml:id="B06375-001-a-0080">and</w>
+     <w lemma="magnanimous" pos="j" xml:id="B06375-001-a-0090">Magnanimous</w>
+     <w lemma="SR" pos="ab" rendition="sup_right,1" xml:id="B06375-001-a-0100">SR</w>
+     <w lemma="Christoph" pos="n1-nn" xml:id="B06375-001-a-0120">CHRISTOPH</w>
+     <pc xml:id="B06375-001-a-0130">:</pc>
+     <w lemma="MINNS" pos="n1-nn" xml:id="B06375-001-a-0140">MINNS</w>
+     <w lemma="wound" pos="vvn" xml:id="B06375-001-a-0150">WOUNDED</w>
+     <w lemma="at" pos="acp" xml:id="B06375-001-a-0160">AT</w>
+     <w lemma="sea." pos="n1" xml:id="B06375-001-a-0170">SEA</w>
+     <pc unit="sentence" xml:id="B06375-001-a-0171">.</pc>
+     <pc unit="sentence" xml:id="B06375-001-a-0180"/>
+    </head>
+    <lg xml:id="B06375-e40">
+     <l xml:id="B06375-e50">
+      <w lemma="time" pos="n1" xml:id="B06375-001-a-0190">TIME</w>
+      <w lemma="break" pos="vvb" xml:id="B06375-001-a-0200">break</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-0210">thy</w>
+      <w lemma="glass" pos="n1" xml:id="B06375-001-a-0220">Glass</w>
+      <pc unit="sentence" xml:id="B06375-001-a-0230">!</pc>
+      <w lemma="why" pos="crq-q" xml:id="B06375-001-a-0240">Why</w>
+      <w lemma="shall" pos="vmd" xml:id="B06375-001-a-0250">should</w>
+      <w lemma="we" pos="pns" xml:id="B06375-001-a-0260">we</w>
+      <w lemma="long" pos="av-c_j" xml:id="B06375-001-a-0270">longer</w>
+      <w lemma="stay" pos="vvi" xml:id="B06375-001-a-0280">stay</w>
+      <pc unit="sentence" xml:id="B06375-001-a-0290">!</pc>
+     </l>
+     <l xml:id="B06375-e60">
+      <w lemma="beat" pos="vvb" xml:id="B06375-001-a-0300">Beat</w>
+      <w lemma="a" pos="d" xml:id="B06375-001-a-0310">a</w>
+      <w lemma="dead" pos="j" xml:id="B06375-001-a-0320">Dead</w>
+      <w lemma="march" pos="n1" xml:id="B06375-001-a-0330">March</w>
+      <pc xml:id="B06375-001-a-0340">,</pc>
+      <w lemma="our" pos="po" xml:id="B06375-001-a-0350">our</w>
+      <w lemma="captain" pos="n1" xml:id="B06375-001-a-0360">Captain</w>
+      <w lemma="lead" pos="vvz" xml:id="B06375-001-a-0370">leads</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0380">the</w>
+      <w lemma="way" pos="n1" xml:id="B06375-001-a-0390">Way</w>
+      <pc unit="sentence" xml:id="B06375-001-a-0400">.</pc>
+     </l>
+     <l xml:id="B06375-e70">
+      <w lemma="he" pos="pns" xml:id="B06375-001-a-0410">He</w>
+      <w lemma="who" pos="crq-q" xml:id="B06375-001-a-0420">who</w>
+      <w lemma="so" pos="av" xml:id="B06375-001-a-0430">so</w>
+      <w lemma="oft" pos="av" xml:id="B06375-001-a-0440">oft</w>
+      <w lemma="from" pos="acp" xml:id="B06375-001-a-0450">from</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0460">the</w>
+      <hi xml:id="B06375-e80">
+       <w lemma="Batavian" pos="n1-nn" xml:id="B06375-001-a-0470">Batavian</w>
+      </hi>
+      <w lemma="brow" pos="n1" xml:id="B06375-001-a-0480">Brow</w>
+     </l>
+     <l xml:id="B06375-e90">
+      <w lemma="have" pos="vvd" xml:id="B06375-001-a-0490">Had</w>
+      <w lemma="snatch" pos="vvn" reg="snatched" xml:id="B06375-001-a-0500">snatch'd</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0510">the</w>
+      <w lemma="conquer" pos="j_vn" reg="conquered" xml:id="B06375-001-a-0520">conquer'd</w>
+      <w lemma="palm" pos="n1" xml:id="B06375-001-a-0530">Palm</w>
+      <w lemma="away" pos="av" xml:id="B06375-001-a-0540">away</w>
+      <pc xml:id="B06375-001-a-0550">,</pc>
+      <w lemma="see" pos="vvb" xml:id="B06375-001-a-0560">see</w>
+      <w lemma="how" pos="crq" xml:id="B06375-001-a-0570">how</w>
+     </l>
+     <l xml:id="B06375-e100">
+      <w lemma="he" pos="pns" xml:id="B06375-001-a-0580">He</w>
+      <w lemma="lay" pos="vvz" reg="lays" xml:id="B06375-001-a-0590">layes</w>
+      <pc xml:id="B06375-001-a-0600">,</pc>
+      <pc xml:id="B06375-001-a-0610">—</pc>
+      <w lemma="a" pos="d" xml:id="B06375-001-a-0620">a</w>
+      <w lemma="piece" pos="n1" xml:id="B06375-001-a-0630">piece</w>
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-0640">of</w>
+      <w lemma="earth" pos="n1" xml:id="B06375-001-a-0650">Earth</w>
+      <pc xml:id="B06375-001-a-0660">;</pc>
+      <w lemma="unfit" pos="j" xml:id="B06375-001-a-0670">unfit</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-0680">to</w>
+      <w lemma="wield" pos="vvi" reg="wield" xml:id="B06375-001-a-0690">weild</w>
+     </l>
+     <l xml:id="B06375-e110">
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0700">The</w>
+      <w lemma="warlike" pos="j" xml:id="B06375-001-a-0710">Warlike</w>
+      <w lemma="weapon" pos="n1" xml:id="B06375-001-a-0720">Weapon</w>
+      <w lemma="or" pos="cc" xml:id="B06375-001-a-0730">or</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-0740">to</w>
+      <w lemma="hug" pos="vvi" xml:id="B06375-001-a-0750">hug</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0760">the</w>
+      <w lemma="shield" pos="n1" xml:id="B06375-001-a-0770">Shield</w>
+      <pc unit="sentence" xml:id="B06375-001-a-0780">!</pc>
+     </l>
+    </lg>
+    <lg xml:id="B06375-e120">
+     <l xml:id="B06375-e130">
+      <w lemma="no" pos="av-x_d" xml:id="B06375-001-a-0790">No</w>
+      <w lemma="soon" pos="av-c" xml:id="B06375-001-a-0800">sooner</w>
+      <w lemma="have" pos="vvd" xml:id="B06375-001-a-0810">had</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-0820">the</w>
+      <w lemma="black-mouthed" pos="j" reg="black-mouthed" xml:id="B06375-001-a-0830">black-mouth'd</w>
+      <w lemma="ordinance" pos="n1" reg="Ordinance" xml:id="B06375-001-a-0840">Ord'nance</w>
+     </l>
+     <l xml:id="B06375-e140">
+      <w lemma="with" pos="acp" xml:id="B06375-001-a-0850">With</w>
+      <w lemma="hellbred" pos="j" reg="Hellbred" xml:id="B06375-001-a-0860">Hell-bred</w>
+      <w lemma="flame" pos="n2" xml:id="B06375-001-a-0870">Flames</w>
+      <pc xml:id="B06375-001-a-0880">,</pc>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-0890">and</w>
+      <w lemma="big" pos="j" xml:id="B06375-001-a-0900">big</w>
+      <w lemma="with" pos="acp" xml:id="B06375-001-a-0910">with</w>
+      <hi xml:id="B06375-e150">
+       <w lemma="flemish" pos="j-nn" reg="Flemish" xml:id="B06375-001-a-0920">Flemmish</w>
+      </hi>
+      <pc join="right" xml:id="B06375-001-a-0930">(</pc>
+      <w lemma="hot" pos="j" xml:id="B06375-001-a-0940">hot</w>
+      <w lemma="shot" pos="n1" xml:id="B06375-001-a-0950">shot</w>
+      <pc xml:id="B06375-001-a-0960">)</pc>
+     </l>
+     <l xml:id="B06375-e160">
+      <w lemma="spit" pos="vvb" xml:id="B06375-001-a-0970">Spit</w>
+      <w lemma="forth" pos="av" xml:id="B06375-001-a-0980">forth</w>
+      <w lemma="its" pos="po" xml:id="B06375-001-a-0990">its</w>
+      <w lemma="Venim'd" pos="n1-nn" xml:id="B06375-001-a-1000">Venim'd</w>
+      <w lemma="blast" pos="n2" xml:id="B06375-001-a-1010">blasts</w>
+      <pc xml:id="B06375-001-a-1020">,</pc>
+      <w lemma="enough" pos="av_d" xml:id="B06375-001-a-1030">enough</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1040">to</w>
+      <w lemma="make" pos="vvi" xml:id="B06375-001-a-1050">make</w>
+     </l>
+     <l xml:id="B06375-e170">
+      <w lemma="the" pos="d" xml:id="B06375-001-a-1060">The</w>
+      <w lemma="well" pos="av" xml:id="B06375-001-a-1070">well</w>
+      <w lemma="compact" pos="j_vn" xml:id="B06375-001-a-1080">compacted</w>
+      <w lemma="universe" pos="n1" xml:id="B06375-001-a-1090">Universe</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1100">to</w>
+      <w lemma="shake" pos="vvi" xml:id="B06375-001-a-1110">shake</w>
+      <pc xml:id="B06375-001-a-1120">,</pc>
+     </l>
+     <l xml:id="B06375-e180">
+      <w lemma="but" pos="acp" xml:id="B06375-001-a-1130">But</w>
+      <w lemma="straight" pos="av_j" reg="strait" xml:id="B06375-001-a-1140">straight</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-1150">the</w>
+      <w lemma="wave" pos="n2" xml:id="B06375-001-a-1160">Waves</w>
+      <pc join="right" xml:id="B06375-001-a-1170">(</pc>
+      <w lemma="suppose" pos="vvg" xml:id="B06375-001-a-1180">supposing</w>
+      <w lemma="thou" pos="pns" xml:id="B06375-001-a-1190">thou</w>
+      <w lemma="be" pos="vvd2" xml:id="B06375-001-a-1200">wert</w>
+      <w lemma="dead" pos="j" xml:id="B06375-001-a-1210">dead</w>
+      <pc xml:id="B06375-001-a-1220">)</pc>
+     </l>
+     <l xml:id="B06375-e190">
+      <w lemma="leap" pos="vvd" xml:id="B06375-001-a-1230">Leapt</w>
+      <w lemma="up" pos="acp-av" xml:id="B06375-001-a-1240">up</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1250">to</w>
+      <w lemma="catch" pos="vvi" xml:id="B06375-001-a-1260">catch</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-1270">the</w>
+      <hi xml:id="B06375-e200">
+       <w lemma="airy" pos="j" reg="Airy" xml:id="B06375-001-a-1280">Airie</w>
+       <w lemma="substance" pos="n1" xml:id="B06375-001-a-1290">Substance</w>
+      </hi>
+      <w lemma="flee" pos="vvn" xml:id="B06375-001-a-1300">fled</w>
+      <pc xml:id="B06375-001-a-1310">;</pc>
+     </l>
+     <l xml:id="B06375-e210">
+      <w lemma="the" pos="d" xml:id="B06375-001-a-1320">Th'</w>
+      <w lemma="expect" pos="j_vg" xml:id="B06375-001-a-1330">expecting</w>
+      <hi xml:id="B06375-e220">
+       <w lemma="ocean" pos="n1" xml:id="B06375-001-a-1340">Ocean</w>
+       <pc xml:id="B06375-001-a-1350">,</pc>
+      </hi>
+      <w lemma="wait" pos="vvz" xml:id="B06375-001-a-1360">waits</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1370">to</w>
+      <w lemma="have" pos="vvi" xml:id="B06375-001-a-1380">have</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-1390">thy</w>
+      <w lemma="tomb" pos="n1" xml:id="B06375-001-a-1400">Tomb</w>
+     </l>
+     <l xml:id="B06375-e230">
+      <w lemma="a" pos="d" xml:id="B06375-001-a-1410">An</w>
+      <w lemma="everlasting" pos="j" xml:id="B06375-001-a-1420">Everlasting</w>
+      <w lemma="trophy" pos="n1" reg="Trophy" xml:id="B06375-001-a-1430">Trophie</w>
+      <pc xml:id="B06375-001-a-1440">,</pc>
+      <w lemma="in" pos="acp" xml:id="B06375-001-a-1450">in</w>
+      <w lemma="her" pos="po" xml:id="B06375-001-a-1460">her</w>
+      <w lemma="womb" pos="n1" xml:id="B06375-001-a-1470">Womb</w>
+      <pc xml:id="B06375-001-a-1480">;</pc>
+     </l>
+     <l xml:id="B06375-e240">
+      <w lemma="that" pos="cs" xml:id="B06375-001-a-1490">That</w>
+      <w lemma="jewel" pos="n2" xml:id="B06375-001-a-1500">Jewels</w>
+      <w lemma="may" pos="vmd" xml:id="B06375-001-a-1510">might</w>
+      <w lemma="invest" pos="vvi" xml:id="B06375-001-a-1520">invest</w>
+      <w lemma="thou" pos="pno" xml:id="B06375-001-a-1530">thee</w>
+      <pc xml:id="B06375-001-a-1540">,</pc>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-1550">and</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-1560">thy</w>
+      <hi xml:id="B06375-e250">
+       <w lemma="bone" pos="n2" xml:id="B06375-001-a-1570">Bones</w>
+      </hi>
+     </l>
+     <l xml:id="B06375-e260">
+      <w lemma="be" pos="vvb" xml:id="B06375-001-a-1580">Be</w>
+      <w lemma="metamorphize" pos="vvn" reg="Metamorphized" xml:id="B06375-001-a-1590">Metamorphiz'd</w>
+      <w lemma="into" pos="acp" xml:id="B06375-001-a-1600">into</w>
+      <w lemma="precious" pos="j" xml:id="B06375-001-a-1610">precious</w>
+      <w lemma="stone" pos="n2" xml:id="B06375-001-a-1620">Stones</w>
+      <pc xml:id="B06375-001-a-1630">;</pc>
+     </l>
+     <l xml:id="B06375-e270">
+      <w lemma="each" pos="d" xml:id="B06375-001-a-1640">Each</w>
+      <w lemma="drop" pos="n1" xml:id="B06375-001-a-1650">drop</w>
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-1660">of</w>
+      <hi xml:id="B06375-e280">
+       <w lemma="blood" pos="n1" xml:id="B06375-001-a-1670">Blood</w>
+      </hi>
+      <w lemma="shall" pos="vmd" xml:id="B06375-001-a-1680">should</w>
+      <w lemma="into" pos="acp" xml:id="B06375-001-a-1690">into</w>
+      <w lemma="ruby" pos="n2" xml:id="B06375-001-a-1700">Rubies</w>
+      <w lemma="turn" pos="vvi" xml:id="B06375-001-a-1710">turn</w>
+      <pc xml:id="B06375-001-a-1720">,</pc>
+     </l>
+     <l xml:id="B06375-e290">
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-1730">And</w>
+      <w lemma="serve" pos="vvi" xml:id="B06375-001-a-1740">serve</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1750">to</w>
+      <w lemma="deck" pos="vvi" xml:id="B06375-001-a-1760">deck</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-1770">thy</w>
+      <w lemma="well" pos="av" xml:id="B06375-001-a-1780">well</w>
+      <w lemma="enamel" pos="j_vn" reg="enamelled" xml:id="B06375-001-a-1790">enamel'd</w>
+      <w lemma="Urn." pos="n1-nn" xml:id="B06375-001-a-1800">Urn.</w>
+     </l>
+     <l xml:id="B06375-e300">
+      <w lemma="whilst" pos="cs" xml:id="B06375-001-a-1810">Whilst</w>
+      <w lemma="that" pos="cs" xml:id="B06375-001-a-1820">that</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-1830">the</w>
+      <w lemma="sympathize" pos="vvg" reg="Sympathising" xml:id="B06375-001-a-1840">Sympathizing</w>
+      <hi xml:id="B06375-e310">
+       <w lemma="dolphin" pos="n2" xml:id="B06375-001-a-1850">Dolphins</w>
+      </hi>
+      <w lemma="stay" pos="vvb" xml:id="B06375-001-a-1860">stay</w>
+     </l>
+     <l xml:id="B06375-e320">
+      <w lemma="long" pos="vvg" xml:id="B06375-001-a-1870">Longing</w>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-1880">to</w>
+      <w lemma="bear" pos="vvi" xml:id="B06375-001-a-1890">bear</w>
+      <w lemma="their" pos="po" xml:id="B06375-001-a-1900">their</w>
+      <w lemma="welcome" pos="j_vn" reg="welcomed" xml:id="B06375-001-a-1910">welcom'd</w>
+      <hi xml:id="B06375-e330">
+       <w lemma="guest" pos="n1" xml:id="B06375-001-a-1920">Guest</w>
+      </hi>
+      <w lemma="away" pos="av" xml:id="B06375-001-a-1930">away</w>
+      <pc unit="sentence" xml:id="B06375-001-a-1940">.</pc>
+     </l>
+     <l xml:id="B06375-e340">
+      <w lemma="but" pos="acp" xml:id="B06375-001-a-1950">But</w>
+      <w lemma="least" pos="d-s" xml:id="B06375-001-a-1960">least</w>
+      <w lemma="that" pos="d" xml:id="B06375-001-a-1970">that</w>
+      <hi xml:id="B06375-e350">
+       <w lemma="corpse" pos="n1" reg="Corpse" xml:id="B06375-001-a-1980">Corps</w>
+      </hi>
+      <w lemma="that" pos="cs" xml:id="B06375-001-a-1990">that</w>
+      <w lemma="do" pos="vvd" xml:id="B06375-001-a-2000">did</w>
+      <w lemma="so" pos="av" xml:id="B06375-001-a-2010">so</w>
+      <hi xml:id="B06375-e360">
+       <w lemma="brave" pos="av_j" xml:id="B06375-001-a-2020">Bravely</w>
+       <w lemma="Diego" pos="n1-nn" reg="Diego" xml:id="B06375-001-a-2030">Die.</w>
+      </hi>
+     </l>
+     <l xml:id="B06375-e370">
+      <w lemma="shall" pos="vmd" xml:id="B06375-001-a-2040">Should</w>
+      <w lemma="underneath" pos="acp" xml:id="B06375-001-a-2050">underneath</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-2060">the</w>
+      <w lemma="wave" pos="n2" xml:id="B06375-001-a-2070">Waves</w>
+      <w lemma="forget" pos="vvn" xml:id="B06375-001-a-2080">forgotten</w>
+      <w lemma="lie" pos="vvi" xml:id="B06375-001-a-2090">lie</w>
+      <pc xml:id="B06375-001-a-2100">,</pc>
+     </l>
+     <l xml:id="B06375-e380">
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-2110">And</w>
+      <w lemma="find" pos="vvb" xml:id="B06375-001-a-2120">find</w>
+      <w lemma="no" pos="d-x" xml:id="B06375-001-a-2130">no</w>
+      <w lemma="other" pos="pi_d" xml:id="B06375-001-a-2140">other</w>
+      <w lemma="funeral" pos="n2" xml:id="B06375-001-a-2150">Funerals</w>
+      <pc xml:id="B06375-001-a-2160">,</pc>
+      <w lemma="no" pos="d-x" xml:id="B06375-001-a-2170">no</w>
+      <w lemma="grave" pos="j" xml:id="B06375-001-a-2180">Grave</w>
+     </l>
+     <l xml:id="B06375-e390">
+      <w lemma="but" pos="acp" xml:id="B06375-001-a-2190">But</w>
+      <w lemma="what" pos="crq" xml:id="B06375-001-a-2200">what</w>
+      <w lemma="be" pos="vvd" xml:id="B06375-001-a-2210">was</w>
+      <w lemma="then" pos="av" xml:id="B06375-001-a-2220">then</w>
+      <w lemma="bestow" pos="vvn" reg="bestowed" xml:id="B06375-001-a-2230">bestow'd</w>
+      <w lemma="on" pos="acp" xml:id="B06375-001-a-2240">on</w>
+      <w lemma="every" pos="d" xml:id="B06375-001-a-2250">every</w>
+      <w lemma="slave" pos="n1" xml:id="B06375-001-a-2260">Slave</w>
+      <pc xml:id="B06375-001-a-2270">,</pc>
+     </l>
+     <l xml:id="B06375-e400">
+      <w lemma="in" pos="acp" xml:id="B06375-001-a-2280">In</w>
+      <w lemma="pity" pos="n1" reg="pity" xml:id="B06375-001-a-2290">pitty</w>
+      <w lemma="gentle" pos="j-c" xml:id="B06375-001-a-2300">Gentler</w>
+      <w lemma="fate" pos="n1" xml:id="B06375-001-a-2310">Fate</w>
+      <w lemma="to" pos="acp" xml:id="B06375-001-a-2320">to</w>
+      <w lemma="we" pos="pno" xml:id="B06375-001-a-2330">us</w>
+      <w lemma="have" pos="vvz" xml:id="B06375-001-a-2340">has</w>
+      <w lemma="give" pos="vvn" xml:id="B06375-001-a-2350">given</w>
+     </l>
+     <l xml:id="B06375-e410">
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2360">Thy</w>
+      <hi xml:id="B06375-e420">
+       <w lemma="body" pos="n1" xml:id="B06375-001-a-2370">Body</w>
+       <pc xml:id="B06375-001-a-2380">,</pc>
+      </hi>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-2390">and</w>
+      <w lemma="return" pos="vvn" reg="returned" xml:id="B06375-001-a-2400">return'd</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2410">thy</w>
+      <hi xml:id="B06375-e430">
+       <w lemma="soul" pos="n1" xml:id="B06375-001-a-2420">Soul</w>
+      </hi>
+      <w lemma="to" pos="acp" xml:id="B06375-001-a-2430">to</w>
+      <w lemma="heaven" pos="n1" xml:id="B06375-001-a-2440">Heaven</w>
+      <pc unit="sentence" xml:id="B06375-001-a-2450">.</pc>
+     </l>
+     <l xml:id="B06375-e440">
+      <w lemma="if" pos="cs" xml:id="B06375-001-a-2460">If</w>
+      <w lemma="there" pos="av" xml:id="B06375-001-a-2470">there</w>
+      <w lemma="be" pos="vvi" xml:id="B06375-001-a-2480">be</w>
+      <w lemma="any" pos="d" xml:id="B06375-001-a-2490">any</w>
+      <w lemma="place" pos="n1" xml:id="B06375-001-a-2500">place</w>
+      <w lemma="above" pos="acp" xml:id="B06375-001-a-2510">above</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-2520">the</w>
+      <w lemma="rest" pos="n1" xml:id="B06375-001-a-2530">rest</w>
+     </l>
+     <l xml:id="B06375-e450">
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2540">Thy</w>
+      <w lemma="brave" pos="j" xml:id="B06375-001-a-2550">brave</w>
+      <hi xml:id="B06375-e460">
+       <w lemma="Herocik" pos="n1-nn" xml:id="B06375-001-a-2560">Herocik</w>
+       <w lemma="soul" pos="n1" xml:id="B06375-001-a-2570">Soul</w>
+      </hi>
+      <w lemma="shall" pos="vmb" xml:id="B06375-001-a-2580">shall</w>
+      <w lemma="be" pos="vvi" xml:id="B06375-001-a-2590">be</w>
+      <w lemma="possess" pos="vvn" reg="possessed" xml:id="B06375-001-a-2600">possest</w>
+     </l>
+     <l xml:id="B06375-e470">
+      <w lemma="o●" pos="n1" xml:id="B06375-001-a-2610">O●</w>
+      <w lemma="its" pos="po" xml:id="B06375-001-a-2620">its</w>
+      <w lemma="immortal" pos="j" xml:id="B06375-001-a-2630">Immortal</w>
+      <w lemma="glory" pos="n2" xml:id="B06375-001-a-2640">Glories</w>
+      <pc xml:id="B06375-001-a-2650">,</pc>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-2660">and</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2670">thy</w>
+      <hi xml:id="B06375-e480">
+       <w lemma="name" pos="n1" xml:id="B06375-001-a-2680">Name</w>
+      </hi>
+     </l>
+     <l xml:id="B06375-e490">
+      <w lemma="still" pos="av" xml:id="B06375-001-a-2690">Still</w>
+      <w lemma="warble" pos="j_vn" xml:id="B06375-001-a-2700">warbled</w>
+      <w lemma="forth" pos="av" xml:id="B06375-001-a-2710">forth</w>
+      <w lemma="by" pos="acp" xml:id="B06375-001-a-2720">by</w>
+      <w lemma="never" pos="av-x" xml:id="B06375-001-a-2730">never</w>
+      <w lemma="die" pos="j_vg" xml:id="B06375-001-a-2740">dying</w>
+      <w lemma="fame" pos="n1" xml:id="B06375-001-a-2750">Fame</w>
+      <pc xml:id="B06375-001-a-2760">:</pc>
+     </l>
+     <l xml:id="B06375-e500">
+      <w lemma="there" pos="av" xml:id="B06375-001-a-2770">There</w>
+      <w lemma="warrior" pos="n2" reg="Warriors" xml:id="B06375-001-a-2780">Warriers</w>
+      <w lemma="garland" pos="n2" xml:id="B06375-001-a-2790">Garlands</w>
+      <w lemma="shall" pos="vmb" xml:id="B06375-001-a-2800">shall</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2810">thy</w>
+      <hi xml:id="B06375-e510">
+       <w lemma="temple" pos="n2" xml:id="B06375-001-a-2820">Temples</w>
+      </hi>
+      <w lemma="crown" pos="vvb" xml:id="B06375-001-a-2830">Crown</w>
+     </l>
+     <l xml:id="B06375-e520">
+      <w lemma="free" pos="j" xml:id="B06375-001-a-2840">Free</w>
+      <w lemma="from" pos="acp" xml:id="B06375-001-a-2850">from</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-2860">the</w>
+      <w lemma="blast" pos="n2" xml:id="B06375-001-a-2870">blasts</w>
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-2880">of</w>
+      <w lemma="fate" pos="n1" xml:id="B06375-001-a-2890">Fate</w>
+      <pc xml:id="B06375-001-a-2900">,</pc>
+      <w lemma="or" pos="cc" xml:id="B06375-001-a-2910">or</w>
+      <w lemma="envy" pos="n2" xml:id="B06375-001-a-2920">Envies</w>
+      <w lemma="frown" pos="vvb" xml:id="B06375-001-a-2930">Frown</w>
+      <pc xml:id="B06375-001-a-2940">;</pc>
+     </l>
+     <l xml:id="B06375-e530">
+      <w lemma="instead" pos="av" xml:id="B06375-001-a-2950">Instead</w>
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-2960">of</w>
+      <w lemma="bloody" pos="j" reg="Bloody" xml:id="B06375-001-a-2970">Bloudy</w>
+      <hi xml:id="B06375-e540">
+       <w lemma="scar" pos="n2" reg="Scars" xml:id="B06375-001-a-2980">Scarrs</w>
+      </hi>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-2990">thy</w>
+      <hi xml:id="B06375-e550">
+       <w lemma="batter" pos="j_vn" reg="battered" xml:id="B06375-001-a-3000">batterd</w>
+       <w lemma="face" pos="n1" xml:id="B06375-001-a-3010">Face</w>
+       <pc unit="sentence" xml:id="B06375-001-a-3020">.</pc>
+      </hi>
+     </l>
+     <l xml:id="B06375-e560">
+      <w lemma="shall" pos="vmb" xml:id="B06375-001-a-3030">Shall</w>
+      <w lemma="be" pos="vvi" xml:id="B06375-001-a-3040">be</w>
+      <w lemma="environ" pos="vvn" reg="environed" xml:id="B06375-001-a-3050">inviron'd</w>
+      <w lemma="with" pos="acp" xml:id="B06375-001-a-3060">with</w>
+      <w lemma="a" pos="d" xml:id="B06375-001-a-3070">a</w>
+      <w lemma="noble" pos="j-c" xml:id="B06375-001-a-3080">Nobler</w>
+      <w lemma="grace" pos="n1" xml:id="B06375-001-a-3090">Grace</w>
+      <pc unit="sentence" xml:id="B06375-001-a-3100">.</pc>
+     </l>
+     <l xml:id="B06375-e570">
+      <w lemma="nor" pos="cc-x" xml:id="B06375-001-a-3110">Nor</w>
+      <w lemma="can" pos="vm2" xml:id="B06375-001-a-3120">canst</w>
+      <w lemma="thou" pos="pns" xml:id="B06375-001-a-3130">thou</w>
+      <w lemma="die" pos="vvi" xml:id="B06375-001-a-3140">Die</w>
+      <pc xml:id="B06375-001-a-3150">,</pc>
+      <w lemma="but" pos="acp" xml:id="B06375-001-a-3160">but</w>
+      <w lemma="be" pos="vv2" xml:id="B06375-001-a-3170">art</w>
+      <w lemma="transcendent" pos="j" xml:id="B06375-001-a-3180">Transcendent</w>
+      <w lemma="grow" pos="vvn" xml:id="B06375-001-a-3190">grown</w>
+     </l>
+     <l xml:id="B06375-e580">
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-3200">And</w>
+      <w lemma="challenge" pos="j-s" xml:id="B06375-001-a-3210">challengest</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-3220">the</w>
+      <w lemma="world" pos="n1" xml:id="B06375-001-a-3230">World</w>
+      <w lemma="as" pos="acp" xml:id="B06375-001-a-3240">as</w>
+      <w lemma="if" pos="cs" xml:id="B06375-001-a-3250">if</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-3260">thine</w>
+      <w lemma="own" pos="d" xml:id="B06375-001-a-3270">own</w>
+      <pc xml:id="B06375-001-a-3280">;</pc>
+     </l>
+     <l xml:id="B06375-e590">
+      <w lemma="who" pos="crq-q" xml:id="B06375-001-a-3290">Who</w>
+      <w lemma="have" pos="vv2" xml:id="B06375-001-a-3300">hast</w>
+      <pc join="right" xml:id="B06375-001-a-3310">(</pc>
+      <w lemma="to" pos="to" xml:id="B06375-001-a-3320">to</w>
+      <w lemma="do" pos="vvi" xml:id="B06375-001-a-3330">do</w>
+      <w lemma="thy" pos="po" xml:id="B06375-001-a-3340">thy</w>
+      <hi xml:id="B06375-e600">
+       <w lemma="native" pos="j" xml:id="B06375-001-a-3350">Native</w>
+       <w lemma="country" pos="n1" xml:id="B06375-001-a-3360">Country</w>
+      </hi>
+      <w lemma="good" pos="j" xml:id="B06375-001-a-3370">Good</w>
+      <pc xml:id="B06375-001-a-3380">)</pc>
+     </l>
+     <l xml:id="B06375-e610">
+      <w lemma="be" pos="vvn" xml:id="B06375-001-a-3390">Been</w>
+      <w lemma="prodigal" pos="j" xml:id="B06375-001-a-3400">Prodigal</w>
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-3410">of</w>
+      <hi xml:id="B06375-e620">
+       <w lemma="fortune" pos="n1" xml:id="B06375-001-a-3420">Fortune</w>
+       <pc xml:id="B06375-001-a-3430">,</pc>
+       <w lemma="life" pos="n1" xml:id="B06375-001-a-3440">Life</w>
+      </hi>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-3450">and</w>
+      <hi xml:id="B06375-e630">
+       <w lemma="Blood" pos="n1" xml:id="B06375-001-a-3460">Blood</w>
+       <pc unit="sentence" xml:id="B06375-001-a-3461">.</pc>
+       <pc unit="sentence" xml:id="B06375-001-a-3470"/>
+      </hi>
+     </l>
+    </lg>
+    <lg xml:id="B06375-e640">
+     <l xml:id="B06375-e650">
+      <w lemma="methinks" pos="vvz" xml:id="B06375-001-a-3480">Methinks</w>
+      <w lemma="i" pos="pns" xml:id="B06375-001-a-3490">I</w>
+      <w lemma="see" pos="vvb" xml:id="B06375-001-a-3500">see</w>
+      <w lemma="another" pos="d" xml:id="B06375-001-a-3510">another</w>
+      <hi xml:id="B06375-e660">
+       <w lemma="star" pos="n1" xml:id="B06375-001-a-3520">Star</w>
+      </hi>
+      <w lemma="appear" pos="vvi" xml:id="B06375-001-a-3530">appear</w>
+     </l>
+     <l xml:id="B06375-e670">
+      <w lemma="bright" pos="j-c" xml:id="B06375-001-a-3540">Brighter</w>
+      <w lemma="than" pos="cs" reg="than" xml:id="B06375-001-a-3550">then</w>
+      <hi xml:id="B06375-e680">
+       <w lemma="Mars" pos="n1-nn" xml:id="B06375-001-a-3560">Mars</w>
+      </hi>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-3570">and</w>
+      <w lemma="in" pos="acp" xml:id="B06375-001-a-3580">in</w>
+      <w lemma="a" pos="d" xml:id="B06375-001-a-3590">a</w>
+      <w lemma="noble" pos="j-c" xml:id="B06375-001-a-3600">Nobler</w>
+      <w lemma="sphere" pos="n1" reg="Sphere" xml:id="B06375-001-a-3610">Sphear</w>
+      <pc xml:id="B06375-001-a-3620">,</pc>
+     </l>
+     <l xml:id="B06375-e690">
+      <w lemma="who" pos="crq-rg" xml:id="B06375-001-a-3630">Whose</w>
+      <w lemma="warlike" pos="j" xml:id="B06375-001-a-3640">Warlike</w>
+      <w lemma="influence" pos="n1" xml:id="B06375-001-a-3650">Influence</w>
+      <w lemma="shall" pos="vmb" xml:id="B06375-001-a-3660">shall</w>
+      <w lemma="make" pos="vvi" xml:id="B06375-001-a-3670">make</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-3680">the</w>
+      <w lemma="fire" pos="n1" xml:id="B06375-001-a-3690">Fire</w>
+     </l>
+     <l xml:id="B06375-e700">
+      <w lemma="of" pos="acp" xml:id="B06375-001-a-3700">Of</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-3710">the</w>
+      <w lemma="undaunted" pos="j" xml:id="B06375-001-a-3720">undaunted</w>
+      <hi xml:id="B06375-e710">
+       <w lemma="Britain" pos="n1g-nn" reg="Britain's" xml:id="B06375-001-a-3730">Brittans</w>
+      </hi>
+      <w lemma="mount" pos="n1" xml:id="B06375-001-a-3740">mount</w>
+      <w lemma="up" pos="acp-av" xml:id="B06375-001-a-3750">up</w>
+      <w lemma="high" pos="av-c_j" xml:id="B06375-001-a-3760">higher</w>
+     </l>
+     <l xml:id="B06375-e720">
+      <w lemma="in" pos="acp" xml:id="B06375-001-a-3770">In</w>
+      <w lemma="future" pos="j" xml:id="B06375-001-a-3780">future</w>
+      <w lemma="age" pos="n2" xml:id="B06375-001-a-3790">Ages</w>
+      <pc xml:id="B06375-001-a-3800">,</pc>
+      <w lemma="and" pos="cc" xml:id="B06375-001-a-3810">and</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-3820">the</w>
+      <w lemma="world" pos="n1" xml:id="B06375-001-a-3830">World</w>
+      <w lemma="shall" pos="vmb" xml:id="B06375-001-a-3840">shall</w>
+      <w lemma="know" pos="vvi" xml:id="B06375-001-a-3850">know</w>
+     </l>
+     <l xml:id="B06375-e730">
+      <w lemma="star" pos="n2" reg="Stars" xml:id="B06375-001-a-3860">Starrs</w>
+      <w lemma="act" pos="vvi" xml:id="B06375-001-a-3870">act</w>
+      <w lemma="upon" pos="acp" xml:id="B06375-001-a-3880">upon</w>
+      <w lemma="the" pos="d" xml:id="B06375-001-a-3890">the</w>
+      <hi xml:id="B06375-e740">
+       <w lemma="body" pos="n2" xml:id="B06375-001-a-3900">Bodies</w>
+      </hi>
+      <w lemma="here" pos="av" xml:id="B06375-001-a-3910">here</w>
+      <w lemma="below" pos="acp-av" xml:id="B06375-001-a-3920">below</w>
+      <pc unit="sentence" xml:id="B06375-001-a-3930">.</pc>
+     </l>
+    </lg>
+   </div>
+  </body>
+  <back xml:id="B06375-e750">
+   <div type="colophon" xml:id="B06375-e760">
+    <p xml:id="B06375-e770">
+     <hi xml:id="B06375-e780">
+      <w lemma="oxford" pos="n1-nn" xml:id="B06375-001-a-3940">OXFORD</w>
+      <pc xml:id="B06375-001-a-3950">,</pc>
+     </hi>
+     <w lemma="print" pos="vvn" xml:id="B06375-001-a-3960">Printed</w>
+     <w lemma="for" pos="acp" xml:id="B06375-001-a-3970">for</w>
+     <hi xml:id="B06375-e790">
+      <w lemma="Joseph" pos="n1-nn" xml:id="B06375-001-a-3980">Joseph</w>
+      <w lemma="Godwin" pos="n1-nn" xml:id="B06375-001-a-3990">Godwin</w>
+      <pc unit="sentence" xml:id="B06375-001-a-4000">.</pc>
+     </hi>
+     <w lemma="1666." pos="crd" xml:id="B06375-001-a-4010">1666.</w>
+     <pc unit="sentence" xml:id="B06375-001-a-4020"/>
+    </p>
+   </div>
+  </back>
+ </text>
+</TEI>

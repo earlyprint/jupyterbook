@@ -4,3 +4,5 @@ numpy
 pandas
 lxml
 sklearn
+networkx
+pyvis
