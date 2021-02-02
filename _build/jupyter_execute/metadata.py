@@ -46,7 +46,7 @@ import requests
 tcp_id = "A53049"
 
 # A "formatting" string that lets us put any TCP ID we want into the right place
-base_url = f'https://raw.githubusercontent.com/earlyprint/epmetadata/master/sourcemeta/{tcp_id}_sourcemeta.xml'
+base_url = f'https://raw.githubusercontent.com/earlyprint/epmetadata/master/header/{tcp_id}_header.xml'
 
 # Using requests, "get" the text from the file at this web location
 raw_text = requests.get(base_url).text
@@ -60,31 +60,31 @@ print(raw_text)
 # In[3]:
 
 
-parser = etree.XMLParser(collect_ids=False)
+parser = etree.XMLParser(collect_ids=False, encoding='utf-8')
 nsmap={'tei': 'http://www.tei-c.org/ns/1.0'}
 
 # Parse your XML file into a "tree" object
-metadata = etree.fromstring(raw_text, parser)
+metadata = etree.fromstring(raw_text.encode('utf8'), parser)
 
 # Get information from the XML
 
 # Get the title, using .find()
-print("Title:", metadata.find(".//tei:title", namespaces=nsmap).text, "\n")
+print("Title:", metadata.find(".//tei:sourceDesc//tei:title", namespaces=nsmap).text, "\n")
 
 # Get the author, using the same technique
-print("Author:", metadata.find(".//tei:author", namespaces=nsmap).text, "\n")
+print("Author:", metadata.find(".//tei:sourceDesc//tei:author", namespaces=nsmap).text, "\n")
 
 # Get the original date, as it was entered by catalogers
-print("Original Date:", metadata.find(".//tei:date", namespaces=nsmap).text, "\n")
+print("Original Date:", metadata.find(".//tei:sourceDesc//tei:date", namespaces=nsmap).text, "\n")
 
 # Get the 4-digit EarlyPrint parsed date, using .get()
-print("Parsed Date:", metadata.find(".//tei:date", namespaces=nsmap).get("when"), "\n")
+print("Parsed Date:", metadata.find(".//tei:sourceDesc//tei:date", namespaces=nsmap).get("when"), "\n")
 
 # Get the printer by finding based on the "type" attribute
 print("Printer:", metadata.find(".//tei:person[@type='printer']/tei:persName", namespaces=nsmap).text, "\n")
 
 
-# # All of the Metadata
+# ## All of the Metadata
 # 
 # The above method works fine if you need data on just one text, but what about analyzing the data for *all* of the texts at once? To do this, you'll need to [download all of the metadata files from Github](https://github.com/earlyprint/epmetadata). But once you do, the code is not all that different from working with a single file.
 # 
@@ -100,24 +100,24 @@ import glob
 
 # Get the full list of metadata files
 # (You'll change this line based on where the files are on your computer)
-files = glob.glob("../../epmetadata/sourcemeta/*.xml")
+files = glob.glob("../../epmetadata/header/*.xml")
 
 all_data = [] # Empty list for data
 index = [] # Empty list for TCP IDs
 for f in files: # Loop through each file
     tcp_id = f.split("/")[-1].split("_")[0] # Get TCP ID from filename
     metadata = etree.parse(f, parser) # Create lxml tree for metadata
-    title = metadata.find(".//tei:title", namespaces=nsmap).text # Get title
+    title = metadata.find(".//tei:sourceDesc//tei:title", namespaces=nsmap).text # Get title
     
     # Get author (if there is one)
     try:
-        author = metadata.find(".//tei:author", namespaces=nsmap).text
+        author = metadata.find(".//tei:sourceDesc//tei:author", namespaces=nsmap).text
     except AttributeError:
         author = None
     
     # Get date (if there is one that isn't a range)
     try:
-        date = metadata.find(".//tei:date", namespaces=nsmap).get("when")
+        date = metadata.find(".//tei:sourceDesc//tei:date", namespaces=nsmap).get("when")
     except AttributeError:
         date = None
     
@@ -133,7 +133,7 @@ df = pd.DataFrame(all_data, index=index)
 df
 
 
-# # Trimming and "Cleaning" Data Fields
+# ## Trimming and "Cleaning" Data Fields
 # 
 # Though we've done a lot of work to make the *EarlyPrint* data more usable, some fields may still need to be adjusted, trimmed, or edited before they can be analyzed. The Author field, for example, includes birth and death dates for most authors, which a researcher may want to leave out.
 # 
@@ -152,7 +152,7 @@ df
 # 
 # Ideally, we would want any analysis of printers to recognize that these 4 variants refer to the same person. We can do that by standardizing the data field as we process it. We can create a function to do this:
 
-# In[52]:
+# In[5]:
 
 
 # Import some built-in libraries
@@ -173,7 +173,7 @@ def standardize_name(name): # Define our function
     return name
 
 
-# # Building a Network
+# ## Building a Network
 # 
 # Now that we've created a function for cleaning up the printer names, we can use them for any purpose we like. In the rest of this tutorial, we'll use printer names to create a network visualization of printers and the books they printed. Such a visualization could be useful for determining how much collaboration among printers there is in the early modern period.
 # 
@@ -183,7 +183,7 @@ def standardize_name(name): # Define our function
 # 
 # Just as we did when getting author, title, and date above, we can loop through every metadata file and pull out the TCP ID and any printers attached to that text. As we do, we can also "clean" the printer names using our function above. Each connection between a TCP ID (representing a book) and a printer's name becomes an item in our edgelist.
 
-# In[76]:
+# In[6]:
 
 
 edgelist = [] # Create an empty list
@@ -196,7 +196,7 @@ for f in files: # Loop through each file
     
     # Get the date of the printing (if there is one)
     try:
-        date = metadata.find(".//tei:date", namespaces=nsmap).get("when")
+        date = metadata.find(".//tei:sourceDesc//tei:date", namespaces=nsmap).get("when")
     except AttributeError:
         date = None
     
@@ -211,7 +211,7 @@ print(edgelist)
 # 
 # Next, using the Python library `networkx`, we can create a network or **graph** object to hold all of our node and edge information.
 
-# In[77]:
+# In[7]:
 
 
 import networkx as nx # Import networkx
@@ -246,7 +246,7 @@ print(nx.info(B))
 # 
 # Before we can move on to visualization, it will be helpful to add more information about each text to our network. A TCP ID doesn't tell the researcher about the text itself. To do this, we can return to the `pandas` DataFrame that we created at the beginning of this tutorial.
 
-# In[67]:
+# In[8]:
 
 
 for n,d in B.nodes(data=True): # Loop through every node in the network
@@ -264,11 +264,11 @@ for n,d in B.nodes(data=True): # Loop through every node in the network
         B.nodes[n]['title'] = f"{df.loc[n]['title']}<br>{df.loc[n]['author']}<br>{df.loc[n]['date']}"
 
 
-# # Visualizing the Network
+# ## Visualizing the Network
 # 
 # We could write a few lines of code to display our full network, but with 30,000+ nodes our visualization is likely to come out a wieldy, muddled mess. It will be more productive to create a smaller subset of the network to visualize, making things easier to read and interpret. Let's look at the network just for the year 1660.
 
-# In[78]:
+# In[9]:
 
 
 # Get all the edges for 1660
@@ -281,7 +281,7 @@ print(nx.info(subgraph_1660))
 
 # We're finally ready to visualize our network. We can do this with the wonderful [`pyvis` library](https://pyvis.readthedocs.io/en/latest/index.html), which lets us create interactive visualizations inside Jupyter notebooks.
 
-# In[79]:
+# In[10]:
 
 
 from pyvis.network import Network # Import pyvis
@@ -293,7 +293,7 @@ g = Network(width=800,height=800,notebook=True,heading='')
 g.from_nx(subgraph_1660)
 
 
-# In[70]:
+# In[11]:
 
 
 # Display the resulting graph in our notebook
@@ -324,7 +324,7 @@ g.show("subgraph.html")
 # 
 # *n.b. I tested out the network for the whole decade of the 1660s, and there wasn't much more collaboration among printers than there was in 1660 alone. But different network "slices" might reveal different results.*
 # 
-# # Next Steps
+# ## Next Steps
 # 
 # We've looked at just a couple examples of how metadata might be processed and used in Python. The DataFrame and network visualization methods here give a rough outline of what might be done with metadata after it's parsed from our XML, but there are a large number of computational possibilities for this data. Perhaps most importantly, you now know how to find and access this data in order to supplement your work with our texts, as demonstrated in the other tutorials.
 # 

@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 604, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 85, in ensure_async
+    result = await obj
+  File "/usr/local/lib/python3.8/dist-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/home/jrladd/.local/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
   File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1082, in execute
@@ -11,70 +22,18 @@ Traceback (most recent call last):
     return future.result()
   File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 535, in async_execute
     await self.async_execute_cell(
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 827, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 735, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-# First we need to create an "instance" of the transformer, with the proper settings.
-# We need to make sure that normalization is turned off
-tfidf = TfidfTransformer(norm=None, sublinear_tf=True)
-# I am choosing to turn on sublinear term frequency scaling, which takes the log of
-# term frequencies and can help to de-emphasize function words like pronouns and articles. 
-# You might make a different choice depending on your corpus.
-
-# Once we've created the instance, we can "transform" our counts
-results = tfidf.fit_transform(df)
-
-# Make results readable using Pandas
-readable_results = pd.DataFrame(results.toarray(), index=df.index, columns=df.columns) # Convert information back to a DataFrame
-
-# Make the DataFrame columns the texts, and sort the DataFrame by 
-# the words with the highest TF-IDF scores in the Cavendish text
-# Use .head(30) to show only the top 30 terms
-readable_results.T.sort_values(by=["A53049"], ascending=False).head(30)
-------------------
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-[0;32m<ipython-input-4-1f12fc66d2dd>[0m in [0;36m<module>[0;34m[0m
-[1;32m      7[0m [0;34m[0m[0m
-[1;32m      8[0m [0;31m# Once we've created the instance, we can "transform" our counts[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 9[0;31m [0mresults[0m [0;34m=[0m [0mtfidf[0m[0;34m.[0m[0mfit_transform[0m[0;34m([0m[0mdf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     10[0m [0;34m[0m[0m
-[1;32m     11[0m [0;31m# Make results readable using Pandas[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/.local/lib/python3.8/site-packages/sklearn/base.py[0m in [0;36mfit_transform[0;34m(self, X, y, **fit_params)[0m
-[1;32m    688[0m         [0;32mif[0m [0my[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    689[0m             [0;31m# fit method of arity 1 (unsupervised transformation)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 690[0;31m             [0;32mreturn[0m [0mself[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mX[0m[0;34m,[0m [0;34m**[0m[0mfit_params[0m[0;34m)[0m[0;34m.[0m[0mtransform[0m[0;34m([0m[0mX[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    691[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    692[0m             [0;31m# fit method of arity 2 (supervised transformation)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/.local/lib/python3.8/site-packages/sklearn/feature_extraction/text.py[0m in [0;36mfit[0;34m(self, X, y)[0m
-[1;32m   1430[0m             [0mA[0m [0mmatrix[0m [0mof[0m [0mterm[0m[0;34m/[0m[0mtoken[0m [0mcounts[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1431[0m         """
-[0;32m-> 1432[0;31m         [0mX[0m [0;34m=[0m [0mcheck_array[0m[0;34m([0m[0mX[0m[0;34m,[0m [0maccept_sparse[0m[0;34m=[0m[0;34m([0m[0;34m'csr'[0m[0;34m,[0m [0;34m'csc'[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1433[0m         [0;32mif[0m [0;32mnot[0m [0msp[0m[0;34m.[0m[0missparse[0m[0;34m([0m[0mX[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1434[0m             [0mX[0m [0;34m=[0m [0msp[0m[0;34m.[0m[0mcsr_matrix[0m[0;34m([0m[0mX[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/.local/lib/python3.8/site-packages/sklearn/utils/validation.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
-[1;32m     70[0m                           FutureWarning)
-[1;32m     71[0m         [0mkwargs[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0;34m{[0m[0mk[0m[0;34m:[0m [0marg[0m [0;32mfor[0m [0mk[0m[0;34m,[0m [0marg[0m [0;32min[0m [0mzip[0m[0;34m([0m[0msig[0m[0;34m.[0m[0mparameters[0m[0;34m,[0m [0margs[0m[0;34m)[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 72[0;31m         [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     73[0m     [0;32mreturn[0m [0minner_f[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     74[0m [0;34m[0m[0m
-
-[0;32m~/.local/lib/python3.8/site-packages/sklearn/utils/validation.py[0m in [0;36mcheck_array[0;34m(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator)[0m
-[1;32m    531[0m [0;34m[0m[0m
-[1;32m    532[0m         [0;32mif[0m [0mall[0m[0;34m([0m[0misinstance[0m[0;34m([0m[0mdtype[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mdtype[0m[0;34m)[0m [0;32mfor[0m [0mdtype[0m [0;32min[0m [0mdtypes_orig[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 533[0;31m             [0mdtype_orig[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mresult_type[0m[0;34m([0m[0;34m*[0m[0mdtypes_orig[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    534[0m [0;34m[0m[0m
-[1;32m    535[0m     [0;32mif[0m [0mdtype_numeric[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m<__array_function__ internals>[0m in [0;36mresult_type[0;34m(*args, **kwargs)[0m
-
-[0;31mValueError[0m: at least one array or dtype is required
-ValueError: at least one array or dtype is required
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 811, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 628, in _async_poll_for_reply
+    await self._async_handle_timeout(timeout, cell)
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 678, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['# First you need a list of all files in your directory', 'files = glob.glob("1666_texts/*.xml") # THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER', '', '# Create an empty lists to put all our texts into', 'all_tokenized = []']
+...
+["    # 3. Get the regularized form of the word: word.get('reg', word.text)", '    # 4. Make sure all the words are in lowercase: .lower()', "    words = [word.get('reg', word.text).lower() for word in word_tags if word.text != None]", '    # Then we add these results to a master list', '    all_tokenized.append(words)']
+-------------------
 
