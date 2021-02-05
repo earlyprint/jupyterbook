@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Parsing *EarlyPrint* XML Texts in Python
+# # Parsing *EarlyPrint* XML Texts
 # 
 # by [John R. Ladd](https://jrladd.com)
 # 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Exploring Vocabulary in *EarlyPrint* using Tf-Idf
+# # Exploring Vocabulary Using Tf-Idf
 # 
 # by [John R. Ladd](https://jrladd.com)
 # 
