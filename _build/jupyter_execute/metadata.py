@@ -152,7 +152,7 @@ df
 # 
 # Ideally, we would want any analysis of printers to recognize that these 4 variants refer to the same person. We can do that by standardizing the data field as we process it. We can create a function to do this:
 
-# In[5]:
+# In[21]:
 
 
 # Import some built-in libraries
@@ -183,7 +183,7 @@ def standardize_name(name): # Define our function
 # 
 # Just as we did when getting author, title, and date above, we can loop through every metadata file and pull out the TCP ID and any printers attached to that text. As we do, we can also "clean" the printer names using our function above. Each connection between a TCP ID (representing a book) and a printer's name becomes an item in our edgelist.
 
-# In[6]:
+# In[22]:
 
 
 edgelist = [] # Create an empty list
@@ -211,7 +211,7 @@ print(edgelist)
 # 
 # Next, using the Python library `networkx`, we can create a network or **graph** object to hold all of our node and edge information.
 
-# In[7]:
+# In[23]:
 
 
 import networkx as nx # Import networkx
@@ -246,7 +246,7 @@ print(nx.info(B))
 # 
 # Before we can move on to visualization, it will be helpful to add more information about each text to our network. A TCP ID doesn't tell the researcher about the text itself. To do this, we can return to the `pandas` DataFrame that we created at the beginning of this tutorial.
 
-# In[8]:
+# In[24]:
 
 
 for n,d in B.nodes(data=True): # Loop through every node in the network
@@ -268,7 +268,7 @@ for n,d in B.nodes(data=True): # Loop through every node in the network
 # 
 # We could write a few lines of code to display our full network, but with 30,000+ nodes our visualization is likely to come out a wieldy, muddled mess. It will be more productive to create a smaller subset of the network to visualize, making things easier to read and interpret. Let's look at the network just for the year 1660.
 
-# In[9]:
+# In[25]:
 
 
 # Get all the edges for 1660
@@ -281,7 +281,7 @@ print(nx.info(subgraph_1660))
 
 # We're finally ready to visualize our network. We can do this with the wonderful [`pyvis` library](https://pyvis.readthedocs.io/en/latest/index.html), which lets us create interactive visualizations inside Jupyter notebooks.
 
-# In[10]:
+# In[26]:
 
 
 from pyvis.network import Network # Import pyvis
@@ -293,7 +293,7 @@ g = Network(width=800,height=800,notebook=True,heading='')
 g.from_nx(subgraph_1660)
 
 
-# In[11]:
+# In[27]:
 
 
 # Display the resulting graph in our notebook
