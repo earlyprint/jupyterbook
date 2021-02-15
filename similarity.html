@@ -98,16 +98,12 @@
    <em>
     EarlyPrint
    </em>
-   XML Texts in Python
+   XML Texts
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   2. Exploring Vocabulary in
-   <em>
-    EarlyPrint
-   </em>
-   using Tf-Idf
+   2. Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
@@ -238,6 +234,23 @@
    4.3. Reading Results
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-results">
+   4.4. Visualizing Results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-words">
+     4.4.1. Visualizing Words
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-texts">
+     4.4.2. Visualizing Texts
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
         </nav>
@@ -292,7 +305,8 @@
 <div class="section" id="get-features">
 <h2><span class="section-number">4.1. </span>Get Features<a class="headerlink" href="#get-features" title="Permalink to this headline">¶</a></h2>
 <p>In order to measure similarity between texts, you need features of those texts to measure. The <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a> calculates similarity across three distinct sets of features for the same texts: TF-IDF weights for word counts, LDA Topic Modeling results, and XML tag structures. As our example here, we’ll use TF-IDF.</p>
-<p>The code below is taken directly from the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF Tutorial</a>, where you’ll find a full explanation of what it does. We loop through each text, extract words, count them, and convert those counts to TF-IDF values. There’s one key difference: below we use <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">L2 normalization</a> on our TF-IDF transformation. Normalizing values helps us account for very long or very short texts that may skew our similarity results.</p>
+<p>The code below is taken directly from the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF Tutorial</a>, where you’ll find a full explanation of what it does. We loop through each text, extract words, count them, and convert those counts to TF-IDF values.</p>
+<p>n.b. There are two key differences between the TF-IDF tutorial and this one. Below I am getting counts of <strong>lemmas</strong>, dictionary headwords, rather than simply regularized forms of the word. This allows us to group plurals or verb forms into a single term. Also, here we’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">L2 normalization</a> on our TF-IDF transformation. Normalizing values helps us account for very long or very short texts that may skew our similarity results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty lists to put all our texts into</span>
@@ -309,9 +323,9 @@
     <span class="c1"># In this next line you&#39;ll do several things at once to create a list of words for each text</span>
     <span class="c1"># 1. Loop through each word: for word in word_tags</span>
     <span class="c1"># 2. Make sure the tag has a word at all: if word.text != None</span>
-    <span class="c1"># 3. Get the regularized form of the word: word.get(&#39;reg&#39;, word.text)</span>
+    <span class="c1"># 3. Get the lemmatized form of the word: word.get(&#39;reg&#39;, word.text)</span>
     <span class="c1"># 4. Make sure all the words are in lowercase: .lower()</span>
-    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reg&#39;</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_tags</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lemma&#39;</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_tags</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
     <span class="c1"># Then we add these results to a master list</span>
     <span class="n">all_tokenized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
     
@@ -397,122 +411,122 @@
     <tr>
       <th>B02845</th>
       <td>0.000000</td>
-      <td>1.276904</td>
-      <td>1.282336</td>
-      <td>1.327388</td>
-      <td>1.385534</td>
-      <td>1.334611</td>
-      <td>1.338054</td>
-      <td>1.285088</td>
-      <td>1.357166</td>
-      <td>1.338225</td>
+      <td>1.240409</td>
+      <td>1.261400</td>
+      <td>1.301035</td>
+      <td>1.376226</td>
+      <td>1.311991</td>
+      <td>1.305806</td>
+      <td>1.243369</td>
+      <td>1.346371</td>
+      <td>1.302199</td>
       <td>...</td>
-      <td>1.310353</td>
-      <td>1.323486</td>
-      <td>1.338434</td>
-      <td>1.234394</td>
-      <td>1.346497</td>
-      <td>1.310042</td>
-      <td>1.346778</td>
-      <td>1.320946</td>
-      <td>1.296652</td>
-      <td>1.313003</td>
+      <td>1.268093</td>
+      <td>1.296807</td>
+      <td>1.306692</td>
+      <td>1.186921</td>
+      <td>1.323102</td>
+      <td>1.279039</td>
+      <td>1.322521</td>
+      <td>1.287410</td>
+      <td>1.269533</td>
+      <td>1.289468</td>
     </tr>
     <tr>
       <th>A51130</th>
-      <td>1.276904</td>
+      <td>1.240409</td>
       <td>0.000000</td>
-      <td>1.200168</td>
-      <td>1.197267</td>
-      <td>1.380927</td>
-      <td>1.244560</td>
-      <td>1.325529</td>
-      <td>1.246744</td>
-      <td>1.300878</td>
-      <td>1.318610</td>
+      <td>1.146744</td>
+      <td>1.153791</td>
+      <td>1.371372</td>
+      <td>1.210468</td>
+      <td>1.302257</td>
+      <td>1.198239</td>
+      <td>1.283282</td>
+      <td>1.299711</td>
       <td>...</td>
-      <td>1.285184</td>
-      <td>1.209513</td>
-      <td>1.317437</td>
-      <td>1.229994</td>
-      <td>1.336612</td>
-      <td>1.218881</td>
-      <td>1.346623</td>
-      <td>1.226397</td>
-      <td>1.197699</td>
-      <td>1.221007</td>
+      <td>1.254342</td>
+      <td>1.156985</td>
+      <td>1.289047</td>
+      <td>1.182374</td>
+      <td>1.317711</td>
+      <td>1.162940</td>
+      <td>1.327107</td>
+      <td>1.181073</td>
+      <td>1.154153</td>
+      <td>1.177594</td>
     </tr>
     <tr>
       <th>A36358</th>
-      <td>1.282336</td>
-      <td>1.200168</td>
+      <td>1.261400</td>
+      <td>1.146744</td>
       <td>0.000000</td>
-      <td>1.229307</td>
-      <td>1.374540</td>
-      <td>1.276676</td>
-      <td>1.330634</td>
-      <td>1.255257</td>
-      <td>1.319624</td>
-      <td>1.333068</td>
+      <td>1.190797</td>
+      <td>1.364288</td>
+      <td>1.244304</td>
+      <td>1.309200</td>
+      <td>1.209562</td>
+      <td>1.303966</td>
+      <td>1.307866</td>
       <td>...</td>
-      <td>1.302456</td>
-      <td>1.247914</td>
-      <td>1.332685</td>
-      <td>1.258395</td>
-      <td>1.339762</td>
-      <td>1.247283</td>
-      <td>1.356161</td>
-      <td>1.249754</td>
-      <td>1.203273</td>
-      <td>1.266901</td>
+      <td>1.272114</td>
+      <td>1.210844</td>
+      <td>1.307535</td>
+      <td>1.220127</td>
+      <td>1.321016</td>
+      <td>1.192531</td>
+      <td>1.338629</td>
+      <td>1.201674</td>
+      <td>1.173816</td>
+      <td>1.228383</td>
     </tr>
     <tr>
       <th>A28171</th>
-      <td>1.327388</td>
-      <td>1.197267</td>
-      <td>1.229307</td>
+      <td>1.301035</td>
+      <td>1.153791</td>
+      <td>1.190797</td>
       <td>0.000000</td>
-      <td>1.377672</td>
-      <td>1.108460</td>
-      <td>1.343706</td>
-      <td>1.276891</td>
-      <td>1.237915</td>
-      <td>1.336067</td>
+      <td>1.372023</td>
+      <td>1.079308</td>
+      <td>1.322708</td>
+      <td>1.239229</td>
+      <td>1.228905</td>
+      <td>1.314978</td>
       <td>...</td>
-      <td>1.294902</td>
-      <td>1.098583</td>
-      <td>1.332020</td>
-      <td>1.289052</td>
-      <td>1.350955</td>
-      <td>1.172351</td>
-      <td>1.350303</td>
-      <td>1.132169</td>
-      <td>1.137134</td>
-      <td>1.186429</td>
+      <td>1.266144</td>
+      <td>1.067373</td>
+      <td>1.309392</td>
+      <td>1.253991</td>
+      <td>1.334604</td>
+      <td>1.123059</td>
+      <td>1.336810</td>
+      <td>1.079009</td>
+      <td>1.095766</td>
+      <td>1.152096</td>
     </tr>
     <tr>
       <th>A51877</th>
-      <td>1.385534</td>
-      <td>1.380927</td>
-      <td>1.374540</td>
-      <td>1.377672</td>
+      <td>1.376226</td>
+      <td>1.371372</td>
+      <td>1.364288</td>
+      <td>1.372023</td>
       <td>0.000000</td>
-      <td>1.382244</td>
-      <td>1.380671</td>
-      <td>1.364325</td>
-      <td>1.382631</td>
-      <td>1.364649</td>
+      <td>1.377101</td>
+      <td>1.373019</td>
+      <td>1.351603</td>
+      <td>1.380807</td>
+      <td>1.351772</td>
       <td>...</td>
-      <td>1.362772</td>
-      <td>1.384687</td>
-      <td>1.322868</td>
-      <td>1.376365</td>
-      <td>1.373189</td>
-      <td>1.370114</td>
-      <td>1.380516</td>
-      <td>1.375525</td>
-      <td>1.386100</td>
-      <td>1.371331</td>
+      <td>1.356264</td>
+      <td>1.379003</td>
+      <td>1.310546</td>
+      <td>1.364846</td>
+      <td>1.368438</td>
+      <td>1.358358</td>
+      <td>1.366346</td>
+      <td>1.369117</td>
+      <td>1.380880</td>
+      <td>1.363097</td>
     </tr>
     <tr>
       <th>...</th>
@@ -540,122 +554,122 @@
     </tr>
     <tr>
       <th>A60948</th>
-      <td>1.310042</td>
-      <td>1.218881</td>
-      <td>1.247283</td>
-      <td>1.172351</td>
-      <td>1.370114</td>
-      <td>1.236151</td>
-      <td>1.313828</td>
-      <td>1.274511</td>
-      <td>1.293992</td>
-      <td>1.311999</td>
+      <td>1.279039</td>
+      <td>1.162940</td>
+      <td>1.192531</td>
+      <td>1.123059</td>
+      <td>1.358358</td>
+      <td>1.201576</td>
+      <td>1.282538</td>
+      <td>1.229372</td>
+      <td>1.275912</td>
+      <td>1.277292</td>
       <td>...</td>
-      <td>1.273916</td>
-      <td>1.220130</td>
-      <td>1.307373</td>
-      <td>1.277805</td>
-      <td>1.329701</td>
+      <td>1.237888</td>
+      <td>1.172691</td>
+      <td>1.279028</td>
+      <td>1.232802</td>
+      <td>1.308778</td>
       <td>0.000000</td>
-      <td>1.333518</td>
-      <td>1.195987</td>
-      <td>1.235246</td>
-      <td>1.221432</td>
+      <td>1.307732</td>
+      <td>1.144610</td>
+      <td>1.188982</td>
+      <td>1.177900</td>
     </tr>
     <tr>
       <th>A53818</th>
-      <td>1.346778</td>
-      <td>1.346623</td>
-      <td>1.356161</td>
-      <td>1.350303</td>
-      <td>1.380516</td>
-      <td>1.360853</td>
-      <td>1.313472</td>
-      <td>1.335803</td>
-      <td>1.371737</td>
-      <td>1.310435</td>
+      <td>1.322521</td>
+      <td>1.327107</td>
+      <td>1.338629</td>
+      <td>1.336810</td>
+      <td>1.366346</td>
+      <td>1.352527</td>
+      <td>1.283130</td>
+      <td>1.317474</td>
+      <td>1.366407</td>
+      <td>1.289383</td>
       <td>...</td>
-      <td>1.327658</td>
-      <td>1.363753</td>
-      <td>1.300872</td>
-      <td>1.345072</td>
-      <td>1.345671</td>
-      <td>1.333518</td>
+      <td>1.308720</td>
+      <td>1.348932</td>
+      <td>1.278803</td>
+      <td>1.321420</td>
+      <td>1.326311</td>
+      <td>1.307732</td>
       <td>0.000000</td>
-      <td>1.342397</td>
-      <td>1.358598</td>
-      <td>1.337482</td>
+      <td>1.327204</td>
+      <td>1.346209</td>
+      <td>1.320528</td>
     </tr>
     <tr>
       <th>A57156</th>
-      <td>1.320946</td>
-      <td>1.226397</td>
-      <td>1.249754</td>
-      <td>1.132169</td>
-      <td>1.375525</td>
-      <td>1.216030</td>
-      <td>1.327618</td>
-      <td>1.286547</td>
-      <td>1.274297</td>
-      <td>1.311981</td>
+      <td>1.287410</td>
+      <td>1.181073</td>
+      <td>1.201674</td>
+      <td>1.079009</td>
+      <td>1.369117</td>
+      <td>1.182909</td>
+      <td>1.304651</td>
+      <td>1.248453</td>
+      <td>1.259959</td>
+      <td>1.290235</td>
       <td>...</td>
-      <td>1.291568</td>
-      <td>1.230670</td>
-      <td>1.311937</td>
-      <td>1.289614</td>
-      <td>1.338420</td>
-      <td>1.195987</td>
-      <td>1.342397</td>
+      <td>1.265129</td>
+      <td>1.189002</td>
+      <td>1.284829</td>
+      <td>1.245869</td>
+      <td>1.320518</td>
+      <td>1.144610</td>
+      <td>1.327204</td>
       <td>0.000000</td>
-      <td>1.211370</td>
-      <td>1.222339</td>
+      <td>1.171885</td>
+      <td>1.187967</td>
     </tr>
     <tr>
       <th>A65985</th>
-      <td>1.296652</td>
-      <td>1.197699</td>
-      <td>1.203273</td>
-      <td>1.137134</td>
-      <td>1.386100</td>
-      <td>1.233905</td>
-      <td>1.345823</td>
-      <td>1.261121</td>
-      <td>1.305451</td>
-      <td>1.333307</td>
+      <td>1.269533</td>
+      <td>1.154153</td>
+      <td>1.173816</td>
+      <td>1.095766</td>
+      <td>1.380880</td>
+      <td>1.205187</td>
+      <td>1.327454</td>
+      <td>1.220195</td>
+      <td>1.293042</td>
+      <td>1.314582</td>
       <td>...</td>
-      <td>1.301967</td>
-      <td>1.222347</td>
-      <td>1.332329</td>
-      <td>1.264718</td>
-      <td>1.353246</td>
-      <td>1.235246</td>
-      <td>1.358598</td>
-      <td>1.211370</td>
+      <td>1.276562</td>
+      <td>1.188205</td>
+      <td>1.310859</td>
+      <td>1.222627</td>
+      <td>1.340587</td>
+      <td>1.188982</td>
+      <td>1.346209</td>
+      <td>1.171885</td>
       <td>0.000000</td>
-      <td>1.232445</td>
+      <td>1.199385</td>
     </tr>
     <tr>
       <th>A41955</th>
-      <td>1.313003</td>
-      <td>1.221007</td>
-      <td>1.266901</td>
-      <td>1.186429</td>
-      <td>1.371331</td>
-      <td>1.201298</td>
-      <td>1.318800</td>
-      <td>1.282141</td>
-      <td>1.282425</td>
-      <td>1.316022</td>
+      <td>1.289468</td>
+      <td>1.177594</td>
+      <td>1.228383</td>
+      <td>1.152096</td>
+      <td>1.363097</td>
+      <td>1.176995</td>
+      <td>1.293009</td>
+      <td>1.254010</td>
+      <td>1.274849</td>
+      <td>1.290434</td>
       <td>...</td>
-      <td>1.251783</td>
-      <td>1.190574</td>
-      <td>1.316063</td>
-      <td>1.290598</td>
-      <td>1.335526</td>
-      <td>1.221432</td>
-      <td>1.337482</td>
-      <td>1.222339</td>
-      <td>1.232445</td>
+      <td>1.229416</td>
+      <td>1.157189</td>
+      <td>1.290969</td>
+      <td>1.255395</td>
+      <td>1.316563</td>
+      <td>1.177900</td>
+      <td>1.320528</td>
+      <td>1.187967</td>
+      <td>1.199385</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -718,122 +732,122 @@
     <tr>
       <th>B02845</th>
       <td>0.000000</td>
-      <td>55.729687</td>
-      <td>51.974010</td>
-      <td>87.676697</td>
-      <td>28.857979</td>
-      <td>88.715280</td>
-      <td>27.394476</td>
-      <td>38.905840</td>
-      <td>85.810841</td>
-      <td>29.641572</td>
+      <td>49.062318</td>
+      <td>46.456602</td>
+      <td>73.766384</td>
+      <td>27.186106</td>
+      <td>78.554307</td>
+      <td>24.943120</td>
+      <td>34.566831</td>
+      <td>79.469178</td>
+      <td>26.949291</td>
       <td>...</td>
-      <td>34.261523</td>
-      <td>83.708689</td>
-      <td>29.228824</td>
-      <td>31.819858</td>
-      <td>28.179513</td>
-      <td>51.192696</td>
-      <td>26.983699</td>
-      <td>55.597272</td>
-      <td>65.165487</td>
-      <td>64.106420</td>
+      <td>30.360400</td>
+      <td>69.432405</td>
+      <td>26.710796</td>
+      <td>27.805034</td>
+      <td>26.033957</td>
+      <td>45.193555</td>
+      <td>24.824657</td>
+      <td>49.653876</td>
+      <td>57.385945</td>
+      <td>55.798902</td>
     </tr>
     <tr>
       <th>A51130</th>
-      <td>55.729687</td>
+      <td>49.062318</td>
       <td>0.000000</td>
-      <td>64.822780</td>
-      <td>91.902515</td>
-      <td>55.152083</td>
-      <td>97.926767</td>
-      <td>53.550342</td>
-      <td>59.311930</td>
-      <td>101.112287</td>
-      <td>55.056478</td>
+      <td>54.222675</td>
+      <td>74.468295</td>
+      <td>50.038157</td>
+      <td>83.725143</td>
+      <td>48.093947</td>
+      <td>50.662014</td>
+      <td>91.017690</td>
+      <td>49.512314</td>
       <td>...</td>
-      <td>57.298261</td>
-      <td>89.232443</td>
-      <td>54.486365</td>
-      <td>55.686694</td>
-      <td>54.017029</td>
-      <td>64.833257</td>
-      <td>53.223271</td>
-      <td>67.947342</td>
-      <td>74.297465</td>
-      <td>74.267718</td>
+      <td>50.224082</td>
+      <td>70.379190</td>
+      <td>48.649180</td>
+      <td>48.111085</td>
+      <td>48.690646</td>
+      <td>53.891687</td>
+      <td>47.872373</td>
+      <td>57.576146</td>
+      <td>62.536424</td>
+      <td>61.645990</td>
     </tr>
     <tr>
       <th>A36358</th>
-      <td>51.974010</td>
-      <td>64.822780</td>
+      <td>46.456602</td>
+      <td>54.222675</td>
       <td>0.000000</td>
-      <td>92.879475</td>
-      <td>50.456637</td>
-      <td>98.423786</td>
-      <td>49.290019</td>
-      <td>55.873211</td>
-      <td>99.577443</td>
-      <td>51.205557</td>
+      <td>75.969002</td>
+      <td>45.953901</td>
+      <td>84.997431</td>
+      <td>44.389212</td>
+      <td>47.860656</td>
+      <td>90.345377</td>
+      <td>45.867268</td>
       <td>...</td>
-      <td>54.612407</td>
-      <td>90.693265</td>
-      <td>50.681598</td>
-      <td>52.951746</td>
-      <td>49.793157</td>
-      <td>63.913262</td>
-      <td>49.260386</td>
-      <td>66.967821</td>
-      <td>72.675023</td>
-      <td>75.664139</td>
+      <td>48.027302</td>
+      <td>73.556452</td>
+      <td>45.390078</td>
+      <td>46.106143</td>
+      <td>44.922047</td>
+      <td>53.604590</td>
+      <td>44.502595</td>
+      <td>56.976705</td>
+      <td>62.323217</td>
+      <td>63.515684</td>
     </tr>
     <tr>
       <th>A28171</th>
-      <td>87.676697</td>
-      <td>91.902515</td>
-      <td>92.879475</td>
+      <td>73.766384</td>
+      <td>74.468295</td>
+      <td>75.969002</td>
       <td>0.000000</td>
-      <td>84.423598</td>
-      <td>97.693334</td>
-      <td>83.580663</td>
-      <td>89.582403</td>
-      <td>113.942085</td>
-      <td>85.058437</td>
+      <td>71.919571</td>
+      <td>81.237594</td>
+      <td>70.588241</td>
+      <td>73.913430</td>
+      <td>100.045007</td>
+      <td>71.692858</td>
       <td>...</td>
-      <td>86.391556</td>
-      <td>93.869316</td>
-      <td>84.456824</td>
-      <td>87.392112</td>
-      <td>83.996037</td>
-      <td>86.722342</td>
-      <td>83.022954</td>
-      <td>84.980525</td>
-      <td>91.087179</td>
-      <td>92.806112</td>
+      <td>71.618736</td>
+      <td>74.438993</td>
+      <td>71.076286</td>
+      <td>72.342723</td>
+      <td>71.155631</td>
+      <td>69.631721</td>
+      <td>70.231026</td>
+      <td>67.907561</td>
+      <td>73.658172</td>
+      <td>75.080058</td>
     </tr>
     <tr>
       <th>A51877</th>
-      <td>28.857979</td>
-      <td>55.152083</td>
-      <td>50.456637</td>
-      <td>84.423598</td>
+      <td>27.186106</td>
+      <td>50.038157</td>
+      <td>45.953901</td>
+      <td>71.919571</td>
       <td>0.000000</td>
-      <td>84.998300</td>
-      <td>21.284498</td>
-      <td>36.366100</td>
-      <td>80.559471</td>
-      <td>22.910382</td>
+      <td>76.105601</td>
+      <td>20.450297</td>
+      <td>33.690599</td>
+      <td>75.072247</td>
+      <td>21.894880</td>
       <td>...</td>
-      <td>30.387239</td>
-      <td>80.807050</td>
-      <td>21.801254</td>
-      <td>31.711135</td>
-      <td>21.450491</td>
-      <td>48.118558</td>
-      <td>20.612170</td>
-      <td>52.296205</td>
-      <td>63.950709</td>
-      <td>61.429944</td>
+      <td>28.456851</td>
+      <td>67.984999</td>
+      <td>20.761592</td>
+      <td>29.225079</td>
+      <td>20.839736</td>
+      <td>43.298651</td>
+      <td>19.549709</td>
+      <td>48.001198</td>
+      <td>57.542085</td>
+      <td>54.222051</td>
     </tr>
     <tr>
       <th>...</th>
@@ -861,122 +875,122 @@
     </tr>
     <tr>
       <th>A60948</th>
-      <td>51.192696</td>
-      <td>64.833257</td>
-      <td>63.913262</td>
-      <td>86.722342</td>
-      <td>48.118558</td>
-      <td>93.510020</td>
-      <td>46.450501</td>
-      <td>55.058915</td>
-      <td>95.593820</td>
-      <td>47.952769</td>
+      <td>45.193555</td>
+      <td>53.891687</td>
+      <td>53.604590</td>
+      <td>69.631721</td>
+      <td>43.298651</td>
+      <td>80.154267</td>
+      <td>41.146393</td>
+      <td>47.073327</td>
+      <td>86.242480</td>
+      <td>42.173978</td>
       <td>...</td>
-      <td>50.148169</td>
-      <td>87.239523</td>
-      <td>47.347027</td>
-      <td>51.897636</td>
-      <td>46.965439</td>
+      <td>43.276514</td>
+      <td>69.218446</td>
+      <td>41.920838</td>
+      <td>44.275903</td>
+      <td>41.876306</td>
       <td>0.000000</td>
-      <td>46.041379</td>
-      <td>61.250843</td>
-      <td>74.062192</td>
-      <td>70.586691</td>
+      <td>40.850785</td>
+      <td>51.758746</td>
+      <td>62.198522</td>
+      <td>58.447899</td>
     </tr>
     <tr>
       <th>A53818</th>
-      <td>26.983699</td>
-      <td>53.223271</td>
-      <td>49.260386</td>
-      <td>83.022954</td>
-      <td>20.612170</td>
-      <td>83.814390</td>
-      <td>18.472033</td>
-      <td>34.861591</td>
-      <td>79.653275</td>
-      <td>20.768595</td>
+      <td>24.824657</td>
+      <td>47.872373</td>
+      <td>44.502595</td>
+      <td>70.231026</td>
+      <td>19.549709</td>
+      <td>74.793490</td>
+      <td>16.797574</td>
+      <td>32.129446</td>
+      <td>74.005534</td>
+      <td>19.277792</td>
       <td>...</td>
-      <td>28.371200</td>
-      <td>79.604647</td>
-      <td>19.847619</td>
-      <td>29.867763</td>
-      <td>20.029364</td>
-      <td>46.041379</td>
+      <td>26.174668</td>
+      <td>66.479761</td>
+      <td>18.447064</td>
+      <td>26.958294</td>
+      <td>18.921282</td>
+      <td>40.850785</td>
       <td>0.000000</td>
-      <td>50.393832</td>
-      <td>62.340451</td>
-      <td>59.569190</td>
+      <td>45.825581</td>
+      <td>55.708712</td>
+      <td>52.179528</td>
     </tr>
     <tr>
       <th>A57156</th>
-      <td>55.597272</td>
-      <td>67.947342</td>
-      <td>66.967821</td>
-      <td>84.980525</td>
-      <td>52.296205</td>
-      <td>93.743856</td>
-      <td>50.875350</td>
-      <td>59.830095</td>
-      <td>96.076857</td>
-      <td>51.987987</td>
+      <td>49.653876</td>
+      <td>57.576146</td>
+      <td>56.976705</td>
+      <td>67.907561</td>
+      <td>48.001198</td>
+      <td>80.523296</td>
+      <td>46.073910</td>
+      <td>52.300658</td>
+      <td>87.004918</td>
+      <td>47.001442</td>
       <td>...</td>
-      <td>55.057412</td>
-      <td>90.299650</td>
-      <td>51.697250</td>
-      <td>56.405675</td>
-      <td>51.460379</td>
-      <td>61.250843</td>
-      <td>50.393832</td>
+      <td>48.848097</td>
+      <td>72.468100</td>
+      <td>46.441765</td>
+      <td>49.298383</td>
+      <td>46.762764</td>
+      <td>51.758746</td>
+      <td>45.825581</td>
       <td>0.000000</td>
-      <td>74.114647</td>
-      <td>72.968215</td>
+      <td>63.077692</td>
+      <td>61.390458</td>
     </tr>
     <tr>
       <th>A65985</th>
-      <td>65.165487</td>
-      <td>74.297465</td>
-      <td>72.675023</td>
-      <td>91.087179</td>
-      <td>63.950709</td>
-      <td>102.454809</td>
-      <td>62.790934</td>
-      <td>68.307826</td>
-      <td>107.964458</td>
-      <td>64.138075</td>
+      <td>57.385945</td>
+      <td>62.536424</td>
+      <td>62.323217</td>
+      <td>73.658172</td>
+      <td>57.542085</td>
+      <td>87.766238</td>
+      <td>55.975631</td>
+      <td>58.608088</td>
+      <td>97.132230</td>
+      <td>57.111213</td>
       <td>...</td>
-      <td>66.734171</td>
-      <td>96.003553</td>
-      <td>63.719435</td>
-      <td>65.396731</td>
-      <td>63.271991</td>
-      <td>74.062192</td>
-      <td>62.340451</td>
-      <td>74.114647</td>
+      <td>58.389323</td>
+      <td>77.834208</td>
+      <td>56.523703</td>
+      <td>56.387725</td>
+      <td>56.640798</td>
+      <td>62.198522</td>
+      <td>55.708712</td>
+      <td>63.077692</td>
       <td>0.000000</td>
-      <td>81.737142</td>
+      <td>68.284832</td>
     </tr>
     <tr>
       <th>A41955</th>
-      <td>64.106420</td>
-      <td>74.267718</td>
-      <td>75.664139</td>
-      <td>92.806112</td>
-      <td>61.429944</td>
-      <td>95.660497</td>
-      <td>59.957683</td>
-      <td>67.835311</td>
-      <td>102.003090</td>
-      <td>61.365149</td>
+      <td>55.798902</td>
+      <td>61.645990</td>
+      <td>63.515684</td>
+      <td>75.080058</td>
+      <td>54.222051</td>
+      <td>81.261956</td>
+      <td>52.231093</td>
+      <td>58.277358</td>
+      <td>91.371010</td>
+      <td>53.367105</td>
       <td>...</td>
-      <td>61.312909</td>
-      <td>89.242595</td>
-      <td>60.927150</td>
-      <td>65.207456</td>
-      <td>60.508757</td>
-      <td>70.586691</td>
-      <td>59.569190</td>
-      <td>72.968215</td>
-      <td>81.737142</td>
+      <td>52.704570</td>
+      <td>71.027916</td>
+      <td>52.972312</td>
+      <td>55.511161</td>
+      <td>53.011405</td>
+      <td>58.447899</td>
+      <td>52.179528</td>
+      <td>61.390458</td>
+      <td>68.284832</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1039,122 +1053,122 @@
     <tr>
       <th>B02845</th>
       <td>0.000000</td>
-      <td>0.815242</td>
-      <td>0.822193</td>
-      <td>0.880979</td>
-      <td>0.959852</td>
-      <td>0.890593</td>
-      <td>0.895194</td>
-      <td>0.825725</td>
-      <td>0.920950</td>
-      <td>0.895423</td>
+      <td>0.769307</td>
+      <td>0.795565</td>
+      <td>0.846346</td>
+      <td>0.946999</td>
+      <td>0.860660</td>
+      <td>0.852564</td>
+      <td>0.772983</td>
+      <td>0.906358</td>
+      <td>0.847861</td>
       <td>...</td>
-      <td>0.858512</td>
-      <td>0.875808</td>
-      <td>0.895703</td>
-      <td>0.761865</td>
-      <td>0.906527</td>
-      <td>0.858105</td>
-      <td>0.906906</td>
-      <td>0.872449</td>
-      <td>0.840653</td>
-      <td>0.861988</td>
+      <td>0.804030</td>
+      <td>0.840854</td>
+      <td>0.853723</td>
+      <td>0.704391</td>
+      <td>0.875300</td>
+      <td>0.817970</td>
+      <td>0.874531</td>
+      <td>0.828712</td>
+      <td>0.805857</td>
+      <td>0.831364</td>
     </tr>
     <tr>
       <th>A51130</th>
-      <td>0.815242</td>
+      <td>0.769307</td>
       <td>0.000000</td>
-      <td>0.720202</td>
-      <td>0.716725</td>
-      <td>0.953480</td>
-      <td>0.774465</td>
-      <td>0.878513</td>
-      <td>0.777185</td>
-      <td>0.846142</td>
-      <td>0.869367</td>
+      <td>0.657511</td>
+      <td>0.665617</td>
+      <td>0.940331</td>
+      <td>0.732616</td>
+      <td>0.847937</td>
+      <td>0.717888</td>
+      <td>0.823407</td>
+      <td>0.844624</td>
       <td>...</td>
-      <td>0.825849</td>
-      <td>0.731461</td>
-      <td>0.867820</td>
-      <td>0.756443</td>
-      <td>0.893266</td>
-      <td>0.742836</td>
-      <td>0.906697</td>
-      <td>0.752025</td>
-      <td>0.717242</td>
-      <td>0.745429</td>
+      <td>0.786687</td>
+      <td>0.669307</td>
+      <td>0.830822</td>
+      <td>0.699004</td>
+      <td>0.868181</td>
+      <td>0.676215</td>
+      <td>0.880606</td>
+      <td>0.697467</td>
+      <td>0.666034</td>
+      <td>0.693363</td>
     </tr>
     <tr>
       <th>A36358</th>
-      <td>0.822193</td>
-      <td>0.720202</td>
+      <td>0.795565</td>
+      <td>0.657511</td>
       <td>0.000000</td>
-      <td>0.755597</td>
-      <td>0.944681</td>
-      <td>0.814951</td>
-      <td>0.885293</td>
-      <td>0.787835</td>
-      <td>0.870704</td>
-      <td>0.888536</td>
+      <td>0.708998</td>
+      <td>0.930640</td>
+      <td>0.774146</td>
+      <td>0.857003</td>
+      <td>0.731521</td>
+      <td>0.850164</td>
+      <td>0.855256</td>
       <td>...</td>
-      <td>0.848196</td>
-      <td>0.778645</td>
-      <td>0.888025</td>
-      <td>0.791779</td>
-      <td>0.897481</td>
-      <td>0.777857</td>
-      <td>0.919586</td>
-      <td>0.780943</td>
-      <td>0.723933</td>
-      <td>0.802519</td>
+      <td>0.809138</td>
+      <td>0.733072</td>
+      <td>0.854823</td>
+      <td>0.744354</td>
+      <td>0.872541</td>
+      <td>0.711065</td>
+      <td>0.895964</td>
+      <td>0.722011</td>
+      <td>0.688922</td>
+      <td>0.754462</td>
     </tr>
     <tr>
       <th>A28171</th>
-      <td>0.880979</td>
-      <td>0.716725</td>
-      <td>0.755597</td>
+      <td>0.846346</td>
+      <td>0.665617</td>
+      <td>0.708998</td>
       <td>0.000000</td>
-      <td>0.948989</td>
-      <td>0.614342</td>
-      <td>0.902773</td>
-      <td>0.815225</td>
-      <td>0.766216</td>
-      <td>0.892537</td>
+      <td>0.941224</td>
+      <td>0.582452</td>
+      <td>0.874778</td>
+      <td>0.767844</td>
+      <td>0.755104</td>
+      <td>0.864583</td>
       <td>...</td>
-      <td>0.838385</td>
-      <td>0.603443</td>
-      <td>0.887138</td>
-      <td>0.830828</td>
-      <td>0.912540</td>
-      <td>0.687204</td>
-      <td>0.911659</td>
-      <td>0.640904</td>
-      <td>0.646536</td>
-      <td>0.703807</td>
+      <td>0.801560</td>
+      <td>0.569643</td>
+      <td>0.857254</td>
+      <td>0.786246</td>
+      <td>0.890583</td>
+      <td>0.630630</td>
+      <td>0.893531</td>
+      <td>0.582130</td>
+      <td>0.600352</td>
+      <td>0.663663</td>
     </tr>
     <tr>
       <th>A51877</th>
-      <td>0.959852</td>
-      <td>0.953480</td>
-      <td>0.944681</td>
-      <td>0.948989</td>
+      <td>0.946999</td>
+      <td>0.940331</td>
+      <td>0.930640</td>
+      <td>0.941224</td>
       <td>0.000000</td>
-      <td>0.955299</td>
-      <td>0.953126</td>
-      <td>0.930692</td>
-      <td>0.955834</td>
-      <td>0.931133</td>
+      <td>0.948203</td>
+      <td>0.942591</td>
+      <td>0.913416</td>
+      <td>0.953314</td>
+      <td>0.913643</td>
       <td>...</td>
-      <td>0.928574</td>
-      <td>0.958679</td>
-      <td>0.874990</td>
-      <td>0.947190</td>
-      <td>0.942824</td>
-      <td>0.938607</td>
-      <td>0.952913</td>
-      <td>0.946034</td>
-      <td>0.960637</td>
-      <td>0.940274</td>
+      <td>0.919726</td>
+      <td>0.950824</td>
+      <td>0.858766</td>
+      <td>0.931403</td>
+      <td>0.936311</td>
+      <td>0.922569</td>
+      <td>0.933451</td>
+      <td>0.937241</td>
+      <td>0.953415</td>
+      <td>0.929017</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1182,122 +1196,122 @@
     </tr>
     <tr>
       <th>A60948</th>
-      <td>0.858105</td>
-      <td>0.742836</td>
-      <td>0.777857</td>
-      <td>0.687204</td>
-      <td>0.938607</td>
-      <td>0.764035</td>
-      <td>0.863072</td>
-      <td>0.812189</td>
-      <td>0.837208</td>
-      <td>0.860671</td>
+      <td>0.817970</td>
+      <td>0.676215</td>
+      <td>0.711065</td>
+      <td>0.630630</td>
+      <td>0.922569</td>
+      <td>0.721892</td>
+      <td>0.822452</td>
+      <td>0.755678</td>
+      <td>0.813975</td>
+      <td>0.815738</td>
       <td>...</td>
-      <td>0.811431</td>
-      <td>0.744358</td>
-      <td>0.854613</td>
-      <td>0.816393</td>
-      <td>0.884052</td>
+      <td>0.766183</td>
+      <td>0.687602</td>
+      <td>0.817957</td>
+      <td>0.759900</td>
+      <td>0.856450</td>
       <td>0.000000</td>
-      <td>0.889135</td>
-      <td>0.715193</td>
-      <td>0.762917</td>
-      <td>0.745949</td>
+      <td>0.855082</td>
+      <td>0.655066</td>
+      <td>0.706839</td>
+      <td>0.693725</td>
     </tr>
     <tr>
       <th>A53818</th>
-      <td>0.906906</td>
-      <td>0.906697</td>
-      <td>0.919586</td>
-      <td>0.911659</td>
-      <td>0.952913</td>
-      <td>0.925960</td>
-      <td>0.862604</td>
-      <td>0.892185</td>
-      <td>0.940831</td>
-      <td>0.858620</td>
+      <td>0.874531</td>
+      <td>0.880606</td>
+      <td>0.895964</td>
+      <td>0.893531</td>
+      <td>0.933451</td>
+      <td>0.914665</td>
+      <td>0.823211</td>
+      <td>0.867869</td>
+      <td>0.933535</td>
+      <td>0.831254</td>
       <td>...</td>
-      <td>0.881337</td>
-      <td>0.929910</td>
-      <td>0.846134</td>
-      <td>0.904610</td>
-      <td>0.905416</td>
-      <td>0.889135</td>
+      <td>0.856373</td>
+      <td>0.909808</td>
+      <td>0.817668</td>
+      <td>0.873076</td>
+      <td>0.879550</td>
+      <td>0.855082</td>
       <td>0.000000</td>
-      <td>0.901015</td>
-      <td>0.922894</td>
-      <td>0.894429</td>
+      <td>0.880735</td>
+      <td>0.906139</td>
+      <td>0.871896</td>
     </tr>
     <tr>
       <th>A57156</th>
-      <td>0.872449</td>
-      <td>0.752025</td>
-      <td>0.780943</td>
-      <td>0.640904</td>
-      <td>0.946034</td>
-      <td>0.739364</td>
-      <td>0.881285</td>
-      <td>0.827602</td>
-      <td>0.811916</td>
-      <td>0.860647</td>
+      <td>0.828712</td>
+      <td>0.697467</td>
+      <td>0.722011</td>
+      <td>0.582130</td>
+      <td>0.937241</td>
+      <td>0.699637</td>
+      <td>0.851057</td>
+      <td>0.779317</td>
+      <td>0.793748</td>
+      <td>0.832353</td>
       <td>...</td>
-      <td>0.834074</td>
-      <td>0.757275</td>
-      <td>0.860590</td>
-      <td>0.831553</td>
-      <td>0.895684</td>
-      <td>0.715193</td>
-      <td>0.901015</td>
+      <td>0.800275</td>
+      <td>0.706863</td>
+      <td>0.825393</td>
+      <td>0.776095</td>
+      <td>0.871884</td>
+      <td>0.655066</td>
+      <td>0.880735</td>
       <td>0.000000</td>
-      <td>0.733708</td>
-      <td>0.747056</td>
+      <td>0.686657</td>
+      <td>0.705633</td>
     </tr>
     <tr>
       <th>A65985</th>
-      <td>0.840653</td>
-      <td>0.717242</td>
-      <td>0.723933</td>
-      <td>0.646536</td>
-      <td>0.960637</td>
-      <td>0.761261</td>
-      <td>0.905620</td>
-      <td>0.795213</td>
-      <td>0.852101</td>
-      <td>0.888854</td>
+      <td>0.805857</td>
+      <td>0.666034</td>
+      <td>0.688922</td>
+      <td>0.600352</td>
+      <td>0.953415</td>
+      <td>0.726237</td>
+      <td>0.881066</td>
+      <td>0.744438</td>
+      <td>0.835979</td>
+      <td>0.864063</td>
       <td>...</td>
-      <td>0.847559</td>
-      <td>0.747067</td>
-      <td>0.887550</td>
-      <td>0.799756</td>
-      <td>0.915638</td>
-      <td>0.762917</td>
-      <td>0.922894</td>
-      <td>0.733708</td>
+      <td>0.814806</td>
+      <td>0.705915</td>
+      <td>0.859176</td>
+      <td>0.747408</td>
+      <td>0.898587</td>
+      <td>0.706839</td>
+      <td>0.906139</td>
+      <td>0.686657</td>
       <td>0.000000</td>
-      <td>0.759460</td>
+      <td>0.719262</td>
     </tr>
     <tr>
       <th>A41955</th>
-      <td>0.861988</td>
-      <td>0.745429</td>
-      <td>0.802519</td>
-      <td>0.703807</td>
-      <td>0.940274</td>
-      <td>0.721558</td>
-      <td>0.869617</td>
-      <td>0.821942</td>
-      <td>0.822306</td>
-      <td>0.865957</td>
+      <td>0.831364</td>
+      <td>0.693363</td>
+      <td>0.754462</td>
+      <td>0.663663</td>
+      <td>0.929017</td>
+      <td>0.692659</td>
+      <td>0.835936</td>
+      <td>0.786271</td>
+      <td>0.812620</td>
+      <td>0.832610</td>
       <td>...</td>
-      <td>0.783481</td>
-      <td>0.708734</td>
-      <td>0.866011</td>
-      <td>0.832822</td>
-      <td>0.891814</td>
-      <td>0.745949</td>
-      <td>0.894429</td>
-      <td>0.747056</td>
-      <td>0.759460</td>
+      <td>0.755732</td>
+      <td>0.669543</td>
+      <td>0.833300</td>
+      <td>0.788008</td>
+      <td>0.866669</td>
+      <td>0.693725</td>
+      <td>0.871896</td>
+      <td>0.705633</td>
+      <td>0.719262</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -1317,11 +1331,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A29017    0.570971
-A28171    0.603443
-A57484    0.620828
-A60482    0.635795
-A56381    0.637656
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A29017    0.541178
+A28171    0.569643
+A66752    0.593669
+A56381    0.596200
+A56390    0.596567
 Name: A53049, dtype: float64
 </pre></div>
 </div>
@@ -1509,15 +1523,9 @@ Name: A53049, dtype: float64
       <td>1667</td>
     </tr>
     <tr>
-      <th>A57484</th>
-      <td>Rochefort, César de, b. 1605.</td>
-      <td>The history of the Caribby-islands, viz, Barba...</td>
-      <td>1666</td>
-    </tr>
-    <tr>
-      <th>A60482</th>
-      <td>Smith, John, 1630-1679.</td>
-      <td>Gērochomia vasilikē King Solomons portraiture ...</td>
+      <th>A66752</th>
+      <td>Wither, George, 1588-1667.</td>
+      <td>Ecchoes from the sixth trumpet. The first part...</td>
       <td>1666</td>
     </tr>
     <tr>
@@ -1526,11 +1534,776 @@ Name: A53049, dtype: float64
       <td>An account of the nature and extent of the div...</td>
       <td>1666</td>
     </tr>
+    <tr>
+      <th>A56390</th>
+      <td>Parker, Samuel, 1640-1688.</td>
+      <td>A free and impartial censure of the Platonick ...</td>
+      <td>1666</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <p>You now have all the tools you need to creat your own mini <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a>, one focused on exactly the texts you care most about. For more on how to interpret these results and things to watch out for when calculating similarity, refer again to <a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">The Programming Historian</a>.</p>
+</div>
+<div class="section" id="visualizing-results">
+<h2><span class="section-number">4.4. </span>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve calculated similarity among all the 1666 texts, it’s helpful to explore further by visualizing those results in different ways. The first thing we need to do is import some simple graphing libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-words">
+<h3><span class="section-number">4.4.1. </span>Visualizing Words<a class="headerlink" href="#visualizing-words" title="Permalink to this headline">¶</a></h3>
+<p>In our results above, we found the text most similar to Cavendish’s <em>Blazing World</em>: Boyle’s <em>The Origin of Forms and Qualities</em>. (We know this similarity makes sense because Cavendish’s <em>Blazing World</em> also includes a scientific treatise: <em>Observations upon Experimental Philosophy</em>.)</p>
+<p>We might want to know which features—in this case individual words—“drive” the similarity between these two texts. We can do this by graphing all the words that appear in both texts according to their Tf-Idf values.</p>
+<p>Luckily, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> lets us do so easily by selecting for the IDs of each text:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to &quot;transpose&quot; our results so that the texts are the columns and the words are the rows.</span>
+<span class="n">transformed_results</span> <span class="o">=</span> <span class="n">readable_results</span><span class="o">.</span><span class="n">T</span> 
+
+<span class="c1"># Then we can graph by selecting our two texts</span>
+<span class="n">transformed_results</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;A53049&#39;</span><span class="p">,</span><span class="s1">&#39;A29017&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc2f3026100&gt;
+</pre></div>
+</div>
+<img alt="_images/similarity_22_1.png" src="_images/similarity_22_1.png" />
+</div>
+</div>
+<p>You can see there are lots of words along the x- and y-axes that only appear in one text or the other. But there are plenty of words that appearn in both, with varying Tf-Idf scores.</p>
+<p>The words we’re interested in will have high Tf-Idf scores in both texts—those are the words that most account for the high similarity score between these two books. We’d like to label those words on this graph.</p>
+<p>First, we can subselect a set of words based on their TF-Idf scores in the two columns we care about. This will create a new, much smaller DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_results</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="p">[((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">))]</span> 
+<span class="n">filtered_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B02845</th>
+      <th>A51130</th>
+      <th>A36358</th>
+      <th>A28171</th>
+      <th>A51877</th>
+      <th>A60482</th>
+      <th>A32566</th>
+      <th>A35206</th>
+      <th>A35114</th>
+      <th>A32207</th>
+      <th>...</th>
+      <th>A59614</th>
+      <th>A53049</th>
+      <th>A32567</th>
+      <th>A38630</th>
+      <th>A32559</th>
+      <th>A60948</th>
+      <th>A53818</th>
+      <th>A57156</th>
+      <th>A65985</th>
+      <th>A41955</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>liquor</th>
+      <td>0.0</td>
+      <td>0.036426</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.022491</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.027102</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>chemist</th>
+      <td>0.0</td>
+      <td>0.021048</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008530</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.031120</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>figure</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014658</td>
+      <td>0.009893</td>
+      <td>0.0</td>
+      <td>0.017729</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.037536</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.009958</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>metal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.020051</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.012843</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.023320</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.011752</td>
+    </tr>
+    <tr>
+      <th>mineral</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.008344</td>
+      <td>0.0</td>
+      <td>0.020664</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.036862</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>finite</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.024130</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044340</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.026685</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>sensitive</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.008754</td>
+      <td>0.0</td>
+      <td>0.019826</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.050490</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>perception</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.022340</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.062897</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014504</td>
+    </tr>
+    <tr>
+      <th>production</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.020664</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.038184</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>immaterial</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008530</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.042829</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>inanimate</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.018417</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.048115</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>fluid</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.020942</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.034811</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>texture</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.009050</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.007984</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>particle</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.015278</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.035767</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>local</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.008248</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.030119</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>corpuscle</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.016755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>volatile</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.023355</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>vitriol</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.019052</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>saline</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.027418</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>camphire</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.009409</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>corporeal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.045473</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>acid</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.021550</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014504</td>
+    </tr>
+    <tr>
+      <th>perceptive</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.051852</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>incorporeal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044798</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>nitre</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.026096</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>microscope</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044798</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>26 rows × 142 columns</p>
+</div></div></div>
+</div>
+<p>These are the 11 words which drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.</p>
+<p>And we can add these words as labels to our graph in order to see their relative Tf-Idf weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;A53049&#39;</span><span class="p">,</span><span class="s1">&#39;A29017&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">filtered_results</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">A53049</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">A29017</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/similarity_26_0.png" src="_images/similarity_26_0.png" />
+</div>
+</div>
+<p>This graph tells us quite a bit about the similarity between these two texts. Words like “texture” and “corpuscles” have very high Tf-Idf scores in Boyle and somewhat high scores in Cavendish. Words like “perception” and “sensitive” have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like “microscope,” “mineral,” and “corporeal,” have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.</p>
+</div>
+<div class="section" id="visualizing-texts">
+<h3><span class="section-number">4.4.2. </span>Visualizing Texts<a class="headerlink" href="#visualizing-texts" title="Permalink to this headline">¶</a></h3>
+<p>In addition to visualizing the words in just two texts, it can also be helpful to visualize all of our texts at once. We can create a visualization of our entire similarity matrix by making a heatmap: a chart where values are expressed as colors.</p>
+<p>Using the <a class="reference external" href="https://seaborn.pydata.org/index.html"><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a> library, this is as easy as inputting our cosine distance DataFrame into a single function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># This line just makes our heatmap a little bigger</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cosine_df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm_r&#39;</span><span class="p">)</span> <span class="c1"># This function creates the heatmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc2f564a7f0&gt;
+</pre></div>
+</div>
+<img alt="_images/similarity_28_1.png" src="_images/similarity_28_1.png" />
+</div>
+</div>
+<p>Like the word-based visualization above, this heatmap of texts is also showing us a lot that we couldn’t see just by looking at a table of numbers.</p>
+<p>Mainly, we can see that most of the texts are not all that similar! Most of the values are showing up as blue, on the coolest end of our heatmap spectrum. [Look at the key on the right, and remember that when measuring distance higher values mean that two texts are farther apart.] This makes sense, as a group of texts published in just one year won’t necessarily use much of the same vocabulary.</p>
+<p>Down the center diagonal of our heatmap is a solid red line. This is where a text matches with itself in our matrix, and texts are always perfectly similar to themselves.</p>
+<p>But all is not lost: notice that some of the points are much lighter blue. These texts are more similar than the dark blue intersections, so there is some variation in our graph. And a few points that are not along the diagonal are dark red, indicating quite low distance, i.e. very high similarity. You would need to use the metadata techniques we learned above to get more information, but it’s possible that these very similar texts were written by the same author or are about the same topics.</p>
+<p>Visualization doesn’t answer all our questions, but it allows us to view the similarity measures in a few different ways. And by seeing our data anew, we can generate more research questions that require further digging, a generative cycle.</p>
+</div>
 </div>
 </div>
 
