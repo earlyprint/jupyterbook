@@ -1560,7 +1560,7 @@ Name: A53049, dtype: float64
 <div class="section" id="visualizing-words">
 <h3><span class="section-number">4.4.1. </span>Visualizing Words<a class="headerlink" href="#visualizing-words" title="Permalink to this headline">¶</a></h3>
 <p>In our results above, we found the text most similar to Cavendish’s <em>Blazing World</em>: Boyle’s <em>The Origin of Forms and Qualities</em>. (We know this similarity makes sense because Cavendish’s <em>Blazing World</em> also includes a scientific treatise: <em>Observations upon Experimental Philosophy</em>.)</p>
-<p>We might want to know which features—in this case individual words—“drive” the similarity between these two texts. We can do this by graphing all the words that appear in both texts according to their Tf-Idf values.</p>
+<p>We might want to know which features—in this case individual words—“drive” the similarity between these two texts. We can do this by graphing all the words that appear in both texts according to their TF-IDF values.</p>
 <p>Luckily, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> lets us do so easily by selecting for the IDs of each text:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1579,9 +1579,9 @@ Name: A53049, dtype: float64
 <img alt="_images/similarity_22_1.png" src="_images/similarity_22_1.png" />
 </div>
 </div>
-<p>You can see there are lots of words along the x- and y-axes that only appear in one text or the other. But there are plenty of words that appearn in both, with varying Tf-Idf scores.</p>
-<p>The words we’re interested in will have high Tf-Idf scores in both texts—those are the words that most account for the high similarity score between these two books. We’d like to label those words on this graph.</p>
-<p>First, we can subselect a set of words based on their TF-Idf scores in the two columns we care about. This will create a new, much smaller DataFrame:</p>
+<p>You can see there are lots of words along the x- and y-axes that only appear in one text or the other. But there are plenty of words that appear in both, with varying TF-IDF scores.</p>
+<p>The words we’re interested in will have high TF-IDF scores in both texts—those are the words that most account for the high similarity score between these two books. We’d like to label those words on this graph.</p>
+<p>First, we can subselect a set of words based on their TF-IDF scores in the two columns we care about. This will create a new, much smaller DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_results</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="p">[((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">))]</span> 
@@ -2261,8 +2261,8 @@ Name: A53049, dtype: float64
 <p>26 rows × 142 columns</p>
 </div></div></div>
 </div>
-<p>These are the 11 words which drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.</p>
-<p>And we can add these words as labels to our graph in order to see their relative Tf-Idf weights:</p>
+<p>These are the 26 words that drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.</p>
+<p>And we can add these words as labels to our graph in order to see their relative TF-IDF weights:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;A53049&#39;</span><span class="p">,</span><span class="s1">&#39;A29017&#39;</span><span class="p">)</span>
@@ -2278,7 +2278,7 @@ Name: A53049, dtype: float64
 <img alt="_images/similarity_26_0.png" src="_images/similarity_26_0.png" />
 </div>
 </div>
-<p>This graph tells us quite a bit about the similarity between these two texts. Words like “texture” and “corpuscles” have very high Tf-Idf scores in Boyle and somewhat high scores in Cavendish. Words like “perception” and “sensitive” have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like “microscope,” “mineral,” and “corporeal,” have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.</p>
+<p>This graph tells us quite a bit about the similarity between these two texts. Words like “texture” and “corpuscles” have very high TF-IDF scores in Boyle and somewhat high scores in Cavendish. Words like “perception” and “sensitive” have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like “microscope,” “mineral,” and “corporeal,” have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.</p>
 </div>
 <div class="section" id="visualizing-texts">
 <h3><span class="section-number">4.4.2. </span>Visualizing Texts<a class="headerlink" href="#visualizing-texts" title="Permalink to this headline">¶</a></h3>
@@ -2302,7 +2302,7 @@ Name: A53049, dtype: float64
 <p>Mainly, we can see that most of the texts are not all that similar! Most of the values are showing up as blue, on the coolest end of our heatmap spectrum. [Look at the key on the right, and remember that when measuring distance higher values mean that two texts are farther apart.] This makes sense, as a group of texts published in just one year won’t necessarily use much of the same vocabulary.</p>
 <p>Down the center diagonal of our heatmap is a solid red line. This is where a text matches with itself in our matrix, and texts are always perfectly similar to themselves.</p>
 <p>But all is not lost: notice that some of the points are much lighter blue. These texts are more similar than the dark blue intersections, so there is some variation in our graph. And a few points that are not along the diagonal are dark red, indicating quite low distance, i.e. very high similarity. You would need to use the metadata techniques we learned above to get more information, but it’s possible that these very similar texts were written by the same author or are about the same topics.</p>
-<p>Visualization doesn’t answer all our questions, but it allows us to view the similarity measures in a few different ways. And by seeing our data anew, we can generate more research questions that require further digging, a generative cycle.</p>
+<p>Visualization doesn’t answer all our questions, but it allows us to view similarity measures in a few different ways. And by seeing our data anew, we can generate more research questions that require further digging: a generative cycle.</p>
 </div>
 </div>
 </div>
