@@ -8,3 +8,4 @@
 - file: tf_idf
 - file: metadata
 - file: similarity
+- file: word2vec

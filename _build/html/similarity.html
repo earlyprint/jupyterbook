@@ -1,0 +1,2370 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. Text Similarity &#8212; EarlyPrint + Python</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Word Embeddings" href="word2vec.html" />
+    <link rel="prev" title="3. Working with Metadata, Creating Text Networks" href="metadata.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/eplogo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">EarlyPrint + Python</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   EarlyPrint + Python
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ep_xml.html">
+   1. Parsing
+   <em>
+    EarlyPrint
+   </em>
+   XML Texts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tf_idf.html">
+   2. Exploring Vocabulary Using Tf-Idf
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html">
+   3. Working with Metadata, Creating Text Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Text Similarity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec.html">
+   5. Word Embeddings
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/similarity.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/earlyprint/jupyterbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/earlyprint/jupyterbook/issues/new?title=Issue%20on%20page%20%2Fsimilarity.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/earlyprint/jupyterbook/master?urlpath=tree/similarity.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-features">
+   4.1. Get Features
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-distance">
+   4.2. Calculate Distance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-results">
+   4.3. Reading Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-results">
+   4.4. Visualizing Results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-words">
+     4.4.1. Visualizing Words
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-texts">
+     4.4.2. Visualizing Texts
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="text-similarity">
+<h1><span class="section-number">4. </span>Text Similarity<a class="headerlink" href="#text-similarity" title="Permalink to this headline">¶</a></h1>
+<p><em>EarlyPrint</em>’s <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a> allows you to find a set of texts similar to any text in our corpus. It does this by using some basic measures of text similarity, and it’s easy to use if you’re interested in finding similar texts across the entire early modern corpus.</p>
+<p>But you might be interested in finding similarity across a smaller subset of the corpus. In this tutorial, we’ll calculate similarity across the same set of 1666 texts that we used in the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF tutorial</a>. You could easily do the same with any subset of texts that you’ve gathered using the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html">Metadata tutorial</a>.</p>
+<p>This tutorial is meant as a companion to an explanation of text similarity that I wrote for <em>The Programming Historian</em>:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">Understanding and Using Common Similarity Measures for Text Analysis</a></p>
+</div></blockquote>
+<p>The article uses the same 1666 corpus as its example, but here we’ll work directly with the <em>EarlyPrint</em> XML instead of with plaintext files. For full explanations of the different similarity measures and how they’re used, please use that piece as a guide.</p>
+<p>First, we’ll import necessary libraries. [n.b. In the <em>Programming Historian</em> tutorial, I use <code class="docutils literal notranslate"><span class="pre">scipy</span></code>’s implementation of pairwise distances. For simplicity’s sake, here we’re using Sci-kit Learn’s built-in distance function.]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">pairwise_distances</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we use <code class="docutils literal notranslate"><span class="pre">glob</span></code> to get our list of files and isolate the filekeys to use later. This is the complete list of texts we’re working with in this example. You may have a different directory or filepath for your own files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the glob library to create a list of file names</span>
+<span class="n">filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts/*.xml&quot;</span><span class="p">)</span>
+<span class="c1"># Parse those filenames to create a list of file keys (ID numbers)</span>
+<span class="c1"># You&#39;ll use these later on.</span>
+<span class="n">filekeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filekeys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;B02845&#39;, &#39;A51130&#39;, &#39;A36358&#39;, &#39;A28171&#39;, &#39;A51877&#39;, &#39;A60482&#39;, &#39;A32566&#39;, &#39;A35206&#39;, &#39;A35114&#39;, &#39;A32207&#39;, &#39;A39345&#39;, &#39;A25743&#39;, &#39;A86466&#39;, &#39;A61929&#39;, &#39;B03114&#39;, &#39;A32916&#39;, &#39;A70852&#39;, &#39;B01661&#39;, &#39;A61594&#39;, &#39;A35608&#39;, &#39;A64861&#39;, &#39;A61503&#39;, &#39;A79302&#39;, &#39;A62436&#39;, &#39;A38556&#39;, &#39;A32751&#39;, &#39;A63370&#39;, &#39;A57484&#39;, &#39;A92820&#39;, &#39;A39246&#39;, &#39;A87622&#39;, &#39;A66752&#39;, &#39;A26426&#39;, &#39;A26249&#39;, &#39;A55410&#39;, &#39;A46087&#39;, &#39;A31237&#39;, &#39;A61867&#39;, &#39;A61891&#39;, &#39;B05835&#39;, &#39;A28989&#39;, &#39;A31124&#39;, &#39;A80818&#39;, &#39;A65296&#39;, &#39;A30203&#39;, &#39;A55387&#39;, &#39;A59325&#39;, &#39;B06022&#39;, &#39;A56381&#39;, &#39;A61600&#39;, &#39;A66777&#39;, &#39;A39714&#39;, &#39;A44801&#39;, &#39;A71109&#39;, &#39;A49213&#39;, &#39;A43020&#39;, &#39;A45206&#39;, &#39;A95690&#39;, &#39;A60606&#39;, &#39;A23770&#39;, &#39;A52519&#39;, &#39;A44938&#39;, &#39;A64258&#39;, &#39;A70867&#39;, &#39;A35851&#39;, &#39;A56390&#39;, &#39;B02572&#39;, &#39;A91186&#39;, &#39;A59229&#39;, &#39;B05308&#39;, &#39;A30143&#39;, &#39;A46046&#39;, &#39;B03376&#39;, &#39;B03317&#39;, &#39;A47095&#39;, &#39;B01318&#39;, &#39;B03106&#39;, &#39;A44879&#39;, &#39;A54070&#39;, &#39;A70287&#39;, &#39;A28209&#39;, &#39;B04153&#39;, &#39;A29017&#39;, &#39;A70866&#39;, &#39;A47367&#39;, &#39;A44334&#39;, &#39;B03109&#39;, &#39;B02123&#39;, &#39;A42533&#39;, &#39;A42537&#39;, &#39;A44627&#39;, &#39;A93280&#39;, &#39;A38792&#39;, &#39;B06375&#39;, &#39;A67572&#39;, &#39;A46030&#39;, &#39;A32581&#39;, &#39;A44478&#39;, &#39;A47379&#39;, &#39;A41072&#39;, &#39;A32557&#39;, &#39;A37237&#39;, &#39;A39839&#39;, &#39;B04338&#39;, &#39;A48797&#39;, &#39;B03631&#39;, &#39;A46137&#39;, &#39;A41266&#39;, &#39;A32484&#39;, &#39;A25198&#39;, &#39;A42820&#39;, &#39;A39442&#39;, &#39;A67762&#39;, &#39;A45552&#39;, &#39;A52328&#39;, &#39;A97379&#39;, &#39;A44061&#39;, &#39;A93281&#39;, &#39;A67335&#39;, &#39;A40254&#39;, &#39;A26482&#39;, &#39;B05591&#39;, &#39;A32544&#39;, &#39;B06872&#39;, &#39;A32555&#39;, &#39;A36329&#39;, &#39;A41527&#39;, &#39;B04364&#39;, &#39;A41958&#39;, &#39;A31229&#39;, &#39;A96485&#39;, &#39;A32288&#39;, &#39;A59614&#39;, &#39;A53049&#39;, &#39;A32567&#39;, &#39;A38630&#39;, &#39;A32559&#39;, &#39;A60948&#39;, &#39;A53818&#39;, &#39;A57156&#39;, &#39;A65985&#39;, &#39;A41955&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="get-features">
+<h2><span class="section-number">4.1. </span>Get Features<a class="headerlink" href="#get-features" title="Permalink to this headline">¶</a></h2>
+<p>In order to measure similarity between texts, you need features of those texts to measure. The <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a> calculates similarity across three distinct sets of features for the same texts: TF-IDF weights for word counts, LDA Topic Modeling results, and XML tag structures. As our example here, we’ll use TF-IDF.</p>
+<p>The code below is taken directly from the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF Tutorial</a>, where you’ll find a full explanation of what it does. We loop through each text, extract words, count them, and convert those counts to TF-IDF values.</p>
+<p>n.b. There are two key differences between the TF-IDF tutorial and this one. Below I am getting counts of <strong>lemmas</strong>, dictionary headwords, rather than simply regularized forms of the word. This allows us to group plurals or verb forms into a single term. Also, here we’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">L2 normalization</a> on our TF-IDF transformation. Normalizing values helps us account for very long or very short texts that may skew our similarity results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty lists to put all our texts into</span>
+<span class="n">all_tokenized</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Then you can loop through the files</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">collect_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Create a parse object that skips XML IDs (in this case they just slow things down)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span> <span class="c1"># Parse each file into an XML tree</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span> <span class="c1"># Get the XML from that tree</span>
+    
+    <span class="c1"># Now we can use lxml to find all the w tags       </span>
+    <span class="n">word_tags</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//{*}w&quot;</span><span class="p">)</span>
+    <span class="c1"># In this next line you&#39;ll do several things at once to create a list of words for each text</span>
+    <span class="c1"># 1. Loop through each word: for word in word_tags</span>
+    <span class="c1"># 2. Make sure the tag has a word at all: if word.text != None</span>
+    <span class="c1"># 3. Get the lemmatized form of the word: word.get(&#39;reg&#39;, word.text)</span>
+    <span class="c1"># 4. Make sure all the words are in lowercase: .lower()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lemma&#39;</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_tags</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="c1"># Then we add these results to a master list</span>
+    <span class="n">all_tokenized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    
+<span class="c1"># We can count all the words in each text in one line of code</span>
+<span class="n">all_counted</span> <span class="o">=</span> <span class="p">[</span><span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">all_tokenized</span><span class="p">]</span>
+
+<span class="c1"># To prepare this data for Tf-Idf Transformation, we need to put into a different form, a DataFrame, using pandas.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_counted</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># First we need to create an &quot;instance&quot; of the transformer, with the proper settings.</span>
+<span class="c1"># Normalization is set to &#39;l2&#39;</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># I am choosing to turn on sublinear term frequency scaling, which takes the log of</span>
+<span class="c1"># term frequencies and can help to de-emphasize function words like pronouns and articles. </span>
+<span class="c1"># You might make a different choice depending on your corpus.</span>
+
+<span class="c1"># Once we&#39;ve created the instance, we can &quot;transform&quot; our counts</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Make results readable using Pandas</span>
+<span class="n">readable_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="c1"># Convert information back to a DataFrame</span>
+<span class="n">readable_results</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="calculate-distance">
+<h2><span class="section-number">4.2. </span>Calculate Distance<a class="headerlink" href="#calculate-distance" title="Permalink to this headline">¶</a></h2>
+<p>Below we’ll calculate three different distance metrics—euclidean distance, “cityblock” distance, and cosine distance—and create DataFrames for each one. For explanations of each metric, and for a discussion of the difference between similarity and distance, you can refer to <a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">The Programming Historian tutorial</a> which goes into these topics in detail.</p>
+<p>Euclidean distance is first, because it’s the default in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">euclidean</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">euclidean_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">euclidean</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">euclidean_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B02845</th>
+      <th>A51130</th>
+      <th>A36358</th>
+      <th>A28171</th>
+      <th>A51877</th>
+      <th>A60482</th>
+      <th>A32566</th>
+      <th>A35206</th>
+      <th>A35114</th>
+      <th>A32207</th>
+      <th>...</th>
+      <th>A59614</th>
+      <th>A53049</th>
+      <th>A32567</th>
+      <th>A38630</th>
+      <th>A32559</th>
+      <th>A60948</th>
+      <th>A53818</th>
+      <th>A57156</th>
+      <th>A65985</th>
+      <th>A41955</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B02845</th>
+      <td>0.000000</td>
+      <td>1.240409</td>
+      <td>1.261400</td>
+      <td>1.301035</td>
+      <td>1.376226</td>
+      <td>1.311991</td>
+      <td>1.305806</td>
+      <td>1.243369</td>
+      <td>1.346371</td>
+      <td>1.302199</td>
+      <td>...</td>
+      <td>1.268093</td>
+      <td>1.296807</td>
+      <td>1.306692</td>
+      <td>1.186921</td>
+      <td>1.323102</td>
+      <td>1.279039</td>
+      <td>1.322521</td>
+      <td>1.287410</td>
+      <td>1.269533</td>
+      <td>1.289468</td>
+    </tr>
+    <tr>
+      <th>A51130</th>
+      <td>1.240409</td>
+      <td>0.000000</td>
+      <td>1.146744</td>
+      <td>1.153791</td>
+      <td>1.371372</td>
+      <td>1.210468</td>
+      <td>1.302257</td>
+      <td>1.198239</td>
+      <td>1.283282</td>
+      <td>1.299711</td>
+      <td>...</td>
+      <td>1.254342</td>
+      <td>1.156985</td>
+      <td>1.289047</td>
+      <td>1.182374</td>
+      <td>1.317711</td>
+      <td>1.162940</td>
+      <td>1.327107</td>
+      <td>1.181073</td>
+      <td>1.154153</td>
+      <td>1.177594</td>
+    </tr>
+    <tr>
+      <th>A36358</th>
+      <td>1.261400</td>
+      <td>1.146744</td>
+      <td>0.000000</td>
+      <td>1.190797</td>
+      <td>1.364288</td>
+      <td>1.244304</td>
+      <td>1.309200</td>
+      <td>1.209562</td>
+      <td>1.303966</td>
+      <td>1.307866</td>
+      <td>...</td>
+      <td>1.272114</td>
+      <td>1.210844</td>
+      <td>1.307535</td>
+      <td>1.220127</td>
+      <td>1.321016</td>
+      <td>1.192531</td>
+      <td>1.338629</td>
+      <td>1.201674</td>
+      <td>1.173816</td>
+      <td>1.228383</td>
+    </tr>
+    <tr>
+      <th>A28171</th>
+      <td>1.301035</td>
+      <td>1.153791</td>
+      <td>1.190797</td>
+      <td>0.000000</td>
+      <td>1.372023</td>
+      <td>1.079308</td>
+      <td>1.322708</td>
+      <td>1.239229</td>
+      <td>1.228905</td>
+      <td>1.314978</td>
+      <td>...</td>
+      <td>1.266144</td>
+      <td>1.067373</td>
+      <td>1.309392</td>
+      <td>1.253991</td>
+      <td>1.334604</td>
+      <td>1.123059</td>
+      <td>1.336810</td>
+      <td>1.079009</td>
+      <td>1.095766</td>
+      <td>1.152096</td>
+    </tr>
+    <tr>
+      <th>A51877</th>
+      <td>1.376226</td>
+      <td>1.371372</td>
+      <td>1.364288</td>
+      <td>1.372023</td>
+      <td>0.000000</td>
+      <td>1.377101</td>
+      <td>1.373019</td>
+      <td>1.351603</td>
+      <td>1.380807</td>
+      <td>1.351772</td>
+      <td>...</td>
+      <td>1.356264</td>
+      <td>1.379003</td>
+      <td>1.310546</td>
+      <td>1.364846</td>
+      <td>1.368438</td>
+      <td>1.358358</td>
+      <td>1.366346</td>
+      <td>1.369117</td>
+      <td>1.380880</td>
+      <td>1.363097</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A60948</th>
+      <td>1.279039</td>
+      <td>1.162940</td>
+      <td>1.192531</td>
+      <td>1.123059</td>
+      <td>1.358358</td>
+      <td>1.201576</td>
+      <td>1.282538</td>
+      <td>1.229372</td>
+      <td>1.275912</td>
+      <td>1.277292</td>
+      <td>...</td>
+      <td>1.237888</td>
+      <td>1.172691</td>
+      <td>1.279028</td>
+      <td>1.232802</td>
+      <td>1.308778</td>
+      <td>0.000000</td>
+      <td>1.307732</td>
+      <td>1.144610</td>
+      <td>1.188982</td>
+      <td>1.177900</td>
+    </tr>
+    <tr>
+      <th>A53818</th>
+      <td>1.322521</td>
+      <td>1.327107</td>
+      <td>1.338629</td>
+      <td>1.336810</td>
+      <td>1.366346</td>
+      <td>1.352527</td>
+      <td>1.283130</td>
+      <td>1.317474</td>
+      <td>1.366407</td>
+      <td>1.289383</td>
+      <td>...</td>
+      <td>1.308720</td>
+      <td>1.348932</td>
+      <td>1.278803</td>
+      <td>1.321420</td>
+      <td>1.326311</td>
+      <td>1.307732</td>
+      <td>0.000000</td>
+      <td>1.327204</td>
+      <td>1.346209</td>
+      <td>1.320528</td>
+    </tr>
+    <tr>
+      <th>A57156</th>
+      <td>1.287410</td>
+      <td>1.181073</td>
+      <td>1.201674</td>
+      <td>1.079009</td>
+      <td>1.369117</td>
+      <td>1.182909</td>
+      <td>1.304651</td>
+      <td>1.248453</td>
+      <td>1.259959</td>
+      <td>1.290235</td>
+      <td>...</td>
+      <td>1.265129</td>
+      <td>1.189002</td>
+      <td>1.284829</td>
+      <td>1.245869</td>
+      <td>1.320518</td>
+      <td>1.144610</td>
+      <td>1.327204</td>
+      <td>0.000000</td>
+      <td>1.171885</td>
+      <td>1.187967</td>
+    </tr>
+    <tr>
+      <th>A65985</th>
+      <td>1.269533</td>
+      <td>1.154153</td>
+      <td>1.173816</td>
+      <td>1.095766</td>
+      <td>1.380880</td>
+      <td>1.205187</td>
+      <td>1.327454</td>
+      <td>1.220195</td>
+      <td>1.293042</td>
+      <td>1.314582</td>
+      <td>...</td>
+      <td>1.276562</td>
+      <td>1.188205</td>
+      <td>1.310859</td>
+      <td>1.222627</td>
+      <td>1.340587</td>
+      <td>1.188982</td>
+      <td>1.346209</td>
+      <td>1.171885</td>
+      <td>0.000000</td>
+      <td>1.199385</td>
+    </tr>
+    <tr>
+      <th>A41955</th>
+      <td>1.289468</td>
+      <td>1.177594</td>
+      <td>1.228383</td>
+      <td>1.152096</td>
+      <td>1.363097</td>
+      <td>1.176995</td>
+      <td>1.293009</td>
+      <td>1.254010</td>
+      <td>1.274849</td>
+      <td>1.290434</td>
+      <td>...</td>
+      <td>1.229416</td>
+      <td>1.157189</td>
+      <td>1.290969</td>
+      <td>1.255395</td>
+      <td>1.316563</td>
+      <td>1.177900</td>
+      <td>1.320528</td>
+      <td>1.187967</td>
+      <td>1.199385</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>142 rows × 142 columns</p>
+</div></div></div>
+</div>
+<p>Next is cityblock distance:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cityblock</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cityblock&#39;</span><span class="p">)</span>
+<span class="n">cityblock_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cityblock</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">cityblock_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B02845</th>
+      <th>A51130</th>
+      <th>A36358</th>
+      <th>A28171</th>
+      <th>A51877</th>
+      <th>A60482</th>
+      <th>A32566</th>
+      <th>A35206</th>
+      <th>A35114</th>
+      <th>A32207</th>
+      <th>...</th>
+      <th>A59614</th>
+      <th>A53049</th>
+      <th>A32567</th>
+      <th>A38630</th>
+      <th>A32559</th>
+      <th>A60948</th>
+      <th>A53818</th>
+      <th>A57156</th>
+      <th>A65985</th>
+      <th>A41955</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B02845</th>
+      <td>0.000000</td>
+      <td>49.062318</td>
+      <td>46.456602</td>
+      <td>73.766384</td>
+      <td>27.186106</td>
+      <td>78.554307</td>
+      <td>24.943120</td>
+      <td>34.566831</td>
+      <td>79.469178</td>
+      <td>26.949291</td>
+      <td>...</td>
+      <td>30.360400</td>
+      <td>69.432405</td>
+      <td>26.710796</td>
+      <td>27.805034</td>
+      <td>26.033957</td>
+      <td>45.193555</td>
+      <td>24.824657</td>
+      <td>49.653876</td>
+      <td>57.385945</td>
+      <td>55.798902</td>
+    </tr>
+    <tr>
+      <th>A51130</th>
+      <td>49.062318</td>
+      <td>0.000000</td>
+      <td>54.222675</td>
+      <td>74.468295</td>
+      <td>50.038157</td>
+      <td>83.725143</td>
+      <td>48.093947</td>
+      <td>50.662014</td>
+      <td>91.017690</td>
+      <td>49.512314</td>
+      <td>...</td>
+      <td>50.224082</td>
+      <td>70.379190</td>
+      <td>48.649180</td>
+      <td>48.111085</td>
+      <td>48.690646</td>
+      <td>53.891687</td>
+      <td>47.872373</td>
+      <td>57.576146</td>
+      <td>62.536424</td>
+      <td>61.645990</td>
+    </tr>
+    <tr>
+      <th>A36358</th>
+      <td>46.456602</td>
+      <td>54.222675</td>
+      <td>0.000000</td>
+      <td>75.969002</td>
+      <td>45.953901</td>
+      <td>84.997431</td>
+      <td>44.389212</td>
+      <td>47.860656</td>
+      <td>90.345377</td>
+      <td>45.867268</td>
+      <td>...</td>
+      <td>48.027302</td>
+      <td>73.556452</td>
+      <td>45.390078</td>
+      <td>46.106143</td>
+      <td>44.922047</td>
+      <td>53.604590</td>
+      <td>44.502595</td>
+      <td>56.976705</td>
+      <td>62.323217</td>
+      <td>63.515684</td>
+    </tr>
+    <tr>
+      <th>A28171</th>
+      <td>73.766384</td>
+      <td>74.468295</td>
+      <td>75.969002</td>
+      <td>0.000000</td>
+      <td>71.919571</td>
+      <td>81.237594</td>
+      <td>70.588241</td>
+      <td>73.913430</td>
+      <td>100.045007</td>
+      <td>71.692858</td>
+      <td>...</td>
+      <td>71.618736</td>
+      <td>74.438993</td>
+      <td>71.076286</td>
+      <td>72.342723</td>
+      <td>71.155631</td>
+      <td>69.631721</td>
+      <td>70.231026</td>
+      <td>67.907561</td>
+      <td>73.658172</td>
+      <td>75.080058</td>
+    </tr>
+    <tr>
+      <th>A51877</th>
+      <td>27.186106</td>
+      <td>50.038157</td>
+      <td>45.953901</td>
+      <td>71.919571</td>
+      <td>0.000000</td>
+      <td>76.105601</td>
+      <td>20.450297</td>
+      <td>33.690599</td>
+      <td>75.072247</td>
+      <td>21.894880</td>
+      <td>...</td>
+      <td>28.456851</td>
+      <td>67.984999</td>
+      <td>20.761592</td>
+      <td>29.225079</td>
+      <td>20.839736</td>
+      <td>43.298651</td>
+      <td>19.549709</td>
+      <td>48.001198</td>
+      <td>57.542085</td>
+      <td>54.222051</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A60948</th>
+      <td>45.193555</td>
+      <td>53.891687</td>
+      <td>53.604590</td>
+      <td>69.631721</td>
+      <td>43.298651</td>
+      <td>80.154267</td>
+      <td>41.146393</td>
+      <td>47.073327</td>
+      <td>86.242480</td>
+      <td>42.173978</td>
+      <td>...</td>
+      <td>43.276514</td>
+      <td>69.218446</td>
+      <td>41.920838</td>
+      <td>44.275903</td>
+      <td>41.876306</td>
+      <td>0.000000</td>
+      <td>40.850785</td>
+      <td>51.758746</td>
+      <td>62.198522</td>
+      <td>58.447899</td>
+    </tr>
+    <tr>
+      <th>A53818</th>
+      <td>24.824657</td>
+      <td>47.872373</td>
+      <td>44.502595</td>
+      <td>70.231026</td>
+      <td>19.549709</td>
+      <td>74.793490</td>
+      <td>16.797574</td>
+      <td>32.129446</td>
+      <td>74.005534</td>
+      <td>19.277792</td>
+      <td>...</td>
+      <td>26.174668</td>
+      <td>66.479761</td>
+      <td>18.447064</td>
+      <td>26.958294</td>
+      <td>18.921282</td>
+      <td>40.850785</td>
+      <td>0.000000</td>
+      <td>45.825581</td>
+      <td>55.708712</td>
+      <td>52.179528</td>
+    </tr>
+    <tr>
+      <th>A57156</th>
+      <td>49.653876</td>
+      <td>57.576146</td>
+      <td>56.976705</td>
+      <td>67.907561</td>
+      <td>48.001198</td>
+      <td>80.523296</td>
+      <td>46.073910</td>
+      <td>52.300658</td>
+      <td>87.004918</td>
+      <td>47.001442</td>
+      <td>...</td>
+      <td>48.848097</td>
+      <td>72.468100</td>
+      <td>46.441765</td>
+      <td>49.298383</td>
+      <td>46.762764</td>
+      <td>51.758746</td>
+      <td>45.825581</td>
+      <td>0.000000</td>
+      <td>63.077692</td>
+      <td>61.390458</td>
+    </tr>
+    <tr>
+      <th>A65985</th>
+      <td>57.385945</td>
+      <td>62.536424</td>
+      <td>62.323217</td>
+      <td>73.658172</td>
+      <td>57.542085</td>
+      <td>87.766238</td>
+      <td>55.975631</td>
+      <td>58.608088</td>
+      <td>97.132230</td>
+      <td>57.111213</td>
+      <td>...</td>
+      <td>58.389323</td>
+      <td>77.834208</td>
+      <td>56.523703</td>
+      <td>56.387725</td>
+      <td>56.640798</td>
+      <td>62.198522</td>
+      <td>55.708712</td>
+      <td>63.077692</td>
+      <td>0.000000</td>
+      <td>68.284832</td>
+    </tr>
+    <tr>
+      <th>A41955</th>
+      <td>55.798902</td>
+      <td>61.645990</td>
+      <td>63.515684</td>
+      <td>75.080058</td>
+      <td>54.222051</td>
+      <td>81.261956</td>
+      <td>52.231093</td>
+      <td>58.277358</td>
+      <td>91.371010</td>
+      <td>53.367105</td>
+      <td>...</td>
+      <td>52.704570</td>
+      <td>71.027916</td>
+      <td>52.972312</td>
+      <td>55.511161</td>
+      <td>53.011405</td>
+      <td>58.447899</td>
+      <td>52.179528</td>
+      <td>61.390458</td>
+      <td>68.284832</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>142 rows × 142 columns</p>
+</div></div></div>
+</div>
+<p>And finally cosine distance, which is usually (but not always) preferrable for text similarity:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cosine</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cosine&#39;</span><span class="p">)</span>
+<span class="n">cosine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cosine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">cosine_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B02845</th>
+      <th>A51130</th>
+      <th>A36358</th>
+      <th>A28171</th>
+      <th>A51877</th>
+      <th>A60482</th>
+      <th>A32566</th>
+      <th>A35206</th>
+      <th>A35114</th>
+      <th>A32207</th>
+      <th>...</th>
+      <th>A59614</th>
+      <th>A53049</th>
+      <th>A32567</th>
+      <th>A38630</th>
+      <th>A32559</th>
+      <th>A60948</th>
+      <th>A53818</th>
+      <th>A57156</th>
+      <th>A65985</th>
+      <th>A41955</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B02845</th>
+      <td>0.000000</td>
+      <td>0.769307</td>
+      <td>0.795565</td>
+      <td>0.846346</td>
+      <td>0.946999</td>
+      <td>0.860660</td>
+      <td>0.852564</td>
+      <td>0.772983</td>
+      <td>0.906358</td>
+      <td>0.847861</td>
+      <td>...</td>
+      <td>0.804030</td>
+      <td>0.840854</td>
+      <td>0.853723</td>
+      <td>0.704391</td>
+      <td>0.875300</td>
+      <td>0.817970</td>
+      <td>0.874531</td>
+      <td>0.828712</td>
+      <td>0.805857</td>
+      <td>0.831364</td>
+    </tr>
+    <tr>
+      <th>A51130</th>
+      <td>0.769307</td>
+      <td>0.000000</td>
+      <td>0.657511</td>
+      <td>0.665617</td>
+      <td>0.940331</td>
+      <td>0.732616</td>
+      <td>0.847937</td>
+      <td>0.717888</td>
+      <td>0.823407</td>
+      <td>0.844624</td>
+      <td>...</td>
+      <td>0.786687</td>
+      <td>0.669307</td>
+      <td>0.830822</td>
+      <td>0.699004</td>
+      <td>0.868181</td>
+      <td>0.676215</td>
+      <td>0.880606</td>
+      <td>0.697467</td>
+      <td>0.666034</td>
+      <td>0.693363</td>
+    </tr>
+    <tr>
+      <th>A36358</th>
+      <td>0.795565</td>
+      <td>0.657511</td>
+      <td>0.000000</td>
+      <td>0.708998</td>
+      <td>0.930640</td>
+      <td>0.774146</td>
+      <td>0.857003</td>
+      <td>0.731521</td>
+      <td>0.850164</td>
+      <td>0.855256</td>
+      <td>...</td>
+      <td>0.809138</td>
+      <td>0.733072</td>
+      <td>0.854823</td>
+      <td>0.744354</td>
+      <td>0.872541</td>
+      <td>0.711065</td>
+      <td>0.895964</td>
+      <td>0.722011</td>
+      <td>0.688922</td>
+      <td>0.754462</td>
+    </tr>
+    <tr>
+      <th>A28171</th>
+      <td>0.846346</td>
+      <td>0.665617</td>
+      <td>0.708998</td>
+      <td>0.000000</td>
+      <td>0.941224</td>
+      <td>0.582452</td>
+      <td>0.874778</td>
+      <td>0.767844</td>
+      <td>0.755104</td>
+      <td>0.864583</td>
+      <td>...</td>
+      <td>0.801560</td>
+      <td>0.569643</td>
+      <td>0.857254</td>
+      <td>0.786246</td>
+      <td>0.890583</td>
+      <td>0.630630</td>
+      <td>0.893531</td>
+      <td>0.582130</td>
+      <td>0.600352</td>
+      <td>0.663663</td>
+    </tr>
+    <tr>
+      <th>A51877</th>
+      <td>0.946999</td>
+      <td>0.940331</td>
+      <td>0.930640</td>
+      <td>0.941224</td>
+      <td>0.000000</td>
+      <td>0.948203</td>
+      <td>0.942591</td>
+      <td>0.913416</td>
+      <td>0.953314</td>
+      <td>0.913643</td>
+      <td>...</td>
+      <td>0.919726</td>
+      <td>0.950824</td>
+      <td>0.858766</td>
+      <td>0.931403</td>
+      <td>0.936311</td>
+      <td>0.922569</td>
+      <td>0.933451</td>
+      <td>0.937241</td>
+      <td>0.953415</td>
+      <td>0.929017</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A60948</th>
+      <td>0.817970</td>
+      <td>0.676215</td>
+      <td>0.711065</td>
+      <td>0.630630</td>
+      <td>0.922569</td>
+      <td>0.721892</td>
+      <td>0.822452</td>
+      <td>0.755678</td>
+      <td>0.813975</td>
+      <td>0.815738</td>
+      <td>...</td>
+      <td>0.766183</td>
+      <td>0.687602</td>
+      <td>0.817957</td>
+      <td>0.759900</td>
+      <td>0.856450</td>
+      <td>0.000000</td>
+      <td>0.855082</td>
+      <td>0.655066</td>
+      <td>0.706839</td>
+      <td>0.693725</td>
+    </tr>
+    <tr>
+      <th>A53818</th>
+      <td>0.874531</td>
+      <td>0.880606</td>
+      <td>0.895964</td>
+      <td>0.893531</td>
+      <td>0.933451</td>
+      <td>0.914665</td>
+      <td>0.823211</td>
+      <td>0.867869</td>
+      <td>0.933535</td>
+      <td>0.831254</td>
+      <td>...</td>
+      <td>0.856373</td>
+      <td>0.909808</td>
+      <td>0.817668</td>
+      <td>0.873076</td>
+      <td>0.879550</td>
+      <td>0.855082</td>
+      <td>0.000000</td>
+      <td>0.880735</td>
+      <td>0.906139</td>
+      <td>0.871896</td>
+    </tr>
+    <tr>
+      <th>A57156</th>
+      <td>0.828712</td>
+      <td>0.697467</td>
+      <td>0.722011</td>
+      <td>0.582130</td>
+      <td>0.937241</td>
+      <td>0.699637</td>
+      <td>0.851057</td>
+      <td>0.779317</td>
+      <td>0.793748</td>
+      <td>0.832353</td>
+      <td>...</td>
+      <td>0.800275</td>
+      <td>0.706863</td>
+      <td>0.825393</td>
+      <td>0.776095</td>
+      <td>0.871884</td>
+      <td>0.655066</td>
+      <td>0.880735</td>
+      <td>0.000000</td>
+      <td>0.686657</td>
+      <td>0.705633</td>
+    </tr>
+    <tr>
+      <th>A65985</th>
+      <td>0.805857</td>
+      <td>0.666034</td>
+      <td>0.688922</td>
+      <td>0.600352</td>
+      <td>0.953415</td>
+      <td>0.726237</td>
+      <td>0.881066</td>
+      <td>0.744438</td>
+      <td>0.835979</td>
+      <td>0.864063</td>
+      <td>...</td>
+      <td>0.814806</td>
+      <td>0.705915</td>
+      <td>0.859176</td>
+      <td>0.747408</td>
+      <td>0.898587</td>
+      <td>0.706839</td>
+      <td>0.906139</td>
+      <td>0.686657</td>
+      <td>0.000000</td>
+      <td>0.719262</td>
+    </tr>
+    <tr>
+      <th>A41955</th>
+      <td>0.831364</td>
+      <td>0.693363</td>
+      <td>0.754462</td>
+      <td>0.663663</td>
+      <td>0.929017</td>
+      <td>0.692659</td>
+      <td>0.835936</td>
+      <td>0.786271</td>
+      <td>0.812620</td>
+      <td>0.832610</td>
+      <td>...</td>
+      <td>0.755732</td>
+      <td>0.669543</td>
+      <td>0.833300</td>
+      <td>0.788008</td>
+      <td>0.866669</td>
+      <td>0.693725</td>
+      <td>0.871896</td>
+      <td>0.705633</td>
+      <td>0.719262</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>142 rows × 142 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="reading-results">
+<h2><span class="section-number">4.3. </span>Reading Results<a class="headerlink" href="#reading-results" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have DataFrames of all our distance results, we can easily look at the texts that are most similar (i.e. closest in distance) to a text of our choice. We’ll use the same example as in the TF-IDF tutorial: Margaret Cavendish’s <em>The Blazing World</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top5_cosine</span> <span class="o">=</span> <span class="n">cosine_df</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;A53049&#39;</span><span class="p">)[</span><span class="s1">&#39;A53049&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top5_cosine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A29017    0.541178
+A28171    0.569643
+A66752    0.593669
+A56381    0.596200
+A56390    0.596567
+Name: A53049, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have a list of text IDs and their cosine similarities, but this list is hard to interpret without more information. We can use the techniques from the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html">Metadata tutorial</a> to get a DataFrame of metadata for all the 1666 texts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the full list of metadata files</span>
+<span class="c1"># (You&#39;ll change this line based on where the files are on your computer)</span>
+<span class="n">metadata_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;../../epmetadata/header/*.xml&quot;</span><span class="p">)</span>
+<span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
+
+<span class="n">all_metadata</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Empty list for data</span>
+<span class="n">index</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Empty list for TCP IDs</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">metadata_files</span><span class="p">:</span> <span class="c1"># Loop through each file</span>
+    <span class="n">tcp_id</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Get TCP ID from filename</span>
+    <span class="k">if</span> <span class="n">tcp_id</span> <span class="ow">in</span> <span class="n">filekeys</span><span class="p">:</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span> <span class="c1"># Create lxml tree for metadata</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:sourceDesc//tei:title&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="c1"># Get title</span>
+
+        <span class="c1"># Get author (if there is one)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:sourceDesc//tei:author&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Get date (if there is one that isn&#39;t a range)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;.//tei:sourceDesc//tei:date&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;when&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Add dictionary of data to data list</span>
+        <span class="n">all_metadata</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="n">title</span><span class="p">,</span><span class="s1">&#39;author&#39;</span><span class="p">:</span><span class="n">author</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">:</span><span class="n">date</span><span class="p">})</span>
+
+        <span class="c1"># Add TCP ID to index list</span>
+        <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tcp_id</span><span class="p">)</span>
+
+
+<span class="c1"># Create DataFrame with data and indices</span>
+<span class="n">metadata_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_metadata</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="n">metadata_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>author</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A48797</th>
+      <td>Wonders no miracles, or, Mr. Valentine Greatra...</td>
+      <td>Lloyd, David, 1635-1692.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A44938</th>
+      <td>A fast-sermon, preached to the Lords in the Hi...</td>
+      <td>Hall, George, 1612?-1668.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A35608</th>
+      <td>The Case of Cornelius Bee and his partners Ric...</td>
+      <td>None</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A52328</th>
+      <td>The pernicious consequences of the new heresie...</td>
+      <td>Nicole, Pierre, 1625-1695.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A26426</th>
+      <td>Advertisement be [sic] Agnes Campbel relict of...</td>
+      <td>Campbel, Agnes.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A66752</th>
+      <td>Ecchoes from the sixth trumpet. The first part...</td>
+      <td>Wither, George, 1588-1667.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A30143</th>
+      <td>Grace abounding to the chief of sinners, or, A...</td>
+      <td>Bunyan, John, 1628-1688.</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A32207</th>
+      <td>His Majesties declaration Charles R.</td>
+      <td>England and Wales. Sovereign (1660-1685 : Char...</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A49213</th>
+      <td>The French Kings declaration of a vvar against...</td>
+      <td>France. Sovereign (1643-1715 : Louis XIV)</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A23770</th>
+      <td>A sermon preach'd before the King, Decemb. 31,...</td>
+      <td>Allestree, Richard, 1619-1681.</td>
+      <td>1666</td>
+    </tr>
+  </tbody>
+</table>
+<p>142 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>And we can combine this with our cosine distance results to see the metadata for the texts most similar to <em>The Blazing World</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metadata_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">top5_cosine</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>author</th>
+      <th>title</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A29017</th>
+      <td>Boyle, Robert, 1627-1691.</td>
+      <td>The origine of formes and qualities, (accordin...</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A28171</th>
+      <td>Binning, Hugh, 1627-1653.</td>
+      <td>The common principiles of Christian religion c...</td>
+      <td>1667</td>
+    </tr>
+    <tr>
+      <th>A66752</th>
+      <td>Wither, George, 1588-1667.</td>
+      <td>Ecchoes from the sixth trumpet. The first part...</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A56381</th>
+      <td>Parker, Samuel, 1640-1688.</td>
+      <td>An account of the nature and extent of the div...</td>
+      <td>1666</td>
+    </tr>
+    <tr>
+      <th>A56390</th>
+      <td>Parker, Samuel, 1640-1688.</td>
+      <td>A free and impartial censure of the Platonick ...</td>
+      <td>1666</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You now have all the tools you need to creat your own mini <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a>, one focused on exactly the texts you care most about. For more on how to interpret these results and things to watch out for when calculating similarity, refer again to <a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">The Programming Historian</a>.</p>
+</div>
+<div class="section" id="visualizing-results">
+<h2><span class="section-number">4.4. </span>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve calculated similarity among all the 1666 texts, it’s helpful to explore further by visualizing those results in different ways. The first thing we need to do is import some simple graphing libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-words">
+<h3><span class="section-number">4.4.1. </span>Visualizing Words<a class="headerlink" href="#visualizing-words" title="Permalink to this headline">¶</a></h3>
+<p>In our results above, we found the text most similar to Cavendish’s <em>Blazing World</em>: Boyle’s <em>The Origin of Forms and Qualities</em>. (We know this similarity makes sense because Cavendish’s <em>Blazing World</em> also includes a scientific treatise: <em>Observations upon Experimental Philosophy</em>.)</p>
+<p>We might want to know which features—in this case individual words—“drive” the similarity between these two texts. We can do this by graphing all the words that appear in both texts according to their TF-IDF values.</p>
+<p>Luckily, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> lets us do so easily by selecting for the IDs of each text:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to &quot;transpose&quot; our results so that the texts are the columns and the words are the rows.</span>
+<span class="n">transformed_results</span> <span class="o">=</span> <span class="n">readable_results</span><span class="o">.</span><span class="n">T</span> 
+
+<span class="c1"># Then we can graph by selecting our two texts</span>
+<span class="n">transformed_results</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;A53049&#39;</span><span class="p">,</span><span class="s1">&#39;A29017&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc2f3026100&gt;
+</pre></div>
+</div>
+<img alt="_images/similarity_22_1.png" src="_images/similarity_22_1.png" />
+</div>
+</div>
+<p>You can see there are lots of words along the x- and y-axes that only appear in one text or the other. But there are plenty of words that appear in both, with varying TF-IDF scores.</p>
+<p>The words we’re interested in will have high TF-IDF scores in both texts—those are the words that most account for the high similarity score between these two books. We’d like to label those words on this graph.</p>
+<p>First, we can subselect a set of words based on their TF-IDF scores in the two columns we care about. This will create a new, much smaller DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_results</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="p">[((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.04</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">))</span> <span class="o">|</span> <span class="p">((</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A29017&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transformed_results</span><span class="p">[</span><span class="s1">&#39;A53049&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.03</span><span class="p">))]</span> 
+<span class="n">filtered_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B02845</th>
+      <th>A51130</th>
+      <th>A36358</th>
+      <th>A28171</th>
+      <th>A51877</th>
+      <th>A60482</th>
+      <th>A32566</th>
+      <th>A35206</th>
+      <th>A35114</th>
+      <th>A32207</th>
+      <th>...</th>
+      <th>A59614</th>
+      <th>A53049</th>
+      <th>A32567</th>
+      <th>A38630</th>
+      <th>A32559</th>
+      <th>A60948</th>
+      <th>A53818</th>
+      <th>A57156</th>
+      <th>A65985</th>
+      <th>A41955</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>liquor</th>
+      <td>0.0</td>
+      <td>0.036426</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.022491</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.027102</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>chemist</th>
+      <td>0.0</td>
+      <td>0.021048</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008530</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.031120</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>figure</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014658</td>
+      <td>0.009893</td>
+      <td>0.0</td>
+      <td>0.017729</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.037536</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.009958</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>metal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.020051</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.012843</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.023320</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.011752</td>
+    </tr>
+    <tr>
+      <th>mineral</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.008344</td>
+      <td>0.0</td>
+      <td>0.020664</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.036862</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>finite</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.024130</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044340</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.026685</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>sensitive</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.008754</td>
+      <td>0.0</td>
+      <td>0.019826</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.050490</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>perception</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.022340</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.062897</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014504</td>
+    </tr>
+    <tr>
+      <th>production</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.020664</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.038184</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>immaterial</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008530</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.042829</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>inanimate</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.018417</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.048115</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>fluid</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.020942</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.034811</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>texture</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.009050</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.007984</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>particle</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.015278</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.035767</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>local</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.008248</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.030119</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>corpuscle</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.016755</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>volatile</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.023355</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>vitriol</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.019052</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>saline</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.027418</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>camphire</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.009409</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>corporeal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.045473</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>acid</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.021550</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.014504</td>
+    </tr>
+    <tr>
+      <th>perceptive</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.051852</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>incorporeal</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044798</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>nitre</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.026096</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>microscope</th>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.044798</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>26 rows × 142 columns</p>
+</div></div></div>
+</div>
+<p>These are the 26 words that drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.</p>
+<p>And we can add these words as labels to our graph in order to see their relative TF-IDF weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;A53049&#39;</span><span class="p">,</span><span class="s1">&#39;A29017&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">filtered_results</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">A53049</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">transformed_results</span><span class="o">.</span><span class="n">A29017</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/similarity_26_0.png" src="_images/similarity_26_0.png" />
+</div>
+</div>
+<p>This graph tells us quite a bit about the similarity between these two texts. Words like “texture” and “corpuscles” have very high TF-IDF scores in Boyle and somewhat high scores in Cavendish. Words like “perception” and “sensitive” have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like “microscope,” “mineral,” and “corporeal,” have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.</p>
+</div>
+<div class="section" id="visualizing-texts">
+<h3><span class="section-number">4.4.2. </span>Visualizing Texts<a class="headerlink" href="#visualizing-texts" title="Permalink to this headline">¶</a></h3>
+<p>In addition to visualizing the words in just two texts, it can also be helpful to visualize all of our texts at once. We can create a visualization of our entire similarity matrix by making a heatmap: a chart where values are expressed as colors.</p>
+<p>Using the <a class="reference external" href="https://seaborn.pydata.org/index.html"><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a> library, this is as easy as inputting our cosine distance DataFrame into a single function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># This line just makes our heatmap a little bigger</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cosine_df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm_r&#39;</span><span class="p">)</span> <span class="c1"># This function creates the heatmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc2f564a7f0&gt;
+</pre></div>
+</div>
+<img alt="_images/similarity_28_1.png" src="_images/similarity_28_1.png" />
+</div>
+</div>
+<p>Like the word-based visualization above, this heatmap of texts is also showing us a lot that we couldn’t see just by looking at a table of numbers.</p>
+<p>Mainly, we can see that most of the texts are not all that similar! Most of the values are showing up as blue, on the coolest end of our heatmap spectrum. [Look at the key on the right, and remember that when measuring distance higher values mean that two texts are farther apart.] This makes sense, as a group of texts published in just one year won’t necessarily use much of the same vocabulary.</p>
+<p>Down the center diagonal of our heatmap is a solid red line. This is where a text matches with itself in our matrix, and texts are always perfectly similar to themselves.</p>
+<p>But all is not lost: notice that some of the points are much lighter blue. These texts are more similar than the dark blue intersections, so there is some variation in our graph. And a few points that are not along the diagonal are dark red, indicating quite low distance, i.e. very high similarity. You would need to use the metadata techniques we learned above to get more information, but it’s possible that these very similar texts were written by the same author or are about the same topics.</p>
+<p>Visualization doesn’t answer all our questions, but it allows us to view similarity measures in a few different ways. And by seeing our data anew, we can generate more research questions that require further digging: a generative cycle.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="metadata.html" title="previous page"><span class="section-number">3. </span>Working with Metadata, Creating Text Networks</a>
+    <a class='right-next' id="next-link" href="word2vec.html" title="next page"><span class="section-number">5. </span>Word Embeddings</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By John R. Ladd<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
