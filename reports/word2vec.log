@@ -32,10 +32,6 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-nsmap={'tei': 'http://www.tei-c.org/ns/1.0'}
-files = glob.glob('1666_texts/*.xml')
-all_sentences = []
-for f in files:
-    get_sentences(f)
+word2vec = Word2Vec(all_sentences, min_count=2, window=4)
 -------------------
 
