@@ -3,11 +3,11 @@
 
 # # Word Embeddings
 # 
-# Many of the improvements and extensions we have in mind for the next stage of *EarlyPrint* involve the series of techniques called word embeddings, or vector semantics. Using popular algorithms like Word2Vec, which we'll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word appears alongside other words. Using word embeddings, it's possible to compute the semantic relationship among words in a corpus, to find **how words are related**.
+# Many of the improvements and extensions we have in mind for the next stage of *EarlyPrint* involve word embeddings. Using popular algorithms like Word2Vec, which we'll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word co-occurs alongside other words. Using word embeddings, it's possible to compute the semantic relationship among words in a corpus, to find **how words are related**.
 # 
 # Word embeddings have lots of different downstream uses for machine learning and text analysis tasks; for instance, they're an important building block for state-of-the-art natural language processing models. In this tutorial we'll focus on the basics: training a Word2Vec model and using the model to identify and visualize similar words.
 # 
-# You can decide how deep you'd like to go into the weeds of how Word2Vec actually produces its similarities. For a first introduction, I recommend [Jay Alammar's *The Illustrated Word2Vec*](https://jalammar.github.io/illustrated-word2vec/), which includes lots of helpful visualizations as it explains the basics. In this tutorial, we'll focus on training Word2Vec in Python rather than the underlying concepts.
+# You can decide how deep you'd like to go into the weeds of the ways Word2Vec actually produces its similarities. For a first introduction, I recommend [Jay Alammar's *The Illustrated Word2Vec*](https://jalammar.github.io/illustrated-word2vec/), which includes lots of helpful visualizations as it explains the basics. In this tutorial, we'll focus on training Word2Vec in Python and interpreting the results, rather than reviewing the underlying concepts.
 # 
 # Let's begin by importing necessarily libraries:
 
@@ -24,11 +24,11 @@ from matplotlib import pyplot as plt
 
 # ## Select a Corpus and Tokenize Sentences
 # 
-# Word2Vec creates vectors based on which words are near each other. We'll train our model on lists of words from a selected corpus. We'll use the same corpus we've been using all along: the *EarlyPrint* texts published in 1666.
+# Word2Vec creates vectors based on which words are near one another. We'll train our model on lists of words from a selected corpus, and we'll use the same corpus we've been using all along: the *EarlyPrint* texts published in 1666.
 # 
 # We're using the [Gensim](https://radimrehurek.com/gensim/models/word2vec.html) library to create our Word2Vec model. Gensim accepts several different types of input, but we'll focus on giving it lists of word tokens. You could create a list of all the tokens in a text and pass them directly to Gensim, but Gensim prefers if you give it each sentence separately. This is because sentence boundaries often contain information about word relationships: the last word of the previous sentence and the first word of the next one don't have the same relationship as two words in the same sentence.
 # 
-# Below I create a function for finding the lemmas in every sentence of our texts, and then collecting those sentences as individual lists. For more detail on how this code works, refer to [our XML tutorial](https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences).
+# Below we create a function for finding the lemmas in every sentence of our texts, which then collects those sentences as individual lists. For more detail on how this code works, refer to [our XML tutorial](https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences).
 
 # In[2]:
 
@@ -59,15 +59,15 @@ for f in files:
 
 # ## Train a Model and Find Similar Words
 # 
-# Now that we have a list of all the lemmas in all the sentences in our text, we're ready to train our Word2Vec model. This can be done with the simple one-line command below.
+# Now that we have a list of all the lemmas in all the sentences in our texts, we're ready to train our Word2Vec model. This can be done with the simple one-line command below.
 # 
 # The parameter `min_count` refers to the minimum amount of times a word must appear in the corpus in order to be part of the model. For the sake of speed, I'm eliminating all words that appear less than 2 times. (And since the eliminated words appear only once, the resulting vectors wouldn't be very reliable anyway: not enough examples of adjacent words.)
 # 
-# The parament `window` refers to the "sliding window" that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our *EarlyPrint* applications of Word2Vec, we'll train the model on the full corpus. But for this example one-year corpus, let's shrink the window to just 4 words: by capturing words that are a little closer together we reduce the likelihood of a weird, one-off adjacency skewing our results.
+# The parament `window` refers to the "sliding window" that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our *EarlyPrint* applications of Word2Vec, we'll train the model on the full corpus. But for this sample one-year corpus, let's shrink the window to just 4 words: by capturing words that are a little closer together we reduce the likelihood of a one-off adjacency skewing our results.
 # 
 # Once we've selected parameters we can train our Word2Vec model.
 
-# In[4]:
+# In[7]:
 
 
 word2vec = Word2Vec(all_sentences, min_count=2, window=4)
@@ -81,7 +81,7 @@ word2vec = Word2Vec(all_sentences, min_count=2, window=4)
 print(list(word2vec.wv.vocab)[:50])
 
 
-# Using the `wv` object, it's simple to retrieve the most similar words to a particular word of your choice. Looking at the first 50 words in the corpus above, let's look at the words most similar to the word "flame".
+# Using the `wv` object, it's simple to retrieve the words most similar to a particular word of your choice. Looking at the first 50 words in the corpus above, we'll choose a word with special resonance for 1666, the year of the Great Fire of London: "flame." Let's find the words most similar to the word "flame".
 
 # In[9]:
 
@@ -89,7 +89,7 @@ print(list(word2vec.wv.vocab)[:50])
 print(word2vec.wv.most_similar("flame"))
 
 
-# The `most_similar()` function gives the top ten most similar words to the word you selected. The similar words to "flame"---"fire," "smoke", "ash"---make a lot of sense.
+# The `most_similar()` function gives the top ten most similar words to the word you selected. The similar words to "flame"—"fire," "smoke", "ash"—make a lot of sense.
 # 
 # The values given with each word are its cosine similarity to the source word. (See our [Similarity tutorial](https://earlyprint.org/jupyterbook/similarity.html) for more about this.)
 # 
@@ -117,7 +117,7 @@ f, ax = plt.subplots(figsize=(15, 10))
 sns.heatmap(df, cmap='coolwarm')
 
 
-# Like in Jalammar's illustrations for "king," "man," and "woman," it's easy to see why these words have high similarity scores. Parts of the vectors for each word that have high (red) values and low (blue) values, and these roughly matchup from word to word.
+# Like in Jalammar's illustrations for "king," "man," and "woman," it's easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.
 # 
 # We could visualize every single word this way, but the resulting chart would be very hard to read. Instead, let's try other visualization methods.
 # 
@@ -148,7 +148,7 @@ pca_df = pd.DataFrame(pca_results, index=word2vec.wv.vocab, columns=["pc1","pc2"
 pca_df
 
 
-# Now that we have a DataFrame with just 2 dimensions, "pc1" and "pc2," we can create a scatterplot of every word, where our principal componennts are the x and y axes.
+# Now that we have a DataFrame with just 2 dimensions, "pc1" and "pc2," we can create a scatterplot of every word, where our principal components are the x and y axes.
 
 # In[15]:
 

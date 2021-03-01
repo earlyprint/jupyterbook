@@ -257,9 +257,9 @@
                 
   <div class="section" id="word-embeddings">
 <h1><span class="section-number">5. </span>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
-<p>Many of the improvements and extensions we have in mind for the next stage of <em>EarlyPrint</em> involve the series of techniques called word embeddings, or vector semantics. Using popular algorithms like Word2Vec, which we’ll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word appears alongside other words. Using word embeddings, it’s possible to compute the semantic relationship among words in a corpus, to find <strong>how words are related</strong>.</p>
+<p>Many of the improvements and extensions we have in mind for the next stage of <em>EarlyPrint</em> involve word embeddings. Using popular algorithms like Word2Vec, which we’ll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word co-occurs alongside other words. Using word embeddings, it’s possible to compute the semantic relationship among words in a corpus, to find <strong>how words are related</strong>.</p>
 <p>Word embeddings have lots of different downstream uses for machine learning and text analysis tasks; for instance, they’re an important building block for state-of-the-art natural language processing models. In this tutorial we’ll focus on the basics: training a Word2Vec model and using the model to identify and visualize similar words.</p>
-<p>You can decide how deep you’d like to go into the weeds of how Word2Vec actually produces its similarities. For a first introduction, I recommend <a class="reference external" href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar’s <em>The Illustrated Word2Vec</em></a>, which includes lots of helpful visualizations as it explains the basics. In this tutorial, we’ll focus on training Word2Vec in Python rather than the underlying concepts.</p>
+<p>You can decide how deep you’d like to go into the weeds of the ways Word2Vec actually produces its similarities. For a first introduction, I recommend <a class="reference external" href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar’s <em>The Illustrated Word2Vec</em></a>, which includes lots of helpful visualizations as it explains the basics. In this tutorial, we’ll focus on training Word2Vec in Python and interpreting the results, rather than reviewing the underlying concepts.</p>
 <p>Let’s begin by importing necessarily libraries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -275,9 +275,9 @@
 </div>
 <div class="section" id="select-a-corpus-and-tokenize-sentences">
 <h2><span class="section-number">5.1. </span>Select a Corpus and Tokenize Sentences<a class="headerlink" href="#select-a-corpus-and-tokenize-sentences" title="Permalink to this headline">¶</a></h2>
-<p>Word2Vec creates vectors based on which words are near each other. We’ll train our model on lists of words from a selected corpus. We’ll use the same corpus we’ve been using all along: the <em>EarlyPrint</em> texts published in 1666.</p>
+<p>Word2Vec creates vectors based on which words are near one another. We’ll train our model on lists of words from a selected corpus, and we’ll use the same corpus we’ve been using all along: the <em>EarlyPrint</em> texts published in 1666.</p>
 <p>We’re using the <a class="reference external" href="https://radimrehurek.com/gensim/models/word2vec.html">Gensim</a> library to create our Word2Vec model. Gensim accepts several different types of input, but we’ll focus on giving it lists of word tokens. You could create a list of all the tokens in a text and pass them directly to Gensim, but Gensim prefers if you give it each sentence separately. This is because sentence boundaries often contain information about word relationships: the last word of the previous sentence and the first word of the next one don’t have the same relationship as two words in the same sentence.</p>
-<p>Below I create a function for finding the lemmas in every sentence of our texts, and then collecting those sentences as individual lists. For more detail on how this code works, refer to <a class="reference external" href="https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences">our XML tutorial</a>.</p>
+<p>Below we create a function for finding the lemmas in every sentence of our texts, which then collects those sentences as individual lists. For more detail on how this code works, refer to <a class="reference external" href="https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences">our XML tutorial</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sentences</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
@@ -310,9 +310,9 @@
 </div>
 <div class="section" id="train-a-model-and-find-similar-words">
 <h2><span class="section-number">5.2. </span>Train a Model and Find Similar Words<a class="headerlink" href="#train-a-model-and-find-similar-words" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have a list of all the lemmas in all the sentences in our text, we’re ready to train our Word2Vec model. This can be done with the simple one-line command below.</p>
+<p>Now that we have a list of all the lemmas in all the sentences in our texts, we’re ready to train our Word2Vec model. This can be done with the simple one-line command below.</p>
 <p>The parameter <code class="docutils literal notranslate"><span class="pre">min_count</span></code> refers to the minimum amount of times a word must appear in the corpus in order to be part of the model. For the sake of speed, I’m eliminating all words that appear less than 2 times. (And since the eliminated words appear only once, the resulting vectors wouldn’t be very reliable anyway: not enough examples of adjacent words.)</p>
-<p>The parament <code class="docutils literal notranslate"><span class="pre">window</span></code> refers to the “sliding window” that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our <em>EarlyPrint</em> applications of Word2Vec, we’ll train the model on the full corpus. But for this example one-year corpus, let’s shrink the window to just 4 words: by capturing words that are a little closer together we reduce the likelihood of a weird, one-off adjacency skewing our results.</p>
+<p>The parament <code class="docutils literal notranslate"><span class="pre">window</span></code> refers to the “sliding window” that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our <em>EarlyPrint</em> applications of Word2Vec, we’ll train the model on the full corpus. But for this sample one-year corpus, let’s shrink the window to just 4 words: by capturing words that are a little closer together we reduce the likelihood of a one-off adjacency skewing our results.</p>
 <p>Once we’ve selected parameters we can train our Word2Vec model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -334,7 +334,7 @@
 </div>
 </div>
 </div>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">wv</span></code> object, it’s simple to retrieve the most similar words to a particular word of your choice. Looking at the first 50 words in the corpus above, let’s look at the words most similar to the word “flame”.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">wv</span></code> object, it’s simple to retrieve the words most similar to a particular word of your choice. Looking at the first 50 words in the corpus above, we’ll choose a word with special resonance for 1666, the year of the Great Fire of London: “flame.” Let’s find the words most similar to the word “flame”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">word2vec</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s2">&quot;flame&quot;</span><span class="p">))</span>
@@ -399,7 +399,7 @@
 <img alt="_images/word2vec_14_1.png" src="_images/word2vec_14_1.png" />
 </div>
 </div>
-<p>Like in Jalammar’s illustrations for “king,” “man,” and “woman,” it’s easy to see why these words have high similarity scores. Parts of the vectors for each word that have high (red) values and low (blue) values, and these roughly matchup from word to word.</p>
+<p>Like in Jalammar’s illustrations for “king,” “man,” and “woman,” it’s easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.</p>
 <p>We could visualize every single word this way, but the resulting chart would be very hard to read. Instead, let’s try other visualization methods.</p>
 </div>
 <div class="section" id="visualize-word-similarity">
@@ -509,7 +509,7 @@
 <p>70551 rows × 2 columns</p>
 </div></div></div>
 </div>
-<p>Now that we have a DataFrame with just 2 dimensions, “pc1” and “pc2,” we can create a scatterplot of every word, where our principal componennts are the x and y axes.</p>
+<p>Now that we have a DataFrame with just 2 dimensions, “pc1” and “pc2,” we can create a scatterplot of every word, where our principal components are the x and y axes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pc1&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;pc2&#39;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
