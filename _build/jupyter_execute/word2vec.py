@@ -67,7 +67,7 @@ for f in files:
 # 
 # Once we've selected parameters we can train our Word2Vec model.
 
-# In[7]:
+# In[4]:
 
 
 word2vec = Word2Vec(all_sentences, min_count=2, window=4)
@@ -75,7 +75,7 @@ word2vec = Word2Vec(all_sentences, min_count=2, window=4)
 
 # Word2Vec outputs a model with a `wv` object that contains lots of information about the word embeddings. For example, every single word in the corpus is stored in the `vocab` attribute:
 
-# In[8]:
+# In[5]:
 
 
 print(list(word2vec.wv.vocab)[:50])
@@ -83,7 +83,7 @@ print(list(word2vec.wv.vocab)[:50])
 
 # Using the `wv` object, it's simple to retrieve the words most similar to a particular word of your choice. Looking at the first 50 words in the corpus above, we'll choose a word with special resonance for 1666, the year of the Great Fire of London: "flame." Let's find the words most similar to the word "flame".
 
-# In[9]:
+# In[6]:
 
 
 print(word2vec.wv.most_similar("flame"))
@@ -99,7 +99,7 @@ print(word2vec.wv.most_similar("flame"))
 # 
 # But we can do more with word embeddings than simply find similar words. Word2Vec creates a vector, a string of numerical values for each word, that we can access with the `wv` object.
 
-# In[11]:
+# In[7]:
 
 
 print(word2vec.wv["flame"])
@@ -107,12 +107,17 @@ print(word2vec.wv["flame"])
 
 # Each word in the text has a vector of the same length. Using these vectors, we can recreate some of the illustrations from Alammar's [The Illustrated Word2Vec](https://jalammar.github.io/illustrated-word2vec/).
 # 
-# Let's start with "flame" and three similar words: "cloud," "fire," and "smoke." We can put the vectors of each of these words into a `pandas` DataFrame and then visuzalize them as a heatmap.
+# Let's start with "flame" and three similar words: "cloud," "fire," and "smoke." We can put the vectors of each of these words into a `pandas` DataFrame and then visualize them as a heatmap. 
+# 
+# *n.b. For this step and the next one, we are using [L2-normalized](https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm) vectors accessed through the `vectors_norm` attribute. This simply gives us comparable numbers regardless of magnitude, or how frequently a single word appears.*
 
-# In[12]:
+# In[8]:
 
 
-df = pd.DataFrame(word2vec.wv["flame", "cloud", "fire", "smoke"], index=["flame", "cloud", "fire", "smoke"])
+wordlist = ["flame", "cloud", "fire", "smoke"] # The words we've selected
+indices = [word2vec.wv.index2entity.index(w) for w in wordlist] # The numerical indices of those words
+
+df = pd.DataFrame(word2vec.wv.vectors_norm[indices], index=wordlist)
 f, ax = plt.subplots(figsize=(15, 10))
 sns.heatmap(df, cmap='coolwarm')
 
@@ -129,7 +134,7 @@ sns.heatmap(df, cmap='coolwarm')
 # 
 # Let's import PCA from `sklearn`:
 
-# In[13]:
+# In[9]:
 
 
 from sklearn.decomposition import PCA
@@ -139,18 +144,18 @@ from sklearn.decomposition import PCA
 # 
 # Below we'll run PCA and put the results in a DataFrame:
 
-# In[14]:
+# In[10]:
 
 
 pca = PCA(n_components=2)
-pca_results = pca.fit_transform(word2vec.wv[word2vec.wv.vocab])
+pca_results = pca.fit_transform(word2vec.wv.vectors_norm)
 pca_df = pd.DataFrame(pca_results, index=word2vec.wv.vocab, columns=["pc1","pc2"])
 pca_df
 
 
 # Now that we have a DataFrame with just 2 dimensions, "pc1" and "pc2," we can create a scatterplot of every word, where our principal components are the x and y axes.
 
-# In[15]:
+# In[11]:
 
 
 pca_df.plot(x='pc1',y='pc2',kind="scatter",figsize=(15, 10))
@@ -160,10 +165,9 @@ pca_df.plot(x='pc1',y='pc2',kind="scatter",figsize=(15, 10))
 # 
 # Let's use this graph as a base, but get rid of all the dots and just show the labels for the four words we care about.
 
-# In[16]:
+# In[13]:
 
 
-# f, ax = plt.subplots()
 ax = pca_df.plot(x='pc1',y='pc2',kind="scatter",figsize=(15, 10),alpha=0)
 for txt in pca_df.index:
     if txt in ["flame", "cloud", "fire", "smoke"]:
@@ -173,6 +177,6 @@ for txt in pca_df.index:
 plt.show()
 
 
-# This is much better. We can see that the words are relatively close together, though fire is a bit far out from the others. By comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).
+# This is much better. We can see how the words are positioned relative to one another. Though we might have expected to seem them next to each other, remember that PCA is only showing us a reduced representation of our high-dimensional data. Still, we can see that "smoke" and "flame" are closer to each other than "cloud" and "fire." And all four words are almost in a horizontal line across the graph, suggesting they're quite similar according to principal compenent 2 (the y-axis), but perhaps less similar according to PC1 (the x-axis). Finally, by comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).
 # 
 # As text similarity increased our sense of text-level relationships in the last tutorial, Word2Vec gives us a clearer (but not complete) sense of word-level relationships. Stacked with other methods, Word2Vec can be used to explore themes and subjects, to help computers and human readers make sense of semantic distinctions, and to drive complex language-based machine learning algorithms.
