@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/home/jrladd/.local/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1082, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 535, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+X_train, X_test, y_train, y_test = train_test_split(readable_results, targets, test_size=0.45, random_state=2)
+lr = LogisticRegression(random_state=0, solver='lbfgs', penalty='none')
+clf = lr.fit(X_train, y_train)
+
+y_pred = clf.predict(X_test)
+# evaluate accuracy
+print("Accuracy score:", accuracy_score(y_test, y_pred, normalize=True, sample_weight=None))
+print("Cross validation score:", np.mean(cross_val_score(lr, readable_results, targets, cv=2)))
+print()
+print("Results of this run:\n")
+print("Play Title | Actual Genre | Predicted Genre")
+for title, real, predicted in zip(X_test.index, y_test, y_pred):
+    print(f"{title} | {real} | {predicted}")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-10-b0b498b04d48>[0m in [0;36m<module>[0;34m[0m
+[1;32m      6[0m [0;31m# evaluate accuracy[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m [0mprint[0m[0;34m([0m[0;34m"Accuracy score:"[0m[0;34m,[0m [0maccuracy_score[0m[0;34m([0m[0my_test[0m[0;34m,[0m [0my_pred[0m[0;34m,[0m [0mnormalize[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0msample_weight[0m[0;34m=[0m[0;32mNone[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 8[0;31m [0mprint[0m[0;34m([0m[0;34m"Cross validation score:"[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mmean[0m[0;34m([0m[0mcross_val_score[0m[0;34m([0m[0mlr[0m[0;34m,[0m [0mreadable_results[0m[0;34m,[0m [0mtargets[0m[0;34m,[0m [0mcv[0m[0;34m=[0m[0;36m2[0m[0;34m)[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      9[0m [0mprint[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m [0mprint[0m[0;34m([0m[0;34m"Results of this run:\n"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'np' is not defined
+NameError: name 'np' is not defined
+
