@@ -1,0 +1,949 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Text Classification: Unsupervised Clustering &#8212; EarlyPrint + Python</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="1. Word Embeddings" href="word2vec.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/eplogo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">EarlyPrint + Python</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   EarlyPrint + Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ep_xml.html">
+   1. Parsing
+   <em>
+    EarlyPrint
+   </em>
+   XML Texts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metadata.html">
+   2. Working with Metadata, Creating Text Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Text Analysis
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tf_idf.html">
+   1. Exploring Vocabulary Using Tf-Idf
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="similarity.html">
+   2. Text Similarity
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Models and Classifiers
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="word2vec.html">
+   1. Word Embeddings
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Text Classification: Unsupervised Clustering
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/unsupervised.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/earlyprint/jupyterbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/earlyprint/jupyterbook/issues/new?title=Issue%20on%20page%20%2Funsupervised.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/earlyprint/jupyterbook/master?urlpath=tree/unsupervised.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-a-text-corpus">
+   2.1. Reading a Text Corpus
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unsupervised-clustering">
+   2.2. Unsupervised Clustering
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="text-classification-unsupervised-clustering">
+<h1><span class="section-number">2. </span>Text Classification: Unsupervised Clustering<a class="headerlink" href="#text-classification-unsupervised-clustering" title="Permalink to this headline">¶</a></h1>
+<p>In the next two notebooks, I lay out some of the basic principles behind a set of techniques usually named by umbrella terms—classification, machine learning, even “artificial intelligence.” In a nutshell, these approaches take a large dataset and attempt to determine values or categories from that data. I’ll show a few of the most basic versions of this approach and gesture to more complex methods.</p>
+<p>Modeling, writ large, has become a massive field in data science. Ted Underwood uses models to understand literary history in <em>Distant Horizons</em>, the OCR tool <a class="reference external" href="https://github.com/tberg12/ocular">Ocular</a> uses statistical models of both typefaces and language, and, of course, topic modeling—technically <a class="reference external" href="http://mallet.cs.umass.edu/">Latent Dirichlet Allocation (LDA)</a>—was one of the earliest types of modeling to be widely adopted by humanities scholars.</p>
+<p>But statistical classification techniques are also often what is underneath the vague talk of “algorithms” or “machine learning” that make up so much discussion of contemporary technology. Such models help to deliver search results, determine what social media posts you see, and <a class="reference external" href="https://projects.fivethirtyeight.com/2020-election-forecast/">even try to predict who will be elected president</a>. Understanding how such prediction works can help you to critique the technologies that increasingly determine so much of our lives, and it can help you to better understand the recent achievements of statistical models in the humanities (and even use these techniques in your own work).</p>
+<p>We’ll begin, as always, by <code class="docutils literal notranslate"><span class="pre">import</span></code>ing necessary libraries and functions. We’ll use many of the ones we’ve used before, including a few new ones from <a class="reference external" href="https://scikit-learn.org/stable/index.html">scikit-learn</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General Libraries Needed</span>
+<span class="kn">import</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="c1"># Functions for Unsupervised Clustering</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># Libraries for Graphing</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-a-text-corpus">
+<h2><span class="section-number">2.1. </span>Reading a Text Corpus<a class="headerlink" href="#reading-a-text-corpus" title="Permalink to this headline">¶</a></h2>
+<p>You can create a statistical model from any kind of data, but in this exercise we’ll use data derived from a set of texts, the same corpus of 1666 texts we’ve been using all along. Here we’re borrowing techniques from the field of <em>information retrieval</em> to get features from our texts, the same way we did in the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">Tf-Idf</a> and <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">Text Similarity</a> tutorials.</p>
+<p>In previous tutorials, we extracted lists of words from the XML files and converted them to Tf-Idf values using <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code>. That would still work in this case, but in order to place some additional limits on Tf-Idf, we’ll convert the text from our XML back into strings. We can put those strings into <code class="docutils literal notranslate"><span class="pre">TfIdfVectorizer</span></code>, which will give us access to those additional limits (see below). The next code block extracts all the lemmas from our texts and converts them into strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the glob library to create a list of file names</span>
+<span class="n">filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts_full/*.xml&quot;</span><span class="p">)</span>
+<span class="c1"># Parse those filenames to create a list of file keys (ID numbers)</span>
+<span class="c1"># You&#39;ll use these later on.</span>
+
+<span class="n">filekeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">]</span>
+<span class="c1"># Create an empty lists to put all our texts into</span>
+<span class="n">all_tokenized</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_strings</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">collect_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Create a parse object that skips XML IDs (in this case they just slow things down)</span>
+
+<span class="c1"># Then you can loop through the files</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span> <span class="c1"># Parse each file into an XML tree</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span> <span class="c1"># Get the XML from that tree</span>
+    <span class="c1"># Now we can use lxml to find all the w tags</span>
+    <span class="c1"># In this next line you&#39;ll do several things at once to create a list of words for each text</span>
+    <span class="c1"># 1. Loop through each word: for word in word_tags</span>
+    <span class="c1"># 2. Make sure the tag has a word at all: if word.text != None</span>
+    <span class="c1"># 3. Get the lemmatized form of the word: word.get(&#39;reg&#39;, word.text)</span>
+    <span class="c1"># 4. Make sure all the words are in lowercase: .lower()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lemma&#39;</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">xml</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s2">&quot;{*}w&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">full_string</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="c1"># Then we add these results to a master list</span>
+    <span class="n">all_strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have strings for each text, we can “vectorize” them into Tf-Idf values. Scikit-learn provides <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer">many options and parameters</a> for its <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code> that aren’t available in the <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> we used in previous tutorials. Specifically, we want to use the <code class="docutils literal notranslate"><span class="pre">min_df</span></code> parameter to set the minimum document frequency to 2: this will filter out all words that appear in fewer than two texts. This creates a smaller list of features and will allow our models to run more quickly and more accurately.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First we need to create an &quot;instance&quot; of the vectorizer, with the proper settings.</span>
+<span class="c1"># Normalization is set to &#39;l2&#39; by default</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sublinear_tf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># I am choosing to turn on sublinear term frequency scaling, which takes the log of</span>
+<span class="c1"># term frequencies and can help to de-emphasize function words like pronouns and articles. </span>
+<span class="c1"># You might make a different choice depending on your corpus.</span>
+
+<span class="c1"># Once we&#39;ve created the instance, we can &quot;transform&quot; our counts</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">all_strings</span><span class="p">)</span>
+
+<span class="c1"># Make results readable using Pandas</span>
+<span class="n">readable_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span> <span class="c1"># Convert information back to a DataFrame</span>
+<span class="n">readable_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>00</th>
+      <th>01</th>
+      <th>02</th>
+      <th>03</th>
+      <th>04</th>
+      <th>05</th>
+      <th>06</th>
+      <th>08</th>
+      <th>09</th>
+      <th>10</th>
+      <th>...</th>
+      <th>zodiac</th>
+      <th>zoilus</th>
+      <th>zona</th>
+      <th>zonara</th>
+      <th>zone</th>
+      <th>zophar</th>
+      <th>zoroaster</th>
+      <th>zosimus</th>
+      <th>zouch</th>
+      <th>zwinglius</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B02845</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A32444</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A51130</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.017101</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A89320</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.059049</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A36358</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.011049</td>
+      <td>...</td>
+      <td>0.028335</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A57156</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.033300</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A57634</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A65985</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B03763</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.041815</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A41955</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.018557</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>269 rows × 31385 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="unsupervised-clustering">
+<h2><span class="section-number">2.2. </span>Unsupervised Clustering<a class="headerlink" href="#unsupervised-clustering" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our matrix of word counts, there are many, many methods and techniques we could apply to categorize or <em>classify</em> our texts. There are two general types of modeling I will introduce: <em>unsupervised</em> methods and <em>supervised</em> ones. Supervised methods are so called because the investigator provides some labels for the data, telling which samples belong in which categories. And based on those samples—the <em>training data</em>—the computer tries to determine to which categories the unlabeled samples belong.</p>
+<p>The supervised methods are what’s most often meant by “machine learning” (because the machine “learns” based on the training data). But there are a set of <em>unsupervised</em> methods which try to find categories in data without knowing about categories in advance. We’ll work with one such <em>clustering</em> method, K-Means Clustering. The k-means method attempts to find categories in data based on how close the samples are to one another in Cartesian space, i.e. in the graph above but across thousands of dimensions.</p>
+<p>The <em>k</em> in k-means stands for <em>any number</em>: we need to tell the computer how many clusters we think it should find. As a test we’ll set <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> to 4, placing our texts into 4 groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># Create a KMeans instance that will look for 4 clusters</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">readable_results</span><span class="p">)</span> <span class="c1"># Feed in our normalized data</span>
+
+<span class="c1"># Show which plays the model put together</span>
+<span class="n">kmeans_groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span><span class="n">filekeys</span><span class="p">):</span>
+    <span class="n">kmeans_groups</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kmeans_groups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;B02845&#39;, &#39;B05117&#39;, &#39;A35206&#39;, &#39;A39345&#39;, &#39;B03164&#39;, &#39;B03114&#39;, &#39;B01661&#39;, &#39;B03489&#39;, &#39;B05916&#39;, &#39;A92820&#39;, &#39;A39246&#39;, &#39;A64918&#39;, &#39;B03672&#39;, &#39;B08665&#39;, &#39;B03352&#39;, &#39;A37096&#39;, &#39;A59325&#39;, &#39;A93278&#39;, &#39;B04360&#39;, &#39;A51346&#39;, &#39;A60606&#39;, &#39;B05875&#39;, &#39;B03376&#39;, &#39;B03106&#39;, &#39;A44879&#39;, &#39;A28209&#39;, &#39;B04153&#39;, &#39;A59168&#39;, &#39;A81069&#39;, &#39;B03109&#39;, &#39;A96936&#39;, &#39;A42533&#39;, &#39;A63571&#39;, &#39;A44627&#39;, &#39;A92373&#39;, &#39;B04154&#39;, &#39;B06375&#39;, &#39;B01399&#39;, &#39;B04338&#39;, &#39;A41266&#39;, &#39;A63431&#39;, &#39;A67335&#39;, &#39;B04701&#39;, &#39;B06473&#39;, &#39;B06427&#39;, &#39;B06872&#39;, &#39;A43177&#39;, &#39;B04364&#39;, &#39;B05057&#39;, &#39;A38630&#39;]
+[&#39;A32444&#39;, &#39;A51877&#39;, &#39;A46196&#39;, &#39;A46152&#39;, &#39;A32566&#39;, &#39;A32314&#39;, &#39;A32207&#39;, &#39;A29439&#39;, &#39;A86466&#39;, &#39;B05479&#39;, &#39;A35608&#39;, &#39;A79302&#39;, &#39;A32313&#39;, &#39;A32751&#39;, &#39;A63370&#39;, &#39;B23164&#39;, &#39;B09634&#39;, &#39;B05319&#39;, &#39;A26426&#39;, &#39;A32503&#39;, &#39;A46087&#39;, &#39;A49061&#39;, &#39;A31124&#39;, &#39;A63952&#39;, &#39;B06022&#39;, &#39;A48909&#39;, &#39;A71109&#39;, &#39;A49213&#39;, &#39;A63951&#39;, &#39;A32233&#39;, &#39;A95690&#39;, &#39;A46193&#39;, &#39;B05308&#39;, &#39;A46046&#39;, &#39;B03317&#39;, &#39;B01318&#39;, &#39;B05318&#39;, &#39;A32967&#39;, &#39;A47546&#39;, &#39;B02089&#39;, &#39;A46108&#39;, &#39;B02123&#39;, &#39;A55322&#39;, &#39;A42537&#39;, &#39;A87330&#39;, &#39;B20017&#39;, &#39;A32612&#39;, &#39;A93280&#39;, &#39;A79623&#39;, &#39;A47545&#39;, &#39;A46030&#39;, &#39;A32581&#39;, &#39;A32557&#39;, &#39;A32614&#39;, &#39;B03631&#39;, &#39;A46137&#39;, &#39;A32484&#39;, &#39;A50075&#39;, &#39;B02051&#39;, &#39;A49793&#39;, &#39;A23851&#39;, &#39;A39938&#39;, &#39;A93281&#39;, &#39;A40254&#39;, &#39;B05591&#39;, &#39;A85898&#39;, &#39;A32555&#39;, &#39;A47547&#39;, &#39;A23912&#39;, &#39;A41958&#39;, &#39;A96485&#39;, &#39;A32288&#39;, &#39;A46071&#39;, &#39;B06591&#39;, &#39;A32567&#39;, &#39;A32559&#39;, &#39;A53818&#39;]
+[&#39;A51130&#39;, &#39;A89320&#39;, &#39;A36358&#39;, &#39;A60482&#39;, &#39;B04513&#39;, &#39;A61956&#39;, &#39;A35114&#39;, &#39;A25743&#39;, &#39;A61929&#39;, &#39;A32916&#39;, &#39;A39482&#39;, &#39;A61594&#39;, &#39;A67420&#39;, &#39;A62436&#39;, &#39;A57484&#39;, &#39;A52005&#39;, &#39;A52396&#39;, &#39;A66752&#39;, &#39;A51442&#39;, &#39;A26249&#39;, &#39;A55410&#39;, &#39;A31237&#39;, &#39;A61867&#39;, &#39;A61891&#39;, &#39;A95297&#39;, &#39;A50777&#39;, &#39;A28989&#39;, &#39;A65702&#39;, &#39;A55387&#39;, &#39;A45620&#39;, &#39;A56381&#39;, &#39;A39714&#39;, &#39;A51369&#39;, &#39;A43020&#39;, &#39;A48218&#39;, &#39;A56390&#39;, &#39;A91186&#39;, &#39;A59229&#39;, &#39;A47951&#39;, &#39;A75960&#39;, &#39;A50520&#39;, &#39;A29017&#39;, &#39;A44334&#39;, &#39;A35538&#39;, &#39;A39466&#39;, &#39;A38792&#39;, &#39;A44478&#39;, &#39;A47379&#39;, &#39;A26496&#39;, &#39;A37237&#39;, &#39;A48797&#39;, &#39;A58750&#39;, &#39;A25198&#39;, &#39;A42820&#39;, &#39;A39442&#39;, &#39;A77803&#39;, &#39;A38741&#39;, &#39;A52328&#39;, &#39;A63849&#39;, &#39;A44061&#39;, &#39;A26482&#39;, &#39;A49471&#39;, &#39;A31229&#39;, &#39;A59614&#39;, &#39;A53049&#39;, &#39;A64060&#39;, &#39;A60948&#39;, &#39;A57634&#39;, &#39;A41955&#39;]
+[&#39;B02144&#39;, &#39;A53272&#39;, &#39;A70852&#39;, &#39;A41058&#39;, &#39;A76131&#39;, &#39;A64861&#39;, &#39;A61503&#39;, &#39;A66579&#39;, &#39;A34136&#39;, &#39;A77996&#39;, &#39;A38556&#39;, &#39;A28339&#39;, &#39;A57421&#39;, &#39;A59608&#39;, &#39;A56039&#39;, &#39;A54027&#39;, &#39;A71231&#39;, &#39;A27397&#39;, &#39;A80818&#39;, &#39;A65296&#39;, &#39;A30203&#39;, &#39;A53911&#39;, &#39;B03891&#39;, &#39;A60250&#39;, &#39;A96435&#39;, &#39;A61600&#39;, &#39;A66777&#39;, &#39;A44801&#39;, &#39;A45206&#39;, &#39;A23770&#39;, &#39;A41053&#39;, &#39;A52519&#39;, &#39;A44938&#39;, &#39;A64258&#39;, &#39;A35851&#39;, &#39;B02572&#39;, &#39;A30143&#39;, &#39;A75822&#39;, &#39;A35574&#39;, &#39;A29694&#39;, &#39;A47095&#39;, &#39;A54070&#39;, &#39;A54418&#39;, &#39;A70287&#39;, &#39;A29110&#39;, &#39;A37291&#39;, &#39;A47367&#39;, &#39;A43741&#39;, &#39;A67572&#39;, &#39;A41072&#39;, &#39;A39839&#39;, &#39;A45529&#39;, &#39;A53307&#39;, &#39;A67762&#39;, &#39;A45552&#39;, &#39;A97379&#39;, &#39;A46743&#39;, &#39;A40151&#39;, &#39;A44594&#39;, &#39;A80816&#39;, &#39;A39974&#39;, &#39;A61206&#39;, &#39;A36329&#39;, &#39;A41527&#39;, &#39;A61207&#39;, &#39;A36272&#39;, &#39;A42544&#39;, &#39;A63767&#39;, &#39;A33006&#39;, &#39;A49697&#39;, &#39;A57156&#39;, &#39;A65985&#39;, &#39;B03763&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see in the list above that <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> has produced four groups as intended: all four clusters are of somewhat similar size. But we can’t tell much from the lists of file IDs above. Do these groups correspond to any known genres or categories of texts?</p>
+<p>We could list out the title of every text in each group and try to discern groupings that way, but we could also look at the <a class="reference external" href="https://id.loc.gov/authorities/subjects.html">Library of Congress subject headings</a> assigned to many of the texts. We can retrieve these from the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html"><em>EarlyPrint</em> metadata</a>, count them up, and look at the most common subject headings in each group.</p>
+<p>[n.b. The subject headings in the <em>EarlyPrint</em> corpus are a helpful but imperfect data set. Most of them were assigned by the British Library to the original EEBO texts, in some cases many years ago. Not every text has subject headings, and the subject headings may not account for every possible subject, genre, or category that a researcher may care about.]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">collect_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
+
+<span class="c1"># Get the full list of metadata files</span>
+<span class="c1"># (You&#39;ll change this line based on where the files are on your computer)</span>
+<span class="n">metadata_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;../../epmetadata/header/*.xml&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kmeans_groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1"># Loop through each file</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Group </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">all_keywords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">filekey</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;../../epmetadata/header/</span><span class="si">{</span><span class="n">filekey</span><span class="si">}</span><span class="s1">_header.xml&#39;</span> <span class="c1"># Get TCP ID from filename</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span> <span class="c1"># Create lxml tree for metadata</span>
+        <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:item&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span>
+        <span class="n">all_keywords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">keywords</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">all_keywords</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Group 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;Great Britain&#39;: 50, &#39;England&#39;: 47, &#39;London&#39;: 46, &#39;Poetry&#39;: 34, &#39;Broadside poems&#39;: 23, &#39;17th century&#39;: 16, &#39;History&#39;: 11, &#39;Anglo-Dutch War, 1664-1667&#39;: 11, &#39;Ballads, English&#39;: 10, &#39;History, Naval&#39;: 10, &#39;Charles II, 1660-1685&#39;: 9, &#39;Netherlands&#39;: 7, &#39;Foreign relations&#39;: 5, &#39;Political poetry, English&#39;: 5, &#39;Stuarts, 1603-1714&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 3, &#39;Scotland&#39;: 3, &#39;Edinburgh&#39;: 3, &#39;Naval battles&#39;: 3, &#39;Naval operations&#39;: 2, &#39;London (England)&#39;: 2, &#39;Oxford&#39;: 2, &#39;War poetry, English&#39;: 2, &#39;Elegiac poetry, English&#39;: 2, &#39;Restoration, 1660-1688&#39;: 1, &#39;1648-1714&#39;: 1, &#39;Astrology&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;France&#39;: 1, &#39;Dioscuri (Greek mythology)&#39;: 1, &#39;Europe&#39;: 1, &#39;Ships&#39;: 1, &#39;Dance&#39;: 1, &#39;War&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &quot;Four Days&#39; Battle, England, 1666&quot;: 1, &#39;Broadsides&#39;: 1, &#39;Prophecies&#39;: 1, &#39;Ballads&#39;: 1, &quot;Four Days&#39; Battle, 1666&quot;: 1, &#39;Stuarts&#39;: 1, &#39;The Hague&#39;: 1, &#39;Love&#39;: 1, &#39;Christmas&#39;: 1, &#39;History, Nava&#39;: 1, &#39;Military histories&#39;: 1, &#39;Physicians&#39;: 1, &#39;Malpractice&#39;: 1})
+
+Group 2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;Great Britain&#39;: 63, &#39;England&#39;: 60, &#39;London&#39;: 54, &#39;History&#39;: 34, &#39;17th century&#39;: 18, &#39;Politics and government&#39;: 15, &#39;Ireland&#39;: 15, &#39;Charles II, 1660-1685&#39;: 11, &#39;1660-1688&#39;: 11, &#39;Dublin&#39;: 10, &#39;Scotland&#39;: 10, &#39;London (England)&#39;: 9, &#39;Great Fire, London, England, 1666&#39;: 9, &#39;Oxford&#39;: 7, &#39;1649-1775&#39;: 7, &#39;Law and legislation&#39;: 7, &#39;Broadsides&#39;: 7, &#39;Edinburgh&#39;: 7, &#39;Anglo-Dutch War, 1664-1667&#39;: 5, &#39;Plague&#39;: 5, &#39;Controversial literature&#39;: 5, &#39;Sources&#39;: 4, &#39;Dissenters, Religious&#39;: 4, &#39;Pastoral letters and charges&#39;: 3, &#39;Broadside poems&#39;: 3, &#39;Poetry&#39;: 3, &#39;Foreign relations&#39;: 3, &#39;Anglo-French War, 1666-1667&#39;: 2, &#39;Fires&#39;: 2, &#39;Quarantine&#39;: 2, &#39;Finance&#39;: 2, &#39;Political oratory&#39;: 2, &#39;Loyalty oaths&#39;: 2, &#39;France&#39;: 2, &#39;Tables&#39;: 2, &#39;Almanacs&#39;: 2, &#39;Visitations, Ecclesiastical&#39;: 2, &#39;Foreign trade regulation&#39;: 2, &#39;Massachusetts&#39;: 2, &#39;Fish trade&#39;: 1, &#39;Plantations&#39;: 1, &#39;Description and travel&#39;: 1, &#39;Colonial period, 1600-1775&#39;: 1, &#39;Florida&#39;: 1, &#39;North Carolina&#39;: 1, &#39;South Carolina&#39;: 1, &#39;North America&#39;: 1, &#39;Copyright infringement&#39;: 1, &#39;Publishers and publishing&#39;: 1, &#39;History, Naval&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;Jews&#39;: 1, &#39;Migrations&#39;: 1, &#39;Restoration&#39;: 1, &#39;70-1789&#39;: 1, &#39;Mehmed IV, 1648-1687&#39;: 1, &#39;Turkey&#39;: 1, &#39;Dress codes&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Presbyterian Church&#39;: 1, &#39;Sermons, English&#39;: 1, &#39;Sermons&#39;: 1, &#39;City planning and redevelopment law&#39;: 1, &#39;Law printing&#39;: 1, &#39;Printing&#39;: 1, &#39;Restraint of trade&#39;: 1, &#39;Monopolies&#39;: 1, &#39;Patents&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;1517-1882&#39;: 1, &#39;Africa, North&#39;: 1, &#39;Morocco&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;Lumber&#39;: 1, &#39;Blasphemy&#39;: 1, &#39;Book burning&#39;: 1, &#39;Prohibited books&#39;: 1, &#39;Censorship&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Liquor laws&#39;: 1, &#39;Provisioning&#39;: 1, &#39;Poll tax&#39;: 1, &#39;Health resorts&#39;: 1, &#39;Humor&#39;: 1, &#39;Wine and wine making&#39;: 1, &#39;Commerce&#39;: 1, &#39;Canary Islands&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Addresses&#39;: 1, &#39;Paper industry&#39;: 1, &#39;Claims&#39;: 1, &#39;Bartholomew Fair&#39;: 1, &#39;Sturbridge Fair&#39;: 1, &#39;Church history&#39;: 1, &#39;Law&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Drainage&#39;: 1, &#39;Reclamation of land&#39;: 1, &#39;Fens, The (England)&#39;: 1, &#39;Fens, The&#39;: 1, &#39;Paper money&#39;: 1, &#39;Credit&#39;: 1, &#39;Christian life&#39;: 1, &#39;Conduct of life&#39;: 1, &#39;Quakers&#39;: 1, &#39;Quaker authors&#39;: 1, &#39;Dissenters&#39;: 1, &#39;Traitors&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Mortality&#39;: 1, &#39;Statistics, Vital&#39;: 1, &#39;Gunpowder industry&#39;: 1, &#39;Almanacs, English&#39;: 1, &#39;Astrology&#39;: 1, &#39;Ephemerides&#39;: 1, &#39;Spiritual healing&#39;: 1, &#39;Healers&#39;: 1, &#39;Linen industry&#39;: 1, &#39;Markets&#39;: 1, &#39;Wool industry&#39;: 1, &#39;Freight and freightage&#39;: 1, &#39;Rates&#39;: 1, &#39;Oxford (England)&#39;: 1})
+
+Group 3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;England&#39;: 66, &#39;Great Britain&#39;: 65, &#39;London&#39;: 59, &#39;History&#39;: 13, &#39;Oxford&#39;: 8, &#39;Controversial literature&#39;: 7, &#39;17th century&#39;: 6, &#39;Poetry&#39;: 4, &#39;Apologetic works&#39;: 3, &#39;Catholics&#39;: 3, &#39;Plague&#39;: 3, &#39;France&#39;: 3, &#39;Healers&#39;: 3, &#39;Sermons&#39;: 3, &#39;Charles II, 1660-1685&#39;: 2, &#39;Penal laws (against nonconformists)&#39;: 2, &#39;Legal status, laws, etc&#39;: 2, &#39;Description and travel&#39;: 2, &#39;Sermons, English&#39;: 2, &#39;Witchcraft&#39;: 2, &#39;Medicine&#39;: 2, &#39;Foreign relations&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Cryptography&#39;: 1, &#39;Monarchy&#39;: 1, &#39;Paraphrases, English&#39;: 1, &#39;Teacher effectiveness&#39;: 1, &#39;Teachers&#39;: 1, &#39;Dismissal of&#39;: 1, &#39;Women&#39;: 1, &#39;Gynecology&#39;: 1, &#39;Diseases&#39;: 1, &#39;Formulae, receipts, prescriptions&#39;: 1, &#39;Paradise&#39;: 1, &#39;Eden&#39;: 1, &#39;Slavery&#39;: 1, &#39;Algeria&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Protestantism&#39;: 1, &#39;Natural history&#39;: 1, &#39;Carib Indians&#39;: 1, &#39;Apalachee Indians&#39;: 1, &#39;Carib language&#39;: 1, &#39;Glossaries, vocabularies, etc&#39;: 1, &#39;West Indies&#39;: 1, &#39;Antilles, Lesser&#39;: 1, &#39;Persecution&#39;: 1, &#39;Quakers&#39;: 1, &#39;Persecutions&#39;: 1, &#39;Norfolk&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;London (England)&#39;: 1, &#39;1600-1799&#39;: 1, &#39;Paris (France)&#39;: 1, &#39;Royalists&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &#39;Christian life&#39;: 1, &#39;Canterbury (England)&#39;: 1, &#39;Ale&#39;: 1, &#39;humor&#39;: 1, &#39;Hydrostatics&#39;: 1, &#39;Authority (Religion)&#39;: 1, &#39;Rule of faith&#39;: 1, &#39;Anti-Catholicism&#39;: 1, &#39;Therapeutics&#39;: 1, &#39;Pre-existence&#39;: 1, &#39;Soul&#39;: 1, &#39;Religious thought&#39;: 1, &#39;Religious aspects&#39;: 1, &#39;Heraldry&#39;: 1, &#39;Tuberculosis&#39;: 1, &#39;Platonists&#39;: 1, &#39;Empiricism&#39;: 1, &#39;Papacy&#39;: 1, &#39;Paris&#39;: 1, &#39;Courts&#39;: 1, &#39;Landlord and tenant&#39;: 1, &#39;Law and legislation&#39;: 1, &#39;Interpretation and construction&#39;: 1, &#39;Cases&#39;: 1, &#39;Matter&#39;: 1, &#39;Light, Corpuscular theory of&#39;: 1, &#39;Constitution&#39;: 1, &#39;Church polity&#39;: 1, &#39;Ecclesiastical law&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Law&#39;: 1, &#39;Digests&#39;: 1, &#39;Gardening&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Miracles&#39;: 1, &#39;Curiosities and wonders&#39;: 1, &#39;Early works to 1900&#39;: 1, &#39;Astrology&#39;: 1, &#39;Susquehanna Indians&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Maryland&#39;: 1, &#39;Sexually transmitted diseases&#39;: 1, &#39;Syphilis&#39;: 1, &#39;Gonorrhea&#39;: 1, &#39;Politics and government&#39;: 1, &#39;1648-1715&#39;: 1, &#39;Europe&#39;: 1, &#39;Prophecies&#39;: 1, &#39;History, Ancient&#39;: 1, &#39;Turkish Wars, 17th century&#39;: 1, &#39;Venice (Italy)&#39;: 1, &#39;Hērakleion (Greece)&#39;: 1, &#39;Philosophy, English&#39;: 1, &#39;Voyages, Imaginary&#39;: 1, &#39;Viticulture&#39;: 1, &#39;Spiritual healing&#39;: 1})
+
+Group 4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;England&#39;: 69, &#39;Great Britain&#39;: 69, &#39;London&#39;: 65, &#39;17th century&#39;: 22, &#39;Sermons&#39;: 19, &#39;Sermons, English&#39;: 17, &#39;Christian life&#39;: 12, &#39;Plague&#39;: 7, &#39;Religious aspects&#39;: 5, &#39;Devotional literature&#39;: 5, &#39;Salvation&#39;: 4, &#39;Conduct of life&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 4, &#39;Controversial literature&#39;: 4, &#39;History&#39;: 4, &#39;London (England)&#39;: 4, &#39;Meditations&#39;: 4, &#39;Poetry&#39;: 4, &#39;Early works to 1900&#39;: 3, &#39;Apologetic works&#39;: 3, &#39;Christianity&#39;: 3, &#39;Prayer-books and devotions&#39;: 2, &#39;Commentaries&#39;: 2, &#39;Fast-day sermons&#39;: 2, &#39;Anglo-Dutch War, 1664-1667&#39;: 2, &#39;York&#39;: 2, &#39;Oxford&#39;: 2, &#39;Theology, Doctrinal&#39;: 2, &#39;Pastoral letters and charges&#39;: 2, &#39;Quakers&#39;: 2, &#39;Catholics&#39;: 2, &#39;Repentance&#39;: 2, &#39;Providence and government of God&#39;: 1, &#39;Protestant authors&#39;: 1, &#39;Freedom of religion&#39;: 1, &#39;Spiritual life&#39;: 1, &#39;Children&#39;: 1, &#39;Biography&#39;: 1, &#39;Rites and ceremonies&#39;: 1, &#39;Ritualism&#39;: 1, &#39;Contentment&#39;: 1, &#39;Fire&#39;: 1, &#39;Devotional exercises&#39;: 1, &#39;Anglican authors&#39;: 1, &#39;Devotional literature, English&#39;: 1, &#39;God&#39;: 1, &#39;Meditation&#39;: 1, &#39;Harvesting&#39;: 1, &#39;Wrath&#39;: 1, &#39;Society of Friends&#39;: 1, &#39;Puritans&#39;: 1, &#39;Theology, Practical&#39;: 1, &#39;Doctrines&#39;: 1, &#39;Future punishment&#39;: 1, &#39;Hell&#39;: 1, &#39;Death&#39;: 1, &#39;Last words&#39;: 1, &#39;Oaths&#39;: 1, &#39;Moral and ethical aspects&#39;: 1, &#39;Fast-day sermons,&#39;: 1, &#39;Broadside poems&#39;: 1, &#39;Grace (Theology)&#39;: 1, &#39;Charity&#39;: 1, &#39;Funeral sermonsvEarly works to 1800&#39;: 1, &#39;Disasters&#39;: 1, &#39;Eternity&#39;: 1, &#39;Future life&#39;: 1, &#39;God (Christianity)&#39;: 1, &#39;Addresses&#39;: 1, &#39;Advent sermons&#39;: 1, &#39;Women in Christianity&#39;: 1, &#39;Women (Christian theology)&#39;: 1, &#39;Funeral sermons&#39;: 1, &#39;Dissenters, Religious&#39;: 1, &#39;Wisdom&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Protestants&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Church property&#39;: 1, &#39;Church renewal&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Patience&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;Prayers&#39;: 1, &#39;Socinianism&#39;: 1, &#39;Pelagianism&#39;: 1, &#39;Epidemics&#39;: 1, &#39;Judgment Day&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<p>How do we make sense of the lists above? There are some subject headings (“Great Britain,” “England,” “London”) that are assigned to almost every text, and keep in mind that any individual text can have between 3 and ~12 terms assigned to it. (Remember: library cataloguers were originally accounting for these EEBO texts as part of much larger library collections.)</p>
+<p>But beyond those most common terms we see some patterns emerge. Group 1 appears to contain mostly poetry, broadsides, and ballads. Group 4 seems to have lots of sermons and religious texts—in addition to the “Sermons” and “Sermons, English” terms, there are lots of religion-related keywords like “Puritans,” “Religious thought,” and even “Hell.” Group 2 seems to contain texts about politics and current events, with the “History” keyword appearing frequently as well as “Ireland,” “Foreign relations,” and the Great Fire of London. Group 3 may be less internally coherent, but perhaps “royal supremacy” is a clue that it contains royal proclamations and government documents, a common genre in the corpus.</p>
+<p>We would be able to find out more by examining the texts in these groups individually, but as a first attempt, the subject headings seem to suggest that these groups are fairly thematically coherent. Not bad for an initial attempt at unsupervised clustering!</p>
+<p>It can also be useful to visualize the clusters, to get a sense of how distinct they are from each other. As we did in the <a class="reference external" href="https://earlyprint.org/jupyterbook/word2vec.html">Word Embeddings tutorial</a>, we can project the high dimensional vector space of Tf-Idf (i.e. thousands of words) into just two graphable dimensions, using PCA. Let’s create a DataFrame of our PCA results for each texts, with an additional “color” column for the K-Means clusters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pca_results</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">readable_results</span><span class="p">)</span>
+
+<span class="c1"># Put PCA into a DataFrame</span>
+<span class="n">pca_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca_results</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pc1&quot;</span><span class="p">,</span><span class="s2">&quot;pc2&quot;</span><span class="p">])</span>
+
+<span class="c1"># Add &quot;color&quot; column for K-Means groups</span>
+<span class="n">pca_df</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">)</span>
+<span class="n">pca_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pc1</th>
+      <th>pc2</th>
+      <th>color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B02845</th>
+      <td>-0.163497</td>
+      <td>-0.137603</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>A32444</th>
+      <td>-0.388425</td>
+      <td>0.110784</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>A51130</th>
+      <td>0.110654</td>
+      <td>-0.040500</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>A89320</th>
+      <td>-0.032386</td>
+      <td>0.093907</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>A36358</th>
+      <td>0.082201</td>
+      <td>-0.077883</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>A57156</th>
+      <td>0.217888</td>
+      <td>-0.043962</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>A57634</th>
+      <td>0.003292</td>
+      <td>0.052297</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>A65985</th>
+      <td>0.260442</td>
+      <td>-0.109177</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>B03763</th>
+      <td>0.118181</td>
+      <td>-0.255734</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>A41955</th>
+      <td>0.155005</td>
+      <td>0.135625</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>269 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>Now that we’ve calculated PCA, we can graph our texts in two dimensions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pc1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pc2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd47a659e20&gt;
+</pre></div>
+</div>
+<img alt="_images/unsupervised_13_1.png" src="_images/unsupervised_13_1.png" />
+</div>
+</div>
+<p>Do you notice any clusters in the data? If you had to draw circles around 4 distinct groups of texts, how would you divide them?</p>
+<p>Let’s use the “color” column to see what <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> did with this data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pc1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pc2&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd47a60c4c0&gt;
+</pre></div>
+</div>
+<img alt="_images/unsupervised_15_1.png" src="_images/unsupervised_15_1.png" />
+</div>
+</div>
+<p>In the graph above, we can see how K-means divided our texts. We can’t see all the variance using PCA, but this gives us a decent initial sense. We can see now why Group 2 (in red) isn’t all that internally coherent—its texts aren’t too close together. Some of the groups have closer, more “clustered” dots than others. So how did our unsupervised clustering method do? I think we might categorize this effort as <em>good</em> but not <em>great</em>.</p>
+<p>From looking at the way the dots are distributed mostly evenly across the graph, we can also see that this data might not be especially well suited for the K-means clustering approach. To get good results with K-means, you really want sets of dots that are already visibly “clustered” together on the graph. Though we got <em>decent enough</em> results with this approach, the visualization tells us that it’s time to try something new.</p>
+<p>The next question is: would the computer do a better job if we tried to teach it about the genres we already know? To answer that, we’ll need a <em>supervised classification</em> method.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="word2vec.html" title="previous page"><span class="section-number">1. </span>Word Embeddings</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By John R. Ladd<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

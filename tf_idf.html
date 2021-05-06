@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Exploring Vocabulary Using Tf-Idf &#8212; EarlyPrint + Python</title>
+    <title>1. Exploring Vocabulary Using Tf-Idf &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Working with Metadata, Creating Text Networks" href="metadata.html" />
-    <link rel="prev" title="1. Parsing EarlyPrint XML Texts" href="ep_xml.html" />
+    <link rel="next" title="2. Text Similarity" href="similarity.html" />
+    <link rel="prev" title="2. Working with Metadata, Creating Text Networks" href="metadata.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -92,7 +92,12 @@
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
    1. Parsing
@@ -102,29 +107,43 @@
    XML Texts
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Exploring Vocabulary Using Tf-Idf
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="metadata.html">
-   3. Working with Metadata, Creating Text Networks
+   2. Working with Metadata, Creating Text Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Text Analysis
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   4. Text Similarity
+   2. Text Similarity
   </a>
  </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Models and Classifiers
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
-   5. Word Embeddings
+   1. Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="modeling.html">
-   6. Statistical Modeling
+  <a class="reference internal" href="unsupervised.html">
+   2. Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -232,22 +251,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   2.1. Introduction
+   1.1. Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tools">
-   2.2. Tools
+   1.2. Tools
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-1-import-libraries">
-   2.3. Step 1: Import Libraries
+   1.3. Step 1: Import Libraries
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-2-open-some-earlyprint-texts-and-get-all-the-regularized-tokens">
-   2.4. Step 2: Open some
+   1.4. Step 2: Open some
    <em>
     EarlyPrint
    </em>
@@ -256,17 +275,17 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-3-counting-words">
-   2.5. Step 3: Counting Words
+   1.5. Step 3: Counting Words
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-4-run-tf-idf">
-   2.6. Step 4: Run Tf-Idf
+   1.6. Step 4: Run Tf-Idf
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-did-we-learn-about-observations-upon-experimental-philosophy-and-the-blazing-world">
-   2.7. What did we learn about
+   1.7. What did we learn about
    <em>
     Observations Upon Experimental Philosophy
    </em>
@@ -279,7 +298,7 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
-   2.8. Conclusion
+   1.8. Conclusion
   </a>
  </li>
 </ul>
@@ -294,17 +313,17 @@
               <div>
                 
   <div class="section" id="exploring-vocabulary-using-tf-idf">
-<h1><span class="section-number">2. </span>Exploring Vocabulary Using Tf-Idf<a class="headerlink" href="#exploring-vocabulary-using-tf-idf" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>Exploring Vocabulary Using Tf-Idf<a class="headerlink" href="#exploring-vocabulary-using-tf-idf" title="Permalink to this headline">¶</a></h1>
 <p>by <a class="reference external" href="https://jrladd.com">John R. Ladd</a></p>
 <div class="section" id="introduction">
-<h2><span class="section-number">2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, you’ll learn how to examine the vocabulary in <em>EarlyPrint</em> texts using Tf-Idf: Term Frequency–Inverse Document Frequency. This technique weights words according to how many times they are used in one text relative to how often they’re used across an entire corpus.</p>
 <p>Let’s say, for example, that the word “temperance” appears about 18 times in the <em>The Faerie Queene</em>. Is that a lot or a little? How can we understand this wordcount not only in the context of Spenser’s usage, but in the context of the word’s appearance across a contemporary corpus? To understand whether this frequency is out of the ordinary, we need to know a word’s <strong>term frequency</strong> (how many times does “temperance” appear in <em>The Faerie Queene</em>) as well as its <strong>document frequency</strong> (how many documents does “temperance” appear in at all). No doubt the word “the” appears in <em>The Faerie Queene</em> many many times (even in the title!), but it also appears in every single other English text. The fact that Spenser uses “the” a lot may not tell us much, but the fact that he uses “temperance” a lot could tell us something. Tf-Idf combines term frequency and document frequency into a score that can show us what words to pay attention to. It allows us to look at the frequencies of all the words in a single text highlighted against their presence or absence in a set of texts.</p>
 <p>Because Tf-Idf gives us more information than raw term frequency, it’s a common ingredient in machine learning, natural language processing, and text classification tasks. <em>EarlyPrint</em>’s own <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html">Discovery Engine</a> uses Tf-Idf as one of several measures for determining text similarity in our corpus. For much more information on what Tf-Idf is and how to use it, please refer to <a class="reference external" href="https://programminghistorian.org/en/lessons/analyzing-documents-with-tfidf">Matt Lavin’s <em>Programming Historian</em> tutorial on Tf-Idf</a>, which was part of the inspiration for this post. However, it’s important to remember that Tf-Idf is a heuristic, not a statistic. It’s a simple, interpretable weighting system that gives a first sense of a word’s relative importance or uniqueness. As Lavin and many others have suggested, Tf-Idf should therefore primarily be used as a first step in a research investigation, a way to ask new and interesting questions, rather than as a source of definitive claims. For more on the range of statistical techniques that can be used to investigate a word’s relative prominence, start with this <a class="reference external" href="https://tedunderwood.com/2011/11/09/identifying-the-terms-that-characterize-an-author-or-genre-why-dunnings-may-not-be-the-best-method/">blog post by Ted Underwood</a>.</p>
 <p>While Lavin’s tutorial will get you very far with most modern texts, early modern printed texts have irregular spellings and other inconsistencies that may throw off word counts (i.e. We need the computer to know that “dog” and “dogge” are the same word). In this tutorial, you’ll learn how to use <em>EarlyPrint</em>’s linguistically annotated texts to deal with those irregularities and produce more reliable Tf-Idf results.</p>
 </div>
 <div class="section" id="tools">
-<h2><span class="section-number">2.2. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
 <p>Like the other tutorials in this series, this post presumes some introductory knowledge of Python. However, you need not write any code yourself. You can simply download this notebook and modify it to run on your own subcorpus of <em>EarlyPrint</em> texts.</p>
 <p>For this notebook to work, you will need to have Python3 installed as well as the following libraries:</p>
 <ul class="simple">
@@ -316,7 +335,7 @@
 <p>Now let’s get started!</p>
 </div>
 <div class="section" id="step-1-import-libraries">
-<h2><span class="section-number">2.3. </span>Step 1: Import Libraries<a class="headerlink" href="#step-1-import-libraries" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Step 1: Import Libraries<a class="headerlink" href="#step-1-import-libraries" title="Permalink to this headline">¶</a></h2>
 <p>Once you’ve installed the necessary libraries, you need to <strong>import</strong> them into our current script. Often you don’t need to import the whole library, just specific commands <strong>from</strong> that library. Our imports look like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -332,15 +351,15 @@
 </div>
 </div>
 <div class="section" id="step-2-open-some-earlyprint-texts-and-get-all-the-regularized-tokens">
-<h2><span class="section-number">2.4. </span>Step 2: Open some <em>EarlyPrint</em> texts and get all the regularized tokens<a class="headerlink" href="#step-2-open-some-earlyprint-texts-and-get-all-the-regularized-tokens" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Step 2: Open some <em>EarlyPrint</em> texts and get all the regularized tokens<a class="headerlink" href="#step-2-open-some-earlyprint-texts-and-get-all-the-regularized-tokens" title="Permalink to this headline">¶</a></h2>
 <p>As a sample, I’ve selected all the <em>EarlyPrint</em> texts available that were published in the year 1666. I did this because I’d like to find out about the distinctive vocabulary used in Margaret Cavendish’s <em>Observations upon Experimental Philosophy</em> with <em>The Blazing World</em>, published in that year. But this method would work just as well for any grouping of texts.</p>
 <p>In the current <em>EarlyPrint</em> repository of freely downloadable texts, there are 143 documents that were published in 1666. Using that set of texts, this script ran on a standard laptop in just three or four minutes. We recommend that you start with a corpus of similar size to get used to the process, at a max of, say, 250 texts. This code <em>will</em> run on thousands or tens of thousands of texts at a time, though it may take a very long time on your average laptop.</p>
 <p>Here’s the wonderful part: <em>EarlyPrint</em> texts are already tokenized (split up into individual words) and regularized (marked up with modernized spellings). So for our purposes here we simply need to open a file, get all its <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags for individual words, look to see if there is a regularized spelling, and put all of those words into a list. That may sound complicated, but the truth is that much of the hard work has already been done for us!</p>
-<p>I’ve collected my subcorpus in a folder called <code class="docutils literal notranslate"><span class="pre">1666_texts</span></code>. So I can process every file in that folder, like so:</p>
+<p>I’ve collected my subcorpus in a folder called <code class="docutils literal notranslate"><span class="pre">1666_texts_full</span></code>. So I can process every file in that folder, like so:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First you need a list of all files in your directory</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts/*.xml&quot;</span><span class="p">)</span> <span class="c1"># THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts_full/*.xml&quot;</span><span class="p">)</span> <span class="c1"># THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER</span>
 
 <span class="c1"># Create an empty lists to put all our texts into</span>
 <span class="n">all_tokenized</span> <span class="o">=</span> <span class="p">[]</span>
@@ -368,7 +387,7 @@
 <p>Because of the affordances of the annotated <em>EarlyPrint</em> texts, we were able to skip a bunch of steps above. Accurate tokenization is handled by the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags, and because there is a separate <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> tag for punctuation, we don’t have to worry about filtering that out either. By accessing the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags directly and extracting the available regularized forms, we’re now ready to move on to counting words.</p>
 </div>
 <div class="section" id="step-3-counting-words">
-<h2><span class="section-number">2.5. </span>Step 3: Counting Words<a class="headerlink" href="#step-3-counting-words" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.5. </span>Step 3: Counting Words<a class="headerlink" href="#step-3-counting-words" title="Permalink to this headline">¶</a></h2>
 <p>In <a class="reference external" href="https://programminghistorian.org/en/lessons/analyzing-documents-with-tfidf">Lavin’s tutorial</a>, he uses the TfIdfVectorizer tool to tokenize and count words all together. Because our words are pretokenized, we can’t combine these two steps. Instead, we need to make our own counts. We do this using a built-in method called <code class="docutils literal notranslate"><span class="pre">Counter()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -383,7 +402,7 @@
 </div>
 </div>
 <div class="section" id="step-4-run-tf-idf">
-<h2><span class="section-number">2.6. </span>Step 4: Run Tf-Idf<a class="headerlink" href="#step-4-run-tf-idf" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.6. </span>Step 4: Run Tf-Idf<a class="headerlink" href="#step-4-run-tf-idf" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our word counts, we can use scikit-learn’s <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> function to run Tf-Idf across our entire corpus.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -427,25 +446,25 @@
     <tr style="text-align: right;">
       <th></th>
       <th>B02845</th>
+      <th>A32444</th>
       <th>A51130</th>
+      <th>A89320</th>
       <th>A36358</th>
-      <th>A28171</th>
       <th>A51877</th>
+      <th>A46196</th>
       <th>A60482</th>
-      <th>A32566</th>
-      <th>A35206</th>
-      <th>A35114</th>
-      <th>A32207</th>
+      <th>B04513</th>
+      <th>A61956</th>
       <th>...</th>
-      <th>A59614</th>
-      <th>A53049</th>
-      <th>A32567</th>
-      <th>A38630</th>
       <th>A32559</th>
+      <th>A33006</th>
       <th>A60948</th>
       <th>A53818</th>
+      <th>A49697</th>
       <th>A57156</th>
+      <th>A57634</th>
       <th>A65985</th>
+      <th>B03763</th>
       <th>A41955</th>
     </tr>
   </thead>
@@ -455,184 +474,172 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>32.750831</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>self-moving</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>32.208326</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>self-knowledg</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>30.409762</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>perceptions</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>30.112464</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>exterior</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>29.368966</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>perception</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>9.585588</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>10.783617</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>28.833331</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>4.016934</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.51898</td>
     </tr>
     <tr>
-      <th>patterning</th>
+      <th>perceptions</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>26.932759</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>empress</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>26.792475</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>patterning</th>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -640,215 +647,167 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>interior</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>26.762544</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>perceptive</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>25.220726</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>sensitive</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3.564949</td>
-      <td>0.0</td>
-      <td>8.507019</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>24.558501</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>figurative</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>10.481941</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>24.276043</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>blazing-world</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>24.005306</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>inanimate</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>7.902577</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>23.403087</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>worm-men</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>23.192979</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
-      <th>bird-men</th>
+      <th>sensitive</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.984896</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>22.829407</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>9.825078</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>sentient</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>22.807799</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>bird-men</th>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -856,311 +815,215 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>figurative</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>10.961014</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>inanimate</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.464695</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>reaction</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>22.232199</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>self-knowing</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>22.232199</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>duchess'</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>22.232199</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>finite</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>10.133499</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>22.172407</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>6.575173</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>corporeal</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>22.118220</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>dense</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>22.017269</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>patterned</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>22.017080</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>divideable</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>22.017080</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>knowledges</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
       <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>21.458893</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>incorporeal</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>21.343024</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>dividable</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>21.313410</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>fishmen</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>21.313410</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>respiration</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>9.953437</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>11.102263</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
-      <td>21.178841</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>dense</th>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1168,16 +1031,172 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>vacuum</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>emperess'</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>vehicles</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>duchess'</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>patterned</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+    </tr>
+    <tr>
+      <th>perceptible</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00000</td>
     </tr>
   </tbody>
 </table>
-<p>30 rows × 142 columns</p>
+<p>30 rows × 269 columns</p>
 </div></div></div>
 </div>
 </div>
 <div class="section" id="what-did-we-learn-about-observations-upon-experimental-philosophy-and-the-blazing-world">
-<h2><span class="section-number">2.7. </span>What did we learn about <em>Observations Upon Experimental Philosophy</em> and <em>The Blazing World</em>?<a class="headerlink" href="#what-did-we-learn-about-observations-upon-experimental-philosophy-and-the-blazing-world" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.7. </span>What did we learn about <em>Observations Upon Experimental Philosophy</em> and <em>The Blazing World</em>?<a class="headerlink" href="#what-did-we-learn-about-observations-upon-experimental-philosophy-and-the-blazing-world" title="Permalink to this headline">¶</a></h2>
 <p>As I said before, Tf-Idf is a great way to generate research questions. In the chart above we can get a sense of some of the words Cavendish is using that aren’t popular in other texts published that year.</p>
 <p>We would naturally expect that character names and other terms specific to this book would score high, and certainly we see “empress,” “bird-men,” “worm-men,” and of course “blazing-world.” It’s exciting, however, that these aren’t the words that score highest. This may be not <em>so</em> surprising since the characters and figures of <em>The Blazing World</em> are mixed in with the philosophical and scientific terminology from the rest of the text, but the resulting list nonetheless includes many interesting words.</p>
 <p>The first thing these results make me want to do is look more into Cavendish’s use of terms that begin with “self-“. Does she use the terms “self-motion” and “self-knowledge” commonly in her other works? What other writers are using these terms in the Restoration? Are other writers using the same terms but without the hyphenation? Are these terms specific to philosophical or scientific texts? All of these are directions to move in for future research, on just a single group of terms.</p>
@@ -1186,7 +1205,7 @@
 <p>Finally, it’s perhaps unsurprising that Cavendish’s interest in “perception” floats to the top of this list. However, we can note that different forms of the word, including “perceptions,” appear here. We might want to treat all forms of a word as a single term, and we can do so through a process called <strong>lemmatization</strong>. If we want to lemmatize our words before running Tf-Idf, there’s more good news: <em>EarlyPrint</em> provides lemmas for all words just as it provides regularized forms. We could refactor our code to use the “lemma” attribute if we chose to, and all the versions of “perception” would be counted as a single term. [n.b. This will work for “perceptions” but not for “perceptive.” Lemmas revert to something like a dictionary headword, and so they usually retain their part of speech.]</p>
 </div>
 <div class="section" id="conclusion">
-<h2><span class="section-number">2.8. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.8. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>I hope that this tutorial will not only help you to run Tf-Idf on texts you care about but that it will convince you of the usefulness of Tf-Idf as a technique. Texts derived from early modern printed books present unique challenges to linguistic analyses like Tf-Idf that rely on consistent spelling, but the regularized texts in <em>EarlyPrint</em> can assist in overcoming some of those challenges.</p>
 <p>If you have any questions, feel free to <a class="reference external" href="mailto:jrladd&#37;&#52;&#48;northwestern&#46;edu">contact me</a>.</p>
 </div>
@@ -1220,8 +1239,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ep_xml.html" title="previous page"><span class="section-number">1. </span>Parsing <em>EarlyPrint</em> XML Texts</a>
-    <a class='right-next' id="next-link" href="metadata.html" title="next page"><span class="section-number">3. </span>Working with Metadata, Creating Text Networks</a>
+    <a class='left-prev' id="prev-link" href="metadata.html" title="previous page"><span class="section-number">2. </span>Working with Metadata, Creating Text Networks</a>
+    <a class='right-next' id="next-link" href="similarity.html" title="next page"><span class="section-number">2. </span>Text Similarity</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

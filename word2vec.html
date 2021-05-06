@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5. Word Embeddings &#8212; EarlyPrint + Python</title>
+    <title>1. Word Embeddings &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Statistical Modeling" href="modeling.html" />
-    <link rel="prev" title="4. Text Similarity" href="similarity.html" />
+    <link rel="next" title="2. Text Classification: Unsupervised Clustering" href="unsupervised.html" />
+    <link rel="prev" title="2. Text Similarity" href="similarity.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -92,7 +92,12 @@
   </a>
  </li>
 </ul>
-<ul class="current nav sidenav_l1">
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
    1. Parsing
@@ -103,28 +108,42 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="tf_idf.html">
-   2. Exploring Vocabulary Using Tf-Idf
+  <a class="reference internal" href="metadata.html">
+   2. Working with Metadata, Creating Text Networks
   </a>
  </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Text Analysis
+ </span>
+</p>
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="metadata.html">
-   3. Working with Metadata, Creating Text Networks
+  <a class="reference internal" href="tf_idf.html">
+   1. Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   4. Text Similarity
+   2. Text Similarity
   </a>
  </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Models and Classifiers
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Word Embeddings
+   1. Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="modeling.html">
-   6. Statistical Modeling
+  <a class="reference internal" href="unsupervised.html">
+   2. Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -232,22 +251,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#select-a-corpus-and-tokenize-sentences">
-   5.1. Select a Corpus and Tokenize Sentences
+   1.1. Select a Corpus and Tokenize Sentences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#train-a-model-and-find-similar-words">
-   5.2. Train a Model and Find Similar Words
+   1.2. Train a Model and Find Similar Words
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#accessing-and-visualizing-vectors">
-   5.3. Accessing and Visualizing Vectors
+   1.3. Accessing and Visualizing Vectors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualize-word-similarity">
-   5.4. Visualize Word Similarity
+   1.4. Visualize Word Similarity
   </a>
  </li>
 </ul>
@@ -262,7 +281,7 @@
               <div>
                 
   <div class="section" id="word-embeddings">
-<h1><span class="section-number">5. </span>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
 <p>Many of the improvements and extensions we have in mind for the next stage of <em>EarlyPrint</em> involve word embeddings. Using popular algorithms like Word2Vec, which we’ll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word co-occurs alongside other words. Using word embeddings, it’s possible to compute the semantic relationship among words in a corpus, to find <strong>how words are related</strong>.</p>
 <p>Word embeddings have lots of different downstream uses for machine learning and text analysis tasks; for instance, they’re an important building block for state-of-the-art natural language processing models. In this tutorial we’ll focus on the basics: training a Word2Vec model and using the model to identify and visualize similar words.</p>
 <p>You can decide how deep you’d like to go into the weeds of the ways Word2Vec actually produces its similarities. For a first introduction, I recommend <a class="reference external" href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar’s <em>The Illustrated Word2Vec</em></a>, which includes lots of helpful visualizations as it explains the basics. In this tutorial, we’ll focus on training Word2Vec in Python and interpreting the results, rather than reviewing the underlying concepts.</p>
@@ -280,7 +299,7 @@
 </div>
 </div>
 <div class="section" id="select-a-corpus-and-tokenize-sentences">
-<h2><span class="section-number">5.1. </span>Select a Corpus and Tokenize Sentences<a class="headerlink" href="#select-a-corpus-and-tokenize-sentences" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Select a Corpus and Tokenize Sentences<a class="headerlink" href="#select-a-corpus-and-tokenize-sentences" title="Permalink to this headline">¶</a></h2>
 <p>Word2Vec creates vectors based on which words are near one another. We’ll train our model on lists of words from a selected corpus, and we’ll use the same corpus we’ve been using all along: the <em>EarlyPrint</em> texts published in 1666.</p>
 <p>We’re using the <a class="reference external" href="https://radimrehurek.com/gensim/models/word2vec.html">Gensim</a> library to create our Word2Vec model. Gensim accepts several different types of input, but we’ll focus on giving it lists of word tokens. You could create a list of all the tokens in a text and pass them directly to Gensim, but Gensim prefers that you give it each sentence separately. This is because sentence boundaries often contain information about word relationships: the last word of a given sentence and the first word of the next one don’t have the same relationship as two words in the same sentence.</p>
 <p>Below we create a function for finding the lemmas in every sentence of our texts, which then collects those sentences as individual lists. For more detail on how this code works, refer to <a class="reference external" href="https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences">our XML tutorial</a>.</p>
@@ -305,7 +324,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;1666_texts/*.xml&#39;</span><span class="p">)</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;1666_texts_full/*.xml&#39;</span><span class="p">)</span>
 <span class="n">all_sentences</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
     <span class="n">get_sentences</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -315,7 +334,7 @@
 </div>
 </div>
 <div class="section" id="train-a-model-and-find-similar-words">
-<h2><span class="section-number">5.2. </span>Train a Model and Find Similar Words<a class="headerlink" href="#train-a-model-and-find-similar-words" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Train a Model and Find Similar Words<a class="headerlink" href="#train-a-model-and-find-similar-words" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a list of all the lemmas in all the sentences in our texts, we’re ready to train our Word2Vec model. This can be done with the simple one-line command below.</p>
 <p>The parameter <code class="docutils literal notranslate"><span class="pre">min_count</span></code> refers to the minimum number of times a word must appear in the corpus in order to be part of the model. For the sake of speed, I’m eliminating all words that appear less than 2 times. (And since the eliminated words appear only once, the resulting vectors wouldn’t be very reliable anyway: not enough examples of adjacent words.)</p>
 <p>The parameter <code class="docutils literal notranslate"><span class="pre">window</span></code> refers to the “sliding window” that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our <em>EarlyPrint</em> applications of Word2Vec, we’ll train the model on the full corpus. But for this sample one-year corpus, let’s shrink the window to just 4 words, which will generate more windows across our smaller corpus.</p>
@@ -335,7 +354,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;the&#39;, &#39;dutch&#39;, &#39;gazette&#39;, &#39;or&#39;, &#39;sheet&#39;, &#39;of&#39;, &#39;wildfire&#39;, &#39;that&#39;, &#39;fire&#39;, &#39;fleet&#39;, &#39;i&#39;, &#39;will&#39;, &#39;tell&#39;, &#39;you&#39;, &#39;not&#39;, &#39;aetna&#39;, &#39;flame&#39;, &#39;nor&#39;, &#39;troy&#39;, &#39;long&#39;, &#39;ago&#39;, &#39;have&#39;, &#39;fill&#39;, &#39;world&#39;, &#39;with&#39;, &#39;noise&#39;, &#39;romance&#39;, &#39;history&#39;, &#39;do&#39;, &#39;age&#39;, &#39;before&#39;, &#39;who&#39;, &#39;obsequy&#39;, &#39;be&#39;, &#39;sing&#39;, &#39;by&#39;, &#39;laureate&#39;, &#39;pen&#39;, &#39;which&#39;, &#39;story&#39;, &#39;can&#39;, &#39;parallel&#39;, &#39;rupert&#39;, &#39;duke&#39;, &#39;albemarle&#39;, &#39;and&#39;, &#39;homes&#39;, &#39;rest&#39;, &#39;send&#39;, &#39;those&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;the&#39;, &#39;dutch&#39;, &#39;gazette&#39;, &#39;or&#39;, &#39;sheet&#39;, &#39;of&#39;, &#39;wildfire&#39;, &#39;that&#39;, &#39;fire&#39;, &#39;fleet&#39;, &#39;i&#39;, &#39;will&#39;, &#39;tell&#39;, &#39;you&#39;, &#39;not&#39;, &#39;aetna&#39;, &#39;flame&#39;, &#39;nor&#39;, &#39;troy&#39;, &#39;long&#39;, &#39;ago&#39;, &#39;have&#39;, &#39;fill&#39;, &#39;world&#39;, &#39;with&#39;, &#39;noise&#39;, &#39;romance&#39;, &#39;history&#39;, &#39;do&#39;, &#39;age&#39;, &#39;before&#39;, &#39;who&#39;, &#39;obsequy&#39;, &#39;be&#39;, &#39;sing&#39;, &#39;by&#39;, &#39;laureate&#39;, &#39;pen&#39;, &#39;which&#39;, &#39;story&#39;, &#39;can&#39;, &#39;parallel&#39;, &#39;rupert&#39;, &#39;duke&#39;, &#39;albemarle&#39;, &#39;and&#39;, &#39;rest&#39;, &#39;send&#39;, &#39;those&#39;, &#39;to&#39;]
 </pre></div>
 </div>
 </div>
@@ -348,17 +367,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;cloud&#39;, 0.9317228198051453), (&#39;fire&#39;, 0.9068721532821655), (&#39;smoke&#39;, 0.8920124769210815), (&#39;rock&#39;, 0.8740819692611694), (&#39;burn&#39;, 0.8726823329925537), (&#39;flood&#39;, 0.8679195046424866), (&#39;chain&#39;, 0.8679168224334717), (&#39;dust&#39;, 0.8658936023712158), (&#39;ash&#39;, 0.8653439879417419), (&#39;wind&#39;, 0.8642510175704956)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;fire&#39;, 0.8489426970481873), (&#39;cloud&#39;, 0.842170238494873), (&#39;coal&#39;, 0.8359401226043701), (&#39;smoke&#39;, 0.8104960918426514), (&#39;fiery&#39;, 0.7995160818099976), (&#39;lamp&#39;, 0.7885575294494629), (&#39;flood&#39;, 0.7738324999809265), (&#39;burn&#39;, 0.773443341255188), (&#39;valley&#39;, 0.758803129196167), (&#39;shower&#39;, 0.7462021112442017)]
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">most_similar()</span></code> function gives the top ten most similar words to the word you selected. The similar words to “flame”—“fire,” “smoke”, “ash”—make a lot of sense.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">most_similar()</span></code> function gives the top ten most similar words to the word you selected. The similar words to “flame”—“fire,” “smoke”, “burn”—make a lot of sense.</p>
 <p>The values given with each word are its cosine similarity to the source word. (See our <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">Similarity tutorial</a> for more about this.)</p>
 <p>If you had a list of words you were particularly interested in, perhaps organized around a theme, you could easily look at the most similar words to each one and begin to populate the semantic field of the topic that interests you.</p>
 </div>
 <div class="section" id="accessing-and-visualizing-vectors">
-<h2><span class="section-number">5.3. </span>Accessing and Visualizing Vectors<a class="headerlink" href="#accessing-and-visualizing-vectors" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Accessing and Visualizing Vectors<a class="headerlink" href="#accessing-and-visualizing-vectors" title="Permalink to this headline">¶</a></h2>
 <p>But we can do more with word embeddings than simply find similar words. Word2Vec creates a vector, a string of numerical values for each word, that we can access with the <code class="docutils literal notranslate"><span class="pre">wv</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -367,23 +386,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.7145108  -0.12516643 -0.29721773  0.18529506 -0.1267187   0.81016743
- -0.2698178  -0.58050805 -1.3886431  -0.26384622 -1.0610106  -0.8030535
- -0.09151758 -0.5355215  -0.64998287 -0.28354886  0.9338349  -0.01685463
-  0.58463025 -0.46613577 -0.44858545 -0.47312522  0.6826598  -0.35454983
-  0.78752154 -0.37928095  0.6372427   0.87677026  0.05423938  0.47669122
- -0.9627098  -0.7284044   0.5599645  -0.42624342  0.37250212  0.1257531
-  0.07453073  0.5000426   1.0599877   0.04867575  0.32578316 -1.105912
-  0.6712924  -0.48948392 -0.86583376 -0.04262859 -0.5072744   0.95682144
- -0.459579    0.33388668  0.87895316  0.8516653   0.56441784  0.5792019
-  0.0896054   0.915266    0.5191485  -0.6310904  -0.24730214 -0.4670559
- -1.2663445  -0.95956767 -0.7953577  -0.05179178 -0.54349494 -0.12064929
- -0.9203471  -0.63457096 -0.43178302  0.49809232 -0.420157    0.01884362
-  0.6277516  -0.72252    -0.23130576  0.6371168   0.5209998   0.37248883
- -0.5978805   0.32759762 -0.00362215  0.4915843   0.30044505  0.04706769
- -0.17561153 -0.765087    1.1106958  -0.668933    0.35436007  0.09042933
-  0.63939345 -0.01185623  0.19130613  0.72370106 -0.3960629   0.6229613
- -0.9803799  -0.14198333  0.08416303  0.07705496]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.5179528   0.5570465   1.2318884   0.43771747 -0.01617345  0.97757787
+ -0.7484764  -0.00724528  1.5031803   0.5369354   0.30949283  0.7545617
+  0.84283984  1.0048558  -0.84035486 -1.7151331  -0.47222072  0.09903593
+  0.14043379  0.32874274 -0.6886271  -0.30410767  0.977618    1.2272265
+ -0.7384447   0.44142935 -0.90228194 -0.20985112  0.01848513  1.8952253
+ -0.21333317 -1.1806738   0.04373931  0.44352213  0.05902958  0.34504023
+ -1.1262454  -0.75915426 -0.41524896 -1.7185836   0.26474038  0.07632465
+  0.6608737   0.03441384 -0.05850032  0.6591872   0.5648993   0.7218732
+ -0.43014666  0.35080278  0.4806738   1.1421118   0.5904824  -0.15326199
+ -0.61639357  1.212343    0.09755696 -1.070593    0.00394901 -0.93870425
+  0.6188808  -0.03228853  0.7208121  -0.4836805   0.40608627  0.4845977
+  0.02519704  0.9874886  -1.111604   -0.951121    0.83848053  0.7699397
+ -0.14420675 -0.09712131 -0.1438172  -0.18786599  0.45889226 -0.43260136
+  0.92145246 -0.04174797  0.19176058  0.88136625 -0.80377656  0.12440117
+  2.2867882  -0.5607841  -0.27620283 -0.79552674 -0.09058311  0.04178488
+  1.8028764  -0.03886571 -0.39758113  0.93894017 -0.87783474  0.33759466
+  0.2686028   0.63075274 -0.28928187  1.2471428 ]
 </pre></div>
 </div>
 </div>
@@ -403,17 +422,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f18cbf5a8b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f7f67c1d8e0&gt;
 </pre></div>
 </div>
 <img alt="_images/word2vec_14_1.png" src="_images/word2vec_14_1.png" />
 </div>
 </div>
-<p>Like in Jalammar’s illustrations for “king,” “man,” and “woman,” it’s easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.</p>
+<p>Like in Alammar’s illustrations for “king,” “man,” and “woman,” it’s easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.</p>
 <p>We could visualize every single word this way, but the resulting chart would be very hard to read. Instead, let’s try other visualization methods.</p>
 </div>
 <div class="section" id="visualize-word-similarity">
-<h2><span class="section-number">5.4. </span>Visualize Word Similarity<a class="headerlink" href="#visualize-word-similarity" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Visualize Word Similarity<a class="headerlink" href="#visualize-word-similarity" title="Permalink to this headline">¶</a></h2>
 <p>By default Word2Vec reduces a word to a vector of 100 features, or 100 dimensions. We can’t visualize a 100-dimensional space: the best we can do is two or three. To go from 100 dimensions to just 2, we need a method for feature reduction.</p>
 <p>We’ll use one of the most common feature reduction methods: Principal Component Analysis. PCA reduces a high-dimensional space into just a few “principal components” that attempt to account for most of the variance in the data. In many applications, such as when <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">calculating similarity</a>, it’s best to work in the higher dimensional space directly. But PCA is a very useful tool for visualization: just remember that you’re looking at a reduced representation of the data rather than the  original data.</p>
 <p>Let’s import PCA from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>:</p>
@@ -461,28 +480,28 @@
   <tbody>
     <tr>
       <th>the</th>
-      <td>1.088081</td>
-      <td>0.064894</td>
+      <td>1.308251</td>
+      <td>-0.103702</td>
     </tr>
     <tr>
       <th>dutch</th>
-      <td>1.065645</td>
-      <td>0.039468</td>
+      <td>1.280252</td>
+      <td>0.091730</td>
     </tr>
     <tr>
       <th>gazette</th>
-      <td>1.097556</td>
-      <td>-0.010632</td>
+      <td>1.279544</td>
+      <td>-0.098819</td>
     </tr>
     <tr>
       <th>or</th>
-      <td>1.041847</td>
-      <td>0.086949</td>
+      <td>1.295807</td>
+      <td>-0.092179</td>
     </tr>
     <tr>
       <th>sheet</th>
-      <td>1.056707</td>
-      <td>0.050866</td>
+      <td>1.274227</td>
+      <td>0.015613</td>
     </tr>
     <tr>
       <th>...</th>
@@ -491,32 +510,32 @@
     </tr>
     <tr>
       <th>whittall</th>
-      <td>0.129968</td>
-      <td>-0.250855</td>
+      <td>-0.170072</td>
+      <td>-0.283742</td>
     </tr>
     <tr>
       <th>noyes</th>
-      <td>0.106204</td>
-      <td>-0.265949</td>
+      <td>-0.108505</td>
+      <td>-0.109053</td>
     </tr>
     <tr>
       <th>grone</th>
-      <td>-0.034138</td>
-      <td>-0.053683</td>
+      <td>0.190941</td>
+      <td>-0.193839</td>
+    </tr>
+    <tr>
+      <th>westley</th>
+      <td>-0.101291</td>
+      <td>-0.322777</td>
     </tr>
     <tr>
       <th>surman</th>
-      <td>-0.123803</td>
-      <td>-0.199232</td>
-    </tr>
-    <tr>
-      <th>brawn</th>
-      <td>0.047043</td>
-      <td>0.225559</td>
+      <td>0.084259</td>
+      <td>-0.466089</td>
     </tr>
   </tbody>
 </table>
-<p>70551 rows × 2 columns</p>
+<p>48403 rows × 2 columns</p>
 </div></div></div>
 </div>
 <p>Now that we have a DataFrame with just 2 dimensions, “pc1” and “pc2,” we can create a scatterplot of every word, where our principal components are the x and y axes.</p>
@@ -527,7 +546,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f18c8043b80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f7f54468280&gt;
 </pre></div>
 </div>
 <img alt="_images/word2vec_20_1.png" src="_images/word2vec_20_1.png" />
@@ -551,7 +570,7 @@
 <img alt="_images/word2vec_22_0.png" src="_images/word2vec_22_0.png" />
 </div>
 </div>
-<p>This is much better. We can see how the words are positioned relative to one another. Though we might have expected to seem them next to each other, remember that PCA is only showing us a reduced representation of our high-dimensional data. Still, we can see that “smoke” and “flame” are closer to each other than “cloud” and “fire.” And all four words are almost in a horizontal line across the graph, suggesting they’re quite similar according to principal component 2 (the y-axis), but perhaps less similar according to PC1 (the x-axis). Finally, by comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).</p>
+<p>This is much better. We can see how the words are positioned relative to one another. Though we might have expected to seem them next to each other, remember that PCA is only showing us a reduced representation of our high-dimensional data. Still, we can see that “smoke” and “cloud” are closer to each other than “flame” and “fire.” And all four words are almost in a horizontal line across the graph, suggesting they’re quite similar according to principal component 2 (the y-axis), but perhaps less similar according to PC1 (the x-axis). Finally, by comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).</p>
 <p>As text similarity increased our sense of text-level relationships in the Similarity tutorial, Word2Vec gives us a clearer (but not complete) sense of word-level relationships. Stacked with other methods, Word2Vec can be used to explore themes and subjects, to help computers and human readers make sense of semantic distinctions, and to drive complex language-based machine learning algorithms.</p>
 </div>
 </div>
@@ -584,8 +603,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="similarity.html" title="previous page"><span class="section-number">4. </span>Text Similarity</a>
-    <a class='right-next' id="next-link" href="modeling.html" title="next page"><span class="section-number">6. </span>Statistical Modeling</a>
+    <a class='left-prev' id="prev-link" href="similarity.html" title="previous page"><span class="section-number">2. </span>Text Similarity</a>
+    <a class='right-next' id="next-link" href="unsupervised.html" title="next page"><span class="section-number">2. </span>Text Classification: Unsupervised Clustering</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
