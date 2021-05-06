@@ -16,4 +16,4 @@
   chapters:
   - file: word2vec
   - file: unsupervised
-  - file: supervised
+#   - file: supervised
