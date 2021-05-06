@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Parsing EarlyPrint XML Texts &#8212; EarlyPrint + Python</title>
+    <title>Parsing EarlyPrint XML Texts &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Working with Metadata, Creating Text Networks" href="metadata.html" />
+    <link rel="next" title="Working with Metadata, Creating Text Networks" href="metadata.html" />
     <link rel="prev" title="EarlyPrint + Python" href="intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -100,7 +100,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Parsing
+   Parsing
    <em>
     EarlyPrint
    </em>
@@ -109,7 +109,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="metadata.html">
-   2. Working with Metadata, Creating Text Networks
+   Working with Metadata, Creating Text Networks
   </a>
  </li>
 </ul>
@@ -121,12 +121,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   1. Exploring Vocabulary Using Tf-Idf
+   Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   2. Text Similarity
+   Text Similarity
   </a>
  </li>
 </ul>
@@ -138,12 +138,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
-   1. Word Embeddings
+   Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unsupervised.html">
-   2. Text Classification: Unsupervised Clustering
+   Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -251,47 +251,47 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   1.1. Introduction
+   Introduction
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tools">
-   1.2. Tools
+   Tools
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-1-import-libraries">
-   1.3. Step 1: Import Libraries
+   Step 1: Import Libraries
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-2-read-a-text-and-create-an-etree-object">
-   1.4. Step 2: Read a Text and Create an “etree” object
+   Step 2: Read a Text and Create an “etree” object
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-3-individual-words">
-   1.5. Step 3: Individual Words
+   Step 3: Individual Words
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-4-lines-stanzas-and-sentences">
-   1.6. Step 4: Lines, Stanzas, and Sentences
+   Step 4: Lines, Stanzas, and Sentences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#other-divisions">
-   1.7. Other Divisions
+   Other Divisions
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exporting-and-sharing">
-   1.8. Exporting and Sharing
+   Exporting and Sharing
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
-   1.9. Conclusion
+   Conclusion
   </a>
  </li>
 </ul>
@@ -306,16 +306,16 @@
               <div>
                 
   <div class="section" id="parsing-earlyprint-xml-texts">
-<h1><span class="section-number">1. </span>Parsing <em>EarlyPrint</em> XML Texts<a class="headerlink" href="#parsing-earlyprint-xml-texts" title="Permalink to this headline">¶</a></h1>
+<h1>Parsing <em>EarlyPrint</em> XML Texts<a class="headerlink" href="#parsing-earlyprint-xml-texts" title="Permalink to this headline">¶</a></h1>
 <p>by <a class="reference external" href="https://jrladd.com">John R. Ladd</a></p>
 <div class="section" id="introduction">
-<h2><span class="section-number">1.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, you’ll learn how to take advantage of the XML markup in <em>EarlyPrint</em> texts to subdivide and <strong>parse</strong> a single text or group of texts (that is, to use the formal encoding provided by XML to select textual features in which you’re especially interested).</p>
 <p><em>EarlyPrint</em> uses <a class="reference external" href="https://tei-c.org/release/doc/tei-p5-exemplars/html/tei_simplePrint.doc.html">TEI simplePrint</a>, an encoding standard derived from the <a class="reference external" href="https://tei-c.org/">Text Encoding Initiative</a> guidelines and designed specifically for early modern and modern printed books. The standard includes many ways of marking up the structure of books, and we’ll take advantage of a text’s various TEI tags and attributes to transform it a number of useful ways.</p>
 <p>For more on XML (which stands for eXtensible Markup Language), its long history, and the ways it has been used with early modern texts, consult <a class="reference external" href="https://earlyprint.org/intros/intro-to-eebo-tcp.html">our introductory post on EEBO-TCP</a> which includes a helpful glossary and set of links at the bottom.</p>
 </div>
 <div class="section" id="tools">
-<h2><span class="section-number">1.2. </span>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
 <p>Like the other tutorials in this series, this post presumes some basic knowledge of Python. However, you need not write any code yourself. You can simply <a class="reference external" href="https://earlyprint.org/assets/jupyter/ep_xml.ipynb">download this notebook</a> and modify it to run on your own <em>EarlyPrint</em> texts.</p>
 <p>For this notebook to work, you will need to have Python3 installed as well as the following libraries:</p>
 <ul class="simple">
@@ -327,7 +327,7 @@
 <p>Now let’s get started!</p>
 </div>
 <div class="section" id="step-1-import-libraries">
-<h2><span class="section-number">1.3. </span>Step 1: Import Libraries<a class="headerlink" href="#step-1-import-libraries" title="Permalink to this headline">¶</a></h2>
+<h2>Step 1: Import Libraries<a class="headerlink" href="#step-1-import-libraries" title="Permalink to this headline">¶</a></h2>
 <p>Once you’ve installed the necessary libraries, you need to <strong>import</strong> them into the current script. Often you don’t need to import the whole library, just specific commands <strong>from</strong> that library. Your imports should look like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -340,7 +340,7 @@
 </div>
 </div>
 <div class="section" id="step-2-read-a-text-and-create-an-etree-object">
-<h2><span class="section-number">1.4. </span>Step 2: Read a Text and Create an “etree” object<a class="headerlink" href="#step-2-read-a-text-and-create-an-etree-object" title="Permalink to this headline">¶</a></h2>
+<h2>Step 2: Read a Text and Create an “etree” object<a class="headerlink" href="#step-2-read-a-text-and-create-an-etree-object" title="Permalink to this headline">¶</a></h2>
 <p>In order for lxml to understand the entire tree structure of your XML text, you’ll need to load all of the text in a special <code class="docutils literal notranslate"><span class="pre">etree</span></code> object (abbreviated from Element Tree). When a computer reads an XML text, it’s called “parsing,” and so you’ll be using lxml’s <code class="docutils literal notranslate"><span class="pre">parse()</span></code> function. Once you do, you can query the object for specific XML tags.</p>
 <p><em><strong>For the examples in this notebook to run as expected, you’ll need to place the file you want to explore in the same directory as the notebook.</strong></em>  You could place it elsewhere, but this would require an adjustment in the code.</p>
 <div class="cell docutils container">
@@ -359,7 +359,7 @@
 </div>
 </div>
 <div class="section" id="step-3-individual-words">
-<h2><span class="section-number">1.5. </span>Step 3: Individual Words<a class="headerlink" href="#step-3-individual-words" title="Permalink to this headline">¶</a></h2>
+<h2>Step 3: Individual Words<a class="headerlink" href="#step-3-individual-words" title="Permalink to this headline">¶</a></h2>
 <p>There are many ways to parse XML documents. The most common and robust is a query language called <a class="reference external" href="https://www.w3schools.com/xml/xpath_intro.asp">XPath</a>, which allows you to create various <em>expressions</em> to select parts of an XML document.</p>
 <p><code class="docutils literal notranslate"><span class="pre">lxml</span></code> uses a simplified version of XPath called <a class="reference external" href="https://effbot.org/zone/element-xpath.htm">ElementPath</a>, which we recommend for beginners. Most of the expressions you see from here forward use <code class="docutils literal notranslate"><span class="pre">lxml</span></code>’s default ElementPath expressions. Keep in mind that if you want to construct very complex queries of a document, you may want to switch to XPath at some point down the road.</p>
 <p>The easiest thing to do with an <em>EarlyPrint</em> document is to tokenize it into a list of words. <em>EarlyPrint</em> texts wrap every word in a <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tag, and it keeps all the punctuation separate in <code class="docutils literal notranslate"><span class="pre">&lt;pc&gt;</span></code> tags. To get all the words in <em>Paradise Lost</em>, you simply use ElementPath to ask for the contents of all the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code> tags.</p>
@@ -502,7 +502,7 @@
 </div>
 </div>
 <div class="section" id="step-4-lines-stanzas-and-sentences">
-<h2><span class="section-number">1.6. </span>Step 4: Lines, Stanzas, and Sentences<a class="headerlink" href="#step-4-lines-stanzas-and-sentences" title="Permalink to this headline">¶</a></h2>
+<h2>Step 4: Lines, Stanzas, and Sentences<a class="headerlink" href="#step-4-lines-stanzas-and-sentences" title="Permalink to this headline">¶</a></h2>
 <p>But what if you want chunks larger than a single word? What if you wanted to examine <em>Paradise Lost</em> by its lines or sentences?</p>
 <p>If you’re examining verse, lines and stanzas are particularly easy. Lines are marked with <code class="docutils literal notranslate"><span class="pre">&lt;l&gt;</span></code> tags and stanzas are marked with <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> tags (for line group). But be careful with <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> tags: not every group of lines constitutes a stanza! In the case of <em>Paradise Lost</em>, <code class="docutils literal notranslate"><span class="pre">&lt;lg&gt;</span></code> elements refer to Milton’s long verse paragraphs.</p>
 <p>Begin by breaking <em>Paradise Lost</em> into lines, using <code class="docutils literal notranslate"><span class="pre">&lt;l&gt;</span></code> tags instead of the <code class="docutils literal notranslate"><span class="pre">&lt;w&gt;</span></code>’s (as well as the same namespace we used above):</p>
@@ -654,7 +654,7 @@ Wast present , and with mighty wings outspread
 <p>There you have it! A bit more complex than the other examples, but just as successful. You’ll notice the first few “sentences” are actually from the book’s front matter, but then it gets going with the first few sentences in the poem. <em>EarlyPrint</em> texts will attempt to segment all text into sentences, even when there aren’t complete sentences to be had, such as on title pages.</p>
 </div>
 <div class="section" id="other-divisions">
-<h2><span class="section-number">1.7. </span>Other Divisions<a class="headerlink" href="#other-divisions" title="Permalink to this headline">¶</a></h2>
+<h2>Other Divisions<a class="headerlink" href="#other-divisions" title="Permalink to this headline">¶</a></h2>
 <p>You’ve now divided up the poem using various linguistic categories: words, parts of speech, lines, sentences. But what about other divisions in books? Most books have title pages, some have dedications and prefaces, and others have many subsections or contain multiple texts.</p>
 <p><em>EarlyPrint</em> texts use <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> tags to account for these kinds of divisions. <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> tags usually have a <code class="docutils literal notranslate"><span class="pre">type</span></code> that tells you what kind of division you’re working with. Some divisions, as you’re about to see, are numbered with an <code class="docutils literal notranslate"><span class="pre">n</span></code> attribute. You can easily find all the divisions in a text and list their attributes:</p>
 <div class="cell docutils container">
@@ -747,7 +747,7 @@ Wast present , and with mighty wings outspread
 </div>
 </div>
 <div class="section" id="exporting-and-sharing">
-<h2><span class="section-number">1.8. </span>Exporting and Sharing<a class="headerlink" href="#exporting-and-sharing" title="Permalink to this headline">¶</a></h2>
+<h2>Exporting and Sharing<a class="headerlink" href="#exporting-and-sharing" title="Permalink to this headline">¶</a></h2>
 <p>Now that you know a little bit about how to parse <em>EarlyPrint</em> XML files, it’s likely you’ll want to export some of this information out of a Python environment into a format that can easily be shared. One simple way of exporting information is as a CSV, or comma-separated value file. CSVs can easily be read by most spreadsheet applications, like Excel or Google Sheets, and are therefore useful for sharing information easily. There are many ways to work with CSV files in Python, but the <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> data science library provides one of the simplest interfaces. You already imported pandas at the beginning of this tutorial and named it <code class="docutils literal notranslate"><span class="pre">pd</span></code> for short.</p>
 <p>In this next bit of code, you’ll combine what you’ve learned from the previous examples to get a CSV file of the counts for every noun in each book of <em>Paradise Lost</em>.</p>
 <div class="cell docutils container">
@@ -778,7 +778,7 @@ Wast present , and with mighty wings outspread
 <p>The code above will save a CSV file to the same directory where this notebook resides. You can now take that CSV and use it any way you choose. You might start by loading it into Excel or Google Sheets and sorting it by column to see the most frequent nouns in each book.</p>
 </div>
 <div class="section" id="conclusion">
-<h2><span class="section-number">1.9. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>You’ve now run through some of the basic ways to subdivide <em>EarlyPrint</em> XML documents. If you have worked through the tutorial on <a class="reference external" href="https://earlyprint.org/notebooks/tf_idf.html">TF-IDF</a>, you will have noted that <em>Observations on Experimental Philosophy</em> and <em>The Blazing World</em> were contained in the same physical book, and therefore were both part of the same XML file. Now you have some tools and approaches with which to subdivide and analyze the two texts separately.</p>
 <p>And there are many more ways to subdivide texts according to the principles you’ve just learned. In the book divisions above, the word lists include headings that say, for example “PARADISE LOST BOOK I.” Those words are from headers and aren’t part of the main text of the poem. They’re contained in <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> tags, which you’re now better equipped to find and avoid, if you so choose.</p>
 <p>If you want to try some of these investigative routines on a different text—say, Aphra Behn’s <em>Oroonoko</em> or Thomas Hobbes’s <em>Leviathan</em>—you can find them by searching <a class="reference external" href="https://earlyprint.org/download/">the <em>EarlyPrint</em> download page</a>.</p>
@@ -815,7 +815,7 @@ Wast present , and with mighty wings outspread
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page"><em>EarlyPrint</em> + Python</a>
-    <a class='right-next' id="next-link" href="metadata.html" title="next page"><span class="section-number">2. </span>Working with Metadata, Creating Text Networks</a>
+    <a class='right-next' id="next-link" href="metadata.html" title="next page">Working with Metadata, Creating Text Networks</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

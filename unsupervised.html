@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Text Classification: Unsupervised Clustering &#8212; EarlyPrint + Python</title>
+    <title>Text Classification: Unsupervised Clustering &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="1. Word Embeddings" href="word2vec.html" />
+    <link rel="prev" title="Word Embeddings" href="word2vec.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -99,7 +99,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
-   1. Parsing
+   Parsing
    <em>
     EarlyPrint
    </em>
@@ -108,7 +108,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="metadata.html">
-   2. Working with Metadata, Creating Text Networks
+   Working with Metadata, Creating Text Networks
   </a>
  </li>
 </ul>
@@ -120,12 +120,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   1. Exploring Vocabulary Using Tf-Idf
+   Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   2. Text Similarity
+   Text Similarity
   </a>
  </li>
 </ul>
@@ -137,12 +137,12 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
-   1. Word Embeddings
+   Word Embeddings
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   2. Text Classification: Unsupervised Clustering
+   Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -250,12 +250,12 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reading-a-text-corpus">
-   2.1. Reading a Text Corpus
+   Reading a Text Corpus
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#unsupervised-clustering">
-   2.2. Unsupervised Clustering
+   Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -270,7 +270,7 @@
               <div>
                 
   <div class="section" id="text-classification-unsupervised-clustering">
-<h1><span class="section-number">2. </span>Text Classification: Unsupervised Clustering<a class="headerlink" href="#text-classification-unsupervised-clustering" title="Permalink to this headline">¶</a></h1>
+<h1>Text Classification: Unsupervised Clustering<a class="headerlink" href="#text-classification-unsupervised-clustering" title="Permalink to this headline">¶</a></h1>
 <p>In the next two notebooks, I lay out some of the basic principles behind a set of techniques usually named by umbrella terms—classification, machine learning, even “artificial intelligence.” In a nutshell, these approaches take a large dataset and attempt to determine values or categories from that data. I’ll show a few of the most basic versions of this approach and gesture to more complex methods.</p>
 <p>Modeling, writ large, has become a massive field in data science. Ted Underwood uses models to understand literary history in <em>Distant Horizons</em>, the OCR tool <a class="reference external" href="https://github.com/tberg12/ocular">Ocular</a> uses statistical models of both typefaces and language, and, of course, topic modeling—technically <a class="reference external" href="http://mallet.cs.umass.edu/">Latent Dirichlet Allocation (LDA)</a>—was one of the earliest types of modeling to be widely adopted by humanities scholars.</p>
 <p>But statistical classification techniques are also often what is underneath the vague talk of “algorithms” or “machine learning” that make up so much discussion of contemporary technology. Such models help to deliver search results, determine what social media posts you see, and <a class="reference external" href="https://projects.fivethirtyeight.com/2020-election-forecast/">even try to predict who will be elected president</a>. Understanding how such prediction works can help you to critique the technologies that increasingly determine so much of our lives, and it can help you to better understand the recent achievements of statistical models in the humanities (and even use these techniques in your own work).</p>
@@ -297,7 +297,7 @@
 </div>
 </div>
 <div class="section" id="reading-a-text-corpus">
-<h2><span class="section-number">2.1. </span>Reading a Text Corpus<a class="headerlink" href="#reading-a-text-corpus" title="Permalink to this headline">¶</a></h2>
+<h2>Reading a Text Corpus<a class="headerlink" href="#reading-a-text-corpus" title="Permalink to this headline">¶</a></h2>
 <p>You can create a statistical model from any kind of data, but in this exercise we’ll use data derived from a set of texts, the same corpus of 1666 texts we’ve been using all along. Here we’re borrowing techniques from the field of <em>information retrieval</em> to get features from our texts, the same way we did in the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">Tf-Idf</a> and <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">Text Similarity</a> tutorials.</p>
 <p>In previous tutorials, we extracted lists of words from the XML files and converted them to Tf-Idf values using <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code>. That would still work in this case, but in order to place some additional limits on Tf-Idf, we’ll convert the text from our XML back into strings. We can put those strings into <code class="docutils literal notranslate"><span class="pre">TfIdfVectorizer</span></code>, which will give us access to those additional limits (see below). The next code block extracts all the lemmas from our texts and converts them into strings.</p>
 <div class="cell docutils container">
@@ -666,7 +666,7 @@
 </div>
 </div>
 <div class="section" id="unsupervised-clustering">
-<h2><span class="section-number">2.2. </span>Unsupervised Clustering<a class="headerlink" href="#unsupervised-clustering" title="Permalink to this headline">¶</a></h2>
+<h2>Unsupervised Clustering<a class="headerlink" href="#unsupervised-clustering" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have our matrix of word counts, there are many, many methods and techniques we could apply to categorize or <em>classify</em> our texts. There are two general types of modeling I will introduce: <em>unsupervised</em> methods and <em>supervised</em> ones. Supervised methods are so called because the investigator provides some labels for the data, telling which samples belong in which categories. And based on those samples—the <em>training data</em>—the computer tries to determine to which categories the unlabeled samples belong.</p>
 <p>The supervised methods are what’s most often meant by “machine learning” (because the machine “learns” based on the training data). But there are a set of <em>unsupervised</em> methods which try to find categories in data without knowing about categories in advance. We’ll work with one such <em>clustering</em> method, K-Means Clustering. The k-means method attempts to find categories in data based on how close the samples are to one another in Cartesian space, i.e. in the graph above but across thousands of dimensions.</p>
 <p>The <em>k</em> in k-means stands for <em>any number</em>: we need to tell the computer how many clusters we think it should find. As a test we’ll set <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> to 4, placing our texts into 4 groups.</p>
@@ -721,24 +721,16 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Group 1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;Great Britain&#39;: 50, &#39;England&#39;: 47, &#39;London&#39;: 46, &#39;Poetry&#39;: 34, &#39;Broadside poems&#39;: 23, &#39;17th century&#39;: 16, &#39;History&#39;: 11, &#39;Anglo-Dutch War, 1664-1667&#39;: 11, &#39;Ballads, English&#39;: 10, &#39;History, Naval&#39;: 10, &#39;Charles II, 1660-1685&#39;: 9, &#39;Netherlands&#39;: 7, &#39;Foreign relations&#39;: 5, &#39;Political poetry, English&#39;: 5, &#39;Stuarts, 1603-1714&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 3, &#39;Scotland&#39;: 3, &#39;Edinburgh&#39;: 3, &#39;Naval battles&#39;: 3, &#39;Naval operations&#39;: 2, &#39;London (England)&#39;: 2, &#39;Oxford&#39;: 2, &#39;War poetry, English&#39;: 2, &#39;Elegiac poetry, English&#39;: 2, &#39;Restoration, 1660-1688&#39;: 1, &#39;1648-1714&#39;: 1, &#39;Astrology&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;France&#39;: 1, &#39;Dioscuri (Greek mythology)&#39;: 1, &#39;Europe&#39;: 1, &#39;Ships&#39;: 1, &#39;Dance&#39;: 1, &#39;War&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &quot;Four Days&#39; Battle, England, 1666&quot;: 1, &#39;Broadsides&#39;: 1, &#39;Prophecies&#39;: 1, &#39;Ballads&#39;: 1, &quot;Four Days&#39; Battle, 1666&quot;: 1, &#39;Stuarts&#39;: 1, &#39;The Hague&#39;: 1, &#39;Love&#39;: 1, &#39;Christmas&#39;: 1, &#39;History, Nava&#39;: 1, &#39;Military histories&#39;: 1, &#39;Physicians&#39;: 1, &#39;Malpractice&#39;: 1})
+Counter({&#39;Great Britain&#39;: 50, &#39;England&#39;: 47, &#39;London&#39;: 46, &#39;Poetry&#39;: 34, &#39;Broadside poems&#39;: 23, &#39;17th century&#39;: 16, &#39;History&#39;: 11, &#39;Anglo-Dutch War, 1664-1667&#39;: 11, &#39;Ballads, English&#39;: 10, &#39;History, Naval&#39;: 10, &#39;Charles II, 1660-1685&#39;: 9, &#39;Netherlands&#39;: 7, &#39;Foreign relations&#39;: 5, &#39;Political poetry, English&#39;: 5, &#39;Stuarts, 1603-1714&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 3, &#39;Scotland&#39;: 3, &#39;Edinburgh&#39;: 3, &#39;Naval battles&#39;: 3, &#39;Naval operations&#39;: 2, &#39;London (England)&#39;: 2, &#39;Oxford&#39;: 2, &#39;War poetry, English&#39;: 2, &#39;Elegiac poetry, English&#39;: 2, &#39;Restoration, 1660-1688&#39;: 1, &#39;1648-1714&#39;: 1, &#39;Astrology&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;France&#39;: 1, &#39;Dioscuri (Greek mythology)&#39;: 1, &#39;Europe&#39;: 1, &#39;Ships&#39;: 1, &#39;Dance&#39;: 1, &#39;War&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &quot;Four Days&#39; Battle, England, 1666&quot;: 1, &#39;Broadsides&#39;: 1, &#39;Prophecies&#39;: 1, &#39;Ballads&#39;: 1, &quot;Four Days&#39; Battle, 1666&quot;: 1, &#39;Stuarts&#39;: 1, &#39;The Hague&#39;: 1, &#39;Love&#39;: 1, &#39;Christmas&#39;: 1, &#39;History, Nava&#39;: 1, &#39;Military histories&#39;: 1, &#39;Physicians&#39;: 1, &#39;Malpractice&#39;: 1})
 
 Group 2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;Great Britain&#39;: 63, &#39;England&#39;: 60, &#39;London&#39;: 54, &#39;History&#39;: 34, &#39;17th century&#39;: 18, &#39;Politics and government&#39;: 15, &#39;Ireland&#39;: 15, &#39;Charles II, 1660-1685&#39;: 11, &#39;1660-1688&#39;: 11, &#39;Dublin&#39;: 10, &#39;Scotland&#39;: 10, &#39;London (England)&#39;: 9, &#39;Great Fire, London, England, 1666&#39;: 9, &#39;Oxford&#39;: 7, &#39;1649-1775&#39;: 7, &#39;Law and legislation&#39;: 7, &#39;Broadsides&#39;: 7, &#39;Edinburgh&#39;: 7, &#39;Anglo-Dutch War, 1664-1667&#39;: 5, &#39;Plague&#39;: 5, &#39;Controversial literature&#39;: 5, &#39;Sources&#39;: 4, &#39;Dissenters, Religious&#39;: 4, &#39;Pastoral letters and charges&#39;: 3, &#39;Broadside poems&#39;: 3, &#39;Poetry&#39;: 3, &#39;Foreign relations&#39;: 3, &#39;Anglo-French War, 1666-1667&#39;: 2, &#39;Fires&#39;: 2, &#39;Quarantine&#39;: 2, &#39;Finance&#39;: 2, &#39;Political oratory&#39;: 2, &#39;Loyalty oaths&#39;: 2, &#39;France&#39;: 2, &#39;Tables&#39;: 2, &#39;Almanacs&#39;: 2, &#39;Visitations, Ecclesiastical&#39;: 2, &#39;Foreign trade regulation&#39;: 2, &#39;Massachusetts&#39;: 2, &#39;Fish trade&#39;: 1, &#39;Plantations&#39;: 1, &#39;Description and travel&#39;: 1, &#39;Colonial period, 1600-1775&#39;: 1, &#39;Florida&#39;: 1, &#39;North Carolina&#39;: 1, &#39;South Carolina&#39;: 1, &#39;North America&#39;: 1, &#39;Copyright infringement&#39;: 1, &#39;Publishers and publishing&#39;: 1, &#39;History, Naval&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;Jews&#39;: 1, &#39;Migrations&#39;: 1, &#39;Restoration&#39;: 1, &#39;70-1789&#39;: 1, &#39;Mehmed IV, 1648-1687&#39;: 1, &#39;Turkey&#39;: 1, &#39;Dress codes&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Presbyterian Church&#39;: 1, &#39;Sermons, English&#39;: 1, &#39;Sermons&#39;: 1, &#39;City planning and redevelopment law&#39;: 1, &#39;Law printing&#39;: 1, &#39;Printing&#39;: 1, &#39;Restraint of trade&#39;: 1, &#39;Monopolies&#39;: 1, &#39;Patents&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;1517-1882&#39;: 1, &#39;Africa, North&#39;: 1, &#39;Morocco&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;Lumber&#39;: 1, &#39;Blasphemy&#39;: 1, &#39;Book burning&#39;: 1, &#39;Prohibited books&#39;: 1, &#39;Censorship&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Liquor laws&#39;: 1, &#39;Provisioning&#39;: 1, &#39;Poll tax&#39;: 1, &#39;Health resorts&#39;: 1, &#39;Humor&#39;: 1, &#39;Wine and wine making&#39;: 1, &#39;Commerce&#39;: 1, &#39;Canary Islands&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Addresses&#39;: 1, &#39;Paper industry&#39;: 1, &#39;Claims&#39;: 1, &#39;Bartholomew Fair&#39;: 1, &#39;Sturbridge Fair&#39;: 1, &#39;Church history&#39;: 1, &#39;Law&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Drainage&#39;: 1, &#39;Reclamation of land&#39;: 1, &#39;Fens, The (England)&#39;: 1, &#39;Fens, The&#39;: 1, &#39;Paper money&#39;: 1, &#39;Credit&#39;: 1, &#39;Christian life&#39;: 1, &#39;Conduct of life&#39;: 1, &#39;Quakers&#39;: 1, &#39;Quaker authors&#39;: 1, &#39;Dissenters&#39;: 1, &#39;Traitors&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Mortality&#39;: 1, &#39;Statistics, Vital&#39;: 1, &#39;Gunpowder industry&#39;: 1, &#39;Almanacs, English&#39;: 1, &#39;Astrology&#39;: 1, &#39;Ephemerides&#39;: 1, &#39;Spiritual healing&#39;: 1, &#39;Healers&#39;: 1, &#39;Linen industry&#39;: 1, &#39;Markets&#39;: 1, &#39;Wool industry&#39;: 1, &#39;Freight and freightage&#39;: 1, &#39;Rates&#39;: 1, &#39;Oxford (England)&#39;: 1})
+Counter({&#39;Great Britain&#39;: 63, &#39;England&#39;: 60, &#39;London&#39;: 54, &#39;History&#39;: 34, &#39;17th century&#39;: 18, &#39;Politics and government&#39;: 15, &#39;Ireland&#39;: 15, &#39;Charles II, 1660-1685&#39;: 11, &#39;1660-1688&#39;: 11, &#39;Dublin&#39;: 10, &#39;Scotland&#39;: 10, &#39;London (England)&#39;: 9, &#39;Great Fire, London, England, 1666&#39;: 9, &#39;Oxford&#39;: 7, &#39;1649-1775&#39;: 7, &#39;Law and legislation&#39;: 7, &#39;Broadsides&#39;: 7, &#39;Edinburgh&#39;: 7, &#39;Anglo-Dutch War, 1664-1667&#39;: 5, &#39;Plague&#39;: 5, &#39;Controversial literature&#39;: 5, &#39;Sources&#39;: 4, &#39;Dissenters, Religious&#39;: 4, &#39;Pastoral letters and charges&#39;: 3, &#39;Broadside poems&#39;: 3, &#39;Poetry&#39;: 3, &#39;Foreign relations&#39;: 3, &#39;Anglo-French War, 1666-1667&#39;: 2, &#39;Fires&#39;: 2, &#39;Quarantine&#39;: 2, &#39;Finance&#39;: 2, &#39;Political oratory&#39;: 2, &#39;Loyalty oaths&#39;: 2, &#39;France&#39;: 2, &#39;Tables&#39;: 2, &#39;Almanacs&#39;: 2, &#39;Visitations, Ecclesiastical&#39;: 2, &#39;Foreign trade regulation&#39;: 2, &#39;Massachusetts&#39;: 2, &#39;Fish trade&#39;: 1, &#39;Plantations&#39;: 1, &#39;Description and travel&#39;: 1, &#39;Colonial period, 1600-1775&#39;: 1, &#39;Florida&#39;: 1, &#39;North Carolina&#39;: 1, &#39;South Carolina&#39;: 1, &#39;North America&#39;: 1, &#39;Copyright infringement&#39;: 1, &#39;Publishers and publishing&#39;: 1, &#39;History, Naval&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;Jews&#39;: 1, &#39;Migrations&#39;: 1, &#39;Restoration&#39;: 1, &#39;70-1789&#39;: 1, &#39;Mehmed IV, 1648-1687&#39;: 1, &#39;Turkey&#39;: 1, &#39;Dress codes&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Presbyterian Church&#39;: 1, &#39;Sermons, English&#39;: 1, &#39;Sermons&#39;: 1, &#39;City planning and redevelopment law&#39;: 1, &#39;Law printing&#39;: 1, &#39;Printing&#39;: 1, &#39;Restraint of trade&#39;: 1, &#39;Monopolies&#39;: 1, &#39;Patents&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;1517-1882&#39;: 1, &#39;Africa, North&#39;: 1, &#39;Morocco&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;Lumber&#39;: 1, &#39;Blasphemy&#39;: 1, &#39;Book burning&#39;: 1, &#39;Prohibited books&#39;: 1, &#39;Censorship&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Liquor laws&#39;: 1, &#39;Provisioning&#39;: 1, &#39;Poll tax&#39;: 1, &#39;Health resorts&#39;: 1, &#39;Humor&#39;: 1, &#39;Wine and wine making&#39;: 1, &#39;Commerce&#39;: 1, &#39;Canary Islands&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Addresses&#39;: 1, &#39;Paper industry&#39;: 1, &#39;Claims&#39;: 1, &#39;Bartholomew Fair&#39;: 1, &#39;Sturbridge Fair&#39;: 1, &#39;Church history&#39;: 1, &#39;Law&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Drainage&#39;: 1, &#39;Reclamation of land&#39;: 1, &#39;Fens, The (England)&#39;: 1, &#39;Fens, The&#39;: 1, &#39;Paper money&#39;: 1, &#39;Credit&#39;: 1, &#39;Christian life&#39;: 1, &#39;Conduct of life&#39;: 1, &#39;Quakers&#39;: 1, &#39;Quaker authors&#39;: 1, &#39;Dissenters&#39;: 1, &#39;Traitors&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Mortality&#39;: 1, &#39;Statistics, Vital&#39;: 1, &#39;Gunpowder industry&#39;: 1, &#39;Almanacs, English&#39;: 1, &#39;Astrology&#39;: 1, &#39;Ephemerides&#39;: 1, &#39;Spiritual healing&#39;: 1, &#39;Healers&#39;: 1, &#39;Linen industry&#39;: 1, &#39;Markets&#39;: 1, &#39;Wool industry&#39;: 1, &#39;Freight and freightage&#39;: 1, &#39;Rates&#39;: 1, &#39;Oxford (England)&#39;: 1})
 
 Group 3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;England&#39;: 66, &#39;Great Britain&#39;: 65, &#39;London&#39;: 59, &#39;History&#39;: 13, &#39;Oxford&#39;: 8, &#39;Controversial literature&#39;: 7, &#39;17th century&#39;: 6, &#39;Poetry&#39;: 4, &#39;Apologetic works&#39;: 3, &#39;Catholics&#39;: 3, &#39;Plague&#39;: 3, &#39;France&#39;: 3, &#39;Healers&#39;: 3, &#39;Sermons&#39;: 3, &#39;Charles II, 1660-1685&#39;: 2, &#39;Penal laws (against nonconformists)&#39;: 2, &#39;Legal status, laws, etc&#39;: 2, &#39;Description and travel&#39;: 2, &#39;Sermons, English&#39;: 2, &#39;Witchcraft&#39;: 2, &#39;Medicine&#39;: 2, &#39;Foreign relations&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Cryptography&#39;: 1, &#39;Monarchy&#39;: 1, &#39;Paraphrases, English&#39;: 1, &#39;Teacher effectiveness&#39;: 1, &#39;Teachers&#39;: 1, &#39;Dismissal of&#39;: 1, &#39;Women&#39;: 1, &#39;Gynecology&#39;: 1, &#39;Diseases&#39;: 1, &#39;Formulae, receipts, prescriptions&#39;: 1, &#39;Paradise&#39;: 1, &#39;Eden&#39;: 1, &#39;Slavery&#39;: 1, &#39;Algeria&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Protestantism&#39;: 1, &#39;Natural history&#39;: 1, &#39;Carib Indians&#39;: 1, &#39;Apalachee Indians&#39;: 1, &#39;Carib language&#39;: 1, &#39;Glossaries, vocabularies, etc&#39;: 1, &#39;West Indies&#39;: 1, &#39;Antilles, Lesser&#39;: 1, &#39;Persecution&#39;: 1, &#39;Quakers&#39;: 1, &#39;Persecutions&#39;: 1, &#39;Norfolk&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;London (England)&#39;: 1, &#39;1600-1799&#39;: 1, &#39;Paris (France)&#39;: 1, &#39;Royalists&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &#39;Christian life&#39;: 1, &#39;Canterbury (England)&#39;: 1, &#39;Ale&#39;: 1, &#39;humor&#39;: 1, &#39;Hydrostatics&#39;: 1, &#39;Authority (Religion)&#39;: 1, &#39;Rule of faith&#39;: 1, &#39;Anti-Catholicism&#39;: 1, &#39;Therapeutics&#39;: 1, &#39;Pre-existence&#39;: 1, &#39;Soul&#39;: 1, &#39;Religious thought&#39;: 1, &#39;Religious aspects&#39;: 1, &#39;Heraldry&#39;: 1, &#39;Tuberculosis&#39;: 1, &#39;Platonists&#39;: 1, &#39;Empiricism&#39;: 1, &#39;Papacy&#39;: 1, &#39;Paris&#39;: 1, &#39;Courts&#39;: 1, &#39;Landlord and tenant&#39;: 1, &#39;Law and legislation&#39;: 1, &#39;Interpretation and construction&#39;: 1, &#39;Cases&#39;: 1, &#39;Matter&#39;: 1, &#39;Light, Corpuscular theory of&#39;: 1, &#39;Constitution&#39;: 1, &#39;Church polity&#39;: 1, &#39;Ecclesiastical law&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Law&#39;: 1, &#39;Digests&#39;: 1, &#39;Gardening&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Miracles&#39;: 1, &#39;Curiosities and wonders&#39;: 1, &#39;Early works to 1900&#39;: 1, &#39;Astrology&#39;: 1, &#39;Susquehanna Indians&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Maryland&#39;: 1, &#39;Sexually transmitted diseases&#39;: 1, &#39;Syphilis&#39;: 1, &#39;Gonorrhea&#39;: 1, &#39;Politics and government&#39;: 1, &#39;1648-1715&#39;: 1, &#39;Europe&#39;: 1, &#39;Prophecies&#39;: 1, &#39;History, Ancient&#39;: 1, &#39;Turkish Wars, 17th century&#39;: 1, &#39;Venice (Italy)&#39;: 1, &#39;Hērakleion (Greece)&#39;: 1, &#39;Philosophy, English&#39;: 1, &#39;Voyages, Imaginary&#39;: 1, &#39;Viticulture&#39;: 1, &#39;Spiritual healing&#39;: 1})
+Counter({&#39;England&#39;: 66, &#39;Great Britain&#39;: 65, &#39;London&#39;: 59, &#39;History&#39;: 13, &#39;Oxford&#39;: 8, &#39;Controversial literature&#39;: 7, &#39;17th century&#39;: 6, &#39;Poetry&#39;: 4, &#39;Apologetic works&#39;: 3, &#39;Catholics&#39;: 3, &#39;Plague&#39;: 3, &#39;France&#39;: 3, &#39;Healers&#39;: 3, &#39;Sermons&#39;: 3, &#39;Charles II, 1660-1685&#39;: 2, &#39;Penal laws (against nonconformists)&#39;: 2, &#39;Legal status, laws, etc&#39;: 2, &#39;Description and travel&#39;: 2, &#39;Sermons, English&#39;: 2, &#39;Witchcraft&#39;: 2, &#39;Medicine&#39;: 2, &#39;Foreign relations&#39;: 1, &#39;Netherlands&#39;: 1, &#39;Cryptography&#39;: 1, &#39;Monarchy&#39;: 1, &#39;Paraphrases, English&#39;: 1, &#39;Teacher effectiveness&#39;: 1, &#39;Teachers&#39;: 1, &#39;Dismissal of&#39;: 1, &#39;Women&#39;: 1, &#39;Gynecology&#39;: 1, &#39;Diseases&#39;: 1, &#39;Formulae, receipts, prescriptions&#39;: 1, &#39;Paradise&#39;: 1, &#39;Eden&#39;: 1, &#39;Slavery&#39;: 1, &#39;Algeria&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Protestantism&#39;: 1, &#39;Natural history&#39;: 1, &#39;Carib Indians&#39;: 1, &#39;Apalachee Indians&#39;: 1, &#39;Carib language&#39;: 1, &#39;Glossaries, vocabularies, etc&#39;: 1, &#39;West Indies&#39;: 1, &#39;Antilles, Lesser&#39;: 1, &#39;Persecution&#39;: 1, &#39;Quakers&#39;: 1, &#39;Persecutions&#39;: 1, &#39;Norfolk&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;London (England)&#39;: 1, &#39;1600-1799&#39;: 1, &#39;Paris (France)&#39;: 1, &#39;Royalists&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &#39;Christian life&#39;: 1, &#39;Canterbury (England)&#39;: 1, &#39;Ale&#39;: 1, &#39;humor&#39;: 1, &#39;Hydrostatics&#39;: 1, &#39;Authority (Religion)&#39;: 1, &#39;Rule of faith&#39;: 1, &#39;Anti-Catholicism&#39;: 1, &#39;Therapeutics&#39;: 1, &#39;Pre-existence&#39;: 1, &#39;Soul&#39;: 1, &#39;Religious thought&#39;: 1, &#39;Religious aspects&#39;: 1, &#39;Heraldry&#39;: 1, &#39;Tuberculosis&#39;: 1, &#39;Platonists&#39;: 1, &#39;Empiricism&#39;: 1, &#39;Papacy&#39;: 1, &#39;Paris&#39;: 1, &#39;Courts&#39;: 1, &#39;Landlord and tenant&#39;: 1, &#39;Law and legislation&#39;: 1, &#39;Interpretation and construction&#39;: 1, &#39;Cases&#39;: 1, &#39;Matter&#39;: 1, &#39;Light, Corpuscular theory of&#39;: 1, &#39;Constitution&#39;: 1, &#39;Church polity&#39;: 1, &#39;Ecclesiastical law&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Law&#39;: 1, &#39;Digests&#39;: 1, &#39;Gardening&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Miracles&#39;: 1, &#39;Curiosities and wonders&#39;: 1, &#39;Early works to 1900&#39;: 1, &#39;Astrology&#39;: 1, &#39;Susquehanna Indians&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Maryland&#39;: 1, &#39;Sexually transmitted diseases&#39;: 1, &#39;Syphilis&#39;: 1, &#39;Gonorrhea&#39;: 1, &#39;Politics and government&#39;: 1, &#39;1648-1715&#39;: 1, &#39;Europe&#39;: 1, &#39;Prophecies&#39;: 1, &#39;History, Ancient&#39;: 1, &#39;Turkish Wars, 17th century&#39;: 1, &#39;Venice (Italy)&#39;: 1, &#39;Hērakleion (Greece)&#39;: 1, &#39;Philosophy, English&#39;: 1, &#39;Voyages, Imaginary&#39;: 1, &#39;Viticulture&#39;: 1, &#39;Spiritual healing&#39;: 1})
 
 Group 4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;England&#39;: 69, &#39;Great Britain&#39;: 69, &#39;London&#39;: 65, &#39;17th century&#39;: 22, &#39;Sermons&#39;: 19, &#39;Sermons, English&#39;: 17, &#39;Christian life&#39;: 12, &#39;Plague&#39;: 7, &#39;Religious aspects&#39;: 5, &#39;Devotional literature&#39;: 5, &#39;Salvation&#39;: 4, &#39;Conduct of life&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 4, &#39;Controversial literature&#39;: 4, &#39;History&#39;: 4, &#39;London (England)&#39;: 4, &#39;Meditations&#39;: 4, &#39;Poetry&#39;: 4, &#39;Early works to 1900&#39;: 3, &#39;Apologetic works&#39;: 3, &#39;Christianity&#39;: 3, &#39;Prayer-books and devotions&#39;: 2, &#39;Commentaries&#39;: 2, &#39;Fast-day sermons&#39;: 2, &#39;Anglo-Dutch War, 1664-1667&#39;: 2, &#39;York&#39;: 2, &#39;Oxford&#39;: 2, &#39;Theology, Doctrinal&#39;: 2, &#39;Pastoral letters and charges&#39;: 2, &#39;Quakers&#39;: 2, &#39;Catholics&#39;: 2, &#39;Repentance&#39;: 2, &#39;Providence and government of God&#39;: 1, &#39;Protestant authors&#39;: 1, &#39;Freedom of religion&#39;: 1, &#39;Spiritual life&#39;: 1, &#39;Children&#39;: 1, &#39;Biography&#39;: 1, &#39;Rites and ceremonies&#39;: 1, &#39;Ritualism&#39;: 1, &#39;Contentment&#39;: 1, &#39;Fire&#39;: 1, &#39;Devotional exercises&#39;: 1, &#39;Anglican authors&#39;: 1, &#39;Devotional literature, English&#39;: 1, &#39;God&#39;: 1, &#39;Meditation&#39;: 1, &#39;Harvesting&#39;: 1, &#39;Wrath&#39;: 1, &#39;Society of Friends&#39;: 1, &#39;Puritans&#39;: 1, &#39;Theology, Practical&#39;: 1, &#39;Doctrines&#39;: 1, &#39;Future punishment&#39;: 1, &#39;Hell&#39;: 1, &#39;Death&#39;: 1, &#39;Last words&#39;: 1, &#39;Oaths&#39;: 1, &#39;Moral and ethical aspects&#39;: 1, &#39;Fast-day sermons,&#39;: 1, &#39;Broadside poems&#39;: 1, &#39;Grace (Theology)&#39;: 1, &#39;Charity&#39;: 1, &#39;Funeral sermonsvEarly works to 1800&#39;: 1, &#39;Disasters&#39;: 1, &#39;Eternity&#39;: 1, &#39;Future life&#39;: 1, &#39;God (Christianity)&#39;: 1, &#39;Addresses&#39;: 1, &#39;Advent sermons&#39;: 1, &#39;Women in Christianity&#39;: 1, &#39;Women (Christian theology)&#39;: 1, &#39;Funeral sermons&#39;: 1, &#39;Dissenters, Religious&#39;: 1, &#39;Wisdom&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Protestants&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Church property&#39;: 1, &#39;Church renewal&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Patience&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;Prayers&#39;: 1, &#39;Socinianism&#39;: 1, &#39;Pelagianism&#39;: 1, &#39;Epidemics&#39;: 1, &#39;Judgment Day&#39;: 1})
+Counter({&#39;England&#39;: 69, &#39;Great Britain&#39;: 69, &#39;London&#39;: 65, &#39;17th century&#39;: 22, &#39;Sermons&#39;: 19, &#39;Sermons, English&#39;: 17, &#39;Christian life&#39;: 12, &#39;Plague&#39;: 7, &#39;Religious aspects&#39;: 5, &#39;Devotional literature&#39;: 5, &#39;Salvation&#39;: 4, &#39;Conduct of life&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 4, &#39;Controversial literature&#39;: 4, &#39;History&#39;: 4, &#39;London (England)&#39;: 4, &#39;Meditations&#39;: 4, &#39;Poetry&#39;: 4, &#39;Early works to 1900&#39;: 3, &#39;Apologetic works&#39;: 3, &#39;Christianity&#39;: 3, &#39;Prayer-books and devotions&#39;: 2, &#39;Commentaries&#39;: 2, &#39;Fast-day sermons&#39;: 2, &#39;Anglo-Dutch War, 1664-1667&#39;: 2, &#39;York&#39;: 2, &#39;Oxford&#39;: 2, &#39;Theology, Doctrinal&#39;: 2, &#39;Pastoral letters and charges&#39;: 2, &#39;Quakers&#39;: 2, &#39;Catholics&#39;: 2, &#39;Repentance&#39;: 2, &#39;Providence and government of God&#39;: 1, &#39;Protestant authors&#39;: 1, &#39;Freedom of religion&#39;: 1, &#39;Spiritual life&#39;: 1, &#39;Children&#39;: 1, &#39;Biography&#39;: 1, &#39;Rites and ceremonies&#39;: 1, &#39;Ritualism&#39;: 1, &#39;Contentment&#39;: 1, &#39;Fire&#39;: 1, &#39;Devotional exercises&#39;: 1, &#39;Anglican authors&#39;: 1, &#39;Devotional literature, English&#39;: 1, &#39;God&#39;: 1, &#39;Meditation&#39;: 1, &#39;Harvesting&#39;: 1, &#39;Wrath&#39;: 1, &#39;Society of Friends&#39;: 1, &#39;Puritans&#39;: 1, &#39;Theology, Practical&#39;: 1, &#39;Doctrines&#39;: 1, &#39;Future punishment&#39;: 1, &#39;Hell&#39;: 1, &#39;Death&#39;: 1, &#39;Last words&#39;: 1, &#39;Oaths&#39;: 1, &#39;Moral and ethical aspects&#39;: 1, &#39;Fast-day sermons,&#39;: 1, &#39;Broadside poems&#39;: 1, &#39;Grace (Theology)&#39;: 1, &#39;Charity&#39;: 1, &#39;Funeral sermonsvEarly works to 1800&#39;: 1, &#39;Disasters&#39;: 1, &#39;Eternity&#39;: 1, &#39;Future life&#39;: 1, &#39;God (Christianity)&#39;: 1, &#39;Addresses&#39;: 1, &#39;Advent sermons&#39;: 1, &#39;Women in Christianity&#39;: 1, &#39;Women (Christian theology)&#39;: 1, &#39;Funeral sermons&#39;: 1, &#39;Dissenters, Religious&#39;: 1, &#39;Wisdom&#39;: 1, &#39;Cambridge&#39;: 1, &#39;Protestants&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Church property&#39;: 1, &#39;Church renewal&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Patience&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;Prayers&#39;: 1, &#39;Socinianism&#39;: 1, &#39;Pelagianism&#39;: 1, &#39;Epidemics&#39;: 1, &#39;Judgment Day&#39;: 1})
 </pre></div>
 </div>
 </div>
@@ -796,25 +788,25 @@ Group 4
     <tr>
       <th>A32444</th>
       <td>-0.388425</td>
-      <td>0.110784</td>
+      <td>0.110768</td>
       <td>1</td>
     </tr>
     <tr>
       <th>A51130</th>
       <td>0.110654</td>
-      <td>-0.040500</td>
+      <td>-0.040515</td>
       <td>2</td>
     </tr>
     <tr>
       <th>A89320</th>
       <td>-0.032386</td>
-      <td>0.093907</td>
+      <td>0.093930</td>
       <td>2</td>
     </tr>
     <tr>
       <th>A36358</th>
       <td>0.082201</td>
-      <td>-0.077883</td>
+      <td>-0.077894</td>
       <td>2</td>
     </tr>
     <tr>
@@ -826,31 +818,31 @@ Group 4
     <tr>
       <th>A57156</th>
       <td>0.217888</td>
-      <td>-0.043962</td>
+      <td>-0.043958</td>
       <td>3</td>
     </tr>
     <tr>
       <th>A57634</th>
       <td>0.003292</td>
-      <td>0.052297</td>
+      <td>0.052306</td>
       <td>2</td>
     </tr>
     <tr>
       <th>A65985</th>
       <td>0.260442</td>
-      <td>-0.109177</td>
+      <td>-0.109189</td>
       <td>3</td>
     </tr>
     <tr>
       <th>B03763</th>
       <td>0.118181</td>
-      <td>-0.255734</td>
+      <td>-0.255723</td>
       <td>3</td>
     </tr>
     <tr>
       <th>A41955</th>
       <td>0.155005</td>
-      <td>0.135625</td>
+      <td>0.135634</td>
       <td>2</td>
     </tr>
   </tbody>
@@ -866,7 +858,7 @@ Group 4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd47a659e20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fddc140ee50&gt;
 </pre></div>
 </div>
 <img alt="_images/unsupervised_13_1.png" src="_images/unsupervised_13_1.png" />
@@ -881,7 +873,7 @@ Group 4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd47a60c4c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fddc29d2880&gt;
 </pre></div>
 </div>
 <img alt="_images/unsupervised_15_1.png" src="_images/unsupervised_15_1.png" />
@@ -921,7 +913,7 @@ Group 4
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="word2vec.html" title="previous page"><span class="section-number">1. </span>Word Embeddings</a>
+    <a class='left-prev' id="prev-link" href="word2vec.html" title="previous page">Word Embeddings</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Working with Metadata, Creating Text Networks &#8212; EarlyPrint + Python</title>
+    <title>Working with Metadata, Creating Text Networks &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Exploring Vocabulary Using Tf-Idf" href="tf_idf.html" />
-    <link rel="prev" title="1. Parsing EarlyPrint XML Texts" href="ep_xml.html" />
+    <link rel="next" title="Exploring Vocabulary Using Tf-Idf" href="tf_idf.html" />
+    <link rel="prev" title="Parsing EarlyPrint XML Texts" href="ep_xml.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -100,7 +100,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
-   1. Parsing
+   Parsing
    <em>
     EarlyPrint
    </em>
@@ -109,7 +109,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   2. Working with Metadata, Creating Text Networks
+   Working with Metadata, Creating Text Networks
   </a>
  </li>
 </ul>
@@ -121,12 +121,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   1. Exploring Vocabulary Using Tf-Idf
+   Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   2. Text Similarity
+   Text Similarity
   </a>
  </li>
 </ul>
@@ -138,12 +138,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
-   1. Word Embeddings
+   Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unsupervised.html">
-   2. Text Classification: Unsupervised Clustering
+   Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -251,37 +251,37 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#downloading-metadata">
-   2.1. Downloading Metadata
+   Downloading Metadata
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-single-metadata-file">
-   2.2. A Single Metadata File
+   A Single Metadata File
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#all-of-the-metadata">
-   2.3. All of the Metadata
+   All of the Metadata
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#trimming-and-cleaning-data-fields">
-   2.4. Trimming and “Cleaning” Data Fields
+   Trimming and “Cleaning” Data Fields
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-a-network">
-   2.5. Building a Network
+   Building a Network
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualizing-the-network">
-   2.6. Visualizing the Network
+   Visualizing the Network
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
-   2.7. Next Steps
+   Next Steps
   </a>
  </li>
 </ul>
@@ -296,7 +296,7 @@
               <div>
                 
   <div class="section" id="working-with-metadata-creating-text-networks">
-<h1><span class="section-number">2. </span>Working with Metadata, Creating Text Networks<a class="headerlink" href="#working-with-metadata-creating-text-networks" title="Permalink to this headline">¶</a></h1>
+<h1>Working with Metadata, Creating Text Networks<a class="headerlink" href="#working-with-metadata-creating-text-networks" title="Permalink to this headline">¶</a></h1>
 <p>The previous notebooks focus on working directly with <em>EarlyPrint</em> texts, as data. But we also provide a range of tools for working metadata: information about the texts. Using metadata, we can supplement our study of texts with information about who authored a text, when it was published, who the printers and publishers were, and more. Knowing how to retrieve this metadata and combine it with the data from the text itself is a crucial skill for working with the <em>EarlyPrint</em> corpus.</p>
 <p>Much of the metadata for <em>EarlyPrint</em> is inherited from EEBO-TCP (the Text Creation Partnership), which is itself inherited from the ESTC (English Short Title Catalog). If these acronyms don’t yet mean anything to you, I’ve written a blog post that covers <a class="reference external" href="https://earlyprint.org/posts/cleaning-metadata.html">many aspects of our metadata and the improvements we’ve made to it</a>. To make a long story short, our updated and improved metadata is <a class="reference external" href="https://github.com/earlyprint/epmetadata">available in its own Github repository</a>.</p>
 <p>The <em>EarlyPrint</em> site offers a number of ways to explore our metadata. The most fine-grained is our <a class="reference external" href="https://ada.artsci.wustl.edu/catalog/">Catalog Search</a> tool. You can also browse and download facets of metadata using our <a class="reference external" href="https://earlyprint.org/download/">Download page</a>.</p>
@@ -307,14 +307,14 @@
 <li><p>using our improved metadata to create networks of texts and their printers</p></li>
 </ul>
 <div class="section" id="downloading-metadata">
-<h2><span class="section-number">2.1. </span>Downloading Metadata<a class="headerlink" href="#downloading-metadata" title="Permalink to this headline">¶</a></h2>
+<h2>Downloading Metadata<a class="headerlink" href="#downloading-metadata" title="Permalink to this headline">¶</a></h2>
 <p>If you look at our <a class="reference external" href="https://ada.artsci.wustl.edu/catalog/">Catalog Search</a> or <a class="reference external" href="https://earlyprint.org/download/">Download page</a>, you’ll see that you can search through various metadata fields and download a CSV (comma-separated value) file of just the subset of metadata you care about. You can use this to get metadata just on texts published in a single year, or ones just by a certain author or on a certain subject.</p>
 <p>For many coding workflows, you may want to do the same sort of operation from within a Python environment. Start with the complete set of metadata, carve out a subset you care about, and use that subset to do something else.</p>
 <p>The files used in this tutorial can be found in <a class="reference external" href="https://github.com/earlyprint/epmetadata">the standalone metadata Github repository</a>. From the Github page, you can download all the files as <code class="docutils literal notranslate"><span class="pre">.zip</span></code> archive, or you can “clone” the repository onto your own computer.</p>
 <p>For this first part of the tutorial, you’ll need to install <code class="docutils literal notranslate"><span class="pre">lxml</span></code> by running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lxml</span></code> on the command line. You may already have it installed from our previous tutorials. All subsequent libraries can be installed the same way. For help on this, see the <em>Programming Historian</em>’s <a class="reference external" href="https://programminghistorian.org/en/lessons/installing-python-modules-pip">Installing Python Modules with pip</a>.</p>
 </div>
 <div class="section" id="a-single-metadata-file">
-<h2><span class="section-number">2.2. </span>A Single Metadata File<a class="headerlink" href="#a-single-metadata-file" title="Permalink to this headline">¶</a></h2>
+<h2>A Single Metadata File<a class="headerlink" href="#a-single-metadata-file" title="Permalink to this headline">¶</a></h2>
 <p>If there’s just one text you care about, you can download our metadata directly into a Python script using the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module. If you’ve already found or downloaded a text using the <em>EarlyPrint</em> library or lab, you’ll notice that each text comes with a unique ID number, inherited from the TCP. (If you’re working with our XML files, the ID is also the filename.)</p>
 <p>As an example, let’s find metadata for the text we used in our first tutorial, Margaret Cavendish’s <em>Observations Upon Experimental Philosophy</em> and <em>The Blazing World</em>. The TCP ID for this text is A53049. Using that and the base url for our metadata GitHub repository, we can retrieve the metadata XML in just a few lines of code:</p>
 <div class="cell docutils container">
@@ -456,7 +456,7 @@ Printer: A. Maxwell
 </div>
 </div>
 <div class="section" id="all-of-the-metadata">
-<h2><span class="section-number">2.3. </span>All of the Metadata<a class="headerlink" href="#all-of-the-metadata" title="Permalink to this headline">¶</a></h2>
+<h2>All of the Metadata<a class="headerlink" href="#all-of-the-metadata" title="Permalink to this headline">¶</a></h2>
 <p>The above method works fine if you need data on just one text, but what about analyzing the data for <em>all</em> of the texts at once? To do this, you’ll need to <a class="reference external" href="https://github.com/earlyprint/epmetadata">download all of the metadata files from Github</a>. But once you do, the code is not all that different from working with a single file.</p>
 <p>In the following code block, we’ll get the title, author, and date for every single text in the <em>EarlyPrint</em> corpus. We’ll aggregate the information and store it in a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrame for later use and analysis. For more on <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, see their <a class="reference external" href="https://pandas.pydata.org/">documentation</a>.</p>
 <p><em>n.b. Some of the dates  in our corpus are ranges rather than exact years, which are handled by <code class="docutils literal notranslate"><span class="pre">notBefore</span></code> and <code class="docutils literal notranslate"><span class="pre">notAfter</span></code> attributes of the <code class="docutils literal notranslate"><span class="pre">&lt;date&gt;</span></code> element. I’m skipping over those in this example, but you may want to retain them in your analysis. Find out more in <a class="reference external" href="https://earlyprint.org/posts/cleaning-metadata.html">my metadata blog post</a>.</em></p>
@@ -504,7 +504,7 @@ Printer: A. Maxwell
 </div>
 </div>
 <div class="section" id="trimming-and-cleaning-data-fields">
-<h2><span class="section-number">2.4. </span>Trimming and “Cleaning” Data Fields<a class="headerlink" href="#trimming-and-cleaning-data-fields" title="Permalink to this headline">¶</a></h2>
+<h2>Trimming and “Cleaning” Data Fields<a class="headerlink" href="#trimming-and-cleaning-data-fields" title="Permalink to this headline">¶</a></h2>
 <p>Though we’ve done a lot of work to make the <em>EarlyPrint</em> data more usable, some fields may still need to be adjusted, trimmed, or edited before they can be analyzed. The Author field, for example, includes birth and death dates for most authors, which a researcher may want to leave out.</p>
 <p>There’s no one-size-fits-all approach to doing this sort of adjustment. And though this step is often referred to as “data cleaning,” the task of deciding when and how to “clean” and aggregate data is <a class="reference external" href="http://curatingmenus.org/articles/against-cleaning/">important intellectual work</a> with serious research implications. How you “clean” data fields will depend on your research question.</p>
 <p>Below, I focus on a single data field that we’ll use in the next section: the names of printers. As I discuss in the <a class="reference external" href="https://earlyprint.org/posts/cleaning-metadata.html">metadata post</a>, the <em>EarlyPrint</em> metadata takes imprint information a step further by algorithmically parsing out the names of printers, publishers, and booksellers (among others). This process is imperfect, and it leaves some unneccessary characters and unusual spellings in these data fields.</p>
@@ -540,7 +540,7 @@ Printer: A. Maxwell
 </div>
 </div>
 <div class="section" id="building-a-network">
-<h2><span class="section-number">2.5. </span>Building a Network<a class="headerlink" href="#building-a-network" title="Permalink to this headline">¶</a></h2>
+<h2>Building a Network<a class="headerlink" href="#building-a-network" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve created a function for cleaning up the printer names, we can use them for any purpose we like. In the rest of this tutorial, we’ll use printer names to create a network visualization of printers and the books they printed. Such a visualization could be useful for determining how much collaboration among printers there is in the early modern period.</p>
 <p>Networks are made up of <strong>nodes</strong> or entities, and the <strong>edges</strong> or relationships that connect those entities to one another. If you’re new to networks, you might refer to <a class="reference external" href="https://programminghistorian.org/en/lessons/exploring-and-analyzing-network-data-with-python">this <em>Programming Historian</em> tutorial on working with networks in Python</a>. We’ll use a similar Python approach here.</p>
 <p>Our goal is to create a <strong>bipartite</strong> network, one with two different types of nodes: printers and the books they printed. To quickly create a network, we can build an <strong>edgelist</strong> from our metadata, which is simply a list of which entities are related or linked.</p>
@@ -639,7 +639,7 @@ Average degree:   1.9540
 </div>
 </div>
 <div class="section" id="visualizing-the-network">
-<h2><span class="section-number">2.6. </span>Visualizing the Network<a class="headerlink" href="#visualizing-the-network" title="Permalink to this headline">¶</a></h2>
+<h2>Visualizing the Network<a class="headerlink" href="#visualizing-the-network" title="Permalink to this headline">¶</a></h2>
 <p>We could write a few lines of code to display our full network, but with 30,000+ nodes our visualization is likely to come out a wieldy, muddled mess. It will be more productive to create a smaller subset of the network to visualize, making things easier to read and interpret. Let’s look at the network just for the year 1660.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -709,7 +709,7 @@ Average degree:   1.8763
 <p><em>n.b. I tested out the network for the whole decade of the 1660s, and there wasn’t much more collaboration among printers than there was in 1660 alone. But different network “slices” might reveal different results.</em></p>
 </div>
 <div class="section" id="next-steps">
-<h2><span class="section-number">2.7. </span>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
 <p>We’ve looked at just a couple examples of how metadata might be processed and used in Python. The DataFrame and network visualization methods here give a rough outline of what might be done with metadata after it’s parsed from our XML, but there are a large number of computational possibilities for this data. Perhaps most importantly, you now know how to find and access this data in order to supplement your work with our texts, as demonstrated in the other tutorials.</p>
 <p>The exploratory methods outlined here are meant to be an intermediate step rather than an ending. Which is to say, creating a network visualization might prompt you to return to earlier stages of scholarly work and data analysis. Let’s look at an example by zooming in on a different component in our interactive visualization:</p>
 <p><img alt="" src="_images/component2.png" /></p>
@@ -747,8 +747,8 @@ Average degree:   1.8763
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="ep_xml.html" title="previous page"><span class="section-number">1. </span>Parsing <em>EarlyPrint</em> XML Texts</a>
-    <a class='right-next' id="next-link" href="tf_idf.html" title="next page"><span class="section-number">1. </span>Exploring Vocabulary Using Tf-Idf</a>
+    <a class='left-prev' id="prev-link" href="ep_xml.html" title="previous page">Parsing <em>EarlyPrint</em> XML Texts</a>
+    <a class='right-next' id="next-link" href="tf_idf.html" title="next page">Exploring Vocabulary Using Tf-Idf</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

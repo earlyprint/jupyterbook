@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Text Similarity &#8212; EarlyPrint + Python</title>
+    <title>Text Similarity &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Word Embeddings" href="word2vec.html" />
-    <link rel="prev" title="1. Exploring Vocabulary Using Tf-Idf" href="tf_idf.html" />
+    <link rel="next" title="Word Embeddings" href="word2vec.html" />
+    <link rel="prev" title="Exploring Vocabulary Using Tf-Idf" href="tf_idf.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -100,7 +100,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
-   1. Parsing
+   Parsing
    <em>
     EarlyPrint
    </em>
@@ -109,7 +109,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="metadata.html">
-   2. Working with Metadata, Creating Text Networks
+   Working with Metadata, Creating Text Networks
   </a>
  </li>
 </ul>
@@ -121,12 +121,12 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   1. Exploring Vocabulary Using Tf-Idf
+   Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   2. Text Similarity
+   Text Similarity
   </a>
  </li>
 </ul>
@@ -138,12 +138,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
-   1. Word Embeddings
+   Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unsupervised.html">
-   2. Text Classification: Unsupervised Clustering
+   Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -251,32 +251,32 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#get-features">
-   2.1. Get Features
+   Get Features
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#calculate-distance">
-   2.2. Calculate Distance
+   Calculate Distance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#reading-results">
-   2.3. Reading Results
+   Reading Results
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualizing-results">
-   2.4. Visualizing Results
+   Visualizing Results
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualizing-words">
-     2.4.1. Visualizing Words
+     Visualizing Words
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#visualizing-texts">
-     2.4.2. Visualizing Texts
+     Visualizing Texts
     </a>
    </li>
   </ul>
@@ -293,7 +293,7 @@
               <div>
                 
   <div class="section" id="text-similarity">
-<h1><span class="section-number">2. </span>Text Similarity<a class="headerlink" href="#text-similarity" title="Permalink to this headline">¶</a></h1>
+<h1>Text Similarity<a class="headerlink" href="#text-similarity" title="Permalink to this headline">¶</a></h1>
 <p><em>EarlyPrint</em>’s <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a> allows you to find a set of texts similar to any text in our corpus. It does this by using some basic measures of text similarity, and it’s easy to use if you’re interested in finding similar texts across the entire early modern corpus.</p>
 <p>But you might be interested in finding similarity across a smaller subset of the corpus. In this tutorial, we’ll calculate similarity across the same set of 1666 texts that we used in the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF tutorial</a>. You could easily do the same with any subset of texts that you’ve gathered using the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html">Metadata tutorial</a>.</p>
 <p>This tutorial is meant as a companion to an explanation of text similarity that I wrote for <em>The Programming Historian</em>:</p>
@@ -333,7 +333,7 @@
 </div>
 </div>
 <div class="section" id="get-features">
-<h2><span class="section-number">2.1. </span>Get Features<a class="headerlink" href="#get-features" title="Permalink to this headline">¶</a></h2>
+<h2>Get Features<a class="headerlink" href="#get-features" title="Permalink to this headline">¶</a></h2>
 <p>In order to measure similarity between texts, you need features of those texts to measure. The <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a> calculates similarity across three distinct sets of features for the same texts: TF-IDF weights for word counts, LDA Topic Modeling results, and XML tag structures. As our example here, we’ll use TF-IDF.</p>
 <p>The code below is taken directly from the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">TF-IDF Tutorial</a>, where you’ll find a full explanation of what it does. We loop through each text, extract words, count them, and convert those counts to TF-IDF values.</p>
 <p>n.b. There are two key differences between the TF-IDF tutorial and this one. Below I am getting counts of <strong>lemmas</strong>, dictionary headwords, rather than simply regularized forms of the word. This allows us to group plurals or verb forms into a single term. Also, here we’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">L2 normalization</a> on our TF-IDF transformation. Normalizing values helps us account for very long or very short texts that may skew our similarity results.</p>
@@ -384,7 +384,7 @@
 </div>
 </div>
 <div class="section" id="calculate-distance">
-<h2><span class="section-number">2.2. </span>Calculate Distance<a class="headerlink" href="#calculate-distance" title="Permalink to this headline">¶</a></h2>
+<h2>Calculate Distance<a class="headerlink" href="#calculate-distance" title="Permalink to this headline">¶</a></h2>
 <p>Below we’ll calculate three different distance metrics—euclidean distance, “cityblock” distance, and cosine distance—and create DataFrames for each one. For explanations of each metric, and for a discussion of the difference between similarity and distance, you can refer to <a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">The Programming Historian tutorial</a> which goes into these topics in detail.</p>
 <p>Euclidean distance is first, because it’s the default in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>:</p>
 <div class="cell docutils container">
@@ -1351,7 +1351,7 @@
 </div>
 </div>
 <div class="section" id="reading-results">
-<h2><span class="section-number">2.3. </span>Reading Results<a class="headerlink" href="#reading-results" title="Permalink to this headline">¶</a></h2>
+<h2>Reading Results<a class="headerlink" href="#reading-results" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have DataFrames of all our distance results, we can easily look at the texts that are most similar (i.e. closest in distance) to a text of our choice. We’ll use the same example as in the TF-IDF tutorial: Margaret Cavendish’s <em>The Blazing World</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1577,7 +1577,7 @@ Name: A53049, dtype: float64
 <p>You now have all the tools you need to creat your own mini <a class="reference external" href="https://earlyprint.org/lab/tool_discovery_engine.html?which_to_do=find_texts&amp;eebo_tcp_id=A43441&amp;n_results=35&amp;tfidf_weight=6&amp;mallet_weight=6&amp;tag_weight=6">Discovery Engine</a>, one focused on exactly the texts you care most about. For more on how to interpret these results and things to watch out for when calculating similarity, refer again to <a class="reference external" href="https://programminghistorian.org/en/lessons/common-similarity-measures">The Programming Historian</a>.</p>
 </div>
 <div class="section" id="visualizing-results">
-<h2><span class="section-number">2.4. </span>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">¶</a></h2>
+<h2>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve calculated similarity among all the 1666 texts, it’s helpful to explore further by visualizing those results in different ways. The first thing we need to do is import some simple graphing libraries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1588,7 +1588,7 @@ Name: A53049, dtype: float64
 </div>
 </div>
 <div class="section" id="visualizing-words">
-<h3><span class="section-number">2.4.1. </span>Visualizing Words<a class="headerlink" href="#visualizing-words" title="Permalink to this headline">¶</a></h3>
+<h3>Visualizing Words<a class="headerlink" href="#visualizing-words" title="Permalink to this headline">¶</a></h3>
 <p>In our results above, we found the text most similar to Cavendish’s <em>Blazing World</em>: Boyle’s <em>The Origin of Forms and Qualities</em>. (We know this similarity makes sense because Cavendish’s <em>Blazing World</em> also includes a scientific treatise: <em>Observations upon Experimental Philosophy</em>.)</p>
 <p>We might want to know which features—in this case individual words—“drive” the similarity between these two texts. We can do this by graphing all the words that appear in both texts according to their TF-IDF values.</p>
 <p>Luckily, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> lets us do so easily by selecting for the IDs of each text:</p>
@@ -2407,7 +2407,7 @@ Name: A53049, dtype: float64
 <p>This graph tells us quite a bit about the similarity between these two texts. Words like “texture” and “corpuscle” have very high TF-IDF scores in Boyle and somewhat high scores in Cavendish. Words like “perception” and “sensitive” have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like “microscope,” “mineral,” and “corporeal,” have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.</p>
 </div>
 <div class="section" id="visualizing-texts">
-<h3><span class="section-number">2.4.2. </span>Visualizing Texts<a class="headerlink" href="#visualizing-texts" title="Permalink to this headline">¶</a></h3>
+<h3>Visualizing Texts<a class="headerlink" href="#visualizing-texts" title="Permalink to this headline">¶</a></h3>
 <p>In addition to visualizing the words in just two texts, it can also be helpful to visualize all of our texts at once. We can create a visualization of our entire similarity matrix by making a heatmap: a chart where values are expressed as colors.</p>
 <p>Using the <a class="reference external" href="https://seaborn.pydata.org/index.html"><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></a> library, this is as easy as inputting our cosine distance DataFrame into a single function:</p>
 <div class="cell docutils container">
@@ -2461,8 +2461,8 @@ Name: A53049, dtype: float64
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="tf_idf.html" title="previous page"><span class="section-number">1. </span>Exploring Vocabulary Using Tf-Idf</a>
-    <a class='right-next' id="next-link" href="word2vec.html" title="next page"><span class="section-number">1. </span>Word Embeddings</a>
+    <a class='left-prev' id="prev-link" href="tf_idf.html" title="previous page">Exploring Vocabulary Using Tf-Idf</a>
+    <a class='right-next' id="next-link" href="word2vec.html" title="next page">Word Embeddings</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

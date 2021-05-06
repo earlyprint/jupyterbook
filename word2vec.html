@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Word Embeddings &#8212; EarlyPrint + Python</title>
+    <title>Word Embeddings &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Text Classification: Unsupervised Clustering" href="unsupervised.html" />
-    <link rel="prev" title="2. Text Similarity" href="similarity.html" />
+    <link rel="next" title="Text Classification: Unsupervised Clustering" href="unsupervised.html" />
+    <link rel="prev" title="Text Similarity" href="similarity.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -100,7 +100,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ep_xml.html">
-   1. Parsing
+   Parsing
    <em>
     EarlyPrint
    </em>
@@ -109,7 +109,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="metadata.html">
-   2. Working with Metadata, Creating Text Networks
+   Working with Metadata, Creating Text Networks
   </a>
  </li>
 </ul>
@@ -121,12 +121,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="tf_idf.html">
-   1. Exploring Vocabulary Using Tf-Idf
+   Exploring Vocabulary Using Tf-Idf
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="similarity.html">
-   2. Text Similarity
+   Text Similarity
   </a>
  </li>
 </ul>
@@ -138,12 +138,12 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Word Embeddings
+   Word Embeddings
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="unsupervised.html">
-   2. Text Classification: Unsupervised Clustering
+   Text Classification: Unsupervised Clustering
   </a>
  </li>
 </ul>
@@ -251,22 +251,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#select-a-corpus-and-tokenize-sentences">
-   1.1. Select a Corpus and Tokenize Sentences
+   Select a Corpus and Tokenize Sentences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#train-a-model-and-find-similar-words">
-   1.2. Train a Model and Find Similar Words
+   Train a Model and Find Similar Words
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#accessing-and-visualizing-vectors">
-   1.3. Accessing and Visualizing Vectors
+   Accessing and Visualizing Vectors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualize-word-similarity">
-   1.4. Visualize Word Similarity
+   Visualize Word Similarity
   </a>
  </li>
 </ul>
@@ -281,7 +281,7 @@
               <div>
                 
   <div class="section" id="word-embeddings">
-<h1><span class="section-number">1. </span>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
+<h1>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Permalink to this headline">¶</a></h1>
 <p>Many of the improvements and extensions we have in mind for the next stage of <em>EarlyPrint</em> involve word embeddings. Using popular algorithms like Word2Vec, which we’ll use in this tutorial, word embeddings create numeric representations for each word in a text corpus based on how frequently that word co-occurs alongside other words. Using word embeddings, it’s possible to compute the semantic relationship among words in a corpus, to find <strong>how words are related</strong>.</p>
 <p>Word embeddings have lots of different downstream uses for machine learning and text analysis tasks; for instance, they’re an important building block for state-of-the-art natural language processing models. In this tutorial we’ll focus on the basics: training a Word2Vec model and using the model to identify and visualize similar words.</p>
 <p>You can decide how deep you’d like to go into the weeds of the ways Word2Vec actually produces its similarities. For a first introduction, I recommend <a class="reference external" href="https://jalammar.github.io/illustrated-word2vec/">Jay Alammar’s <em>The Illustrated Word2Vec</em></a>, which includes lots of helpful visualizations as it explains the basics. In this tutorial, we’ll focus on training Word2Vec in Python and interpreting the results, rather than reviewing the underlying concepts.</p>
@@ -299,7 +299,7 @@
 </div>
 </div>
 <div class="section" id="select-a-corpus-and-tokenize-sentences">
-<h2><span class="section-number">1.1. </span>Select a Corpus and Tokenize Sentences<a class="headerlink" href="#select-a-corpus-and-tokenize-sentences" title="Permalink to this headline">¶</a></h2>
+<h2>Select a Corpus and Tokenize Sentences<a class="headerlink" href="#select-a-corpus-and-tokenize-sentences" title="Permalink to this headline">¶</a></h2>
 <p>Word2Vec creates vectors based on which words are near one another. We’ll train our model on lists of words from a selected corpus, and we’ll use the same corpus we’ve been using all along: the <em>EarlyPrint</em> texts published in 1666.</p>
 <p>We’re using the <a class="reference external" href="https://radimrehurek.com/gensim/models/word2vec.html">Gensim</a> library to create our Word2Vec model. Gensim accepts several different types of input, but we’ll focus on giving it lists of word tokens. You could create a list of all the tokens in a text and pass them directly to Gensim, but Gensim prefers that you give it each sentence separately. This is because sentence boundaries often contain information about word relationships: the last word of a given sentence and the first word of the next one don’t have the same relationship as two words in the same sentence.</p>
 <p>Below we create a function for finding the lemmas in every sentence of our texts, which then collects those sentences as individual lists. For more detail on how this code works, refer to <a class="reference external" href="https://earlyprint.org/jupyterbook/ep_xml.html#step-4-lines-stanzas-and-sentences">our XML tutorial</a>.</p>
@@ -334,7 +334,7 @@
 </div>
 </div>
 <div class="section" id="train-a-model-and-find-similar-words">
-<h2><span class="section-number">1.2. </span>Train a Model and Find Similar Words<a class="headerlink" href="#train-a-model-and-find-similar-words" title="Permalink to this headline">¶</a></h2>
+<h2>Train a Model and Find Similar Words<a class="headerlink" href="#train-a-model-and-find-similar-words" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have a list of all the lemmas in all the sentences in our texts, we’re ready to train our Word2Vec model. This can be done with the simple one-line command below.</p>
 <p>The parameter <code class="docutils literal notranslate"><span class="pre">min_count</span></code> refers to the minimum number of times a word must appear in the corpus in order to be part of the model. For the sake of speed, I’m eliminating all words that appear less than 2 times. (And since the eliminated words appear only once, the resulting vectors wouldn’t be very reliable anyway: not enough examples of adjacent words.)</p>
 <p>The parameter <code class="docutils literal notranslate"><span class="pre">window</span></code> refers to the “sliding window” that Word2Vec pulls across a sentence to determine if words are near each other. The default window is 5 words. In general, Word2Vec gives better results in a very large corpus, when there are lots of instances of every word. For our <em>EarlyPrint</em> applications of Word2Vec, we’ll train the model on the full corpus. But for this sample one-year corpus, let’s shrink the window to just 4 words, which will generate more windows across our smaller corpus.</p>
@@ -377,7 +377,7 @@
 <p>If you had a list of words you were particularly interested in, perhaps organized around a theme, you could easily look at the most similar words to each one and begin to populate the semantic field of the topic that interests you.</p>
 </div>
 <div class="section" id="accessing-and-visualizing-vectors">
-<h2><span class="section-number">1.3. </span>Accessing and Visualizing Vectors<a class="headerlink" href="#accessing-and-visualizing-vectors" title="Permalink to this headline">¶</a></h2>
+<h2>Accessing and Visualizing Vectors<a class="headerlink" href="#accessing-and-visualizing-vectors" title="Permalink to this headline">¶</a></h2>
 <p>But we can do more with word embeddings than simply find similar words. Word2Vec creates a vector, a string of numerical values for each word, that we can access with the <code class="docutils literal notranslate"><span class="pre">wv</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -432,7 +432,7 @@
 <p>We could visualize every single word this way, but the resulting chart would be very hard to read. Instead, let’s try other visualization methods.</p>
 </div>
 <div class="section" id="visualize-word-similarity">
-<h2><span class="section-number">1.4. </span>Visualize Word Similarity<a class="headerlink" href="#visualize-word-similarity" title="Permalink to this headline">¶</a></h2>
+<h2>Visualize Word Similarity<a class="headerlink" href="#visualize-word-similarity" title="Permalink to this headline">¶</a></h2>
 <p>By default Word2Vec reduces a word to a vector of 100 features, or 100 dimensions. We can’t visualize a 100-dimensional space: the best we can do is two or three. To go from 100 dimensions to just 2, we need a method for feature reduction.</p>
 <p>We’ll use one of the most common feature reduction methods: Principal Component Analysis. PCA reduces a high-dimensional space into just a few “principal components” that attempt to account for most of the variance in the data. In many applications, such as when <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">calculating similarity</a>, it’s best to work in the higher dimensional space directly. But PCA is a very useful tool for visualization: just remember that you’re looking at a reduced representation of the data rather than the  original data.</p>
 <p>Let’s import PCA from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>:</p>
@@ -603,8 +603,8 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="similarity.html" title="previous page"><span class="section-number">2. </span>Text Similarity</a>
-    <a class='right-next' id="next-link" href="unsupervised.html" title="next page"><span class="section-number">2. </span>Text Classification: Unsupervised Clustering</a>
+    <a class='left-prev' id="prev-link" href="similarity.html" title="previous page">Text Similarity</a>
+    <a class='right-next' id="next-link" href="unsupervised.html" title="next page">Text Classification: Unsupervised Clustering</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
