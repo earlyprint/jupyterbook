@@ -4,9 +4,16 @@
 - file: intro
   numbered: true
 
-- file: ep_xml
-- file: tf_idf
-- file: metadata
-- file: similarity
-- file: word2vec
-- file: modeling
+- part: Getting Started
+  chapters:
+  - file: ep_xml
+  - file: metadata
+- part: Text Analysis
+  chapters:
+  - file: tf_idf
+  - file: similarity
+- part: Models and Classifiers
+  chapters:
+  - file: word2vec
+  - file: unsupervised
+  - file: supervised
