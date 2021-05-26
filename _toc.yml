@@ -2,7 +2,6 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 #
 - file: intro
-  numbered: true
 
 - part: Getting Started
   chapters:
@@ -16,4 +15,4 @@
   chapters:
   - file: word2vec
   - file: unsupervised
-#   - file: supervised
+  - file: supervised

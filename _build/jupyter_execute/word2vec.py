@@ -51,7 +51,7 @@ def get_sentences(filename):
 
 
 nsmap={'tei': 'http://www.tei-c.org/ns/1.0'}
-files = glob.glob('1666_texts/*.xml')
+files = glob.glob('1666_texts_full/*.xml')
 all_sentences = []
 for f in files:
     get_sentences(f)
@@ -89,7 +89,7 @@ print(list(word2vec.wv.vocab)[:50])
 print(word2vec.wv.most_similar("flame"))
 
 
-# The `most_similar()` function gives the top ten most similar words to the word you selected. The similar words to "flame"—"fire," "smoke", "ash"—make a lot of sense.
+# The `most_similar()` function gives the top ten most similar words to the word you selected. The similar words to "flame"—"fire," "smoke", "burn"—make a lot of sense.
 # 
 # The values given with each word are its cosine similarity to the source word. (See our [Similarity tutorial](https://earlyprint.org/jupyterbook/similarity.html) for more about this.)
 # 
@@ -122,7 +122,7 @@ f, ax = plt.subplots(figsize=(15, 10))
 sns.heatmap(df, cmap='coolwarm')
 
 
-# Like in Jalammar's illustrations for "king," "man," and "woman," it's easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.
+# Like in Alammar's illustrations for "king," "man," and "woman," it's easy to see why these words have high similarity scores. Parts of the vectors for each word have high (red) values and low (blue) values, and these roughly matchup from word to word.
 # 
 # We could visualize every single word this way, but the resulting chart would be very hard to read. Instead, let's try other visualization methods.
 # 
@@ -165,7 +165,7 @@ pca_df.plot(x='pc1',y='pc2',kind="scatter",figsize=(15, 10))
 # 
 # Let's use this graph as a base, but get rid of all the dots and just show the labels for the four words we care about.
 
-# In[13]:
+# In[12]:
 
 
 ax = pca_df.plot(x='pc1',y='pc2',kind="scatter",figsize=(15, 10),alpha=0)
@@ -177,6 +177,6 @@ for txt in pca_df.index:
 plt.show()
 
 
-# This is much better. We can see how the words are positioned relative to one another. Though we might have expected to seem them next to each other, remember that PCA is only showing us a reduced representation of our high-dimensional data. Still, we can see that "smoke" and "flame" are closer to each other than "cloud" and "fire." And all four words are almost in a horizontal line across the graph, suggesting they're quite similar according to principal component 2 (the y-axis), but perhaps less similar according to PC1 (the x-axis). Finally, by comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).
+# This is much better. We can see how the words are positioned relative to one another. Though we might have expected to seem them next to each other, remember that PCA is only showing us a reduced representation of our high-dimensional data. Still, we can see that "smoke" and "cloud" are closer to each other than "flame" and "fire." And all four words are almost in a horizontal line across the graph, suggesting they're quite similar according to principal component 2 (the y-axis), but perhaps less similar according to PC1 (the x-axis). Finally, by comparing the last graph to this one, we can also see where these words fit in areas of semantic density (lots of similar words) versus sparseness (words with more distinct meanings).
 # 
 # As text similarity increased our sense of text-level relationships in the Similarity tutorial, Word2Vec gives us a clearer (but not complete) sense of word-level relationships. Stacked with other methods, Word2Vec can be used to explore themes and subjects, to help computers and human readers make sense of semantic distinctions, and to drive complex language-based machine learning algorithms.

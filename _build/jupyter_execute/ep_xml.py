@@ -5,8 +5,6 @@
 # 
 # by [John R. Ladd](https://jrladd.com)
 # 
-# [Download this notebook!](https://earlyprint.org/assets/jupyter/ep_xml.ipynb)
-# 
 # ## Introduction
 # 
 # In this tutorial, you'll learn how to take advantage of the XML markup in *EarlyPrint* texts to subdivide and **parse** a single text or group of texts (that is, to use the formal encoding provided by XML to select textual features in which you’re especially interested).

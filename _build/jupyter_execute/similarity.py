@@ -32,7 +32,7 @@ from collections import Counter
 
 
 # Use the glob library to create a list of file names
-filenames = glob.glob("1666_texts/*.xml")
+filenames = glob.glob("1666_texts_full/*.xml")
 # Parse those filenames to create a list of file keys (ID numbers)
 # You'll use these later on.
 filekeys = [f.split('/')[-1].split('.')[0] for f in filenames]
@@ -97,7 +97,7 @@ readable_results
 # 
 # Euclidean distance is first, because it's the default in `sklearn`:
 
-# In[55]:
+# In[4]:
 
 
 euclidean = pairwise_distances(results)
@@ -107,7 +107,7 @@ euclidean_df
 
 # Next is cityblock distance:
 
-# In[56]:
+# In[5]:
 
 
 cityblock = pairwise_distances(results, metric='cityblock')
@@ -115,9 +115,9 @@ cityblock_df = pd.DataFrame(cityblock, index=df.index, columns=df.index)
 cityblock_df
 
 
-# And finally cosine distance, which is usually (but not always) preferrable for text similarity:
+# And finally cosine distance, which is usually (but not always) preferable for text similarity:
 
-# In[57]:
+# In[7]:
 
 
 cosine = pairwise_distances(results, metric='cosine')
@@ -129,7 +129,7 @@ cosine_df
 # 
 # Now that we have DataFrames of all our distance results, we can easily look at the texts that are most similar (i.e. closest in distance) to a text of our choice. We'll use the same example as in the TF-IDF tutorial: Margaret Cavendish's *The Blazing World*.
 
-# In[58]:
+# In[8]:
 
 
 top5_cosine = cosine_df.nsmallest(6, 'A53049')['A53049'][1:]
@@ -138,7 +138,7 @@ print(top5_cosine)
 
 # We now have a list of text IDs and their cosine similarities, but this list is hard to interpret without more information. We can use the techniques from the [Metadata tutorial](https://earlyprint.org/jupyterbook/metadata.html) to get a DataFrame of metadata for all the 1666 texts:
 
-# In[59]:
+# In[9]:
 
 
 # Get the full list of metadata files
@@ -180,7 +180,7 @@ metadata_df
 
 # And we can combine this with our cosine distance results to see the metadata for the texts most similar to *The Blazing World*:
 
-# In[60]:
+# In[10]:
 
 
 metadata_df.loc[top5_cosine.index, ['author','title','date']]
@@ -192,7 +192,7 @@ metadata_df.loc[top5_cosine.index, ['author','title','date']]
 # 
 # Now that we've calculated similarity among all the 1666 texts, it's helpful to explore further by visualizing those results in different ways. The first thing we need to do is import some simple graphing libraries.
 
-# In[61]:
+# In[11]:
 
 
 from matplotlib import pyplot as plt
@@ -207,7 +207,7 @@ import seaborn as sns
 # 
 # Luckily, `pandas` lets us do so easily by selecting for the IDs of each text:
 
-# In[62]:
+# In[12]:
 
 
 # We need to "transpose" our results so that the texts are the columns and the words are the rows.
@@ -223,18 +223,18 @@ transformed_results.plot.scatter('A53049','A29017')
 # 
 # First, we can subselect a set of words based on their TF-IDF scores in the two columns we care about. This will create a new, much smaller DataFrame:
 
-# In[63]:
+# In[13]:
 
 
 filtered_results = transformed_results[((transformed_results['A53049'] > 0.04) & (transformed_results['A29017'] > 0.005)) | ((transformed_results['A29017'] > 0.04) & (transformed_results['A53049'] > 0.005)) | ((transformed_results['A29017'] > 0.03) & (transformed_results['A53049'] > 0.03))] 
 filtered_results
 
 
-# These are the 26 words that drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.
+# These are the 30 words that drive the similarity between Cavendish and Boyle. You could adjust the threshold values in the above filter to get a bigger or smaller list of words.
 # 
 # And we can add these words as labels to our graph in order to see their relative TF-IDF weights:
 
-# In[64]:
+# In[14]:
 
 
 ax = transformed_results.plot.scatter('A53049','A29017')
@@ -245,7 +245,7 @@ for txt in filtered_results.index:
 plt.show()
 
 
-# This graph tells us quite a bit about the similarity between these two texts. Words like "texture" and "corpuscles" have very high TF-IDF scores in Boyle and somewhat high scores in Cavendish. Words like "perception" and "sensitive" have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like "microscope," "mineral," and "corporeal," have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.
+# This graph tells us quite a bit about the similarity between these two texts. Words like "texture" and "corpuscle" have very high TF-IDF scores in Boyle and somewhat high scores in Cavendish. Words like "perception" and "sensitive" have very high scores in Cavendish and only somewhat high in Boyle. And a few select terms, like "microscope," "mineral," and "corporeal," have high scores in both texts. This scientific vocabulary is exactly what we might expect to see driving similarity between two early science texts.
 # 
 # ### Visualizing Texts
 # 
@@ -253,7 +253,7 @@ plt.show()
 # 
 # Using the [`seaborn`](https://seaborn.pydata.org/index.html) library, this is as easy as inputting our cosine distance DataFrame into a single function:
 
-# In[65]:
+# In[15]:
 
 
 f, ax = plt.subplots(figsize=(15, 10)) # This line just makes our heatmap a little bigger

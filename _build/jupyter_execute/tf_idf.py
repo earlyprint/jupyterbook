@@ -51,13 +51,13 @@ from sklearn.feature_extraction.text import TfidfTransformer # Import only the T
 # 
 # Here's the wonderful part: *EarlyPrint* texts are already tokenized (split up into individual words) and regularized (marked up with modernized spellings). So for our purposes here we simply need to open a file, get all its `<w>` tags for individual words, look to see if there is a regularized spelling, and put all of those words into a list. That may sound complicated, but the truth is that much of the hard work has already been done for us!
 # 
-# I've collected my subcorpus in a folder called `1666_texts`. So I can process every file in that folder, like so:
+# I've collected my subcorpus in a folder called `1666_texts_full`. So I can process every file in that folder, like so:
 
 # In[2]:
 
 
 # First you need a list of all files in your directory
-files = glob.glob("1666_texts/*.xml") # THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER
+files = glob.glob("1666_texts_full/*.xml") # THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER
 
 # Create an empty lists to put all our texts into
 all_tokenized = []
@@ -141,9 +141,3 @@ readable_results.T.sort_values(by=["A53049"], ascending=False).head(30)
 # I hope that this tutorial will not only help you to run Tf-Idf on texts you care about but that it will convince you of the usefulness of Tf-Idf as a technique. Texts derived from early modern printed books present unique challenges to linguistic analyses like Tf-Idf that rely on consistent spelling, but the regularized texts in *EarlyPrint* can assist in overcoming some of those challenges.
 # 
 # If you have any questions, feel free to [contact me](mailto:jrladd@northwestern.edu).
-
-# In[ ]:
-
-
-
-
