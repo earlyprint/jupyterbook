@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Statistical Modeling &#8212; EarlyPrint + Python</title>
+    <title>Text Classification: Supervision &#8212; EarlyPrint + Python</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -54,6 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Text Classification: Unsupervised Clustering" href="unsupervised.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -133,7 +134,7 @@
   Models and Classifiers
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="word2vec.html">
    Word Embeddings
@@ -142,6 +143,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="unsupervised.html">
    Text Classification: Unsupervised Clustering
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Text Classification: Supervision
   </a>
  </li>
 </ul>
@@ -253,11 +259,6 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsupervised-clustering">
-   Unsupervised Clustering
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#targets">
    Targets
   </a>
@@ -268,8 +269,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpreting-results">
-   Interpreting Results
+  <a class="reference internal nav-link" href="#assessing-a-classifier">
+   Assessing a Classifier
   </a>
  </li>
 </ul>
@@ -283,12 +284,12 @@
         
               <div>
                 
-  <div class="section" id="statistical-modeling">
-<h1>Statistical Modeling<a class="headerlink" href="#statistical-modeling" title="Permalink to this headline">¶</a></h1>
-<p>In this notebook, I lay out some of the basic principles behind a set of techniques usually named by umbrella terms—statistical modeling, machine learning, even “artificial intelligence.” In a nutshell, these approaches take a large dataset and attempt to determine values or categories from that data. I’ll show a few of the most basic versions of this approach and gesture to more complex methods.</p>
-<p>Modeling, writ large, has become a massive field in data science. Ted Underwood uses models to understand literary history in <em>Distant Horizons</em>, the OCR tool <a class="reference external" href="https://github.com/tberg12/ocular">Ocular</a> uses statistical models of both typefaces and language, and, of course, topic modeling—technically <a class="reference external" href="http://mallet.cs.umass.edu/">Latent Dirichlet Allocation (LDA)</a>—was one of the earliest types of modeling to be widely adopted by humanities scholars.</p>
-<p>But statistical models are also often what is underneath the vague talk of “algorithms” or “machine learning” that make up so much discussion of contemporary technology. Models help to deliver search results, determine what social media posts you see, and <a class="reference external" href="https://projects.fivethirtyeight.com/2020-election-forecast/">even try to predict who will be elected president</a>. Understanding how statistical modeling works can help you to critique the technologies that increasingly determine so much of our lives, and it can help you to better understand the recent achievements of statistical models in the humanities (and even use these techniques in your own work).</p>
-<p>We’ll begin, as always, by <code class="docutils literal notranslate"><span class="pre">import</span></code>ing necessary libraries and functions. We’ll use many of the ones we’ve used before, including a few new ones from <a class="reference external" href="https://scikit-learn.org/stable/index.html">scikit-learn</a>.</p>
+  <div class="section" id="text-classification-supervision">
+<h1>Text Classification: Supervision<a class="headerlink" href="#text-classification-supervision" title="Permalink to this headline">¶</a></h1>
+<p>In the <a class="reference external" href="https://earlyprint.org/jupyterbook/unsupervised.html">previous tutorial</a>, we attempted to use an unsupervised method, K-means clustering, to create groups or clusters of our 1666 texts into genres. But we concluded that clustering might not be the ideal method for our data.</p>
+<p>Thankfully, unsupervised methods aren’t the only way we can classify texts. We can use <em>supervision</em>, or <em>supervised classification</em>, to sort our texts into groups based on our knowledge of existing categories. Essentially, we give the classifier some texts with categories already labeled and ask it to guess at categories for the unlabeled data. The term “machine learning” is most often used to describe to this process, because the classifier “learns” the categories based on the labeled samples.</p>
+<p>The supervised classifier we’ll use is one of the simplest and oldest: <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_regression">logistic regression</a>, or logit. It’s mathematically related to the common statistical technique of <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a>. Where linear regression can predict <em>values</em>, logistic regression can predict <em>categories</em> (in other words: classify). While traditional logistic regression is a binary classifier, predicting whether data belongs in one of two categories, we can use multinomial logit to predict things in more than two categories.</p>
+<p>We begin by importing the necessary libraries and functions. These are similar to our imports for unsupervised clustering, but with different libraries and models from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General Libraries Needed</span>
@@ -297,15 +298,11 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">Counter</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 
-<span class="c1"># Functions for Unsupervised Clustering</span>
-<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-
 <span class="c1"># Functions for Supervised Classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># Libraries for Graphing</span>
@@ -318,12 +315,14 @@
 </div>
 <div class="section" id="reading-a-text-corpus">
 <h2>Reading a Text Corpus<a class="headerlink" href="#reading-a-text-corpus" title="Permalink to this headline">¶</a></h2>
-<p>You can create a statistical model from any kind of data, but in this exercise we’ll use data derived from a set of texts, the same corpus of 1666 texts we’ve been using all along. Here we’re borrowing techniques from the field of <em>information retrieval</em> to get features from our texts, the same way we did in the <a class="reference external" href="https://earlyprint.org/jupyterbook/tf_idf.html">Tf-Idf</a> and <a class="reference external" href="https://earlyprint.org/jupyterbook/similarity.html">Text Similarity</a> tutorials.</p>
-<p>In previous tutorials, we extracted lists of words from the XML files and converted them to Tf-Idf values using <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code>. That would still work in this case, but in order to place some additional limits on Tf-Idf, we’ll convert the text from our XML back into strings. We can put those strings into <code class="docutils literal notranslate"><span class="pre">TfIdfVectorizer</span></code>, which will give us access to those additional limits (see below). The next code block extracts all the lemmas from our texts and converts them into strings.</p>
+<p>This first step is identical to what we did in the last tutorial, loading our corpus of 1666 texts and getting Tf-Idf values for each word. Here’s an important note from the last lesson:</p>
+<blockquote>
+<div><p>In previous tutorials, we extracted lists of words from the XML files and converted them to Tf-Idf values using <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code>. That would still work in this case, but in order to place some additional limits on Tf-Idf, we’ll convert the text from our XML back into strings. We can put those strings into <code class="docutils literal notranslate"><span class="pre">TfIdfVectorizer</span></code>, which will give us access to those additional limits (see below). The next code block extracts all the lemmas from our texts and converts them into strings.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the glob library to create a list of file names</span>
-<span class="n">filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts/*.xml&quot;</span><span class="p">)</span>
+<span class="n">filenames</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;1666_texts_full/*.xml&quot;</span><span class="p">)</span>
 <span class="c1"># Parse those filenames to create a list of file keys (ID numbers)</span>
 <span class="c1"># You&#39;ll use these later on.</span>
 
@@ -353,7 +352,10 @@
 </div>
 </div>
 </div>
-<p>Now that we have strings for each text, we can “vectorize” them into Tf-Idf values. Scikit-learn provides <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer">many options and parameters</a> for its <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code> that aren’t available in the <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> we used in previous tutorials. Specifically, we want to use the <code class="docutils literal notranslate"><span class="pre">min_df</span></code> parameter to set the minimum document frequency to 2: this will filter out all words that appear in fewer than two texts. This creates a smaller list of features and will allow our models to run more quickly and more accurately.</p>
+<p>And now we can calculate Tf-Idf, just as we did last time:</p>
+<blockquote>
+<div><p>Now that we have strings for each text, we can “vectorize” them into Tf-Idf values. Scikit-learn provides <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html#sklearn.feature_extraction.text.TfidfVectorizer">many options and parameters</a> for its <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code> that aren’t available in the <code class="docutils literal notranslate"><span class="pre">TfidfTransformer</span></code> we used in previous tutorials. Specifically, we want to use the <code class="docutils literal notranslate"><span class="pre">min_df</span></code> parameter to set the minimum document frequency to 2: this will filter out all words that appear in fewer than two texts. This creates a smaller list of features and will allow our models to run more quickly and more accurately.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First we need to create an &quot;instance&quot; of the vectorizer, with the proper settings.</span>
@@ -398,20 +400,20 @@
       <th>04</th>
       <th>05</th>
       <th>06</th>
-      <th>07</th>
+      <th>08</th>
       <th>09</th>
       <th>10</th>
       <th>...</th>
+      <th>zodiac</th>
       <th>zoilus</th>
-      <th>zonar</th>
+      <th>zona</th>
       <th>zonara</th>
-      <th>zonaras</th>
       <th>zone</th>
       <th>zophar</th>
+      <th>zoroaster</th>
       <th>zosimus</th>
-      <th>zum</th>
-      <th>àd</th>
-      <th>ùs</th>
+      <th>zouch</th>
+      <th>zwinglius</th>
     </tr>
   </thead>
   <tbody>
@@ -428,7 +430,31 @@
       <td>0.0</td>
       <td>0.000000</td>
       <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A32444</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -450,9 +476,33 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.018419</td>
+      <td>0.017101</td>
       <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A89320</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.059049</td>
+      <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -474,57 +524,9 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.011869</td>
+      <td>0.011049</td>
       <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>A28171</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.019668</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>A51877</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.0</td>
+      <td>0.028335</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -560,54 +562,6 @@
       <td>...</td>
     </tr>
     <tr>
-      <th>A60948</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>A53818</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
       <th>A57156</th>
       <td>0.0</td>
       <td>0.0</td>
@@ -618,9 +572,33 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.035230</td>
+      <td>0.033300</td>
       <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>A57634</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -644,7 +622,31 @@
       <td>0.0</td>
       <td>0.000000</td>
       <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>B03763</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.041815</td>
+      <td>...</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -666,9 +668,9 @@
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.020007</td>
+      <td>0.018557</td>
       <td>...</td>
-      <td>0.0</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -681,230 +683,16 @@
     </tr>
   </tbody>
 </table>
-<p>142 rows × 49390 columns</p>
+<p>269 rows × 31385 columns</p>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="unsupervised-clustering">
-<h2>Unsupervised Clustering<a class="headerlink" href="#unsupervised-clustering" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have our matrix of word counts, there are many, many methods and techniques we could apply to categorize or <em>classify</em> our texts. There are two general types of modeling I will introduce: <em>unsupervised</em> methods and <em>supervised</em> ones. Supervised methods are so called because the investigator provides some labels for the data, telling which samples belong in which categories. And based on those samples—the <em>training data</em>—the computer tries to determine to which categories the unlabeled samples belong.</p>
-<p>The supervised methods are what’s most often meant by “machine learning” (because the machine “learns” based on the training data). But there are a set of <em>unsupervised</em> methods which try to find categories in data without knowing about categories in advance. We’ll work with one such <em>clustering</em> method, K-Means Clustering. The k-means method attempts to find categories in data based on how close the samples are to one another in Cartesian space, i.e. in the graph above but across thousands of dimensions.</p>
-<p>The <em>k</em> in k-means stands for <em>any number</em>: we need to tell the computer how many clusters we think it should find. As a test we’ll set <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> to 4, placing our texts into 4 groups.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># Create a KMeans instance that will look for 4 clusters</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">readable_results</span><span class="p">)</span> <span class="c1"># Feed in our normalized data</span>
-
-<span class="c1"># Show which plays the model put together</span>
-<span class="n">kmeans_groups</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span><span class="n">filekeys</span><span class="p">):</span>
-    <span class="n">kmeans_groups</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    
-<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kmeans_groups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;B02845&#39;, &#39;A51130&#39;, &#39;A36358&#39;, &#39;A35206&#39;, &#39;A39345&#39;, &#39;A61929&#39;, &#39;B03114&#39;, &#39;A32916&#39;, &#39;A70852&#39;, &#39;B01661&#39;, &#39;A32751&#39;, &#39;A92820&#39;, &#39;A39246&#39;, &#39;A87622&#39;, &#39;A26426&#39;, &#39;A55410&#39;, &#39;A31237&#39;, &#39;B05835&#39;, &#39;A80818&#39;, &#39;A59325&#39;, &#39;B06022&#39;, &#39;A60606&#39;, &#39;A52519&#39;, &#39;A64258&#39;, &#39;A35851&#39;, &#39;B02572&#39;, &#39;B03376&#39;, &#39;B01318&#39;, &#39;B03106&#39;, &#39;A44879&#39;, &#39;A54070&#39;, &#39;A70287&#39;, &#39;A28209&#39;, &#39;B04153&#39;, &#39;B03109&#39;, &#39;A42533&#39;, &#39;A42537&#39;, &#39;A44627&#39;, &#39;A93280&#39;, &#39;A38792&#39;, &#39;B06375&#39;, &#39;A41072&#39;, &#39;B04338&#39;, &#39;B03631&#39;, &#39;A41266&#39;, &#39;A93281&#39;, &#39;A67335&#39;, &#39;A40254&#39;, &#39;B06872&#39;, &#39;B04364&#39;, &#39;A41958&#39;, &#39;A96485&#39;, &#39;A59614&#39;, &#39;A38630&#39;]
-[&#39;A28171&#39;, &#39;A60482&#39;, &#39;A25743&#39;, &#39;A61594&#39;, &#39;A64861&#39;, &#39;A61503&#39;, &#39;A62436&#39;, &#39;A38556&#39;, &#39;A57484&#39;, &#39;A66752&#39;, &#39;A26249&#39;, &#39;A61867&#39;, &#39;A61891&#39;, &#39;A28989&#39;, &#39;A65296&#39;, &#39;A30203&#39;, &#39;A56381&#39;, &#39;A61600&#39;, &#39;A66777&#39;, &#39;A39714&#39;, &#39;A44801&#39;, &#39;A43020&#39;, &#39;A45206&#39;, &#39;A23770&#39;, &#39;A44938&#39;, &#39;A56390&#39;, &#39;A59229&#39;, &#39;A30143&#39;, &#39;A47095&#39;, &#39;A29017&#39;, &#39;A47367&#39;, &#39;A67572&#39;, &#39;A44478&#39;, &#39;A47379&#39;, &#39;A39839&#39;, &#39;A48797&#39;, &#39;A25198&#39;, &#39;A42820&#39;, &#39;A67762&#39;, &#39;A45552&#39;, &#39;A97379&#39;, &#39;A26482&#39;, &#39;A36329&#39;, &#39;A41527&#39;, &#39;A31229&#39;, &#39;A53049&#39;, &#39;A60948&#39;, &#39;A57156&#39;, &#39;A65985&#39;, &#39;A41955&#39;]
-[&#39;A51877&#39;, &#39;A32566&#39;, &#39;A32207&#39;, &#39;A86466&#39;, &#39;A35608&#39;, &#39;A79302&#39;, &#39;A63370&#39;, &#39;A46087&#39;, &#39;A31124&#39;, &#39;A71109&#39;, &#39;A49213&#39;, &#39;A95690&#39;, &#39;B05308&#39;, &#39;A46046&#39;, &#39;B03317&#39;, &#39;B02123&#39;, &#39;A46030&#39;, &#39;A32581&#39;, &#39;A32557&#39;, &#39;A46137&#39;, &#39;A32484&#39;, &#39;B05591&#39;, &#39;A32544&#39;, &#39;A32555&#39;, &#39;A32288&#39;, &#39;A32567&#39;, &#39;A32559&#39;, &#39;A53818&#39;]
-[&#39;A35114&#39;, &#39;A55387&#39;, &#39;A70867&#39;, &#39;A91186&#39;, &#39;A70866&#39;, &#39;A44334&#39;, &#39;A37237&#39;, &#39;A39442&#39;, &#39;A52328&#39;, &#39;A44061&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can see in the list above that <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> has produced four groups as intended: three of them are of somewhat similar size and one is a bit smaller. But we can’t tell much from the lists of file IDs above. Do these groups correspond to any known genres or categories of texts?</p>
-<p>We could list out the title of every text in each group and try to discern groupings that way, but we could also look at the <a class="reference external" href="https://id.loc.gov/authorities/subjects.html">Library of Congress subject headings</a> assigned to many of the texts. We can retrieve these from the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html"><em>EarlyPrint</em> metadata</a>, count them up, and look at the most common subject headings in each group.</p>
-<p>[n.b. The subject headings in the <em>EarlyPrint</em> corpus are a helpful but imperfect data set. Most of them were assigned by the British Library to the original EEBO texts, in some cases many years ago. Not every text has subject headings, and the subject headings may not account for every possible subject, genre, or category that a researcher may care about.]</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLParser</span><span class="p">(</span><span class="n">collect_ids</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">nsmap</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;tei&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.tei-c.org/ns/1.0&#39;</span><span class="p">}</span>
-
-<span class="c1"># Get the full list of metadata files</span>
-<span class="c1"># (You&#39;ll change this line based on where the files are on your computer)</span>
-<span class="n">metadata_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;../../epmetadata/header/*.xml&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kmeans_groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1"># Loop through each file</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Group </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">all_keywords</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">filekey</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;../../epmetadata/header/</span><span class="si">{</span><span class="n">filekey</span><span class="si">}</span><span class="s1">_header.xml&#39;</span> <span class="c1"># Get TCP ID from filename</span>
-        <span class="n">metadata</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span> <span class="c1"># Create lxml tree for metadata</span>
-        <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:item&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span>
-        <span class="n">all_keywords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">keywords</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">all_keywords</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Group 3
-Counter({&#39;Great Britain&#39;: 54, &#39;England&#39;: 54, &#39;London&#39;: 49, &#39;Poetry&#39;: 28, &#39;Broadside poems&#39;: 14, &#39;History&#39;: 11, &#39;17th century&#39;: 9, &#39;Charles II, 1660-1685&#39;: 7, &#39;Anglo-Dutch War, 1664-1667&#39;: 6, &#39;Ballads, English&#39;: 6, &#39;Controversial literature&#39;: 5, &#39;Foreign relations&#39;: 4, &#39;Netherlands&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 3, &#39;Christian life&#39;: 3, &#39;Oxford&#39;: 3, &#39;Dissenters, Religious&#39;: 3, &#39;Restoration, 1660-1688&#39;: 2, &#39;Conduct of life&#39;: 2, &#39;Scotland&#39;: 2, &#39;Edinburgh&#39;: 2, &#39;Loyalty oaths&#39;: 2, &#39;Quakers&#39;: 2, &#39;1648-1714&#39;: 1, &#39;Monarchy&#39;: 1, &#39;Apologetic works&#39;: 1, &#39;Early works to 1900&#39;: 1, &#39;Jews&#39;: 1, &#39;Migrations&#39;: 1, &#39;Restoration&#39;: 1, &#39;70-1789&#39;: 1, &#39;Mehmed IV, 1648-1687&#39;: 1, &#39;Turkey&#39;: 1, &#39;Drinking of alcoholic beverages&#39;: 1, &#39;Presbyterian Church&#39;: 1, &#39;Sermons, English&#39;: 1, &#39;Sermons&#39;: 1, &#39;Description and travel&#39;: 1, &#39;1600-1799&#39;: 1, &#39;France&#39;: 1, &#39;Paris (France)&#39;: 1, &#39;Royalists&#39;: 1, &#39;Catholics&#39;: 1, &#39;Commonwealth and Protectorate, 1649-1660&#39;: 1, &#39;God&#39;: 1, &#39;Meditation&#39;: 1, &#39;Harvesting&#39;: 1, &#39;Wrath&#39;: 1, &#39;Society of Friends&#39;: 1, &#39;Christianity&#39;: 1, &#39;Presbyterianism&#39;: 1, &#39;Ships&#39;: 1, &#39;London (England)&#39;: 1, &#39;Theology, Doctrinal&#39;: 1, &#39;Pastoral letters and charges&#39;: 1, &#39;Dance&#39;: 1, &#39;War&#39;: 1, &#39;Almanacs&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Salvation&#39;: 1, &#39;Political poetry, English&#39;: 1, &quot;Four Days&#39; Battle, England, 1666&quot;: 1, &#39;Health resorts&#39;: 1, &#39;Humor&#39;: 1, &#39;Religious disputations&#39;: 1, &#39;Addresses&#39;: 1, &#39;Gardening&#39;: 1, &#39;Women in Christianity&#39;: 1, &#39;Women (Christian theology)&#39;: 1, &#39;Devotional literature&#39;: 1, &#39;Church history&#39;: 1, &#39;War poetry, English&#39;: 1, &#39;Quaker authors&#39;: 1, &#39;Christmas&#39;: 1, &#39;Spiritual healing&#39;: 1, &#39;Healers&#39;: 1, &#39;Witchcraft&#39;: 1, &#39;History, Naval&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1})
-
-Group 1
-Counter({&#39;Great Britain&#39;: 49, &#39;England&#39;: 48, &#39;London&#39;: 40, &#39;17th century&#39;: 15, &#39;Sermons, English&#39;: 9, &#39;Sermons&#39;: 9, &#39;History&#39;: 8, &#39;Oxford&#39;: 7, &#39;Plague&#39;: 5, &#39;Poetry&#39;: 4, &#39;Christian life&#39;: 4, &#39;Religious aspects&#39;: 3, &#39;London (England)&#39;: 3, &#39;Healers&#39;: 3, &#39;Christianity&#39;: 2, &#39;Great Fire, London, England, 1666&#39;: 2, &#39;Fast-day sermons&#39;: 2, &#39;Early works to 1900&#39;: 2, &#39;Conduct of life&#39;: 2, &#39;Catechisms, English&#39;: 1, &#39;Theology, Doctrinal&#39;: 1, &#39;Catechetical sermons&#39;: 1, &#39;Essence, genius, nature&#39;: 1, &#39;Scotland&#39;: 1, &#39;Glasgow&#39;: 1, &#39;Paraphrases, English&#39;: 1, &#39;Slavery&#39;: 1, &#39;Algeria&#39;: 1, &#39;Protestantism&#39;: 1, &#39;Apologetic works&#39;: 1, &#39;Controversial literature&#39;: 1, &#39;Children&#39;: 1, &#39;Biography&#39;: 1, &#39;Fire&#39;: 1, &#39;Natural history&#39;: 1, &#39;Carib Indians&#39;: 1, &#39;Apalachee Indians&#39;: 1, &#39;Carib language&#39;: 1, &#39;Description and travel&#39;: 1, &#39;Glossaries, vocabularies, etc&#39;: 1, &#39;West Indies&#39;: 1, &#39;Antilles, Lesser&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;Hydrostatics&#39;: 1, &#39;Puritans&#39;: 1, &#39;Theology, Practical&#39;: 1, &#39;Doctrines&#39;: 1, &#39;Future punishment&#39;: 1, &#39;Hell&#39;: 1, &#39;Commentaries&#39;: 1, &#39;Pre-existence&#39;: 1, &#39;Soul&#39;: 1, &#39;Religious thought&#39;: 1, &#39;Anglo-Dutch War, 1664-1667&#39;: 1, &#39;Oaths&#39;: 1, &#39;Moral and ethical aspects&#39;: 1, &#39;Tuberculosis&#39;: 1, &#39;York&#39;: 1, &#39;Fast-day sermons,&#39;: 1, &#39;Platonists&#39;: 1, &#39;Empiricism&#39;: 1, &#39;France&#39;: 1, &#39;Paris&#39;: 1, &#39;Grace (Theology)&#39;: 1, &#39;Matter&#39;: 1, &#39;Light, Corpuscular theory of&#39;: 1, &#39;Constitution&#39;: 1, &#39;Advent sermons&#39;: 1, &#39;Funeral sermons&#39;: 1, &#39;Miracles&#39;: 1, &#39;Curiosities and wonders&#39;: 1, &#39;Susquehanna Indians&#39;: 1, &#39;Colonial period, ca. 1600-1775&#39;: 1, &#39;Maryland&#39;: 1, &#39;Witchcraft&#39;: 1, &#39;Wisdom&#39;: 1, &#39;Cambridge&#39;: 1, &#39;History, Ancient&#39;: 1, &#39;Patience&#39;: 1, &#39;Turkish Wars, 17th century&#39;: 1, &#39;Venice (Italy)&#39;: 1, &#39;Hērakleion (Greece)&#39;: 1, &#39;Philosophy, English&#39;: 1, &#39;Voyages, Imaginary&#39;: 1, &#39;Epidemics&#39;: 1, &#39;Judgment Day&#39;: 1, &#39;Spiritual healing&#39;: 1})
-
-Group 4
-Counter({&#39;Great Britain&#39;: 22, &#39;London&#39;: 21, &#39;England&#39;: 20, &#39;History&#39;: 16, &#39;Broadsides&#39;: 7, &#39;17th century&#39;: 7, &#39;London (England)&#39;: 5, &#39;Charles II, 1660-1685&#39;: 5, &#39;Ireland&#39;: 5, &#39;Politics and government&#39;: 4, &#39;1660-1688&#39;: 4, &#39;Great Fire, London, England, 1666&#39;: 4, &#39;Dublin&#39;: 4, &#39;Scotland&#39;: 4, &#39;Edinburgh&#39;: 3, &#39;Law and legislation&#39;: 3, &#39;1649-1775&#39;: 2, &#39;Foreign relations&#39;: 2, &#39;Sources&#39;: 2, &#39;Copyright infringement&#39;: 1, &#39;Publishers and publishing&#39;: 1, &#39;History, Naval&#39;: 1, &#39;Stuarts, 1603-1714&#39;: 1, &#39;Fires&#39;: 1, &#39;Law printing&#39;: 1, &#39;Printing&#39;: 1, &#39;Restraint of trade&#39;: 1, &#39;Monopolies&#39;: 1, &#39;Patents&#39;: 1, &#39;1517-1882&#39;: 1, &#39;Africa, North&#39;: 1, &#39;Morocco&#39;: 1, &#39;Louis XIV, 1643-1715&#39;: 1, &#39;France&#39;: 1, &#39;Lumber&#39;: 1, &#39;Tables&#39;: 1, &#39;Book burning&#39;: 1, &#39;Prohibited books&#39;: 1, &#39;Censorship&#39;: 1, &#39;Anglo-Dutch War, 1664-1667&#39;: 1, &#39;Provisioning&#39;: 1, &#39;Paper industry&#39;: 1, &#39;Claims&#39;: 1, &#39;Plague&#39;: 1, &#39;Dissenters&#39;: 1, &#39;Traitors&#39;: 1, &#39;Restoration, 1660-1688&#39;: 1, &#39;Gunpowder industry&#39;: 1, &#39;Markets&#39;: 1, &#39;Wool industry&#39;: 1, &#39;Foreign trade regulation&#39;: 1, &#39;Freight and freightage&#39;: 1, &#39;Rates&#39;: 1, &#39;Oxford (England)&#39;: 1, &#39;Oxford&#39;: 1})
-
-Group 2
-Counter({&#39;Great Britain&#39;: 9, &#39;England&#39;: 9, &#39;London&#39;: 9, &#39;History&#39;: 4, &#39;Controversial literature&#39;: 2, &#39;Royal supremacy (Church of England)&#39;: 2, &#39;Sources&#39;: 2, &#39;Church history&#39;: 2, &#39;Constitutional history&#39;: 2, &#39;1066-1485&#39;: 2, &#39;17th century&#39;: 2, &#39;Paradise&#39;: 1, &#39;Eden&#39;: 1, &#39;Anti-Catholicism&#39;: 1, &#39;Oxford&#39;: 1, &#39;Papacy&#39;: 1, &#39;Church polity&#39;: 1, &#39;Ecclesiastical law&#39;: 1, &#39;Sermons, English&#39;: 1, &#39;Apologetic works&#39;: 1, &#39;Ireland&#39;: 1, &#39;Dublin&#39;: 1, &#39;Catholics&#39;: 1, &#39;Penal laws (against nonconformists)&#39;: 1, &#39;Legal status, laws, etc&#39;: 1, &#39;Medicine&#39;: 1, &#39;Plague&#39;: 1})
-</pre></div>
-</div>
-</div>
-</div>
-<p>How do we make sense of the lists above? There are some subject headings (“Great Britain,” “England,” “London”) that are assigned to almost every text, and keep in mind that any individual text can have between 3 and ~12 terms assigned to it. (Remember: library cataloguers were originally accounting for these EEBO texts as part of much larger library collections.)</p>
-<p>But beyond those most common terms we see some patterns emerge. Group 3 appears to contain mostly poetry, broadsides, and ballads. Group 1 seems to have lots of sermons and religious texts—in addition to the “Sermons” and “Sermons, English” terms, there are lots of religion-related keywords like “Puritans,” “Religious thought,” and even “Hell.” Group 4 seems to contain texts about politics and current events, with the “History” keyword appearing frequently as well as “Ireland,” “Foreign relations,” and the Great Fire of London. Group 2, the smallest group, may be less internally coherent, but perhaps “royal supremacy” is a clue that it contains royal proclamations and government documents, a common genre in the corpus.</p>
-<p>We would be able to find out more by examining the texts in these groups individually, but as a first attempt, the subject headings seem to suggest that these groups are fairly thematically coherent. Not bad for an initial attempt at unsupervised clustering!</p>
-<p>It can also be useful to visualize the clusters, to get a sense of how distinct they are from each other. As we did in the <a class="reference external" href="https://earlyprint.org/jupyterbook/word2vec.html">Word Embeddings tutorial</a>, we can project the high dimensional vector space of Tf-Idf (i.e. thousands of words) into just two graphable dimensions, using PCA. Let’s create a DataFrame of our PCA results for each texts, with an additional “color” column for the K-Means clusters.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate PCA</span>
-<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pca_results</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">readable_results</span><span class="p">)</span>
-
-<span class="c1"># Put PCA into a DataFrame</span>
-<span class="n">pca_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca_results</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pc1&quot;</span><span class="p">,</span><span class="s2">&quot;pc2&quot;</span><span class="p">])</span>
-
-<span class="c1"># Add &quot;color&quot; column for K-Means groups</span>
-<span class="n">pca_df</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">filekeys</span><span class="p">)</span>
-<span class="n">pca_df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pc1</th>
-      <th>pc2</th>
-      <th>color</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>B02845</th>
-      <td>-0.172944</td>
-      <td>-0.171013</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>A51130</th>
-      <td>0.129717</td>
-      <td>-0.132889</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>A36358</th>
-      <td>0.080574</td>
-      <td>-0.135410</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>A28171</th>
-      <td>0.423339</td>
-      <td>0.056694</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>A51877</th>
-      <td>-0.241586</td>
-      <td>0.135333</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>A60948</th>
-      <td>0.140028</td>
-      <td>0.002911</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>A53818</th>
-      <td>-0.266444</td>
-      <td>0.100949</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>A57156</th>
-      <td>0.196382</td>
-      <td>-0.026824</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>A65985</th>
-      <td>0.268681</td>
-      <td>-0.176684</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>A41955</th>
-      <td>0.182151</td>
-      <td>0.080421</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>142 rows × 3 columns</p>
-</div></div></div>
-</div>
-<p>Now that we’ve calculated PCA, we can graph our texts in two dimensions:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pc1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pc2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f41da83ee20&gt;
-</pre></div>
-</div>
-<img alt="_images/supervised_13_1.png" src="_images/supervised_13_1.png" />
-</div>
-</div>
-<p>Do you notice any clusters in the data? If you had to draw circles around 4 distinct groups of texts, how would you divide them?</p>
-<p>Let’s use the “color” column to see what <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> did with this data:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pc1&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;pc2&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f41d9e3bf70&gt;
-</pre></div>
-</div>
-<img alt="_images/supervised_15_1.png" src="_images/supervised_15_1.png" />
-</div>
-</div>
-<p>In the graph above, we can see how K-means divided our texts. We can’t see all the variance using PCA, but this gives us a decent initial sense. We can see now why Group 2 (in red) isn’t all that internally coherent—its texts aren’t too close together. Some of the groups have closer, more “clustered” dots than others. So how did our unsupervised clustering method do? I think we might categorize this effort as <em>good</em> but not <em>great</em>. The next question is: would the computer do a better job if we tried to teach it about the genres we already know? To answer that, we’ll need a <em>supervised classification</em> method.</p>
+<p>Now we have a dataset that tells us about the features of every text in our corpus!</p>
 </div>
 <div class="section" id="targets">
 <h2>Targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h2>
-<p>Before we can begin using a supervised method, we need to add one more piece of data to our matrix. In addition to <em>samples</em> and <em>features</em>, matrices can also have <em>targets</em>, i.e. category labels that particular samples fall into. These targets can be used to <em>train</em> a model by telling it what to expect.</p>
-<p>In this case, we need targets that label the genre of a text. Rather than assigning genre labels ourselves, we can pull targets from the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html">metadata</a>. The supervised classification method we’ll use can handle multiple categories at once, so let’s choose a couple different generic categories. We’ll use two of the most common genres in <em>EarlyPrint</em>: sermons and poetry. We’ll also have a third “neither” category for texts that don’t belong to either group.</p>
+<p>Before we can begin using a supervised method, we need to add one more piece of data to our matrix. In addition to <em>samples</em> and <em>features</em>, matrices can also have <em>targets</em>, i.e. category labels that particular samples fall into. These targets can be used to <em>train</em> a classifier by telling it what to expect.</p>
+<p>In this case, we need targets that label the genre of a text. Rather than assigning genre labels ourselves, we can pull targets from the <a class="reference external" href="https://earlyprint.org/jupyterbook/metadata.html">metadata</a>. As I mentioned in the last section, the logit method we’ll use can handle multiple categories at once, so let’s choose a couple different generic categories. We’ll use two of the most common subject labels in <em>EarlyPrint</em>: history and poetry. We’ll also have a third “neither” category for texts that don’t belong to either group.</p>
+<p><em>n.b. This is a flawed example! In a real research situation you may want your categories to be more precise, and you may want a more apples-to-apples comparison than history and poetry, which are very different. And “history” itself is a very fuzzy category that may include different kinds of texts! You may also want to avoid a catch-all “neither” category. However, for the purposes of <strong>learning the method</strong>, it helps to have categories that are very different.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="p">[]</span>
@@ -915,11 +703,11 @@ Counter({&#39;Great Britain&#39;: 9, &#39;England&#39;: 9, &#39;London&#39;: 9, 
     <span class="c1"># Find all the keywords in each text</span>
     <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//tei:item&quot;</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)]</span>
     <span class="c1"># Search in those keywords for the word &quot;sermon&quot; or words pertaining to poetry</span>
-    <span class="n">poetry_terms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;poetry&#39;</span><span class="p">,</span> <span class="s1">&#39;broadside poems&#39;</span><span class="p">,</span> <span class="s1">&#39;broadsides&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;sermon&#39;</span> <span class="ow">in</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
-        <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;sermon&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">poetry_terms</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
+    <span class="n">poetry_terms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;poetry&#39;</span><span class="p">,</span> <span class="s1">&#39;broadside poems&#39;</span><span class="p">,</span> <span class="s1">&#39;poems&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">poetry_terms</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
         <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;poetry&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;history&#39;</span> <span class="ow">in</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
+        <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;history&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;neither&#39;</span><span class="p">)</span>
 
@@ -929,30 +717,30 @@ Counter({&#39;Great Britain&#39;: 9, &#39;England&#39;: 9, &#39;London&#39;: 9, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;sermon&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;sermon&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;sermon&#39;, &#39;poetry&#39;, &#39;neither&#39;]
-Counter({&#39;neither&#39;: 88, &#39;poetry&#39;: 39, &#39;sermon&#39;: 15})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;poetry&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;history&#39;, &#39;history&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;neither&#39;, &#39;history&#39;, &#39;neither&#39;, &#39;poetry&#39;, &#39;neither&#39;, &#39;neither&#39;]
+Counter({&#39;neither&#39;: 162, &#39;history&#39;: 58, &#39;poetry&#39;: 49})
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can see that <code class="docutils literal notranslate"><span class="pre">targets</span></code> is simply a list of labels for each text in our corpus. If we count those up, we can see that 39 of our texts contain poetry, 15 of our texts are sermons, and 88 are neither. (The actual counts of poetry and sermons in this corpus are probably larger, but this is what we can find using the existing subject headings.)</p>
+<p>We can see that <code class="docutils literal notranslate"><span class="pre">targets</span></code> is simply a list of labels for each text in our corpus. Importantly, the list is in the same order as the texts in our Tf-Idf matrix.</p>
+<p>If we count the categories up, we can see that 49 of our texts contain poetry, 58 of our texts are labeled with history, and 162 have neither label. (When texts were labeled both “poetry” and “history,” I kept the label “poetry.” The actual counts of poetry and historical texts in this corpus are probably larger, but this is what we can find using the existing subject headings.)</p>
 </div>
 <div class="section" id="supervised-classification">
 <h2>Supervised Classification<a class="headerlink" href="#supervised-classification" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have target labels, we can use them to train a <em>supervised model</em> to determine genre categories. Unlike with K-means clustering, where we simply create a model and plug in the entire dataset, we need to split our data into a <em>training set</em>, which we use to help our model learn, and a <em>test set</em>, which we use to see how the model did. In our case, we’ll split our data approximately in half, using just over half of the plays for training and reserving the rest for testing.</p>
+<p>Now that we have target labels, we can use them to train a <em>supervised classifier</em> to determine genre categories. Unlike with K-means clustering, where we simply create a model and plug in the entire dataset, we need to split our data into a <em>training set</em>, which we use to help our model learn, and a <em>test set</em>, which we use to see how the model did. In our case, we’ll split our data approximately in half, using just over half of the plays for training and reserving the rest for testing.</p>
 <p>We need to split both the feature set (denoted by a capital X) and the target labels (denoted by a lowercase y). Luckily, scikit-learn does all of this for us with its <code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code> function.</p>
-<p>Once the data is split, we can choose a model to train. In this case, the method I’ve chosen is logistic regression. Logistic regression is quite an old method for classification, and it is useful in part because it is easy to explain and provides results that (as we shall see) are easier to interpret than newer methods, like neural networks. Logistic regression uses a logistic function to draw an s-shaped <a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid curve</a> that takes any value and converts it to a value between 0 and 1. The closer the value is to 0 or 1, the more closely it belongs in one category or another. Because of this 0-or-1, one-or-the-other feature, logistic regression was originally only a <em>binary</em> classifier: it could only tell if something was in one of just two categories. However, we can use multiclass logistic regression, and the model will predict all three of our classes at once.</p>
+<p>Once the data is split, we can choose a model to train. In this case, the method I’ve chosen is logistic regression (logit). As I mentioned before, logit is quite an old method for classification, and it is useful in part because it is easy to explain and provides results that (as we shall see) are easier to interpret than newer methods like neural networks. Logistic regression uses a logistic function to draw an s-shaped <a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoid curve</a> that takes any value and converts it to a value between 0 and 1. The closer the value is to 0 or 1, the more closely it belongs in one category or another. Because of this 0-or-1, one-or-the-other feature, logit was originally only a <em>binary</em> classifier: it could only tell if something was in one of just two categories. However, we can use multiclass or multinomial logistic regression, and the model will predict all three of our classes at once.</p>
 <p>In the code below, we’ll split the data automatically, create a logistic regression model, and “fit” that model using the training data. Then, we’ll run the model to <em>predict</em> categories for the texts in the test set. In the end, we can get accuracy scores, as well as a list of the texts in the test set with their real and predicted genres.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">readable_results</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">readable_results</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="c1"># evaluate accuracy</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy score:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cross validation score:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">readable_results</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Results of this run:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Play Title | Actual Genre | Predicted Genre&quot;</span><span class="p">)</span>
@@ -962,86 +750,161 @@ Counter({&#39;neither&#39;: 88, &#39;poetry&#39;: 39, &#39;sermon&#39;: 15})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy score: 0.734375
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cross validation score: 0.7676056338028169
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy score: 0.7540983606557377
 
 Results of this run:
 
 Play Title | Actual Genre | Predicted Genre
-A59614 | neither | neither
-A32557 | neither | poetry
-A67572 | sermon | sermon
-A31124 | neither | neither
-A28171 | sermon | neither
-A38556 | sermon | sermon
-A56381 | neither | neither
-A32581 | neither | neither
-A36358 | neither | poetry
-A60482 | neither | neither
-A46046 | neither | poetry
+A41058 | neither | neither
+A23770 | neither | neither
+A71231 | neither | neither
+B05875 | poetry | poetry
+A37237 | history | neither
+A47095 | neither | neither
+A50075 | history | neither
+B03489 | poetry | poetry
+B04154 | poetry | poetry
+A23912 | neither | neither
+B06375 | poetry | poetry
+B03763 | neither | neither
 A67335 | poetry | poetry
-A44334 | sermon | neither
-A62436 | neither | neither
-A38792 | neither | neither
-A43020 | neither | neither
-A55387 | neither | neither
-A86466 | poetry | neither
-A23770 | sermon | sermon
-B03109 | poetry | poetry
-A41958 | neither | neither
-A44478 | neither | poetry
-A93281 | neither | poetry
-A26482 | neither | neither
-A45552 | sermon | sermon
-A32544 | neither | poetry
-A32751 | neither | neither
-A30203 | neither | neither
-A38630 | poetry | poetry
-A47095 | neither | poetry
-A56390 | neither | neither
-B03114 | poetry | poetry
-A25743 | neither | neither
-A92820 | poetry | poetry
-B02845 | poetry | poetry
-A65985 | poetry | poetry
-A31237 | neither | neither
-A35851 | neither | neither
-A64861 | neither | neither
-A32484 | neither | poetry
-A97379 | neither | neither
-A61929 | neither | neither
-A87622 | poetry | poetry
-A93280 | neither | poetry
-A42537 | neither | poetry
-B03631 | neither | neither
-A53049 | neither | neither
-A32566 | neither | neither
-A52328 | neither | neither
-A49213 | neither | neither
-A39246 | poetry | poetry
+A27397 | neither | neither
+A41072 | neither | neither
 A47379 | neither | neither
-A61503 | sermon | sermon
-A71109 | neither | neither
-A70852 | neither | sermon
-A29017 | neither | neither
-A57484 | neither | neither
-A46087 | neither | poetry
-B04153 | poetry | poetry
-A32559 | neither | poetry
-A54070 | neither | neither
+A41527 | neither | neither
+A57634 | neither | neither
+A48909 | neither | neither
+A64918 | history | history
+A60948 | neither | neither
+A44478 | neither | poetry
+A32751 | history | neither
+A62436 | neither | neither
+A67572 | neither | neither
+A61956 | neither | neither
+A86466 | neither | history
+B04338 | poetry | neither
+A32233 | neither | history
+B03114 | poetry | poetry
+A48218 | neither | neither
+A55410 | neither | neither
+A54418 | neither | neither
+A39938 | neither | history
+A46137 | history | history
+A46196 | history | history
+A64258 | neither | neither
+A32503 | neither | history
+A44938 | neither | neither
+A52519 | poetry | poetry
+B05479 | neither | history
+A59229 | neither | neither
+A43741 | neither | neither
+A39345 | poetry | poetry
+A95297 | history | neither
+A38741 | history | history
+A59325 | neither | poetry
+A87330 | history | neither
+A53911 | history | poetry
+A63767 | neither | neither
+A35114 | neither | neither
+A37291 | neither | neither
+A40151 | neither | neither
 B04364 | poetry | poetry
-A40254 | neither | neither
-A47367 | sermon | neither
+A60606 | poetry | poetry
+A35608 | history | neither
+A47545 | history | history
+B05318 | neither | neither
+A59614 | neither | neither
+A36272 | neither | neither
+A32314 | history | history
+A61867 | neither | neither
+A29110 | neither | neither
+A46152 | history | history
+A44594 | neither | neither
+A56039 | neither | neither
+A81069 | history | poetry
+B02123 | neither | history
+A38792 | neither | neither
+A37096 | history | neither
+A29439 | neither | history
+A66777 | poetry | neither
+A39974 | neither | neither
+A45206 | neither | neither
+A47547 | neither | history
+A65702 | neither | neither
+A57421 | neither | neither
+B04360 | poetry | poetry
+A48797 | neither | neither
+A66579 | neither | neither
+B02089 | neither | history
+A63952 | neither | history
+A61207 | neither | neither
+B06022 | poetry | poetry
+B03631 | history | neither
+A46193 | history | history
+A91186 | history | neither
+A50777 | neither | neither
+A79623 | neither | neither
+A51346 | poetry | poetry
+B04701 | poetry | poetry
+A50520 | neither | neither
+A32559 | neither | history
+A42533 | poetry | poetry
+A32967 | neither | neither
+A93280 | neither | neither
+A46087 | history | history
+A51130 | poetry | poetry
+A61891 | neither | neither
+A75960 | neither | neither
+B03106 | poetry | poetry
+A54070 | neither | neither
+A93278 | poetry | poetry
+A63951 | neither | history
+A44879 | poetry | poetry
+A32555 | history | history
+A61206 | neither | neither
+A31237 | history | neither
+A41053 | neither | neither
+A39482 | neither | neither
+A77803 | neither | neither
+A39442 | neither | neither
+A80816 | neither | neither
+A59168 | neither | neither
+A53818 | neither | neither
+A51877 | neither | history
+A39246 | poetry | poetry
+B05057 | poetry | neither
+A41958 | neither | neither
+A31229 | history | history
+B03672 | poetry | poetry
+A29017 | neither | neither
 </pre></div>
 </div>
 </div>
 </div>
-<p>The results above show us a few things about how the logistic regression model did. First, the <em>accuracy score</em> shows the percentage of texts in the test set that were labeled correctly in this run of the model. 73% accuracy is not too bad for a first attempt!</p>
-<p>However, this is only the accuracy result for the data split in just one way and run just once. How does the model do if we split up the data differently? The <em>cross validation score</em> answers this question by running the model several times with differently split data. The average of the accuracy of those runs gives us a sense of how well the model does no matter how the data is split. We can see that the cross validation shows that this particular run of the model is fairly close to the expected result.</p>
+<p>The results above show us a few things about how the logistic regression model did. First, the <em>accuracy score</em> shows the percentage of texts in the test set that were labeled correctly in this run of the model. 75% accuracy is pretty good for a first attempt!</p>
 <p>And the results themselves show that the model got things mostly right. By browsing the list above, we can see that most of the expected and predicted values match.</p>
-<p>We can also assess a model’s accuracy using a <em>confusion matrix</em>, a chart that shows how often predicted values matched expected values. In the code below we’ll generate the confusion matrix for our model:</p>
+<p>But there’s a catch: the majority of our texts are in the “neither” category, i.e. they’re neither poetry nor history. If the model guesses “neither” most of the time, it’s likely to be right most of the time. The question, then, is: how well did the model <em>actually</em> do at identifying the texts in these very different categories? There are a few ways of finding out.</p>
+</div>
+<div class="section" id="assessing-a-classifier">
+<h2>Assessing a Classifier<a class="headerlink" href="#assessing-a-classifier" title="Permalink to this headline">¶</a></h2>
+<p>After training a classifier, we naturally want to know if it worked. One way we can do this is by scanning a list of results, as above. We can look at the texts that are listed and find out if the mistakes the model made were interesting: perhaps some of the texts are mislabeled and the model is right that they really <em>are</em> poetry or history. And it’s important to do this kind of close-reading check for any model. A humanities researcher may care as much about what a model gets wrong as what it gets right: the point isn’t training a computer to do a task for us, it’s what we learn about our corpus by going through the process of training.</p>
+<p>And to that end, in addition to examining examples, there are a range of mathematical ways to assess a classifier. We already calculated an accuracy score in the code above, which tells us how often the classifier picked the correct category. However, this is only the accuracy result for the data split in just one way and run just once. How does the model do if we split up the data differently?</p>
+<p>The <em>cross validation score</em> answers this question by running the model several times with differently split data. We can use a technique called <a class="reference external" href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)#k-fold_cross-validation"><em>k</em>-fold cross-validation</a>, where <em>k</em> refers to any possible number. This method splits the data up differently <em>k</em> number of times and calculates the average accuracy across the differently-split runs of the classifier. Maybe in one random run, the data winds up split in such a way that the model is much more accurate than it is every other time it’s run. Cross-validation accounts for this and gives us a sense of how well the model does no matter how the data is split. We can see that the cross validation shows that this particular run of the model is fairly close to the expected result.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>, running <em>k</em>-fold cross-validation is as simple as one line of code. We’ll do 5-fold cross-validation by setting <code class="docutils literal notranslate"><span class="pre">cv=5</span></code>. This means that <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> will run the model 5 different ways:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cross validation score:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">readable_results</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cross validation score: 0.7880503144654087
+</pre></div>
+</div>
+</div>
+</div>
+<p>These results may put our minds somewhat at ease. The classifier actually performs slightly better in cross-validation than it did in our test run: about 79%. But we still don’t know how the model performed on our three different categories.</p>
+<p>In addition to cross-validation, we can also assess a model’s accuracy using a <em>confusion matrix</em>, a chart that shows how often predicted values matched expected values. In the code below we’ll generate the confusion matrix for our model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
@@ -1052,87 +915,42 @@ A47367 | sermon | neither
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f41da26ed00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7ff21c34d460&gt;
 </pre></div>
 </div>
-<img alt="_images/supervised_22_1.png" src="_images/supervised_22_1.png" />
+<img alt="_images/supervised_14_1.png" src="_images/supervised_14_1.png" />
 </div>
 </div>
-<p>In this confusion matrix, predicted values (the output of the model) are shown horizontally and expected values (what was in the original data) are shown vertically. When the two match, we can see the number of <em>true positives</em>, places where the predicted value matched the expected value. Those are the darkest squares along the diagonal from top left to bottom right. Our model got sermons right 5 times, poetry right 11 times, and correctly predicted when a text was neither 31 times.</p>
-<p>The confusion matrix also shows false results—places where the predicted value did not match the expected value. Like we saw in the list above, the model miscategorized 12 texts labeled as “neither” as poetry, for example. This could be a blind spot in our model, or it could be that we have more poetry texts in our data than we originally thought!</p>
-<p>We need to keep in mind that this is a small corpus and the genre groups aren’t symmetrical, so we should take these results with a grain of salt. If we really wanted to detect sermons, for instance, we should choose a larger sample of sermons from the <em>EarlyPrint</em> corpus and compare them to an equally-sized set of non-sermon texts.</p>
-</div>
-<div class="section" id="interpreting-results">
-<h2>Interpreting Results<a class="headerlink" href="#interpreting-results" title="Permalink to this headline">¶</a></h2>
-<p>So we know the logistic regression model performed decently. It identifies the correct genre of a text in many cases. Now that we have the model, we could plug in a new, unfamiliar text, and the model would attempt to tell us whether it was a sermon, poetry, or something else!</p>
-<p>Wait a second—there are no <em>new</em> early modern texts, and a literary scholar could simply read a text to determine its genre. The truth is, we don’t <em>need</em> a model to tell us a text’s genre, especially for something as distinct as a sermon or a poem. So if we don’t need a model to predict the genre, then what is the model <em>for</em>?</p>
-<p>For Facebook or FiveThirtyEight, models might be useful because of what they predict. But digital humanities scholars don’t usually need computers to perform tasks for them, instead they’re using the computer to help them to better understand their corpus.</p>
-<p>At the beginning of this tutorial, we started by getting the Tf-Idf scores for the words in each text. We did that because of an instinct that the vocabulary of a text is related to its genre. And based on the relative success of our model, there does seem to be such a relationship. But what’s the nature of that relationship? What do wordcounts have to do with genre?</p>
-<p>This gets back to why we used logistic regression over other approaches. As a model it’s interpretable because it provides <em>coefficients</em> for each feature. That is, it doesn’t just tell us the answer: logistic regression tells us how it arrived at the answer. For each possible genre class, the model gives us a coefficient for every feature, every word. The coefficient is either a positive or negative number. If the coefficient is a high positive number, that means it’s a strong positive indicator that a text will belong in that class: if that word appears a lot in the text, the model will be more likely to assign the text to that genre. If the coefficient is a low negative number, that means it’s a strong negative indicator: if that word appears a lot in the text, the model will be more likely <strong>not</strong> to assign the play to that genre.</p>
-<p>In the code below, we’ll show the top 5 highest and lowest coefficients for each class. This gives us a sense of what words drove the model’s genre predictions.</p>
+<p>In this confusion matrix, predicted values (the output of the model) are shown horizontally and expected values (what was in the original data) are shown vertically. When the two match, we can see the number of <em>true positives</em>, places where the predicted value matched the expected value. Those are the darker squares along the diagonal from top left to bottom right. Our model got history right 11 times, poetry right 21 times, and correctly predicted when a text was neither 60 times.</p>
+<p>The confusion matrix also shows false results—places where the predicted value did not match the expected value. Like we saw in the list above, the model miscategorized 3 texts originally labeled “neither” as poetry, for example. This could be a blind spot in our model, or it could be that we have more poetry texts in our data than we originally thought! We would have to examine the texts to find out.</p>
+<p>What we can see from this matrix is that the model struggled the most with the history category. Look at the top row and the left-most column, where the history texts are categorized. Things are less neatly sorted into the top-left square of true positives as we’d like to see. Instead, history texts are sometimes misclassified as “neither,” and “neither” texts are sometimes misclassified as history.</p>
+<p>We can quantify what we’re seeing in the confusion matrix with the final way of assessing our classifier: <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>’s classification report. Here’s the classification report that goes with the above matrix:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">g</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Genre:&quot;</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">sort_values</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">c</span><span class="p">)),</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best positive indicators (words with highest coefficients):&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sort_values</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best negative indicators (words with lowest coefficients):&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sort_values</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">clf</span><span class="o">.</span><span class="n">classes_</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Genre: neither
-Best positive indicators (words with highest coefficients):
-	 (&#39;tromp&#39;, 16.90378751994914)
-	 (&#39;six&#39;, 7.422771045694573)
-	 (&#39;burgh&#39;, 7.2036946445005094)
-	 (&#39;ratclif&#39;, 7.001642596322178)
-	 (&#39;sixty&#39;, 5.6172705361963065)
-Best negative indicators (words with lowest coefficients):
-	 (&#39;666&#39;, -6.168242280327785)
-	 (&#39;diev&#39;, -6.172133762458676)
-	 (&#39;ratcliff&#39;, -6.317900079000194)
-	 (&#39;swinge&#39;, -7.02144769319718)
-	 (&#39;trump&#39;, -11.148209605246723)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-Genre: poetry
-Best positive indicators (words with highest coefficients):
-	 (&#39;trump&#39;, 12.03375401826274)
-	 (&#39;swinge&#39;, 7.305917391609967)
-	 (&#39;diev&#39;, 6.751384753077631)
-	 (&#39;bill&#39;, 6.406296634187871)
-	 (&#39;666&#39;, 6.404788081993181)
-Best negative indicators (words with lowest coefficients):
-	 (&#39;excellent&#39;, -5.091523054002271)
-	 (&#39;six&#39;, -5.135377706702381)
-	 (&#39;ratclif&#39;, -6.704958793367047)
-	 (&#39;burgh&#39;, -6.839978363829833)
-	 (&#39;tromp&#39;, -16.24654969995368)
+     history       0.46      0.48      0.47        23
+     neither       0.82      0.80      0.81        75
+      poetry       0.84      0.88      0.86        24
 
-Genre: sermon
-Best positive indicators (words with highest coefficients):
-	 (&#39;sermon&#39;, 8.136346607337561)
-	 (&#39;text&#39;, 4.822172931462676)
-	 (&#39;soundness&#39;, 4.598811803599365)
-	 (&#39;himself&#39;, 4.289533013494786)
-	 (&#39;very&#39;, 4.094616301054098)
-Best negative indicators (words with lowest coefficients):
-	 (&#39;betwixt&#39;, -2.012866685700437)
-	 (&#39;sheriff&#39;, -2.0568040642627854)
-	 (&#39;town&#39;, -2.11129389132578)
-	 (&#39;six&#39;, -2.2873933389920924)
-	 (&#39;dutch&#39;, -2.515143219782335)
+    accuracy                           0.75       122
+   macro avg       0.71      0.72      0.71       122
+weighted avg       0.76      0.75      0.76       122
 </pre></div>
 </div>
 </div>
 </div>
-<p>Not everything in these lists is perfectly clear, but though we’d want to do more digging, there are some interesting results. Most obviously, if a text contains the word “sermon,” it’s probably a sermon! But more interestingly, the words “text” and “soundness” are highly indicative of sermons, which may be because many sermons are concerned with scriptural interpretation. Likewise if a text discusses sheriffs or the Dutch, our model will assume (usually correctly) that it’s not a sermon. Overall, this list conforms with some scholarly assumptions about certain genres, and it invites the curious scholar into more close reading, e.g. why does the word “excellent” tell us that a text doesn’t contain poetry?</p>
-<p>For a humanist scholar, models are less about <em>prediction</em> and more about the <em>features</em> themselves. A little knowledge about how various models work can go a long way. Using statistical modeling, we can begin to determine the relationship between certain sets of features and different historical categories and classifications. Beyond word counts, modeling allows scholars to explore all sorts of features and can be a powerful tool for framing questions for future research.</p>
+<p>The classification report gives us scores for the <a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall">precision and recall</a> of the classifier across each category. Precision is the ratio of true positives (correct guesses of a text’s category) to the number of total times it guessed that category. Recall is the ratio of true positives to the total number of texts in that category that existed in the dataset. So precision tells us how often the model guessed correctly while recall tells us how often the model found the right thing—two different views of a similar task. (If this is still confusing to you, I highly recommend the examples and visualizations in the <a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall">Wikipedia article on this topic</a>.)</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall#F-measure">F1-score</a> combines these two measures, and “support” just shows the number of times that category appeared in our dataset (i.e. the total number of texts with that label).</p>
+<p>How did our classifier do, according to this report? It did a decent job with the “neither” category, which makes sense since “neither” was the largest category. And it did really well with poetry! Especially with recall: if there was poetry in a text, our classifier could find it. Given that verse is distinctive compared to a nebulous genre like “history,” it makes sense that this was the classifier’s strength.</p>
+<p>And we can can see that the history category is where the classifier really struggled. In fact, it’s what’s dragging down our overall accuracy score.  Both precision and recall are less than 50%: the classifier can neither find historical texts nor guess their label correctly. It’s worse than a coin flip!</p>
+<p>The classification report clarifies trends that were harder to see in our other methods of model assessment. Namely, one category (history) is badly suited to this method. Perhaps we could create a classifier that’s quite good at identifying poetry texts, but we need to go back to the drawing board on history. This makes sense since, as I mentioned previously, “history” isn’t a very well-defined genre in this corpus. Instead it’s a subject label applied to lots of different kinds of texts. If we’re really interested in correctly classifying historical texts, we may want to hand label a sample and start over with our model.</p>
+<p>Just as we discovered with K-means clustering, it’s easy to run these models but harder to assess and interpret their results. It requires a knowledge of the task at hand, a general idea of what’s in the corpus, and a willingness to drill down to specific examples. The example we worked through above didn’t work perfectly, and that makes it a good object lesson in supervised classification. You won’t always find the right model or the right categories on the first try, and that’s okay. By applying your knowledge of the corpus and some general principles of how classifiers work, you can still learn something from imperfect classifiers and work toward a model that does the job.</p>
 </div>
 </div>
 
@@ -1164,6 +982,7 @@ Best negative indicators (words with lowest coefficients):
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="unsupervised.html" title="previous page">Text Classification: Unsupervised Clustering</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

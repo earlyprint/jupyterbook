@@ -32,7 +32,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# First you need a list of all files in your directory', 'files = glob.glob("1666_texts/*.xml") # THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER', '', '# Create an empty lists to put all our texts into', 'all_tokenized = []']
+['# First you need a list of all files in your directory', 'files = glob.glob("1666_texts_full/*.xml") # THIS IS THE LINE YOU SHOULD MODIFY TO POINT AT THE TEXTS ON YOUR COMPUTER', '', '# Create an empty lists to put all our texts into', 'all_tokenized = []']
 ...
 ["    # 3. Get the regularized form of the word: word.get('reg', word.text)", '    # 4. Make sure all the words are in lowercase: .lower()', "    words = [word.get('reg', word.text).lower() for word in word_tags if word.text != None]", '    # Then we add these results to a master list', '    all_tokenized.append(words)']
 -------------------
